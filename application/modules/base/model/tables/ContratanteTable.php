@@ -225,7 +225,7 @@ abstract class ContratanteTable extends \kerana\Ada
      */
     public function set_email($value = "")
     {
-        $this->_email = \helpers\Validator::valVarchar('f_email', "jhjkhhjk", FALSE);
+        $this->_email = \helpers\Validator::valVarchar('f_email', $value, FALSE);
     }
 
     /**
