@@ -15,6 +15,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Model</th>
+                    <th>Module</th>
                     <th>Table</th>
                     <th>Description</th>
                     <th class="bg-default">Tools</th>
@@ -25,6 +26,7 @@
                     <tr>
                         <td><?php echo $model->id_model; ?></td>
                         <td><?php echo $model->model; ?></td>
+                        <td><?php echo 'module'; ?></td>
                         <td><?php echo $model->table_reference; ?></td>
                         <td><?php echo $model->model_description; ?></td>
                         <td class="well">
