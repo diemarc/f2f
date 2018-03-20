@@ -58,7 +58,19 @@ class PoblacionModel extends tables\PoblacionTable
         $key_to_search = \helpers\Validator::valVarchar('k_poblacion',$keysearch);
         
         if(!empty($key_to_search)){
-           echo $this->findLike('*', ['poblacion'=>$key_to_search], 'all');
+            
+            $rsPoblacion = $this->findLike('*', ['poblacion'=>$key_to_search], 'all');
+            
+            if($rsPoblacion){
+                $poblacion_array = [];
+                foreach($rsPoblacion AS $poblacion):
+                    $poblacion_array['poblaciones'][] = $poblacion;
+                endforeach;
+                echo json_encode($poblacion_array);
+            }
+            
+            
+            
         }
         
     }
