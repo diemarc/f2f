@@ -16,9 +16,8 @@
         <link rel="stylesheet" href="/_layouts/f2f/dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="/_layouts/f2f/dist/css/skins/_all-skins.min.css">
+        <link rel="stylesheet" href="/_layouts/f2f/dist/css/skins/skin-blue.min.css">
         <!-- Morris chart -->
-        <link rel="stylesheet" href="/_layouts/f2f/bower_components/morris.js/morris.css">
         <!-- jvectormap -->
         <link rel="stylesheet" href="/_layouts/f2f/bower_components/jvectormap/jquery-jvectormap.css">
         <!-- Date Picker -->
