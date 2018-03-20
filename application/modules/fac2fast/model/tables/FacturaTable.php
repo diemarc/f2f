@@ -200,7 +200,7 @@ abstract class FacturaTable extends \kerana\Ada {
      * @param datetime $value the fecha_factura value 
      */
     public function set_fecha_factura($value = "") {
-        $this->_fecha_factura = \helpers\Validator::valDatetime('f_fecha_factura', $value, TRUE);
+        $this->_fecha_factura = \helpers\Validator::valDatetime('f_fecha_factura', $value, FALSE);
     }
 
     /**
@@ -220,7 +220,7 @@ abstract class FacturaTable extends \kerana\Ada {
      * @param tinyint $value the abono value 
      */
     public function set_abono($value = "") {
-        $this->_abono = \helpers\Validator::valTinyint('f_abono', $value, TRUE);
+        $this->_abono = \helpers\Validator::valTinyint('f_abono', $value, FALSE);
     }
 
     /**

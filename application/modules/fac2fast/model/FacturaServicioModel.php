@@ -19,35 +19,33 @@
  */
 
 namespace application\modules\fac2fast\model;
-
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
-  | Class FacturaModel
+  | Class FacturaServicioModel
   |-----------------------------------------------------------------------------
-  | Buisiness logic (rules) for FacturaTable
-  | dvd facturas
+  | Buisiness logic (rules) for FacturaServicioTable 
+  | dvd fact_serv f2f
   | @author kerana,
-  | @date 19-03-2018 18:31:06,
+  | @date 20-03-2018 06:56:06,
   |
  */
 
-class FacturaModel extends tables\FacturaTable {
+class FacturaServicioModel extends tables\FacturaServicioTable {
 
-    public
-
-    /** @object EmpresaContratanteModel  */
-            $objEmpresaContratanteModel,
-            /** @object FormaPagoModel  */
-            $objFormaPagoModel,
-            /** @object TipoModel  */
-            $objTipoModel;
-
-    public function __construct() {
+    public 
+ /** @object FacturaModel  */ 
+ $objFacturaModel,
+/** @object ServicioModel  */ 
+ $objServicioModel;
+    
+     public function __construct()
+    {
         parent::__construct();
-        $this->objEmpresaContratanteModel = new \application\modules\fac2fast\model\EmpresaContratanteModel();
-        $this->objFormaPagoModel = new \application\modules\base\model\FormaPagoModel();
-        $this->objTipoModel = new \application\modules\base\model\TipoModel();
+         $this->objFacturaModel= new \application\modules\fac2fast\model\FacturaModel(); 
+ $this->objServicioModel= new \application\modules\fac2fast\model\ServicioModel(); 
+
+        
     }
 
     /**
@@ -55,18 +53,15 @@ class FacturaModel extends tables\FacturaTable {
      * Save post data
      * -------------------------------------------------------------------------
      */
-    public function savePost() {
-        $this->set_id_empresa();
-        $this->set_id_contratante();
-        $this->set_id_pago();
-        $this->set_fecha_factura();
-        $this->set_num_factura();
-        $this->set_abono();
-        $this->set_id_tipo();
-        $this->set_created_at();
-        $this->set_created_by();
+    public function savePost(){
+        $this->set_facturas_id_facturas();
+$this->set_f_servicios_id_servicio();
+$this->set_cantidad();
+$this->set_precio();
 
-        return parent::saveFactura();
+        return parent::saveFacturaServicio();
     }
+    
+    
 
 }
