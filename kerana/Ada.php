@@ -206,7 +206,7 @@ abstract class Ada
     {
         if (is_array($conditions)):
             foreach ($conditions AS $field => $search) :
-                $operator_to_use = ($operator == '=')? ' = :'.$field : ' LIKE CONCAT(:'.$field.',"%")';
+                $operator_to_use = ($operator == '=')? ' = :'.$field : ' LIKE CONCAT("%":'.$field.',"%")';
                 $this->_query .= ' AND ' . $field . $operator_to_use;
                 $this->_binds[':' . $field] = $search;
             endforeach;
@@ -316,7 +316,7 @@ abstract class Ada
      * @param string $mode , 
      * @return rs
      */
-    public function findLike($fields = '*', $conditions = false, $mode = 'one')
+    public function findLike($fields = '*', $conditions = false, $mode = 'all')
     {
 
         $this->_fields = $fields;
@@ -332,7 +332,7 @@ abstract class Ada
         }
         //  parse each conditions
         $this->_setConditions($conditions,'like');
-        return $this->getQuery('json');
+        return $this->getQuery($mode);
     }
     
 
