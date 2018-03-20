@@ -1,3 +1,21 @@
+<script>
+    function findLocalidad(localidad) {
+        var url = "/base/poblacion/findPoblacion/" + localidad;
+
+        $.getJSON(url, function (data) {
+            console.log(data);
+            $.each(data.tutorials, function (i, poblacion) {
+                var newRow =
+                        "<tr>"
+                        + "<td>" + poblacion.id_poblacion + "</td>"
+                        + "<td>" + poblacion.poblacion + "</td>"
+                        + "</tr>";
+                $(newRow).appendTo("#json_localidades");
+            });
+        });
+    }
+</script>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <section class="content-header">
@@ -27,7 +45,7 @@
 
                         <div class="box-body">
                             <div class="breadcrumb">
-                                <a href="<?php echo __URL__ . '/base/contratante/detail/'.$rsContratante->id_contratante; ?>" class="btn btn-warning">Cancelar</a>
+                                <a href="<?php echo __URL__ . '/base/contratante/detail/' . $rsContratante->id_contratante; ?>" class="btn btn-warning">Cancelar</a>
                                 <button type="submit" class="btn btn-info">Actualizar datos</button>
                             </div>
                             <div class='form-group form-group-sm'> 
@@ -62,6 +80,19 @@
                                         <input type="text" id="f_direccion" name="f_direccion" class="form-control"  maxlength="45"  value="<?php echo $rsContratante->direccion; ?>"  />
                                     </div> 
                                 </div> 
+                            </div> 
+                            <div class='form-group form-group-sm'> 
+                                <label for='k_poblacion' class='col-sm-2 control-label'>Localidad</label> 
+                                <div class='col-sm-6'> 
+                                    <div class='input-group col-sm-12'> 
+                                        <input type="text" id="k_localidad" name="k_localidad" 
+                                               class="form-control"  maxlength="45"  onchange="findLocalidad(this.value)"
+                                               value="<?php echo $rsContratante->direccion; ?>"  />
+                                    </div> 
+                                </div> 
+                                <table id="json_localidades">
+
+                                </table>
                             </div> 
                             <div class='form-group form-group-sm'> 
                                 <label for='f_telefono' class='col-sm-2 control-label'>Tel&eacute;fono</label> 
