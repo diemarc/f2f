@@ -3,13 +3,13 @@ function findLocalidad(localidad) {
 
     $.getJSON(url, function (data) {
         console.log(data);
-        $.each(data.tutorials, function (i, poblacion) {
-            var newRow =
-                    "<tr>"
+        var poblacion_output = "";
+        $.each(data.poblaciones, function (i, poblacion) {
+            poblacion_output += "<tr>"
                     + "<td>" + poblacion.id_poblacion + "</td>"
                     + "<td>" + poblacion.poblacion + "</td>"
                     + "</tr>";
-            $(newRow).appendTo("#json_localidades");
+            $('#json_localidades').html(poblacion_output);
         });
     });
 }
