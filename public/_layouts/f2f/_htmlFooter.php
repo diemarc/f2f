@@ -202,16 +202,20 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/_layouts/f2f/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
+<!-- Morris.js charts 
 <script src="/_layouts/f2f/bower_components/raphael/raphael.min.js"></script>
 <script src="/_layouts/f2f/bower_components/morris.js/morris.min.js"></script>
-<!-- Sparkline -->
+-->
+<!-- Sparkline 
 <script src="/_layouts/f2f/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-<!-- jvectormap -->
+-->
+<!-- jvectormap 
 <script src="/_layouts/f2f/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="/_layouts/f2f/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- jQuery Knob Chart -->
+-->
+<!-- jQuery Knob Chart
 <script src="/_layouts/f2f/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+ -->
 <!-- daterangepicker -->
 <script src="/_layouts/f2f/bower_components/moment/min/moment.min.js"></script>
 <script src="/_layouts/f2f/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
@@ -225,7 +229,9 @@
 <script src="/_layouts/f2f/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="/_layouts/f2f/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!-- AdminLTE dashboard demo (This is only for demo purposes) 
 <script src="/_layouts/f2f/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
+<!-- AdminLTE for demo purposes 
 <script src="/_layouts/f2f/dist/js/demo.js"></script>
+
+-->
