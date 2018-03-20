@@ -64,12 +64,12 @@
                     <div class="col-lg-4">
                         <div class="box box-primary">
                             <div class="box-body box-profile">
-                                <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="logo de mi empresa">
+                                <img class="profile-user-img img-responsive img-circle" src="<?php echo __DOCUMENTROOT__.'../data/logos/seva/ipr_small.jpg';?>" alt="logo de mi empresa">
 
                                 <h3 class="profile-username text-center"><?php echo $rsContratante->razon_social; ?></h3>
                                 <p class="text-muted text-center"><?php echo $rsContratante->contratante; ?></p>
 
-                                <a href="#" class="btn btn-primary btn-block"><b>Cambiar logo</b></a>
+                                <a href="#" class="btn btn-success btn-block"><b>Cambiar logo</b></a>
                             </div>
                             <!-- /.box-body -->
                         </div>
