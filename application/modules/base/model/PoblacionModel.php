@@ -19,44 +19,65 @@
  */
 
 namespace application\modules\base\model;
+
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
   | Class PoblacionModel
   |-----------------------------------------------------------------------------
-  | Buisiness logic (rules) for PoblacionTable 
-  | 
+  | Buisiness logic (rules) for PoblacionTable
+  |
   | @author kerana,
   | @date 09-03-2018 06:03:24,
   |
  */
 
-class PoblacionModel extends tables\PoblacionTable {
+class PoblacionModel extends tables\PoblacionTable
+{
 
-    
-    
-     public function __construct()
+    public function __construct()
     {
         parent::__construct();
+    }
+
+    /*
+      |--------------------------------------------------------------------------
+      | JSON DATAS
+      |--------------------------------------------------------------------------
+     */
+    
+    
+    /**
+     * -------------------------------------------------------------------------
+     * Search poblacion 
+     * -------------------------------------------------------------------------
+     * @param type $keysearch
+     */
+    public function searchPoblacionJson($keysearch){
         
+        $key_to_search = \helpers\Validator::valVarchar('k_poblacion',$keysearch);
+        
+        if(!empty($key_to_search)){
+           echo $this->findLike('*', ['poblacion'=>$key_to_search], 'all');
+        }
         
     }
+    
 
     /**
      * -------------------------------------------------------------------------
      * Save post data
      * -------------------------------------------------------------------------
      */
-    public function savePost(){
+    public function savePost()
+    {
         $this->set_poblacion();
-$this->set_provincia();
-$this->set_ccaa();
-$this->set_cod_provincia();
-$this->set_cod_ccaa();
+        $this->set_provincia();
+        $this->set_ccaa();
+        $this->set_cod_provincia();
+        $this->set_cod_ccaa();
 
         return parent::savePoblacion();
     }
-    
-    
 
 }
