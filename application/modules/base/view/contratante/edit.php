@@ -1,20 +1,4 @@
-<script>
-    function findLocalidad(localidad) {
-        var url = "/base/poblacion/findPoblacion/" + localidad;
-
-        $.getJSON(url, function (data) {
-            console.log(data);
-            $.each(data.tutorials, function (i, poblacion) {
-                var newRow =
-                        "<tr>"
-                        + "<td>" + poblacion.id_poblacion + "</td>"
-                        + "<td>" + poblacion.poblacion + "</td>"
-                        + "</tr>";
-                $(newRow).appendTo("#json_localidades");
-            });
-        });
-    }
-</script>
+<script src="/src/js/poblacion_js.js"></script>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -23,7 +7,6 @@
             <?php echo $rsContratante->contratante; ?>
             <small>aqu&iacute; puedes editar todo lo referente a tu empresa</small>
         </h1>
-
     </section> 
     <!-- Main content -->
     <section class="content">
@@ -90,8 +73,16 @@
                                                value="<?php echo $rsContratante->direccion; ?>"  />
                                     </div> 
                                 </div> 
-                                <table id="json_localidades">
+                                <table id="">
+                                    <thead>
+                                        <tr>
+                                            <th>id_localidad</th>
+                                            <th>localidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="json_localidades">
 
+                                    </tbody>
                                 </table>
                             </div> 
                             <div class='form-group form-group-sm'> 
