@@ -69,6 +69,13 @@ class F2FModel extends \application\modules\configuracion\model\UserContratanteM
         else if ($num_contra == 1) {
             $_SESSION['f2f_id_contratante'] = $rsContratantesUser[0]->id_contratante;
             $_SESSION['f2f_contratante'] = $rsContratantesUser[0]->contratante;
+            $this->f2f_contratantes_array[] = [
+                'id_contratante' => $rsContratantesUser[0]->id_contratante,
+                'contratante' => $rsContratantesUser[0]->contratante,
+                'nombre_contra' => $rsContratantesUser[0]->razon_social,
+                'cif' => $rsContratantesUser[0]->cif
+            ];
+            $_SESSION['f2f_contratantes_array'] = $this->f2f_contratantes_array;
         }
         // if have grater tan 1, then create a array wit all the contratantes
         else {
@@ -101,8 +108,8 @@ class F2FModel extends \application\modules\configuracion\model\UserContratanteM
 
         // create a new session value for contratante
         $_SESSION['f2f_id_contratante'] = $this->get_id_contratante();
-        $_SESSION['f2f_contratante'] = $this->find('contratante', ['id_contratante' =>$this->get_id_contratante()]
-        )->contratante;
+        $_SESSION['f2f_contratante'] = $this->find('contratante', ['id_contratante' => $this->get_id_contratante()]
+                )->contratante;
     }
 
 }
