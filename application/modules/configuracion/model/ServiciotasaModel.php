@@ -19,33 +19,33 @@
  */
 
 namespace application\modules\configuracion\model;
+
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
   | Class ServiciotasaModel
   |-----------------------------------------------------------------------------
-  | Buisiness logic (rules) for ServiciotasaTable 
-  | 
+  | Buisiness logic (rules) for ServiciotasaTable
+  |
   | @author kerana,
   | @date 19-03-2018 17:34:20,
   |
  */
 
-class ServiciotasaModel extends tables\ServiciotasaTable {
+class ServiciotasaModel extends tables\ServiciotasaTable
+{
 
-    public 
- /** @object ServicioModel  */ 
- $objServicioModel,
-/** @object TaxaModel  */ 
- $objTaxaModel;
-    
-     public function __construct()
+    public
+    /** @object ServicioModel  */
+            $objServicioModel,
+            /** @object TaxaModel  */
+            $objTaxaModel;
+
+    public function __construct()
     {
         parent::__construct();
-         $this->objServicioModel= new \application\modules\fac2fast\model\ServicioModel(); 
- $this->objTaxaModel= new \application\modules\base\model\TaxaModel(); 
-
-        
+        $this->objServicioModel = new \application\modules\fac2fast\model\ServicioModel();
+        $this->objTaxaModel = new \application\modules\base\model\TaxaModel();
     }
 
     /**
@@ -53,13 +53,12 @@ class ServiciotasaModel extends tables\ServiciotasaTable {
      * Save post data
      * -------------------------------------------------------------------------
      */
-    public function savePost(){
+    public function savePost()
+    {
         $this->set_id_servicio();
-$this->set_id_tasa();
+        $this->set_id_tasa();
 
         return parent::saveServiciotasa();
     }
-    
-    
 
 }
