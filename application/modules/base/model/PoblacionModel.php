@@ -45,36 +45,25 @@ class PoblacionModel extends tables\PoblacionTable
       | JSON DATAS
       |--------------------------------------------------------------------------
      */
-    
-    
+
     /**
      * -------------------------------------------------------------------------
      * Search poblacion 
      * -------------------------------------------------------------------------
      * @param type $keysearch
      */
-    public function searchPoblacionJson($keysearch){
-        
-        $key_to_search = \helpers\Validator::valVarchar('k_poblacion',$keysearch);
-        
-        if(!empty($key_to_search)){
-            
-            $rsPoblacion = $this->findLike('*', ['poblacion'=>$key_to_search], 'all');
-            
-            if($rsPoblacion){
-                $poblacion_array = [];
-                foreach($rsPoblacion AS $poblacion):
-                    $poblacion_array['poblaciones'][] = $poblacion;
-                endforeach;
-                echo json_encode($poblacion_array);
-            }
-            
-            
-            
+    public function searchPoblacionJson($keysearch)
+    {
+        $key_to_search = \helpers\Validator::valVarchar('k_poblacion', $keysearch);
+        $rsPoblacion = $this->findLike('*', ['poblacion' => $key_to_search], 'all');
+        if ($rsPoblacion) {
+            $poblacion_array = [];
+            foreach ($rsPoblacion AS $poblacion):
+                $poblacion_array['poblaciones'][] = $poblacion;
+            endforeach;
+            echo json_encode($poblacion_array);
         }
-        
     }
-    
 
     /**
      * -------------------------------------------------------------------------
