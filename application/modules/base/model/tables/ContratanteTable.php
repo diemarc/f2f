@@ -118,7 +118,7 @@ abstract class ContratanteTable extends \kerana\Ada
             'contratante' => $this->_contratante,
             'cif' => $this->_cif,
             'razon_social' => $this->_razon_social,
-            'id_poblacion' => $this->_id_poblacion,
+            //'id_poblacion' => $this->_id_poblacion,
             'direccion' => $this->_direccion,
             'telefono' => $this->_telefono,
             'email' => $this->_email,
@@ -128,7 +128,7 @@ abstract class ContratanteTable extends \kerana\Ada
             'observacion' => $this->_observacion,
             'created_at' => $this->_created_at,
             'created_by' => $this->_created_by,
-            'aux_estados_id_estado' => $this->_aux_estados_id_estado,
+            //'aux_estados_id_estado' => $this->_aux_estados_id_estado,
         ];
         return parent::save($data_insert);
     }
@@ -192,7 +192,7 @@ abstract class ContratanteTable extends \kerana\Ada
      */
     public function set_id_poblacion($value = "")
     {
-        $this->_id_poblacion = \helpers\Validator::valInt('f_id_poblacion', $value, TRUE);
+        $this->_id_poblacion = \helpers\Validator::valInt('f_id_poblacion', $value, false);
     }
 
     /**
@@ -302,7 +302,7 @@ abstract class ContratanteTable extends \kerana\Ada
      */
     public function set_aux_estados_id_estado($value = "")
     {
-        $this->_aux_estados_id_estado = \helpers\Validator::valInt('f_aux_estados_id_estado', $value, TRUE);
+        $this->_aux_estados_id_estado = \helpers\Validator::valInt('f_aux_estados_id_estado', $value, false);
     }
 
     /*

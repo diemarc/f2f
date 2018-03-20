@@ -66,9 +66,9 @@ class ContratanteModel extends tables\ContratanteTable
         $this->set_cta_bancaria();
         $this->set_path_logo();
         $this->set_observacion();
-        $this->set_created_at();
-        $this->set_created_by();
-        $this->set_aux_estados_id_estado();
+        //$this->set_created_at();
+        //$this->set_created_by();
+        //$this->set_aux_estados_id_estado();
 
         return parent::saveContratante();
     }
