@@ -87,7 +87,7 @@
                 <!-- quick email widget -->
                 <div class="box box-info">
                     <div class="box-header">
-                        <i class="fa fa-envelope"></i>
+                        <i class="fa fa-money"></i>
 
                         <h3 class="box-title">Fast2Fac</h3>
                         <!-- tools box -->
@@ -101,7 +101,7 @@
                     <div class="box-body">
                         <form action="#" method="post">
                             <div class="form-group">
-                                <input type="email" class="form-control" name="emailto" placeholder="Email to:">
+                                <input type="email" class="form-control" name="emailto" placeholder="Cliente:">
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="subject" placeholder="Subject">
