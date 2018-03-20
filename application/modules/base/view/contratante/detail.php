@@ -21,7 +21,7 @@
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h3 class="box-title">
-                                    <a href="" class="btn btn-sm btn-info">
+                                    <a href="<?php echo __URL__.'/base/contratante/edit/'.$rsContratante->id_contratante;?>" class="btn btn-sm btn-info">
                                         <i class="fa fa-edit"></i>Editar
                                     </a>
                                 </h3>
