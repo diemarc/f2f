@@ -69,8 +69,8 @@ class ContratanteController extends \kerana\Kerana implements \kerana\KeranaInte
      * Show one record detail
      * -------------------------------------------------------------------------
      * @param int $id
-     */
-    public function detail($id)
+     */ 
+   public function detail($id)
     {
 
         $this->_contratante->_setIdTableValue($id);
@@ -101,7 +101,7 @@ class ContratanteController extends \kerana\Kerana implements \kerana\KeranaInte
     public function update($id)
     {
         $this->_contratante->_setIdTableValue($id);
-        ($this->_contratante->savePost()) ? \helpers\Redirect::to('/base/contratante/index') : '';
+        ($this->_contratante->savePost()) ? \helpers\Redirect::to('/base/contratante/detail/'.$id) : '';
     }
 
     /**
