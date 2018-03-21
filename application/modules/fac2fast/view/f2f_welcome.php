@@ -110,9 +110,9 @@
                 <!-- TO DO List -->
                 <div class="box box-primary">
                     <div class="box-header">
-                        <i class="ion ion-clipboard"></i>
+                        <i class="ion ion-cash"></i>
 
-                        <h3 class="box-title">Ultimas facturas</h3>
+                        <h3 class="box-title text-blue">Ultimas facturas</h3>
 
                         <div class="box-tools pull-right">
                             <ul class="pagination pagination-sm inline">
@@ -129,13 +129,6 @@
                         <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
                         <ul class="todo-list">
                             <li>
-                                <!-- drag handle -->
-                                <span class="handle">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                    <i class="fa fa-ellipsis-v"></i>
-                                </span>
-                                <!-- checkbox -->
-                                <input type="checkbox" value="">
                                 <!-- todo text -->
                                 <span class="text">F-984554, Carpinteria metalica jose 587€</span>
                                 <!-- Emphasis label -->
@@ -147,11 +140,6 @@
                                 </div>
                             </li>
                             <li>
-                                <span class="handle">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                    <i class="fa fa-ellipsis-v"></i>
-                                </span>
-                                <input type="checkbox" value="">
                                 <span class="text">F-984534, Pescaderia diarte 57€</span>
                                 <small class="label label-info"><i class="fa fa-clock-o"></i> Enviada</small>
                                 <div class="tools">
@@ -160,11 +148,6 @@
                                 </div>
                             </li>
                             <li>
-                                <span class="handle">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                    <i class="fa fa-ellipsis-v"></i>
-                                </span>
-                                <input type="checkbox" value="">
                                 <span class="text">F-911554, Micromouse 1587€</span>
                                 <small class="label label-warning"><i class="fa fa-clock-o"></i> Abono</small>
                                 <div class="tools">
@@ -173,11 +156,6 @@
                                 </div>
                             </li>
                             <li>
-                                <span class="handle">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                    <i class="fa fa-ellipsis-v"></i>
-                                </span>
-                                <input type="checkbox" value="">
                                 <span class="text">F-984551, Ipr 350€</span>
                                 <small class="label label-success"><i class="fa fa-clock-o"></i> Cobrada</small>
                                 <div class="tools">
@@ -186,26 +164,8 @@
                                 </div>
                             </li>
                             <li>
-                                <span class="handle">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                    <i class="fa fa-ellipsis-v"></i>
-                                </span>
-                                <input type="checkbox" value="">
                                 <span class="text">F-623559, Serigrafia Lopez, 71€</span>
                                 <small class="label label-primary"><i class="fa fa-clock-o"></i>Cobrada</small>
-                                <div class="tools">
-                                    <i class="fa fa-edit"></i>
-                                    <i class="fa fa-trash-o"></i>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="handle">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                    <i class="fa fa-ellipsis-v"></i>
-                                </span>
-                                <input type="checkbox" value="">
-                                <span class="text">f-0054 Facebok</span>
-                                <small class="label label-default"><i class="fa fa-clock-o"></i>Creada</small>
                                 <div class="tools">
                                     <i class="fa fa-edit"></i>
                                     <i class="fa fa-trash-o"></i>
@@ -215,7 +175,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix no-border">
-                        <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
+                        <button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Nueva Factura</button>
                     </div>
                 </div>
                 <!-- /.box -->
