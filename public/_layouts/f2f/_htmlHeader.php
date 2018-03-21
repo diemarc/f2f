@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="/_layouts/f2f/bower_components/font-awesome/css/font-awesome.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="/_layouts/f2f/bower_components/Ionicons/css/ionicons.min.css">
+        <link rel="stylesheet" href="/_layouts/f2f/plugins/iCheck/minimal/minimal.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="/_layouts/f2f/dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
