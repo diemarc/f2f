@@ -118,7 +118,7 @@ abstract class ContratanteTable extends \kerana\Ada
             'contratante' => $this->_contratante,
             'cif' => $this->_cif,
             'razon_social' => $this->_razon_social,
-            //'id_poblacion' => $this->_id_poblacion,
+            'id_poblacion' => $this->_id_poblacion,
             'direccion' => $this->_direccion,
             'telefono' => $this->_telefono,
             'email' => $this->_email,
