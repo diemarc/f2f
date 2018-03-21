@@ -24,11 +24,11 @@
                           id="formKerana" name="formKerana" method="POST" class="form-horizontal"
                           accept-charset="utf-8">
                               <?php echo $kerana_token; ?>
-                        <input type="hidden"name="f_id_poblacion" id="f_id_poblacion" value="<?php echo $rsContratante->id_poblacion; ?>" />
+                        <input type="text"name="f_id_empresa" id="f_id_empresa" value="" />
 
                         <div class="box-body">
                             <div class="breadcrumb">
-                                <a href="<?php echo __URL__ . '/base/contratante/detail/' . $rsContratante->id_contratante; ?>" class="btn btn-warning">Cancelar</a>
+                                <a href="<?php echo __URL__ . '/fac2fast/f2f/index/';?>" class="btn btn-warning">Cancelar</a>
                                 <button type="submit" class="btn btn-success">Crear factura</button>
                             </div>
                             <div class='form-group form-group-sm'> 
@@ -72,8 +72,8 @@
                                 <label for='f_abono' class='col-sm-2 control-label'>Abono</label> 
                                 <div class='col-sm-6'> 
                                     <div class='input-group col-sm-8'> 
-                                        <input type="radio" id="f_abono" name="f_abono" class="radio_inline" value="1">Si
-                                        <input type="radio" id="f_abono" name="f_abono" class="radio_inline" value="0">No
+                                        <input type="radio" id="f_abono" name="f_abono" class="minimal" value="1">Si
+                                        <input type="radio" id="f_abono" name="f_abono" class="minimal" value="0">No
                                     </div> 
                                 </div> 
                             </div> 
@@ -90,7 +90,7 @@
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <a href="<?php echo __URL__ . ''; ?>" class="btn btn-warning">Cancelar</a>
+                            <a href="<?php echo __URL__ . '/fac2fast/f2f/index/';?>" class="btn btn-warning">Cancelar</a>
                             <button type="submit" class="btn btn-success">Crear factura</button>
                         </div>
                         <!-- /.box-footer -->
