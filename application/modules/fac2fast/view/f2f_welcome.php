@@ -175,7 +175,11 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix no-border">
-                        <button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Nueva Factura</button>
+                        <a href="<?php echo __URL__.'/fac2fast/factura/add';?>" 
+                           class="btn btn-primary pull-right"
+                           title="Nueva factura">
+                            <i class="fa fa-plus"></i> Nueva Factura
+                        </a>
                     </div>
                 </div>
                 <!-- /.box -->
