@@ -25,6 +25,7 @@
                           id="formKerana" name="formKerana" method="POST" class="form-horizontal"
                           accept-charset="utf-8">
                               <?php echo $kerana_token; ?>
+                        <input type="hidden"name="f_id_poblacion" id="f_id_poblacion" value="<?php echo $rsContratante->id_poblacion; ?>" />
 
                         <div class="box-body">
                             <div class="breadcrumb">
@@ -35,7 +36,8 @@
                                 <label for='f_contratante' class='col-sm-2 control-label'>Nombre  corto</label> 
                                 <div class='col-sm-6'> 
                                     <div class='input-group col-sm-2'> 
-                                        <input type="text" id="f_contratante" name="f_contratante" class="form-control"  maxlength="45" required value="<?php echo $rsContratante->contratante; ?>"  />
+                                        <input type="text" id="f_contratante" name="f_contratante" class="form-control"  
+                                               maxlength="45" required value="<?php echo $rsContratante->contratante; ?>"  />
                                     </div> 
                                 </div> 
                             </div> 
@@ -52,7 +54,8 @@
                                 <label for='f_razon_social' class='col-sm-2 control-label'>Razon social</label> 
                                 <div class='col-sm-6'> 
                                     <div class='input-group col-sm-10'> 
-                                        <input type="text" id="f_razon_social" name="f_razon_social" class="form-control"  maxlength="250"  value="<?php echo $rsContratante->razon_social; ?>"  />
+                                        <input type="text" id="f_razon_social" name="f_razon_social" class="form-control"  
+                                               maxlength="250"  value="<?php echo $rsContratante->razon_social; ?>"  />
                                     </div> 
                                 </div> 
                             </div> 
@@ -60,7 +63,8 @@
                                 <label for='f_direccion' class='col-sm-2 control-label'>Direccion</label> 
                                 <div class='col-sm-6'> 
                                     <div class='input-group col-sm-12'> 
-                                        <input type="text" id="f_direccion" name="f_direccion" class="form-control"  maxlength="45"  value="<?php echo $rsContratante->direccion; ?>"  />
+                                        <input type="text" id="f_direccion" name="f_direccion" class="form-control"  
+                                               maxlength="45"  value="<?php echo $rsContratante->direccion; ?>"  />
                                     </div> 
                                 </div> 
                             </div> 
@@ -70,26 +74,33 @@
                                     <div class='input-group col-sm-12'> 
                                         <input type="text" id="k_localidad" name="k_localidad" 
                                                class="form-control"  maxlength="45"  onchange="findLocalidad(this.value)"
-                                               value="<?php echo $rsContratante->direccion; ?>"  />
+                                               value="<?php echo $rsContratante->poblacion; ?>"  />
+                                        <div id="live_search_poblacion" class="hidden">
+                                            <br/>
+                                            <div class="box box-info">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title text-blue">Selecciona una localidad</h3>
+                                                </div>
+                                                <div class="box-body">
+                                                    <table class="table table-bordered">
+                                                        <tbody class="small" id="json_localidades">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div> 
                                 </div> 
-                                <table id="">
-                                    <thead>
-                                        <tr>
-                                            <th>id_localidad</th>
-                                            <th>localidad</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="json_localidades">
 
-                                    </tbody>
-                                </table>
                             </div> 
                             <div class='form-group form-group-sm'> 
                                 <label for='f_telefono' class='col-sm-2 control-label'>Tel&eacute;fono</label> 
                                 <div class='col-sm-6'> 
                                     <div class='input-group col-sm-4'> 
-                                        <input type="tel" id="f_telefono" name="f_telefono" class="form-control"  maxlength="15"  value="<?php echo $rsContratante->telefono; ?>"  />
+                                        <input type="tel" id="f_telefono" name="f_telefono" class="form-control"  
+                                               maxlength="15"  value="<?php echo $rsContratante->telefono; ?>"  />
                                     </div> 
                                 </div> 
                             </div> 
@@ -97,7 +108,8 @@
                                 <label for='f_email' class='col-sm-2 control-label'>Email</label> 
                                 <div class='col-sm-6'> 
                                     <div class='input-group col-sm-8'> 
-                                        <input type="email" id="f_email" name="f_email" class="form-control"  maxlength="45"  value="<?php echo $rsContratante->email; ?>"  />
+                                        <input type="email" id="f_email" name="f_email" class="form-control"  
+                                               maxlength="45"  value="<?php echo $rsContratante->email; ?>"  />
                                     </div> 
                                 </div> 
                             </div> 
@@ -105,7 +117,8 @@
                                 <label for='f_contacto' class='col-sm-2 control-label'>Contacto</label> 
                                 <div class='col-sm-6'> 
                                     <div class='input-group col-sm-8'> 
-                                        <input type="text" id="f_contacto" name="f_contacto" class="form-control"  maxlength="45"  value="<?php echo $rsContratante->contacto; ?>"  />
+                                        <input type="text" id="f_contacto" name="f_contacto" class="form-control"  
+                                               maxlength="45"  value="<?php echo $rsContratante->contacto; ?>"  />
                                     </div> 
                                 </div> 
                             </div> 
@@ -113,7 +126,8 @@
                                 <label for='f_cta_bancaria' class='col-sm-2 control-label'>Cta bancaria</label> 
                                 <div class='col-sm-6'> 
                                     <div class='input-group col-sm-8'> 
-                                        <input type="number" id="f_cta_bancaria" name="f_cta_bancaria" class="form-control" maxlength="20"  value="<?php echo $rsContratante->cta_bancaria; ?>" />
+                                        <input type="number" id="f_cta_bancaria" name="f_cta_bancaria" class="form-control" 
+                                               maxlength="20"  value="<?php echo $rsContratante->cta_bancaria; ?>" />
                                     </div> 
                                 </div> 
                             </div> 
