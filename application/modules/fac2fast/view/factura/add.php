@@ -5,7 +5,7 @@
         <h1 class="text-blue">
             Nueva factura
             <small>sera emitida por <strong>
-                <?php echo $_SESSION['f2f_contratante']; ?></strong></small>
+                    <?php echo $_SESSION['f2f_contratante']; ?></strong></small>
         </h1>
     </section> 
     <!-- Main content -->
@@ -14,6 +14,8 @@
         <!-- Default box -->
         <div class="box box-success">
             <div class="box-header with-border">
+
+
 
             </div>
             <div class="box-body">
@@ -28,11 +30,12 @@
 
                         <div class="box-body">
                             <div class="breadcrumb">
-                                <a href="<?php echo __URL__ . '/fac2fast/f2f/index/';?>" class="btn btn-warning">Cancelar</a>
+                                <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" class="btn btn-warning">Cancelar</a>
                                 <button type="submit" class="btn btn-success">Crear factura</button>
                             </div>
+                            <!-- fecha factura -->
                             <div class='form-group form-group-sm'> 
-                                <label for='f_fecha_factura' class='col-sm-2 control-label'>Fecha_factura</label> 
+                                <label for='f_fecha_factura' class='col-sm-2 control-label'>Fecha factura</label> 
                                 <div class='col-sm-6'> 
                                     <div class="input-group date col-sm-4">
                                         <div class="input-group-addon">
@@ -42,6 +45,23 @@
                                     </div>
                                 </div> 
                             </div> 
+                            <!-- /fecha_facuta -->
+                            <!-- cliente -->
+
+                            <div class='form-group  has-success  form-group-sm'> 
+                                <label for='k_cliente' class='col-sm-2 control-label'>Cliente</label> 
+                                <div class='col-sm-6'> 
+                                    <div class="input-group date col-sm-8">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-building"></i></span>
+                                        <input class="form-control" name="k_cliente" id="k_cliente" 
+                                               placeholder="busca un cliente" 
+                                               type="text">
+                                    </div>
+                                </div> 
+                            </div> 
+                            <!-- /cliente -->
+                            
                             <div class='form-group form-group-sm'> 
                                 <label for='f_id_tipo' class='col-sm-2 control-label'>Tipo</label> 
                                 <div class='col-sm-6'> 
@@ -90,7 +110,7 @@
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <a href="<?php echo __URL__ . '/fac2fast/f2f/index/';?>" class="btn btn-warning">Cancelar</a>
+                            <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" class="btn btn-warning">Cancelar</a>
                             <button type="submit" class="btn btn-success">Crear factura</button>
                         </div>
                         <!-- /.box-footer -->
