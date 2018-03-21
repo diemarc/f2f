@@ -178,6 +178,17 @@ class Validator
         self::initValidator($param_name, $param_value, $required);
         return (empty(self::$param_to_validate)) ? date('Y-m-d h:i:s') : trim($param_value);
     }
+    
+    
+    public static function valDateTime($param_name, $param_value = '', $required = false)
+    {
+        self::initValidator($param_name, $param_value, $required);
+        return (empty(self::$param_to_validate)) ? date('Y-m-d h:i:s') : trim($param_value);
+    }
+    
+    public static function valTinyint($param_name, $param_value = '', $required = false){
+        return self::valInt($param_name, $param_value = '', $required);
+    }
 
     /**
      * -------------------------------------------------------------------------
