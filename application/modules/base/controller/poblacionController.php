@@ -124,11 +124,12 @@ class PoblacionController extends \kerana\Kerana implements \kerana\KeranaInterf
      * -------------------------------------------------------------------------
      * Find poblacion and return json data
      * -------------------------------------------------------------------------
-     * @param type $poblacion
-     * @return type
+     * @param int $cod_provincia
+     * @param string$poblacion
+     * @return json
      */
-    public function findPoblacion($poblacion){
-        return $this->_poblacion->searchPoblacionJson($poblacion);
+    public function findPoblacion($cod_provincia,$poblacion){
+        return $this->_poblacion->searchPoblacionJson($cod_provincia,$poblacion);
     }
     
 }
