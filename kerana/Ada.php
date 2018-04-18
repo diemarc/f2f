@@ -206,7 +206,7 @@ abstract class Ada
     {
         if (is_array($conditions)):
             foreach ($conditions AS $field => $search) :
-                $operator_to_use = ($operator == '=')? ' = :'.$field : ' LIKE CONCAT("%":'.$field.',"%")';
+                $operator_to_use = ($operator == '=')? ' = :'.$field : ' LIKE CONCAT(:'.$field.',"%")';
                 $this->_query .= ' AND ' . $field . $operator_to_use;
                 $this->_binds[':' . $field] = $search;
             endforeach;
