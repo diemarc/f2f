@@ -40,7 +40,7 @@ if (PHP_SAPI == 'cli') {
  * SITE URL
  * -----------------------------------------------------------------------------
  */
-define('__URL__', 'http://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '');
+define('__URL__', 'https://' . filter_input(INPUT_SERVER, 'HTTP_HOST') . '');
 
 /**
  * -----------------------------------------------------------------------------
