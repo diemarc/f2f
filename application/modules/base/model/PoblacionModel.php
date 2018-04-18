@@ -50,12 +50,20 @@ class PoblacionModel extends tables\PoblacionTable
      * -------------------------------------------------------------------------
      * Search poblacion 
      * -------------------------------------------------------------------------
-     * @param type $keysearch
+     * @param string $cod_provincia
+     * @param string $keysearch
      */
-    public function searchPoblacionJson($keysearch)
+    public function searchPoblacionJson($cod_provincia, $keysearch)
     {
-        $key_to_search = \helpers\Validator::valVarchar('k_poblacion', $keysearch);
-        $rsPoblacion = $this->findLike('*', ['poblacion' => $key_to_search], 'all');
+        // mutate the query
+        $this->_query = $this->_query . ' AND A.cod_provincia = :prov_to_search ';
+        $this->_binds[':prov_to_search'] = \helpers\Validator::valVarchar('aux_provincia', $cod_provincia);
+
+        $rsPoblacion = $this->findLike('*', [
+            'poblacion' => \helpers\Validator::valVarchar('k_poblacion', $keysearch)
+                ], 'all');
+
+
         if ($rsPoblacion) {
             $poblacion_array = [];
             foreach ($rsPoblacion AS $poblacion):
@@ -63,6 +71,18 @@ class PoblacionModel extends tables\PoblacionTable
             endforeach;
             echo json_encode($poblacion_array);
         }
+    }
+
+    /**
+     * -------------------------------------------------------------------------
+     * Get all provincias
+     * -------------------------------------------------------------------------
+     * @return type
+     */
+    public function getProvincias()
+    {
+        $this->_query = $this->_query . ' GROUP BY A.cod_provincia ';
+        return $this->getAll();
     }
 
     /**
