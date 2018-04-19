@@ -69,7 +69,8 @@ abstract class EmpresaContratanteTable extends \kerana\Ada {
                 . ' C.contacto AS contacto_empresa,'
                 . ' C.cta_bancaria AS cta_bancaria_empresa,'
                 . ' C.observacion AS observacion_empresa,C.aux_estados_id_estado AS id_estado_empresa,'
-                . ' C4.poblacion AS poblacion_empresa,C4.provincia AS provincia_empresa,C4.ccaa AS ccaa_empresa,'
+                . ' C4.poblacion AS poblacion_empresa,C4.provincia AS provincia_empresa,'
+                . ' C4.ccaa AS ccaa_empresa,'
                 . ' C4.pais AS pais_empresa,C4.cod_poblacion AS cod_poblacion_empresa,'
                 . ' C4.cod_provincia AS cod_provincia_empresa,'
                 . ' C4.cod_ccaa AS cod_ccaa_empresa,C4.cod_pais AS cod_pais_empresa'
@@ -80,7 +81,8 @@ abstract class EmpresaContratanteTable extends \kerana\Ada {
                 . ' INNER JOIN a_empresas C ON (C.id_empresa = A.id_empresa) '
                 //. ' INNER JOIN aux_estados C3 ON (C3.id_estado = C.aux_estados_id_estado) '
                 . ' INNER JOIN aux_poblaciones C4 ON (C4.id_poblacion = C.id_poblacion) '
-                . ' WHERE A.id_empresa IS NOT NULL ';
+                . ' WHERE A.id_empresa IS NOT NULL'
+                . ' AND A.id_contratante = '.$_SESSION['f2f_id_contratante'];
     }
 
     /*

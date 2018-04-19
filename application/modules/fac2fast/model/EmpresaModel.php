@@ -19,58 +19,60 @@
  */
 
 namespace application\modules\fac2fast\model;
+
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
   | Class EmpresaModel
   |-----------------------------------------------------------------------------
-  | Buisiness logic (rules) for EmpresaTable 
+  | Buisiness logic (rules) for EmpresaTable
   | dvd empresas
   | @author kerana,
   | @date 19-03-2018 17:47:07,
   |
  */
 
-class EmpresaModel extends tables\EmpresaTable {
+class EmpresaModel extends tables\EmpresaTable
+{
 
-    public 
- /** @object EstadoModel  */ 
- $objEstadoModel,
-/** @object PoblacionModel  */ 
- $objPoblacionModel;
-    
-     public function __construct()
+    public
+    /** @object EstadoModel  */
+            $objEstadoModel,
+            /** @object PoblacionModel  */
+            $objPoblacionModel;
+
+    public function __construct()
     {
         parent::__construct();
-         $this->objEstadoModel= new \application\modules\base\model\EstadoModel(); 
- $this->objPoblacionModel= new \application\modules\base\model\PoblacionModel(); 
-
-        
+        $this->objEstadoModel = new \application\modules\base\model\EstadoModel();
+        $this->objPoblacionModel = new \application\modules\base\model\PoblacionModel();
     }
+
+    
+    
 
     /**
      * -------------------------------------------------------------------------
      * Save post data
      * -------------------------------------------------------------------------
      */
-    public function savePost(){
+    public function savePost()
+    {
         $this->set_cif();
-$this->set_empresa();
-$this->set_razon_social();
-$this->set_id_poblacion();
-$this->set_direccion();
-$this->set_telefono();
-$this->set_email();
-$this->set_contacto();
-$this->set_cta_bancaria();
-$this->set_observacion();
-$this->set_created_at();
-$this->set_created_by();
-$this->set_aux_estados_id_estado();
+        $this->set_empresa();
+        $this->set_razon_social();
+        $this->set_id_poblacion();
+        $this->set_direccion();
+        $this->set_telefono();
+        $this->set_email();
+        $this->set_contacto();
+        $this->set_cta_bancaria();
+        $this->set_observacion();
+        $this->set_created_at();
+        $this->set_created_by();
+        $this->set_aux_estados_id_estado();
 
         return parent::saveEmpresa();
     }
-    
-    
 
 }
