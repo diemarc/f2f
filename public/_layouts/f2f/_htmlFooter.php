@@ -192,12 +192,12 @@
 <!--  end of div class wrapper iniciated in _htmlHeader.php -->
 </div><!-- Model -->
 <div class="modal fade" id="myModel" tabindex="-1"
-    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"
-                    aria-label="Close">
+                        aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h3 class="modal-title" id="myModalLabel">Model Title</h3>
@@ -221,6 +221,17 @@
 <script src="/_layouts/f2f/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
+
+    $(document).ready(function () {
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+
     $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
@@ -238,7 +249,7 @@
 -->
 <!-- jQuery Knob Chart
 <script src="/_layouts/f2f/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
- -->
+-->
 <!-- daterangepicker -->
 <script src="/_layouts/f2f/bower_components/moment/min/moment.min.js"></script>
 <script src="/_layouts/f2f/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
