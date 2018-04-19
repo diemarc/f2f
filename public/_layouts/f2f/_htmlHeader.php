@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title><?php echo __APPNAME__;?></title>
+        <title><?php echo __APPNAME__; ?></title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.7 -->
@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="/_layouts/f2f/dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="/_layouts/f2f/dist/css/skins/skin-blue.min.css">
+        <link rel="stylesheet" href="/_layouts/f2f/dist/css/skins/skin-blue-light.min.css">
         <!-- Morris chart -->
         <!-- jvectormap -->
         <link rel="stylesheet" href="/_layouts/f2f/bower_components/jvectormap/jquery-jvectormap.css">
@@ -37,10 +37,12 @@
 
         <!-- Google Font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        <!-- jQuery 3 -->
+        <script src="/_layouts/f2f/bower_components/jquery/dist/jquery.min.js"></script>
     </head>
-    <body class="hold-transition  skin-blue sidebar-mini">
+    <body class="hold-transition  skin-blue-light sidebar-mini">
         <div class="wrapper">
             <?php
-            include __DOCUMENTROOT__. '/_layouts/f2f/_top.php';
-            include __DOCUMENTROOT__. '/_layouts/f2f/_sidebar.php';
+            include __DOCUMENTROOT__ . '/_layouts/f2f/_top.php';
+            include __DOCUMENTROOT__ . '/_layouts/f2f/_sidebar.php';
             
