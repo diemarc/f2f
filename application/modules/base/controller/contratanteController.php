@@ -88,7 +88,12 @@ class ContratanteController extends \kerana\Kerana implements \kerana\KeranaInte
     {
         $this->_contratante->_setIdTableValue($id);
         \kerana\View::$model = $this->_contratante;
-        $params['rsContratante'] = $this->_contratante->getRecord();
+        
+        $params = [
+          'rsContratante'=> $this->_contratante->getRecord(),
+          'rsProvincias' => $this->_contratante->objPoblacionModel->getProvincias()
+        ];
+        
         \kerana\View::showForm($this->_current_module, 'contratante/edit', $params);
     }
 
