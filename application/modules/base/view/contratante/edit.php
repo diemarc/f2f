@@ -60,11 +60,16 @@
                                 </div> 
                             </div> 
                             <div class='form-group form-group-sm'> 
-                                <label for='f_direccion' class='col-sm-2 control-label'>Direccion</label> 
+                                <label for='aux_provincia' class='col-sm-2 control-label'>Provincia</label> 
                                 <div class='col-sm-6'> 
-                                    <div class='input-group col-sm-12'> 
-                                        <input type="text" id="f_direccion" name="f_direccion" class="form-control"  
-                                               maxlength="45"  value="<?php echo $rsContratante->direccion; ?>"  />
+                                    <div class='input-group col-sm-10'> 
+                                        <select name="aux_provincia" class="form-control" id="aux_provincia">
+                                            <?php foreach($rsProvincias AS $provincia): ?>
+                                            <option value="<?php echo $provincia->cod_provincia;?>">
+                                            <?php echo $provincia->provincia;?>
+                                            </option>
+                                            <?php endforeach;?>
+                                        </select>
                                     </div> 
                                 </div> 
                             </div> 
@@ -95,6 +100,16 @@
                                 </div> 
 
                             </div> 
+                            <div class='form-group form-group-sm'> 
+                                <label for='f_direccion' class='col-sm-2 control-label'>Direccion</label> 
+                                <div class='col-sm-6'> 
+                                    <div class='input-group col-sm-12'> 
+                                        <input type="text" id="f_direccion" name="f_direccion" class="form-control"  
+                                               maxlength="45"  value="<?php echo $rsContratante->direccion; ?>"  />
+                                    </div> 
+                                </div> 
+                            </div> 
+
                             <div class='form-group form-group-sm'> 
                                 <label for='f_telefono' class='col-sm-2 control-label'>Tel&eacute;fono</label> 
                                 <div class='col-sm-6'> 
