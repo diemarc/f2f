@@ -190,7 +190,8 @@
 </aside>
 <!-- /.control-sidebar -->
 <!--  end of div class wrapper iniciated in _htmlHeader.php -->
-</div><!-- Model -->
+</div>
+<!-- Modal window -->
 <div class="modal fade" id="myModel" tabindex="-1"
      role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -219,16 +220,14 @@
 <script src="/_layouts/f2f/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-
-    $(document).ready(function () {
-        $(window).keydown(function (event) {
-            if (event.keyCode == 13) {
-                event.preventDefault();
-                return false;
-            }
-        });
+// prevent send form with enter
+    $('#formKerana').on('keyup keypress', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
     });
-
 
     $.widget.bridge('uibutton', $.ui.button);
 </script>
