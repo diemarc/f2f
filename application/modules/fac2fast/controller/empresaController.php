@@ -1,6 +1,7 @@
 <?php
 
 namespace application\modules\fac2fast\controller;
+
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
@@ -13,16 +14,15 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
   |
  */
 
-class EmpresaController extends \kerana\Kerana implements \kerana\KeranaInterface {
+class EmpresaController extends \kerana\Kerana implements \kerana\KeranaInterface
+{
 
-    
     protected $_empresa;
 
-     public function __construct()
+    public function __construct()
     {
         parent::__construct();
-         $this->_empresa= New \application\modules\fac2fast\model\EmpresaModel();
-        
+        $this->_empresa = New \application\modules\fac2fast\model\EmpresaModel();
     }
 
     /**
@@ -30,90 +30,88 @@ class EmpresaController extends \kerana\Kerana implements \kerana\KeranaInterfac
      * Show all 
      * -------------------------------------------------------------------------
      */
-    public function index(){
-        
+    public function index()
+    {
+
         // only necesary for a view creator, remove it  after index files is
         // created
         \kerana\View::$model = $this->_empresa;
-        \kerana\View::showView($this->_current_module, 'empresa/index', 
-                ['rsEmpresas' => $this->_empresa->getAll()]);
+        \kerana\View::showView($this->_current_module, 'empresa/index', ['rsEmpresas' => $this->_empresa->getAll()]);
     }
-    
+
     /**
      * -------------------------------------------------------------------------
      * Add new
      * -------------------------------------------------------------------------
      */
-    
-    public function add(){
-         \kerana\View::$model = $this->_empresa;
+    public function add()
+    {
+        \kerana\View::$model = $this->_empresa;
         $params = [
- "rsEstados"=> $this->_empresa->objEstadoModel->getAll(), 
-
- "rsPoblacions"=> $this->_empresa->objPoblacionModel->getAll(), 
-];
-        \kerana\View::showForm($this->_current_module,'empresa/add',$params,$this->_empresa);
+            "rsEstados" => $this->_empresa->objEstadoModel->getAll(),
+            "rsPoblacions" => $this->_empresa->objPoblacionModel->getAll(),
+        ];
+        \kerana\View::showForm($this->_current_module, 'empresa/add', $params, $this->_empresa);
     }
-    
-     /**
+
+    /**
      * -------------------------------------------------------------------------
      * Save new record
      * -------------------------------------------------------------------------
      */
-    
-    public function save(){
+    public function save()
+    {
         ($this->_empresa->savePost()) ? \helpers\Redirect::to('/fac2fast/empresa/index') : '';
     }
-    
+
     /**
      * -------------------------------------------------------------------------
      * Show one record detail
      * -------------------------------------------------------------------------
      * @param int $id
      */
-    
-    public function detail($id){
-        
+    public function detail($id)
+    {
+
         $this->_empresa->_setIdTableValue($id);
         $params['rsEmpresa'] = $this->_empresa->getRecord();
-        \kerana\View::showView($this->_current_module,'empresa/detail',$params);
-        
+        \kerana\View::showView($this->_current_module, 'empresa/detail', $params);
     }
-    
+
     /**
      * -------------------------------------------------------------------------
      * Edit one record
      * -------------------------------------------------------------------------
      * @param int $id
      */
-    
-    public function edit($id){
+    public function edit($id)
+    {
         $this->_empresa->_setIdTableValue($id);
-         \kerana\View::$model = $this->_empresa;
+        \kerana\View::$model = $this->_empresa;
         $params['rs'] = $this->_empresa->getRecord();
-        \kerana\View::showForm($this->_current_module,'empresa/edit',$params);
+        \kerana\View::showForm($this->_current_module, 'empresa/edit', $params);
     }
-    
+
     /**
      * -------------------------------------------------------------------------
      * Update one record
      * -------------------------------------------------------------------------
      * @param int $id
      */
-    
-    public function update($id){
+    public function update($id)
+    {
         $this->_empresa->_setIdTableValue($id);
         ($this->_empresa->savePost()) ? \helpers\Redirect::to('/fac2fast/empresa/index') : '';
     }
-    
+
     /**
      * -------------------------------------------------------------------------
      * Delete one record
      * -------------------------------------------------------------------------
      * @param int $id
      */
-    
-    public function delete($id){
+    public function delete($id)
+    {
         $this->_empresa->_setIdTableValue($id);
         ($this->_empresa->delete()) ? \helpers\Redirect::to('/fac2fast/empresa/index') : '';
     }
