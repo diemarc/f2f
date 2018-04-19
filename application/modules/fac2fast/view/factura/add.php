@@ -1,4 +1,14 @@
+<script src="/src/js/empresa_js.js"></script>
+<script>
 
+    $(function () {
+        $("#k_cliente").keypress(function (e) {
+            if (e.keyCode === 13) {
+                findEmpresa($("#k_cliente").val());
+            }
+        });
+    });
+</script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <section class="content-header">
@@ -12,17 +22,15 @@
     <section class="content">
 
         <!-- Default box -->
-        <div class="box box-success">
+        <div class="box box-info">
             <div class="box-header with-border">
-
-
 
             </div>
             <div class="box-body">
                 <div class="row">
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form action="<?php echo __URL__ . '/base/contratante/update/' . $rsContratante->id_contratante; ?>" 
+                    <form action="<?php echo __URL__ . '/fac2fast/factura/save/' . $rsContratante->id_contratante; ?>" 
                           id="formKerana" name="formKerana" method="POST" class="form-horizontal"
                           accept-charset="utf-8">
                               <?php echo $kerana_token; ?>
@@ -31,8 +39,60 @@
                         <div class="box-body">
                             <div class="breadcrumb">
                                 <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" class="btn btn-warning">Cancelar</a>
-                                <button type="submit" class="btn btn-success">Crear factura</button>
+                                <button type="submit" class="btn btn-info">Crear factura</button>
+
                             </div>
+                            <!-- /fecha_facuta -->
+                            <!-- cliente -->
+                            <div class='form-group  has-success  form-group-sm'> 
+                                <label for='k_cliente' class='col-sm-2 control-label'>Cliente</label> 
+                                <div class='col-sm-6'> 
+                                    <div class="input-group date col-sm-8" id="div_cliente">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-building"></i></span>
+                                        <input class="form-control" name="k_cliente" id="k_cliente" 
+
+                                               placeholder="busca un cliente" 
+                                               type="text">
+                                    </div>
+                                    <!-- cliente livesearch -->
+                                    <div id="live_search_empresa" class="hidden">
+                                        <div class="col-sm-10">
+                                            <div class="box box-success direct-chat direct-chat-success" id="">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">Cliente encontrado</h3>
+                                                </div>
+                                                <div class="box-body">
+
+                                                    <div class="direct-chat-text">
+                                                        <table class="table table-bordered">
+                                                            <tbody class="small" id="json_empresas">
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end of div live search -->
+                                    <!-- client not found -->
+                                    <div class="box box-solid direct-chat direct-chat-warning hidden" id="div_cliente_notfound">
+                                        <div class="box-body">
+
+                                            <div class="direct-chat-msg right">
+                                                <div class="direct-chat-text">
+                                                    Cliente no encontrado,deseas crearlo? 
+                                                    <button type="button" class="btn btn-sm btn-circle btn-primary" data-toggle="modal" 
+                                                            data-remote="<?php echo __URL__ . '/fac2fast/empresa/add/'; ?>" data-target="#myModel">Si</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.client not found -->
+                                </div> 
+                            </div> 
+                            <!-- /cliente -->
                             <!-- fecha factura -->
                             <div class='form-group form-group-sm'> 
                                 <label for='f_fecha_factura' class='col-sm-2 control-label'>Fecha factura</label> 
@@ -45,23 +105,6 @@
                                     </div>
                                 </div> 
                             </div> 
-                            <!-- /fecha_facuta -->
-                            <!-- cliente -->
-
-                            <div class='form-group  has-success  form-group-sm'> 
-                                <label for='k_cliente' class='col-sm-2 control-label'>Cliente</label> 
-                                <div class='col-sm-6'> 
-                                    <div class="input-group date col-sm-8">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-building"></i></span>
-                                        <input class="form-control" name="k_cliente" id="k_cliente" 
-                                               placeholder="busca un cliente" 
-                                               type="text">
-                                    </div>
-                                </div> 
-                            </div> 
-                            <!-- /cliente -->
-                            
                             <div class='form-group form-group-sm'> 
                                 <label for='f_id_tipo' class='col-sm-2 control-label'>Tipo</label> 
                                 <div class='col-sm-6'> 
@@ -111,7 +154,7 @@
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" class="btn btn-warning">Cancelar</a>
-                            <button type="submit" class="btn btn-success">Crear factura</button>
+                            <button type="submit" class="btn btn-info">Crear factura</button>
                         </div>
                         <!-- /.box-footer -->
                     </form>
@@ -123,3 +166,4 @@
 
     </section>
 </div>
+
