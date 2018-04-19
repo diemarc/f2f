@@ -19,33 +19,67 @@
  */
 
 namespace application\modules\fac2fast\model;
+
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
   | Class EmpresaContratanteModel
   |-----------------------------------------------------------------------------
-  | Buisiness logic (rules) for EmpresaContratanteTable 
+  | Buisiness logic (rules) for EmpresaContratanteTable
   | dvd empresa contratnae
   | @author kerana,
   | @date 19-03-2018 18:21:42,
   |
  */
 
-class EmpresaContratanteModel extends tables\EmpresaContratanteTable {
+class EmpresaContratanteModel extends tables\EmpresaContratanteTable
+{
 
-    public 
- /** @object ContratanteModel  */ 
- $objContratanteModel,
-/** @object EmpresaModel  */ 
- $objEmpresaModel;
-    
-     public function __construct()
+    public
+    /** @object ContratanteModel  */
+            $objContratanteModel,
+            /** @object EmpresaModel  */
+            $objEmpresaModel;
+
+    public function __construct()
     {
         parent::__construct();
-         $this->objContratanteModel= new \application\modules\base\model\ContratanteModel(); 
- $this->objEmpresaModel= new \application\modules\fac2fast\model\EmpresaModel(); 
+        $this->objContratanteModel = new \application\modules\base\model\ContratanteModel();
+        $this->objEmpresaModel = new \application\modules\fac2fast\model\EmpresaModel();
+    }
 
+    /*
+      |--------------------------------------------------------------------------
+      | JSON DATA
+      |--------------------------------------------------------------------------
+      |
+     */
+
+    /**
+     * -------------------------------------------------------------------------
+     * Find a company
+     * -------------------------------------------------------------------------
+     * @param type $key_to_search
+     */
+    public function searchEmpresaJson($key_to_search)
+    {
         
+        
+        $rsEmpresa = $this->findLike('*', [
+            'empresa' => \helpers\Validator::valVarchar('k_empresa', $key_to_search)
+                ], 'all');
+
+        $empresa_array = [];
+
+        if ($rsEmpresa) {
+            $empresa_array['exists'] = true;
+            foreach ($rsEmpresa as $empresa) :
+                $empresa_array['empresas'][] = $empresa;
+            endforeach;
+        }else {
+            $empresa_array['exists'] = false;
+        }
+        echo json_encode($empresa_array);
     }
 
     /**
@@ -53,14 +87,13 @@ class EmpresaContratanteModel extends tables\EmpresaContratanteTable {
      * Save post data
      * -------------------------------------------------------------------------
      */
-    public function savePost(){
+    public function savePost()
+    {
         $this->set_id_empresa();
-$this->set_id_contratante();
-$this->set_fechas();
+        $this->set_id_contratante();
+        $this->set_fechas();
 
         return parent::saveEmpresaContratante();
     }
-    
-    
 
 }
