@@ -191,31 +191,21 @@
 <!-- /.control-sidebar -->
 <!--  end of div class wrapper iniciated in _htmlHeader.php -->
 </div>
-<!-- Modal window -->
 <div class="modal fade" id="myModel" tabindex="-1"
      role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h3 class="modal-title" id="myModalLabel">Model Title</h3>
-            </div>
-            <div class="modal-body">
-                <p>
-                    <img alt="loading" src="resources/img/ajax-loader.gif">
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Submit</button>
+            <div class="overlay" id="overlay_modal" align="center">
+                <div class="text-aqua">
+                    <i class="fa fa-refresh fa-spin fa-4x"></i>
+                    <p>
+                        Loading...
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 <!-- jQuery UI 1.11.4 -->
 <script src="/_layouts/f2f/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
