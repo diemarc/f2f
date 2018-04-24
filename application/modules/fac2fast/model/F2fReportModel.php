@@ -43,7 +43,7 @@ class F2fReportModel extends FacturaModel
              * @var string, the tamplate path
              * all reports templates must be stored in application/templates/reporst
              */
-            $_factura_template = 'factura';
+            $_factura_template = 'factura/tpl_factura';
 
     public function __construct()
     {
@@ -68,7 +68,7 @@ class F2fReportModel extends FacturaModel
         // set te params to render in template pdf.
         $this->_pdf->setParams(
                 [
-                    'titulo' => 'diego rojas',
+                    'titulo' => 'palantir',
                     'id_factura' => $id,
                     'rsFactura' => $this->getRecord()
                     
