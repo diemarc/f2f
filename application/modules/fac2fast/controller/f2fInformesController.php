@@ -23,7 +23,7 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
 
 /**
  * -----------------------------------------------------------------------------
- * f2fInformesController
+ * f2fInformesController 
  * ------------------------------------------------------------------------------
  * @author diemarc
  */
@@ -46,12 +46,12 @@ class F2fInformesController extends \kerana\Kerana
      * -------------------------------------------------------------------------
      * Genera una factura
      * -------------------------------------------------------------------------
-     * @param type $id
-     * @return type
+     * @param int $id , id factura que deseas generar
+     * @return avoid
      */
     public function generarFactura($id){
         
-        return $this->f2fReport_model->parseFactura($id);
+        $this->f2fReport_model->parseFactura($id);
         
     }
     
