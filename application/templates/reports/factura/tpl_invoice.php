@@ -15,7 +15,8 @@ td    { vertical-align: top; }
             <td style="width: 75%;">
             </td>
             <td style="width: 25%; color: #444444;">
-                <img style="width: 100%;" src="<?php echo __URL__.'/data/logos/seva/ipr_small.jpg';?>" alt="Logo"><br>
+                <img style="width: 100%;" src="<?php echo __URL__.'/data/logos/seva/ipr_small.jpg';?>"
+                     alt="Logo"><br>
                 RELATION CLIENT
             </td>
         </tr>
@@ -59,8 +60,8 @@ td    { vertical-align: top; }
     <br>
     <i>
         <b><u>Objet </u>: &laquo; Bon de Retour &raquo;</b><br>
-        Compte client : 00C4520100A<br>
-        Référence du Dossier : 71326<br>
+        Compte client : <?php echo $rsFactura->num_factura;?><br>
+        Factura : <?php echo $rsFactura->num_factura;?><br>
     </i>
     <br>
     <br>
@@ -74,7 +75,7 @@ td    { vertical-align: top; }
             <th style="width: 12%">Produit</th>
             <th style="width: 52%">Désignation</th>
             <th style="width: 13%">Prix Unitaire</th>
-            <th style="width: 10%">Quantité</th>
+            <th style="width: 10%">Calid&aacute;d</th>
             <th style="width: 13%">Prix Net</th>
         </tr>
     </table>
