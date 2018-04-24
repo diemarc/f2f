@@ -19,33 +19,33 @@
  */
 
 namespace application\modules\fac2fast\model;
+
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
   | Class FacturaServicioModel
   |-----------------------------------------------------------------------------
-  | Buisiness logic (rules) for FacturaServicioTable 
+  | Buisiness logic (rules) for FacturaServicioTable
   | dvd fact_serv f2f
   | @author kerana,
   | @date 20-03-2018 06:56:06,
   |
  */
 
-class FacturaServicioModel extends tables\FacturaServicioTable {
+class FacturaServicioModel extends tables\FacturaServicioTable
+{
 
-    public 
- /** @object FacturaModel  */ 
- $objFacturaModel,
-/** @object ServicioModel  */ 
- $objServicioModel;
-    
-     public function __construct()
+    public
+    /** @object FacturaModel  */
+            $objFacturaModel,
+            /** @object ServicioModel  */
+            $objServicioModel;
+
+    public function __construct()
     {
         parent::__construct();
-         $this->objFacturaModel= new \application\modules\fac2fast\model\FacturaModel(); 
- $this->objServicioModel= new \application\modules\fac2fast\model\ServicioModel(); 
-
-        
+        $this->objFacturaModel = new \application\modules\fac2fast\model\FacturaModel();
+        $this->objServicioModel = new \application\modules\fac2fast\model\ServicioModel();
     }
 
     /**
@@ -53,15 +53,14 @@ class FacturaServicioModel extends tables\FacturaServicioTable {
      * Save post data
      * -------------------------------------------------------------------------
      */
-    public function savePost(){
+    public function savePost()
+    {
         $this->set_facturas_id_facturas();
-$this->set_f_servicios_id_servicio();
-$this->set_cantidad();
-$this->set_precio();
+        $this->set_f_servicios_id_servicio();
+        $this->set_cantidad();
+        $this->set_precio();
 
         return parent::saveFacturaServicio();
     }
-    
-    
 
 }
