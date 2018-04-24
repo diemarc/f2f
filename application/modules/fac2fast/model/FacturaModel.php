@@ -32,7 +32,8 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
   |
  */
 
-class FacturaModel extends tables\FacturaTable {
+class FacturaModel extends tables\FacturaTable
+{
 
     public
 
@@ -43,7 +44,8 @@ class FacturaModel extends tables\FacturaTable {
             /** @object TipoModel  */
             $objTipoModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->objEmpresaContratanteModel = new \application\modules\fac2fast\model\EmpresaContratanteModel();
         $this->objFormaPagoModel = new \application\modules\base\model\FormaPagoModel();
@@ -55,7 +57,8 @@ class FacturaModel extends tables\FacturaTable {
      * Save post data
      * -------------------------------------------------------------------------
      */
-    public function savePost() {
+    public function savePost()
+    {
         $this->set_id_empresa();
         $this->set_id_contratante();
         $this->set_id_pago();
