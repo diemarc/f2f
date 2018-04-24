@@ -46,6 +46,7 @@ class F2fController extends \kerana\Kerana
         \kerana\View::showView($this->_current_module, 'f2f_welcome');
     }
 
+
     /**
      * -------------------------------------------------------------------------
      * Request to f2fmodel to change the current contratante (company)
@@ -53,11 +54,11 @@ class F2fController extends \kerana\Kerana
      * @param int $id_contratante
      * @return type
      */
-    public function changeCompany($id_contratante){
-        
+    public function changeCompany($id_contratante)
+    {
+
         $this->f2fModel->changeCurrentCompany($id_contratante);
         \helpers\Redirect::to('/fac2fast/f2f/index');
-        
     }
-    
+
 }
