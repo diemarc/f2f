@@ -41,7 +41,7 @@ class F2fReportModel extends FacturaModel
             
             /**
              * @var string, the tamplate path
-             * all reports templates must be stored in application/templates/reporst
+             * all reports templates must be stored in application/templates/reports
              */
             $_factura_template = 'factura/tpl_factura';
 
