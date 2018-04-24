@@ -67,7 +67,7 @@ class Pdf
 
     public function __construct()
     {
-        $this->_html2pdf = new \Spipu\Html2Pdf\Html2Pdf();
+        
     }
 
     /**
@@ -82,8 +82,8 @@ class Pdf
         $tmp_path = realpath(__APPFOLDER__ . 'templates/reports/' . $template . '.php');
 
         if (empty($tmp_path)) {
-            \kerana\Exceptions::showError('PedeEFE error', 'The template '
-                    . $template . ' dosnt exists or is misspelled <br> path= <b>'
+            \kerana\Exceptions::showError('PedeEFE error', 'The template <b><u>'
+                    . $template . '</u></b> doesn`t exists or is misspelled <br> path= <b>'
                     . __APPFOLDER__ . 'templates/reports/' . $template . '.php' . '</b>, fixit !!');
         } else {
             $this->_template_pdf = $tmp_path;
