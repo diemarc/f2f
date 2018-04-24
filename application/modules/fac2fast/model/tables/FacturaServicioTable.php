@@ -19,6 +19,7 @@
  */
 
 namespace application\modules\fac2fast\model\tables;
+
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
@@ -31,39 +32,35 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
   |
  */
 
-abstract class FacturaServicioTable extends \kerana\Ada {
+abstract class FacturaServicioTable extends \kerana\Ada
+{
 
     protected
-    /** @var int(11), $facturas_id_facturas  */ 
-$_facturas_id_facturas, 
-/** @var int(11), $f_servicios_id_servicio  */ 
-$_f_servicios_id_servicio, 
-/** @var decimal(9,2), $cantidad  */ 
-$_cantidad, 
-/** @var decimal(9,2), $precio  */ 
-$_precio,
-            
+    /** @var int(11), $facturas_id_facturas  */
+            $_facturas_id_facturas,
+            /** @var int(11), $f_servicios_id_servicio  */
+            $_f_servicios_id_servicio,
+            /** @var decimal(9,2), $cantidad  */
+            $_cantidad,
+            /** @var decimal(9,2), $precio  */
+            $_precio,
             /** Master query for facturaservicio */
             $_query_facturaservicio;
-    
-    
-
-    public 
-            /** @array data matching attributes with table field */
+    public
+    /** @array data matching attributes with table field */
             $data_facturaservicio;
-    
-     public function __construct()
+
+    public function __construct()
     {
         parent::__construct();
         $this->table_name = 'f_facturas_servicios';
         $this->table_id = 'facturas_id_facturas';
-        
+
         $this->pks = [
-          'facturas_id_facturas'=> $this->_facturas_id_facturas,
-'f_servicios_id_servicio'=> $this->_f_servicios_id_servicio,
-  
+            'facturas_id_facturas' => $this->_facturas_id_facturas,
+            'f_servicios_id_servicio' => $this->_f_servicios_id_servicio,
         ];
-        
+
         $this->_query = ' SELECT A.facturas_id_facturas,A.f_servicios_id_servicio,A.cantidad,A.precio,'
                 . ' B.id_pago,B.fecha_factura,B.num_factura,B.abono,B.id_tipo,B.created_at AS created_at_B,B.created_by As created_by_B,'
                 . ' B2.fechas,'
@@ -88,27 +85,24 @@ $_precio,
                 . ' C.id_subclase,C.servicio,C.descripcion,C.precio AS precio_generico,'
                 . ' C.created_at AS created_as_servicio,C.created_by AS created_by_servicio,'
                 . ' C3.subclase,'
-                . ' C34.clase' 
-.' FROM f_facturas_servicios A '
- .' INNER JOIN f_facturas B ON (B.id_facturas = A.facturas_id_facturas) ' 
-.' INNER JOIN a_empresa_contratante B2 ON (B2.id_empresa = B.id_empresa) ' 
-.' INNER JOIN a_contratantes B23 ON (B23.id_contratante = B2.id_contratante) ' 
-.' INNER JOIN aux_estados B234 ON (B234.id_estado = B23.aux_estados_id_estado) ' 
-.' INNER JOIN aux_poblaciones B235 ON (B235.id_poblacion = B23.id_poblacion) ' 
-.' INNER JOIN a_empresas B24 ON (B24.id_empresa = B2.id_empresa) ' 
-.' INNER JOIN aux_estados B245 ON (B245.id_estado = B24.aux_estados_id_estado) ' 
-.' INNER JOIN aux_poblaciones B246 ON (B246.id_poblacion = B24.id_poblacion) ' 
-.' INNER JOIN f_formas_pago B3 ON (B3.id_pago = B.id_pago) ' 
-.' INNER JOIN f_tipo B4 ON (B4.id_tipo = B.id_tipo) ' 
-
- .' INNER JOIN f_servicios C ON (C.id_servicio = A.f_servicios_id_servicio) ' 
-.' INNER JOIN aux_subclases C3 ON (C3.id_subclase = C.id_subclase) ' 
-.' INNER JOIN aux_clases C34 ON (C34.id_clases = C3.id_clases) ' 
-
- .' WHERE A.facturas_id_facturas IS NOT NULL ';  
+                . ' C34.clase'
+                . ' FROM f_facturas_servicios A '
+                . ' INNER JOIN f_facturas B ON (B.id_facturas = A.facturas_id_facturas) '
+                . ' INNER JOIN a_empresa_contratante B2 ON (B2.id_empresa = B.id_empresa) '
+                . ' INNER JOIN a_contratantes B23 ON (B23.id_contratante = B2.id_contratante) '
+                . ' INNER JOIN aux_estados B234 ON (B234.id_estado = B23.aux_estados_id_estado) '
+                . ' INNER JOIN aux_poblaciones B235 ON (B235.id_poblacion = B23.id_poblacion) '
+                . ' INNER JOIN a_empresas B24 ON (B24.id_empresa = B2.id_empresa) '
+                . ' INNER JOIN aux_estados B245 ON (B245.id_estado = B24.aux_estados_id_estado) '
+                . ' INNER JOIN aux_poblaciones B246 ON (B246.id_poblacion = B24.id_poblacion) '
+                . ' INNER JOIN f_formas_pago B3 ON (B3.id_pago = B.id_pago) '
+                . ' INNER JOIN f_tipo B4 ON (B4.id_tipo = B.id_tipo) '
+                . ' INNER JOIN f_servicios C ON (C.id_servicio = A.f_servicios_id_servicio) '
+                . ' INNER JOIN aux_subclases C3 ON (C3.id_subclase = C.id_subclase) '
+                . ' INNER JOIN aux_clases C34 ON (C34.id_clases = C3.id_clases) '
+                . ' WHERE A.facturas_id_facturas IS NOT NULL ';
     }
 
-    
     /*
       |-------------------------------------------------------------------------
       | SELECT-METHODS
@@ -116,15 +110,14 @@ $_precio,
       |
      */
 
-    
-    
-    /*
-     |-------------------------------------------------------------------------
-     | INSERT-UPDATE-METHODS
-     |-------------------------------------------------------------------------
-     |
-    */
 
+
+    /*
+      |-------------------------------------------------------------------------
+      | INSERT-UPDATE-METHODS
+      |-------------------------------------------------------------------------
+      |
+     */
 
     /**
      * -------------------------------------------------------------------------
@@ -132,110 +125,118 @@ $_precio,
      * -------------------------------------------------------------------------
      * @return boolean
      */
-    public function saveFacturaServicio(){
-        
-        $data_insert =  [
-            'facturas_id_facturas' =>$this->_facturas_id_facturas,
-'f_servicios_id_servicio' =>$this->_f_servicios_id_servicio,
-'cantidad' =>$this->_cantidad,
-'precio' =>$this->_precio,
-  
+    public function saveFacturaServicio()
+    {
+
+        $data_insert = [
+            'facturas_id_facturas' => $this->_facturas_id_facturas,
+            'f_servicios_id_servicio' => $this->_f_servicios_id_servicio,
+            'cantidad' => $this->_cantidad,
+            'precio' => $this->_precio,
         ];
-          return parent::save($data_insert);
-        
+        return parent::save($data_insert);
     }
-    
-    
-    
-    
- /*
-  |-------------------------------------------------------------------------
-  | SETTERS
-  |-------------------------------------------------------------------------
-  | 
- */
 
- /** 
-* ------------------------------------------------------------------------- 
-* Setter for facturas_id_facturas
-* ------------------------------------------------------------------------- 
-* @param int $value the facturas_id_facturas value 
-*/ 
- public function set_facturas_id_facturas($value = ""){ 
- $this->_facturas_id_facturas= \helpers\Validator::valInt('f_facturas_id_facturas',$value,TRUE);
-}
-/** 
-* ------------------------------------------------------------------------- 
-* Setter for f_servicios_id_servicio
-* ------------------------------------------------------------------------- 
-* @param int $value the f_servicios_id_servicio value 
-*/ 
- public function set_f_servicios_id_servicio($value = ""){ 
- $this->_f_servicios_id_servicio= \helpers\Validator::valInt('f_f_servicios_id_servicio',$value,TRUE);
-}
-/** 
-* ------------------------------------------------------------------------- 
-* Setter for cantidad
-* ------------------------------------------------------------------------- 
-* @param decimal $value the cantidad value 
-*/ 
- public function set_cantidad($value = ""){ 
- $this->_cantidad= \helpers\Validator::valDecimal('f_cantidad',$value,TRUE);
-}
-/** 
-* ------------------------------------------------------------------------- 
-* Setter for precio
-* ------------------------------------------------------------------------- 
-* @param decimal $value the precio value 
-*/ 
- public function set_precio($value = ""){ 
- $this->_precio= \helpers\Validator::valDecimal('f_precio',$value,TRUE);
-}
+    /*
+      |-------------------------------------------------------------------------
+      | SETTERS
+      |-------------------------------------------------------------------------
+      |
+     */
 
-    
-    
- 
- /*
-  |-------------------------------------------------------------------------
-  | GETTERS
-  |-------------------------------------------------------------------------
-  | 
- */
- /** 
-* ------------------------------------------------------------------------- 
-* Getter for facturas_id_facturas
-* ------------------------------------------------------------------------- 
-* @return int $value  
-*/ 
- public function get_facturas_id_facturas(){ 
- return (isset($this->_facturas_id_facturas)) ? $this->_facturas_id_facturas: null;
-}
-/** 
-* ------------------------------------------------------------------------- 
-* Getter for f_servicios_id_servicio
-* ------------------------------------------------------------------------- 
-* @return int $value  
-*/ 
- public function get_f_servicios_id_servicio(){ 
- return (isset($this->_f_servicios_id_servicio)) ? $this->_f_servicios_id_servicio: null;
-}
-/** 
-* ------------------------------------------------------------------------- 
-* Getter for cantidad
-* ------------------------------------------------------------------------- 
-* @return decimal $value  
-*/ 
- public function get_cantidad(){ 
- return (isset($this->_cantidad)) ? $this->_cantidad: null;
-}
-/** 
-* ------------------------------------------------------------------------- 
-* Getter for precio
-* ------------------------------------------------------------------------- 
-* @return decimal $value  
-*/ 
- public function get_precio(){ 
- return (isset($this->_precio)) ? $this->_precio: null;
-}
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for facturas_id_facturas
+     * ------------------------------------------------------------------------- 
+     * @param int $value the facturas_id_facturas value 
+     */
+    public function set_facturas_id_facturas($value = "")
+    {
+        $this->_facturas_id_facturas = \helpers\Validator::valInt('f_facturas_id_facturas', $value, TRUE);
+    }
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for f_servicios_id_servicio
+     * ------------------------------------------------------------------------- 
+     * @param int $value the f_servicios_id_servicio value 
+     */
+    public function set_f_servicios_id_servicio($value = "")
+    {
+        $this->_f_servicios_id_servicio = \helpers\Validator::valInt('f_f_servicios_id_servicio', $value, TRUE);
+    }
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for cantidad
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the cantidad value 
+     */
+    public function set_cantidad($value = "")
+    {
+        $this->_cantidad = \helpers\Validator::valDecimal('f_cantidad', $value, TRUE);
+    }
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for precio
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the precio value 
+     */
+    public function set_precio($value = "")
+    {
+        $this->_precio = \helpers\Validator::valDecimal('f_precio', $value, TRUE);
+    }
+
+    /*
+      |-------------------------------------------------------------------------
+      | GETTERS
+      |-------------------------------------------------------------------------
+      |
+     */
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for facturas_id_facturas
+     * ------------------------------------------------------------------------- 
+     * @return int $value  
+     */
+    public function get_facturas_id_facturas()
+    {
+        return (isset($this->_facturas_id_facturas)) ? $this->_facturas_id_facturas : null;
+    }
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for f_servicios_id_servicio
+     * ------------------------------------------------------------------------- 
+     * @return int $value  
+     */
+    public function get_f_servicios_id_servicio()
+    {
+        return (isset($this->_f_servicios_id_servicio)) ? $this->_f_servicios_id_servicio : null;
+    }
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for cantidad
+     * ------------------------------------------------------------------------- 
+     * @return decimal $value  
+     */
+    public function get_cantidad()
+    {
+        return (isset($this->_cantidad)) ? $this->_cantidad : null;
+    }
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for precio
+     * ------------------------------------------------------------------------- 
+     * @return decimal $value  
+     */
+    public function get_precio()
+    {
+        return (isset($this->_precio)) ? $this->_precio : null;
+    }
 
 }
