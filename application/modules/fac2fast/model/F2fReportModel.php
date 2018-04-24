@@ -32,18 +32,16 @@ class F2fReportModel extends FacturaModel
 {
 
     protected
-            
-            /** @object, pdf helper instance */
+
+    /** @object, pdf helper instance */
             $_pdf,
-            
             /** @var string , name of doc to generate */
             $_factura_name = 'factura_f2f',
-            
             /**
              * @var string, the tamplate path
              * all reports templates must be stored in application/templates/reports
              */
-            $_factura_template = 'factura/tpl_factura';
+            $_factura_template = 'factura/tpl_invoice';
 
     public function __construct()
     {
@@ -53,7 +51,6 @@ class F2fReportModel extends FacturaModel
         $this->_pdf->setName($this->_factura_name);
     }
 
-    
     /**
      * -------------------------------------------------------------------------
      * Set the params, object, rs to use in the invoice template.
@@ -64,17 +61,16 @@ class F2fReportModel extends FacturaModel
     {
         // set the id_factura to generate
         $this->set_id_facturas($id);
-        
+
         // set te params to render in template pdf.
         $this->_pdf->setParams(
                 [
                     'titulo' => 'palantir',
                     'id_factura' => $id,
                     'rsFactura' => $this->getRecord()
-                    
-                    ]
+                ]
         );
-        
+
         // parse to pdf
         $this->_pdf->parsePdf();
     }

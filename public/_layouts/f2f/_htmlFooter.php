@@ -196,7 +196,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="overlay" id="overlay_modal" align="center">
-                <div class="text-aqua">
+                <div class="text-mutted">
                     <i class="fa fa-refresh fa-spin fa-4x"></i>
                     <p>
                         Loading...
