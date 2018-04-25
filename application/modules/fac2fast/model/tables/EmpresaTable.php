@@ -84,10 +84,9 @@ abstract class EmpresaTable extends \kerana\Ada
                 . ' A.id_poblacion,A.direccion,A.telefono,A.email,A.contacto,'
                 . ' A.cta_bancaria,A.observacion,A.created_at,'
                 . ' A.created_by,A.aux_estados_id_estado,'
-                . ' B.estado,B.tipo,C.poblacion,C.provincia,C.ccaa,'
-                . ' C.pais,C.cod_poblacion,C.cod_provincia,C.cod_ccaa,C.cod_pais'
+                . ' C.poblacion,C.provincia,C.ccaa,'
+                . ' C.pais'
                 . ' FROM a_empresas A '
-                . ' INNER JOIN aux_estados B ON (B.id_estado = A.aux_estados_id_estado) '
                 . ' INNER JOIN aux_poblaciones C ON (C.id_poblacion = A.id_poblacion) '
                 . ' WHERE A.id_empresa IS NOT NULL ';
     }
@@ -119,8 +118,8 @@ abstract class EmpresaTable extends \kerana\Ada
 
         $data_insert = [
             'cif' => $this->_cif,
-            'empresa' => $this->_empresa,
             'razon_social' => $this->_razon_social,
+            'empresa' => $this->_empresa,
             'id_poblacion' => $this->_id_poblacion,
             'direccion' => $this->_direccion,
             'telefono' => $this->_telefono,
@@ -172,7 +171,8 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_empresa($value = "")
     {
-        $this->_empresa = \helpers\Validator::valVarchar('f_empresa', $value, FALSE);
+        $empresa = \helpers\Validator::valVarchar('f_empresa', $value, FALSE);
+        $this->_empresa = (empty($empresa)) ?  $this->_razon_social : $empresa;
     }
 
     /**
@@ -291,9 +291,9 @@ abstract class EmpresaTable extends \kerana\Ada
      * ------------------------------------------------------------------------- 
      * @param int $value the aux_estados_id_estado value 
      */
-    public function set_aux_estados_id_estado($value = "")
+    public function set_aux_estados_id_estado($value = 1)
     {
-        $this->_aux_estados_id_estado = \helpers\Validator::valInt('f_aux_estados_id_estado', $value, TRUE);
+        $this->_aux_estados_id_estado = \helpers\Validator::valInt('f_aux_estados_id_estado', $value, false);
     }
 
     /*
