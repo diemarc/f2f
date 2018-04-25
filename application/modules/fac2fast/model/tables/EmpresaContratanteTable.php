@@ -76,10 +76,8 @@ abstract class EmpresaContratanteTable extends \kerana\Ada {
                 . ' C4.cod_ccaa AS cod_ccaa_empresa,C4.cod_pais AS cod_pais_empresa'
                 . ' FROM a_empresa_contratante A '
                 . ' INNER JOIN a_contratantes B ON (B.id_contratante = A.id_contratante) '
-               // . ' INNER JOIN aux_estados B2 ON (B2.id_estado = B.aux_estados_id_estado) '
                 . ' INNER JOIN aux_poblaciones B3 ON (B3.id_poblacion = B.id_poblacion) '
                 . ' INNER JOIN a_empresas C ON (C.id_empresa = A.id_empresa) '
-                //. ' INNER JOIN aux_estados C3 ON (C3.id_estado = C.aux_estados_id_estado) '
                 . ' INNER JOIN aux_poblaciones C4 ON (C4.id_poblacion = C.id_poblacion) '
                 . ' WHERE A.id_empresa IS NOT NULL'
                 . ' AND A.id_contratante = '.$_SESSION['f2f_id_contratante'];
@@ -104,6 +102,7 @@ abstract class EmpresaContratanteTable extends \kerana\Ada {
     /**
      * -------------------------------------------------------------------------
      * Insert/update new record into a_empresa_contratante
+     * no token here, because always be used from script and not form a form
      * -------------------------------------------------------------------------
      * @return boolean
      */
@@ -114,7 +113,7 @@ abstract class EmpresaContratanteTable extends \kerana\Ada {
             'id_contratante' => $this->_id_contratante,
             'fechas' => $this->_fechas,
         ];
-        return parent::save($data_insert);
+        return parent::insert($data_insert);
     }
 
     /*
