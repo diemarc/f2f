@@ -57,13 +57,12 @@ class EmpresaContratanteModel extends tables\EmpresaContratanteTable
 
     /**
      * -------------------------------------------------------------------------
-     * Find a company
+     * Find a customer
      * -------------------------------------------------------------------------
      * @param type $key_to_search
      */
     public function searchEmpresaJson($key_to_search)
     {
-        
         
         $rsEmpresa = $this->findLike('*', [
             'empresa' => \helpers\Validator::valVarchar('k_empresa', $key_to_search)
@@ -82,6 +81,25 @@ class EmpresaContratanteModel extends tables\EmpresaContratanteTable
         echo json_encode($empresa_array);
     }
 
+    /**
+     * 
+     * @return type
+     */
+    public function createEmpresaContratante(){
+        
+        // first insert the new customer
+        $this->objEmpresaModel->savePost();
+        
+        // set the id_empresa contratante from the new id_empresa saved
+        $this->set_id_empresa($this->objEmpresaModel->_id_value);
+        $this->set_id_contratante($_SESSION['f2f_id_contratante']);
+        return parent::saveEmpresaContratante();
+        
+        
+    }
+    
+    
+    
     /**
      * -------------------------------------------------------------------------
      * Save post data
