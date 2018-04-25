@@ -24,12 +24,12 @@
                 </div> 
             </div> 
         </div> 
-        <div class='form-group form-group-sm'> 
-            <label for='f_empresa' class='col-sm-2 control-label'>Nombre clave</label> 
+        <div class='form-group form-group-sm bg-grey'> 
+            <label for='f_empresa' class='col-sm-2 control-label'>Nombre</label> 
             <div class='col-sm-10'> 
-                <div class='input-group col-sm-6'> 
+                <div class='input-group col-sm-8'> 
                     <input type="text" id="f_empresa" name="f_empresa" class="form-control"  maxlength="250"   />
-                    <span class="small">(*solo para busquedas)</span>
+                    <span class="small text-info">(*solo para busquedas, si lo dejas vacio se usa la razon social)</span>
                 </div> 
             </div> 
         </div> 
