@@ -171,7 +171,7 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_empresa($value = "")
     {
-        $empresa = \helpers\Validator::valVarchar('f_empresa', $value, FALSE);
+        $empresa = \helpers\Validator::valVarchar('f_empresa', $value, false);
         $this->_empresa = (empty($empresa)) ?  $this->_razon_social : $empresa;
     }
 
@@ -183,7 +183,7 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_razon_social($value = "")
     {
-        $this->_razon_social = \helpers\Validator::valVarchar('f_razon_social', $value, FALSE);
+        $this->_razon_social = \helpers\Validator::valVarchar('f_razon_social', $value, false);
     }
 
     /**
@@ -205,7 +205,7 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_direccion($value = "")
     {
-        $this->_direccion = \helpers\Validator::valVarchar('f_direccion', $value, FALSE);
+        $this->_direccion = \helpers\Validator::valVarchar('f_direccion', $value, false);
     }
 
     /**
@@ -216,7 +216,7 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_telefono($value = "")
     {
-        $this->_telefono = \helpers\Validator::valVarchar('f_telefono', $value, FALSE);
+        $this->_telefono = \helpers\Validator::valVarchar('f_telefono', $value, false);
     }
 
     /**
@@ -227,7 +227,7 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_email($value = "")
     {
-        $this->_email = \helpers\Validator::valVarchar('f_email', $value, FALSE);
+        $this->_email = \helpers\Validator::valVarchar('f_email', $value, false);
     }
 
     /**
@@ -238,7 +238,7 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_contacto($value = "")
     {
-        $this->_contacto = \helpers\Validator::valVarchar('f_contacto', $value, FALSE);
+        $this->_contacto = \helpers\Validator::valVarchar('f_contacto', $value, false);
     }
 
     /**
@@ -249,7 +249,7 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_cta_bancaria($value = "")
     {
-        $this->_cta_bancaria = \helpers\Validator::valInt('f_cta_bancaria', $value, FALSE);
+        $this->_cta_bancaria = \helpers\Validator::valInt('f_cta_bancaria', $value, false);
     }
 
     /**
@@ -260,7 +260,7 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_observacion($value = "")
     {
-        $this->_observacion = \helpers\Validator::valVarchar('f_observacion', $value, FALSE);
+        $this->_observacion = \helpers\Validator::valVarchar('f_observacion', $value, false);
     }
 
     /**
@@ -271,7 +271,7 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_created_at($value = "")
     {
-        $this->_created_at = \helpers\Validator::valTime('f_created_at', $value, FALSE);
+        $this->_created_at = \helpers\Validator::valTime('f_created_at', $value, false);
     }
 
     /**
@@ -282,7 +282,7 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_created_by($value = "")
     {
-        $this->_created_by = \helpers\Validator::valVarchar('f_created_by', $value, FALSE);
+        $this->_created_by = \helpers\Validator::valVarchar('f_created_by', $value, false);
     }
 
     /**
