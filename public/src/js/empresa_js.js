@@ -47,3 +47,6 @@ function asignarEmpresa(empresa, id_empresa) {
     $('#k_cliente').val(empresa);
 
 }
+
+
+
