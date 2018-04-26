@@ -1,4 +1,7 @@
 <script src="/src/js/empresa_js.js"></script>
+<script src="/src/js/poblacion_js.js"></script>
+<script src="/src/js/form_js.js"></script>
+<script src="/src/js/factura_js.js"></script>
 <script>
 
     $(function () {
