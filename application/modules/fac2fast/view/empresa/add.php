@@ -1,4 +1,3 @@
-<script src="/src/js/poblacion_js.js"></script>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal"
             aria-label="Close">
@@ -8,7 +7,7 @@
 </div>
 <div class="modal-body">
     <form action="<?php echo __URL__; ?>/fac2fast/empresacontratante/save" 
-          id="formKerana" name="formKerana" method="POST" class="form-horizontal"
+          id="formNewEmpresa" name="formNewEmpresa" method="POST" class="form-horizontal"
           accept-charset="utf-8">
         <input type="hidden"name="f_id_poblacion" id="f_id_poblacion" value="" />
         <?php echo $kerana_token; ?>
@@ -94,7 +93,6 @@
             Complementarios
         </header>
 
-
         <div class='form-group form-group-sm'> 
             <label for='f_telefono' class='col-sm-2 control-label'>Tel&eacute;fono</label> 
             <div class='col-sm-4'> 
@@ -126,14 +124,15 @@
             <label for='f_cta_bancaria' class='col-sm-2 control-label'>N&ordm; cuenta</label> 
             <div class='col-sm-6'> 
                 <div class='input-group col-sm-8'> 
-                    <input type="number" id="f_cta_bancaria" name="f_cta_bancaria" class="form-control" maxlength="20"  />
+                    <input type="number" id="f_cta_bancaria" 
+                           name="f_cta_bancaria" class="form-control" maxlength="20"  />
                 </div> 
             </div> 
         </div> 
-        <button type="submit" class="btn btn-success">submit</button>
     </form>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-    <button type="button" class="btn btn-success">Crear</button>
+    <button type="button" class="btn btn-success"
+            onclick="saveEmpresaFactura()">Crear</button>
 </div>
