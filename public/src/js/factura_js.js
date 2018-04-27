@@ -8,7 +8,6 @@
  */
 function saveEmpresaFactura() {
 
-
     $.ajax({
         type: "POST",
         url: $("#formNewEmpresa").attr('action'),
@@ -21,6 +20,8 @@ function saveEmpresaFactura() {
                asignarEmpresa(json.cliente,json.id_empresa);
                $('#div_cliente_notfound').addClass('hidden');
                $('#myModel').modal('hide');
+               // remove remote contente from modal window
+               $('#myModel').removeData('bs.modal');
            }else{
                alert('un error ocurrio');
            }
