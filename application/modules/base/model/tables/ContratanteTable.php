@@ -82,9 +82,12 @@ abstract class ContratanteTable extends \kerana\Ada
             'id_contratante' => $this->_id_contratante,
         ];
 
-        $this->_query = ' SELECT A.id_contratante,A.contratante,A.cif,A.razon_social,A.id_poblacion,A.direccion,A.telefono,A.email,A.contacto,A.cta_bancaria,A.path_logo,A.observacion,A.created_at,A.created_by,A.aux_estados_id_estado,B.estado,C.poblacion,C.provincia,C.ccaa,C.cod_provincia,C.cod_ccaa,C.cod_poblacion'
+        $this->_query = ' SELECT A.id_contratante,A.contratante,'
+                . ' A.cif,A.razon_social,A.id_poblacion,A.direccion,A.telefono,'
+                . ' A.email,A.contacto,A.cta_bancaria,A.path_logo,A.observacion,'
+                . ' A.created_at,A.created_by,A.aux_estados_id_estado,'
+                . ' C.poblacion,C.provincia,C.ccaa,C.cod_provincia,C.cod_ccaa,C.cod_poblacion'
                 . ' FROM a_contratantes A '
-                . ' INNER JOIN aux_estados B ON (B.id_estado = A.aux_estados_id_estado) '
                 . ' INNER JOIN aux_poblaciones C ON (C.id_poblacion = A.id_poblacion) '
                 . ' WHERE A.id_contratante IS NOT NULL ';
     }
