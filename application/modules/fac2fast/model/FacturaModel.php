@@ -59,6 +59,7 @@ class FacturaModel extends tables\FacturaTable
      */
     public function savePost()
     {
+
         $this->set_id_empresa();
         $this->set_id_contratante();
         $this->set_id_pago();
@@ -71,5 +72,6 @@ class FacturaModel extends tables\FacturaTable
 
         return parent::saveFactura();
     }
+
 
 }
