@@ -19,30 +19,30 @@
  */
 
 namespace application\modules\fac2fast\model;
+
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
   | Class ServicioModel
   |-----------------------------------------------------------------------------
-  | Buisiness logic (rules) for ServicioTable 
+  | Buisiness logic (rules) for ServicioTable
   | dvd3
   | @author kerana,
   | @date 16-03-2018 07:25:28,
   |
  */
 
-class ServicioModel extends tables\ServicioTable {
+class ServicioModel extends tables\ServicioTable
+{
 
-    public 
- /** @object SubclaseModel  */ 
- $objSubclaseModel;
-    
-     public function __construct()
+    public
+    /** @object SubclaseModel  */
+            $objSubclaseModel;
+
+    public function __construct()
     {
         parent::__construct();
-         $this->objSubclaseModel= new \application\modules\base\model\SubclaseModel(); 
-
-        
+        $this->objSubclaseModel = new \application\modules\base\model\SubclaseModel();
     }
 
     /**
@@ -50,17 +50,16 @@ class ServicioModel extends tables\ServicioTable {
      * Save post data
      * -------------------------------------------------------------------------
      */
-    public function savePost(){
+    public function savePost()
+    {
         $this->set_id_subclase();
-$this->set_servicio();
-$this->set_descripcion();
-$this->set_precio();
-$this->set_created_at();
-$this->set_created_by();
+        $this->set_servicio();
+        $this->set_descripcion();
+        $this->set_precio();
+        $this->set_created_at();
+        $this->set_created_by();
 
         return parent::saveServicio();
     }
-    
-    
 
 }
