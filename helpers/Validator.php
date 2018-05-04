@@ -153,10 +153,6 @@ class Validator
     }
 
     
-    public static function valEmail($param_name,$param_value){
-        
-    }
-    
     
     
     /**
@@ -192,7 +188,7 @@ class Validator
     public static function valDateTime($param_name, $param_value = '', $required = false)
     {
         self::initValidator($param_name, $param_value, $required);
-        return (empty(self::$param_to_validate)) ? date('Y-m-d h:i:s') : trim($param_value);
+        return (empty(self::$param_to_validate)) ? date('Y-m-d h:i:s') : trim(self::$param_to_validate);
     }
     
     public static function valTinyint($param_name, $param_value = '', $required = false){
