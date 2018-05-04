@@ -152,6 +152,7 @@ abstract class ContratanteTable extends \kerana\Ada
     public function set_id_contratante($value = "")
     {
         $this->_id_contratante = \helpers\Validator::valInt('f_id_contratante', $value, TRUE);
+        //$this->_id_value = $this->_id_contratante;
     }
 
     /**
@@ -323,6 +324,7 @@ abstract class ContratanteTable extends \kerana\Ada
      */
     public function get_id_contratante()
     {
+        
         return (isset($this->_id_contratante)) ? $this->_id_contratante : null;
     }
 
