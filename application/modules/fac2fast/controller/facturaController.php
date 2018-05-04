@@ -38,17 +38,19 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
 
     /**
      * -------------------------------------------------------------------------
-     * Add new
+     * Add new factura
      * -------------------------------------------------------------------------
      */
     public function add() {
-        \kerana\View::$model = $this->_factura;
+        
+        // get all default services 
+        $obj_model_services = new \application\modules\fac2fast\model\ServicioContratanteModel();
+        
         $params = [
-            "rsEmpresacontratantes" => $this->_factura->objEmpresaContratanteModel->getAll(),
-            "rsFormapagos" => $this->_factura->objFormaPagoModel->getAll(),
-            "rsTipos" => $this->_factura->objTipoModel->getAll(),
+            'rsFormapagos' => $this->_factura->objFormaPagoModel->getAll(),
+            'rsServicios' => $obj_model_services->getAll()
         ];
-        \kerana\View::showForm($this->_current_module, 'factura/add', $params, $this->_factura);
+        \kerana\View::showForm($this->_current_module, 'factura/add', $params);
     }
 
     /**
