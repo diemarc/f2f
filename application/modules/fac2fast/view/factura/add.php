@@ -176,7 +176,7 @@
 
                                                 </td>
                                                 <td>
-                                                    <div class='col-sm-4'> 
+                                                    <div class='col-sm-6'> 
                                                         <div class="input-group">
                                                             <div class="input-group-addon">
                                                                 <i class="fa fa-euro"></i>
@@ -188,8 +188,9 @@
                                                     </div> 
                                                 </td>
                                                 <td>
-                                                    <div class='col-sm-3'> 
+                                                    <div class='col-sm-4'> 
                                                         <input type="number" class="form-control pull-right"
+                                                               name="f_concepto_cantidad[<?php echo $servicio->id_servicio;?>]"
                                                                value="1"/>
                                                     </div> 
 
