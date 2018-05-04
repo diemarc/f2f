@@ -59,7 +59,7 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
      * -------------------------------------------------------------------------
      */
     public function save() {
-        ($this->_factura->savePost()) ? \helpers\Redirect::to('/fac2fast/factura/index') : '';
+        ($this->_factura->saveFactura()) ? \helpers\Redirect::to('/fac2fast/factura/index') : '';
     }
 
     /**
