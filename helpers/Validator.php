@@ -135,6 +135,8 @@ class Validator
             $email_value = filter_var(self::$param_to_validate, FILTER_VALIDATE_EMAIL);
             if ($email_value != false) {
                 return self::$param_to_validate = $email_value;
+            } else if($required == false) {
+                return '';           
             } else {
                 \kerana\Exceptions::showError('stringVALIDATOR::Email', ' param_name=<strong>' .
                         self::$param_name . '</strong><br> param_value=<strong>'
@@ -150,6 +152,13 @@ class Validator
         }
     }
 
+    
+    public static function valEmail($param_name,$param_value){
+        
+    }
+    
+    
+    
     /**
      * -------------------------------------------------------------------------
      * Evaluate a textdata is to same of valString

@@ -61,7 +61,7 @@ class EmpresacontratanteController extends \kerana\Kerana implements \kerana\Ker
      */
     public function save()
     {
-        ($this->_empresacontratante->savePost()) ? \helpers\Redirect::to('/fac2fast/empresacontratante/index') : '';
+     $this->_empresacontratante->createEmpresaContratante();
     }
 
     /**

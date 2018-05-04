@@ -98,7 +98,6 @@
 
                                     </div> 
                                 </div> 
-
                             </div> 
                             <div class='form-group form-group-sm'> 
                                 <label for='f_direccion' class='col-sm-2 control-label'>Direccion</label> 

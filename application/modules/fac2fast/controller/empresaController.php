@@ -49,7 +49,7 @@ class EmpresaController extends \kerana\Kerana implements \kerana\KeranaInterfac
         \kerana\View::$model = $this->_empresa;
         $params = [
             "rsEstados" => $this->_empresa->objEstadoModel->getAll(),
-            "rsPoblacions" => $this->_empresa->objPoblacionModel->getAll(),
+            'rsProvincias' => $this->_empresa->objPoblacionModel->getProvincias(),
         ];
         \kerana\View::showForm($this->_current_module, 'empresa/add', $params, $this->_empresa);
     }

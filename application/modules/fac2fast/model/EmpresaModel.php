@@ -59,8 +59,8 @@ class EmpresaModel extends tables\EmpresaTable
     public function savePost()
     {
         $this->set_cif();
-        $this->set_empresa();
         $this->set_razon_social();
+        $this->set_empresa();
         $this->set_id_poblacion();
         $this->set_direccion();
         $this->set_telefono();
