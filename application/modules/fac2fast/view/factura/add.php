@@ -22,39 +22,37 @@
         </h1>
     </section> 
     <!-- Main content -->
-    <section class="content">
+    <!-- Default box -->
+    <div class="box box-solid">
+        <div class="box-body">
+            <div class="row">
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form action="<?php echo __URL__ . '/fac2fast/factura/save/'; ?>" 
+                      id="formKerana" name="formKerana" method="POST" class="form-horizontal"
+                      accept-charset="utf-8">
+                          <?php echo $kerana_token; ?>
+                    <input type="hidden"name="f_id_empresa" id="f_id_empresa" value="" />
+                    <input type="hidden"name="f_id_tipo" id="f_id_tipo" value="1" />
+                    <input type="hidden"name="f_id_contratante" id="f_id_contratante" 
+                           value="<?php echo $_SESSION['f2f_id_contratante']; ?>" />
 
-        <!-- Default box -->
-        <div class="box box-info">
-            <div class="box-header with-border">
+                    <div class="box-body">
+                        <div class="breadcrumb">
+                            <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" 
+                               class="btn btn-default">Cancelar</a>
+                            <button type="submit" class="btn btn-success">Crear factura</button>
+                        </div>
 
-            </div>
-            <div class="box-body">
-                <div class="row">
-                    <!-- /.box-header -->
-                    <!-- form start -->
-                    <form action="<?php echo __URL__ . '/fac2fast/factura/save/' . $rsContratante->id_contratante; ?>" 
-                          id="formKerana" name="formKerana" method="POST" class="form-horizontal"
-                          accept-charset="utf-8">
-                              <?php echo $kerana_token; ?>
-                        <input type="text"name="f_id_empresa" id="f_id_empresa" value="" />
-
-                        <div class="box-body">
-                            <div class="breadcrumb">
-                                <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" class="btn btn-warning">Cancelar</a>
-                                <button type="submit" class="btn btn-info">Crear factura</button>
-
-                            </div>
-                            <!-- /fecha_facuta -->
+                        <div class="row">
                             <!-- cliente -->
-                            <div class='form-group  has-success  form-group-sm'> 
+                            <div class='form-group form-group-sm' id="div_cliente"> 
                                 <label for='k_cliente' class='col-sm-2 control-label'>Cliente</label> 
                                 <div class='col-sm-6'> 
                                     <div class="input-group date col-sm-8" id="div_cliente">
                                         <span class="input-group-addon">
                                             <i class="fa fa-building"></i></span>
                                         <input class="form-control" name="k_cliente" id="k_cliente" 
-
                                                placeholder="busca un cliente" 
                                                type="text">
                                     </div>
@@ -109,22 +107,9 @@
                                 </div> 
                             </div> 
                             <div class='form-group form-group-sm'> 
-                                <label for='f_id_tipo' class='col-sm-2 control-label'>Tipo</label> 
-                                <div class='col-sm-6'> 
-                                    <div class='input-group col-sm-8'> 
-                                        <select class="form-control" name="f_id_tipo" id="f_id_tipo" required> 
-                                            <option value="">--Seleccione una opcion --</option><?php foreach ($rsTipos AS $tipo): ?>  
-                                                <option value="<?php echo $tipo->id_tipo; ?>"> <?php echo $tipo->tipo; ?></option> 
-                                            <?php endforeach; ?>  
-                                        </select> 
-
-                                    </div> 
-                                </div> 
-                            </div> 
-                            <div class='form-group form-group-sm'> 
                                 <label for='f_id_pago' class='col-sm-2 control-label'>Forma pago</label> 
-                                <div class='col-sm-6'> 
-                                    <div class='input-group col-sm-8'> 
+                                <div class='col-sm-4'> 
+                                    <div class='input-group col-sm-6'> 
                                         <select class="form-control" name="f_id_pago" id="f_id_pago" required> 
                                             <option value="">--Seleccione una opcion --</option><?php foreach ($rsFormapagos AS $formapago): ?>  
                                                 <option value="<?php echo $formapago->id_pago; ?>"> <?php echo $formapago->formapago; ?></option> 
@@ -134,39 +119,89 @@
                                     </div> 
                                 </div> 
                             </div> 
-                            <div class='form-group form-group-sm'> 
-                                <label for='f_abono' class='col-sm-2 control-label'>Abono</label> 
-                                <div class='col-sm-6'> 
-                                    <div class='input-group col-sm-8'> 
-                                        <input type="radio" id="f_abono" name="f_abono" class="minimal" value="1">Si
-                                        <input type="radio" id="f_abono" name="f_abono" class="minimal" value="0">No
-                                    </div> 
-                                </div> 
-                            </div> 
-
-                            <div class='form-group form-group-sm'> 
-                                <label for='f_observacion' class='col-sm-2 control-label'>Observacion</label> 
-                                <div class='col-sm-6'> 
-                                    <div class='input-group col-sm-8'> 
-                                        <textarea name="f_observacion" id="f_observacion" class="form-control"></textarea>
-
-                                    </div> 
-                                </div> 
-                            </div> 
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" class="btn btn-warning">Cancelar</a>
-                            <button type="submit" class="btn btn-info">Crear factura</button>
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Servicios</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class="bg-default">
+                                            <th style="width: 10px">#</th>
+                                            <th>Servicio</th>
+                                            <th>Cantidad</th>
+                                            <th style="width: 40px">Precio</th>
+                                        </tr>
+                                        <tr>
+                                            <td>1.</td>
+                                            <td>Update software</td>
+                                            <td>
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-red">55%</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.</td>
+                                            <td>Clean database</td>
+                                            <td>
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-yellow">70%</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>3.</td>
+                                            <td>Cron job running</td>
+                                            <td>
+                                                <div class="progress progress-xs progress-striped active">
+                                                    <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-light-blue">30%</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>4.</td>
+                                            <td>Fix and squish bugs</td>
+                                            <td>
+                                                <div class="progress progress-xs progress-striped active">
+                                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-green">90%</span></td>
+                                        </tr>
+                                    </tbody></table>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer clearfix">
+                                <ul class="pagination pagination-sm no-margin pull-right">
+                                    <li><a href="#">«</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">»</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <!-- /.box-footer -->
-                    </form>
-                </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" 
+                           class="btn btn-default">Cancelar</a>
+                        <button type="submit" 
+                                class="btn btn-success">Crear factura</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
             </div>
-            <!-- /.box-body -->
         </div>
-        <!-- /.box -->
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
 
-    </section>
 </div>
 
