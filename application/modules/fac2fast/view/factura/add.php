@@ -95,7 +95,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="date" class="form-control pull-right" id="datepicker">
+                                            <input type="date" class="form-control pull-right" name="f_fecha_factura" id="datepicker">
                                         </div>
                                     </div> 
                                 </div> 
@@ -169,6 +169,7 @@
                                                                 <i class="fa fa-check"></i>
                                                             </div>
                                                             <input type="text" class="form-control pull-right"
+                                                                   name="f_concepto[<?php echo $servicio->id_servicio;?>]"
                                                                    value="<?php echo $servicio->servicio; ?>"/>
                                                         </div>
                                                     </div> 
@@ -181,6 +182,7 @@
                                                                 <i class="fa fa-euro"></i>
                                                             </div>
                                                             <input type="text" class="form-control pull-right"
+                                                                   name="f_concepto_precio[<?php echo $servicio->id_servicio;?>]"
                                                                    value="<?php echo $servicio->precio; ?>"/>
                                                         </div>
                                                     </div> 
