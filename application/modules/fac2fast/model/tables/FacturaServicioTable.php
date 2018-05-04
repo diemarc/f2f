@@ -134,7 +134,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
             'cantidad' => $this->_cantidad,
             'precio' => $this->_precio,
         ];
-        return parent::save($data_insert);
+        parent::save($data_insert,false);
     }
 
     /*
