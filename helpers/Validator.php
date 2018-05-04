@@ -171,6 +171,28 @@ class Validator
 
     /**
      * -------------------------------------------------------------------------
+     * Validate a array
+     * -------------------------------------------------------------------------
+     * @param type $param_name
+     * @param type $param_value
+     * @param type $required
+     * @return type
+     */
+    public static function valArray($param_name,$param_value='',$required = false){
+        
+         self::initValidator($param_name, $param_value, $required);
+        
+        if(is_array($param_value)){
+            return $param_value;
+        }else{
+             \kerana\Exceptions::showError('stringVALIDATOR::Array', ' param_name=<strong>' .
+                        self::$param_name . '</strong><br> param_value=<strong>'
+                        . '' . self::$param_to_validate . '</strong> <br> WTF??... is not a valid array');
+        }
+    }
+    
+    /**
+     * -------------------------------------------------------------------------
      * Validate timestamp
      * -------------------------------------------------------------------------
      * @param string $param_name
