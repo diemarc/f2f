@@ -50,7 +50,7 @@ abstract class ServicioContratanteTable extends \kerana\Ada
     {
         parent::__construct();
         $this->table_name = 'f_servicios_contratantes';
-        $this->table_id = 'id_servicio';
+        $this->table_id = 'id_contratante';
 
         $this->pks = [
             'id_servicio' => $this->_id_servicio,
