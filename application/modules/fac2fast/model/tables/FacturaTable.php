@@ -218,7 +218,19 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function set_num_factura($value = "")
     {
-        $this->_num_factura = \helpers\Validator::valVarchar('f_num_factura', $value, false);
+        // first get the year of the fecha_factura date
+        $parts = explode('-',$this->_fecha_factura);
+        
+        $this->_query = ' SELECT getCodeFactura(:id_c,:tipo,:ambito,:ano) AS code_factura ';
+        $this->_binds = [
+            ':id_c' => $this->_id_contratante,
+            ':tipo' => 1,
+            ':ambito' => 1,
+            ':ano' => $parts[0]
+        ];
+        
+        $rs = $this->getQuery('one');
+        $this->_num_factura = $rs->code_factura;
     }
 
     /**
