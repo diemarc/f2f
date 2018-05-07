@@ -140,7 +140,7 @@
                             </div>
                             <!-- /total factura -->
                         </div>
-                        <div class="hidden box1" id="div_conceptos">
+                        <div class="hidden1 box1" id="div_conceptos">
                             <div class="box-header">
                                 <h3 class="box-title ">Conceptos a facturar</h3>
                             </div>
@@ -199,27 +199,18 @@
                                                 </td>
                                                 <td>
                                                     <div class='col-sm-8'> 
-                                                        <select class="form-control" name="f_concepto_iva[<?php echo $servicio->id_servicio; ?>]" id="f_concepto_iva" required> 
-                                                            <option value="0">0</option>
-                                                            <?php foreach ($rsIva AS $iva): ?>  
-                                                                <option value="<?php echo $iva->porcentaje; ?>"> 
-                                                                    <?php echo $iva->porcentaje; ?>
-                                                                </option> 
-                                                            <?php endforeach; ?>  
-                                                        </select> 
+                                                        <input type="number" class="form-control pull-right"
+                                                               name="f_concepto_iva[<?php echo $servicio->id_servicio; ?>]"
+                                                               value="<?php echo $rsIva->porcentaje; ?>"/>
                                                     </div> 
 
                                                 </td>
                                                 <td>
                                                     <div class='col-sm-8'> 
-                                                        <select class="form-control" name="f_concepto_irpf[<?php echo $servicio->id_servicio; ?>]" id="f_concepto_irpf" required> 
-                                                            <option value="0">0</option>
-                                                            <?php foreach ($rsIrpf AS $retencion): ?>  
-                                                                <option value="<?php echo $retencion->porcentaje; ?>"> 
-                                                                    <?php echo $retencion->porcentaje; ?>
-                                                                </option> 
-                                                            <?php endforeach; ?>  
-                                                        </select> 
+
+                                                        <input type="number" class="form-control pull-right"
+                                                               name="f_concepto_irpf[<?php echo $servicio->id_servicio; ?>]"
+                                                               value="<?php echo $rsIrpf->porcentaje; ?>"/>
                                                     </div> 
 
                                                 </td>
