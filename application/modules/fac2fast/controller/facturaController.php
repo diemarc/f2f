@@ -45,10 +45,14 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
         
         // get all default services 
         $obj_model_services = new \application\modules\fac2fast\model\ServicioContratanteModel();
+        $obj_tasas = new \application\modules\base\model\TaxaModel();
         
         $params = [
             'rsFormapagos' => $this->_factura->objFormaPagoModel->getAll(),
-            'rsServicios' => $obj_model_services->getAll()
+            'rsServicios' => $obj_model_services->getAll(),
+            'rsIva' => $obj_tasas->find('*',['tasa'=>'IVA'],'all'),
+            'rsIrpf' => $obj_tasas->find('*',['tasa'=>'IRPF'],'all')
+            
         ];
         \kerana\View::showForm($this->_current_module, 'factura/add', $params);
     }
