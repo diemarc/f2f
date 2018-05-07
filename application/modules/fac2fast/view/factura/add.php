@@ -140,7 +140,7 @@
                             </div>
                             <!-- /total factura -->
                         </div>
-                        <div class="hidden1 box1" id="div_conceptos">
+                        <div class="hidden box1" id="div_conceptos">
                             <div class="box-header">
                                 <h3 class="box-title ">Conceptos a facturar</h3>
                             </div>
@@ -241,8 +241,8 @@
                     <div class="box-footer">
                         <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" 
                            class="btn btn-default">Cancelar</a>
-                        <button type="submit" 
-                                class="btn btn-success">Crear factura</button>
+                        <button type="submit" id="btnGrabarFactura"
+                                class="hidden btn btn-success">Crear factura</button>
                     </div>
                     <!-- /.box-footer -->
                 </form>
