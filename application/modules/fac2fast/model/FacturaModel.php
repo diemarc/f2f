@@ -62,7 +62,7 @@ class FacturaModel extends tables\FacturaTable
 
         $this->set_id_empresa();
         $this->set_id_contratante();
-       $this->set_id_tipo();
+        $this->set_id_tipo();
         $this->set_id_pago();
         $this->set_fecha_factura();
         $this->set_num_factura();
@@ -70,7 +70,7 @@ class FacturaModel extends tables\FacturaTable
         $this->set_created_at();
         $this->set_created_by();
 
-        return parent::saveFactura();
+        return parent::saveFacturaTable();
     }
 
     /**
