@@ -221,11 +221,10 @@ abstract class FacturaTable extends \kerana\Ada
         // first get the year of the fecha_factura date
         $parts = explode('-',$this->_fecha_factura);
         
-        $this->_query = ' SELECT getCodeFactura(:id_c,:tipo,:ambito,:ano) AS code_factura ';
+        $this->_query = ' SELECT getCodeFactura(:id_c,:tipo,:ano) AS code_factura ';
         $this->_binds = [
             ':id_c' => $this->_id_contratante,
             ':tipo' => 1,
-            ':ambito' => 1,
             ':ano' => $parts[0]
         ];
         
