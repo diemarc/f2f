@@ -130,7 +130,7 @@ abstract class FacturaTable extends \kerana\Ada
      * -------------------------------------------------------------------------
      * @return boolean
      */
-    public function saveFactura()
+    public function saveFacturaTable()
     {
 
         $data_insert = [
