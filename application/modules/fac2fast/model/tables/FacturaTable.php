@@ -224,7 +224,7 @@ abstract class FacturaTable extends \kerana\Ada
         $this->_query = ' SELECT getCodeFactura(:id_c,:tipo,:ano) AS code_factura ';
         $this->_binds = [
             ':id_c' => $this->_id_contratante,
-            ':tipo' => 1,
+            ':tipo' => $this->_id_tipo,
             ':ano' => $parts[0]
         ];
         
