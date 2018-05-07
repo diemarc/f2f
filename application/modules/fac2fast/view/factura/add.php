@@ -46,7 +46,7 @@
                                             <span class="input-group-addon">
                                                 <i class="fa fa-building"></i></span>
                                             <input class="form-control" name="k_cliente" id="k_cliente" 
-                                                   placeholder="busca un cliente" 
+                                                   placeholder="busca un cliente" autocomplete="off"
                                                    type="text">
                                         </div>
                                         <!-- cliente livesearch -->
@@ -140,7 +140,7 @@
                             </div>
                             <!-- /total factura -->
                         </div>
-                        <div class="box1">
+                        <div class="hidden box1" id="div_conceptos">
                             <div class="box-header">
                                 <h3 class="box-title ">Conceptos a facturar</h3>
                             </div>
@@ -151,8 +151,10 @@
                                         <tr class="bg-info">
                                             <th style="width: 10px">#</th>
                                             <th>Servicio</th>
-                                            <th>Precio</th>
+                                            <th>Base imponible</th>
                                             <th>Cantidad</th>
+                                            <th>IVA</th>
+                                            <th>Retenci&oacute;n</th>
                                             <th style="">Total</th>
                                         </tr>
                                     </thead>
@@ -169,7 +171,7 @@
                                                                 <i class="fa fa-check"></i>
                                                             </div>
                                                             <input type="text" class="form-control pull-right"
-                                                                   name="f_concepto[<?php echo $servicio->id_servicio;?>]"
+                                                                   name="f_concepto[<?php echo $servicio->id_servicio; ?>]"
                                                                    value="<?php echo $servicio->servicio; ?>"/>
                                                         </div>
                                                     </div> 
@@ -182,7 +184,7 @@
                                                                 <i class="fa fa-euro"></i>
                                                             </div>
                                                             <input type="text" class="form-control pull-right"
-                                                                   name="f_concepto_precio[<?php echo $servicio->id_servicio;?>]"
+                                                                   name="f_concepto_precio[<?php echo $servicio->id_servicio; ?>]"
                                                                    value="<?php echo $servicio->precio; ?>"/>
                                                         </div>
                                                     </div> 
@@ -190,8 +192,34 @@
                                                 <td>
                                                     <div class='col-sm-4'> 
                                                         <input type="number" class="form-control pull-right"
-                                                               name="f_concepto_cantidad[<?php echo $servicio->id_servicio;?>]"
+                                                               name="f_concepto_cantidad[<?php echo $servicio->id_servicio; ?>]"
                                                                value="1"/>
+                                                    </div> 
+
+                                                </td>
+                                                <td>
+                                                    <div class='col-sm-8'> 
+                                                        <select class="form-control" name="f_concepto_iva[<?php echo $servicio->id_servicio; ?>]" id="f_concepto_iva" required> 
+                                                            <option value="0">0</option>
+                                                            <?php foreach ($rsIva AS $iva): ?>  
+                                                                <option value="<?php echo $iva->porcentaje; ?>"> 
+                                                                    <?php echo $iva->porcentaje; ?>
+                                                                </option> 
+                                                            <?php endforeach; ?>  
+                                                        </select> 
+                                                    </div> 
+
+                                                </td>
+                                                <td>
+                                                    <div class='col-sm-8'> 
+                                                        <select class="form-control" name="f_concepto_irpf[<?php echo $servicio->id_servicio; ?>]" id="f_concepto_irpf" required> 
+                                                            <option value="0">0</option>
+                                                            <?php foreach ($rsIrpf AS $retencion): ?>  
+                                                                <option value="<?php echo $retencion->porcentaje; ?>"> 
+                                                                    <?php echo $retencion->porcentaje; ?>
+                                                                </option> 
+                                                            <?php endforeach; ?>  
+                                                        </select> 
                                                     </div> 
 
                                                 </td>
