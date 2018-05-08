@@ -44,6 +44,14 @@ abstract class FacturaServicioTable extends \kerana\Ada
             $_cantidad,
             /** @var decimal(9,2), $precio  */
             $_precio,
+            /** @var decimal(9,2), $iva  */
+            $_iva,
+            /** @var decimal(9,2), $retencion  */
+            $_retencion,
+            /** @var decimal(9,2), $total  */
+            $_total,
+            /** @var varchar, $personalizacion del servicio  */
+            $_personalizacion,
             /** Master query for facturaservicio */
             $_query_facturaservicio;
     public
@@ -62,44 +70,13 @@ abstract class FacturaServicioTable extends \kerana\Ada
         ];
 
         $this->_query = ' SELECT A.facturas_id_facturas,A.f_servicios_id_servicio,A.cantidad,A.precio,'
-                . ' B.id_pago,B.fecha_factura,B.num_factura,B.abono,B.id_tipo,B.created_at AS created_at_B,B.created_by As created_by_B,'
-                . ' B2.fechas,'
-                . ' B23.contratante,B23.cif AS cif_contratante,B23.razon_social AS razon_social_contratante,'
-                . ' B23.id_poblacion AS id_poblacion_contratante,B23.direccion AS direccion_contratante,'
-                . ' B23.telefono AS telelefono_contratante,'
-                . ' B23.email AS email_contratante,B23.contacto AS contacto_contratante,'
-                . ' B23.cta_bancaria AS cta_bancaria_contratante,B23.path_logo,'
-                . ' B23.observacion AS observacion_contratante,B23.created_at  AS created_at_contratante,'
-                . ' B23.created_by AS creataed_by_contratante,B23.aux_estados_id_estado AS id_estado_contratante,'
-                . ' B234.estado AS estado_contratante,B234.tipo AS tipo_contratante,'
-                . ' B235.poblacion AS poblacion_contratante,B235.provincia AS provincia_contratante,'
-                . ' B235.ccaa AS ccaa_contratante,B235.pais AS pais_contratante,'
-                . ' B235.cod_poblacion AS cod_pobalcion_contratante,B235.cod_provincia AS cod_provincia_contratante,'
-                . ' B235.cod_ccaa AS cod_ccaa_contratante,B235.cod_pais AS cod_pais_contratante,'
-                . ' B24.cif,B24.empresa,B24.razon_social,B24.id_poblacion,B24.direccion,B24.telefono,'
-                . ' B24.email,B24.contacto,B24.cta_bancaria,B24.observacion,B24.created_at,B24.created_by,B24.aux_estados_id_estado,'
-                . ' B245.estado,B245.tipo AS tipo_empresa,'
-                . ' B246.poblacion,B246.provincia,B246.ccaa,B246.pais,B246.cod_poblacion,B246.cod_provincia,B246.cod_ccaa,B246.cod_pais,'
-                . ' B3.formapago,'
-                . ' B4.tipo,'
-                . ' C.id_subclase,C.servicio,C.descripcion,C.precio AS precio_generico,'
-                . ' C.created_at AS created_as_servicio,C.created_by AS created_by_servicio,'
-                . ' C3.subclase,'
-                . ' C34.clase'
+                . ' A.iva, A.retencion,A.total,A.personalizacion_servicio,'
+                . ' B.id_pago,B.fecha_factura,B.num_factura,B.abono,B.id_tipo,B.created_at AS created_at_B,'
+                . ' B.created_by As created_by_B,'
+                . ' C.id_subclase,C.servicio,C.descripcion,C.precio AS precio_generico'
                 . ' FROM f_facturas_servicios A '
                 . ' INNER JOIN f_facturas B ON (B.id_facturas = A.facturas_id_facturas) '
-                . ' INNER JOIN a_empresa_contratante B2 ON (B2.id_empresa = B.id_empresa) '
-                . ' INNER JOIN a_contratantes B23 ON (B23.id_contratante = B2.id_contratante) '
-                . ' INNER JOIN aux_estados B234 ON (B234.id_estado = B23.aux_estados_id_estado) '
-                . ' INNER JOIN aux_poblaciones B235 ON (B235.id_poblacion = B23.id_poblacion) '
-                . ' INNER JOIN a_empresas B24 ON (B24.id_empresa = B2.id_empresa) '
-                . ' INNER JOIN aux_estados B245 ON (B245.id_estado = B24.aux_estados_id_estado) '
-                . ' INNER JOIN aux_poblaciones B246 ON (B246.id_poblacion = B24.id_poblacion) '
-                . ' INNER JOIN f_formas_pago B3 ON (B3.id_pago = B.id_pago) '
-                . ' INNER JOIN f_tipo B4 ON (B4.id_tipo = B.id_tipo) '
                 . ' INNER JOIN f_servicios C ON (C.id_servicio = A.f_servicios_id_servicio) '
-                . ' INNER JOIN aux_subclases C3 ON (C3.id_subclase = C.id_subclase) '
-                . ' INNER JOIN aux_clases C34 ON (C34.id_clases = C3.id_clases) '
                 . ' WHERE A.facturas_id_facturas IS NOT NULL ';
     }
 
@@ -133,6 +110,10 @@ abstract class FacturaServicioTable extends \kerana\Ada
             'f_servicios_id_servicio' => $this->_f_servicios_id_servicio,
             'cantidad' => $this->_cantidad,
             'precio' => $this->_precio,
+            'retencion' => $this->_retencion,
+            'iva' => $this->_iva,
+            'personalizacion_servicio' => $this->_personalizacion,
+            'total' => $this->_total
         ];
         parent::save($data_insert,false);
     }
@@ -152,7 +133,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
      */
     public function set_facturas_id_facturas($value = "")
     {
-        $this->_facturas_id_facturas = \helpers\Validator::valInt('f_facturas_id_facturas', $value, TRUE);
+        $this->_facturas_id_facturas = \helpers\Validator::valInt('f_facturas_id_facturas', $value, true);
     }
 
     /**
@@ -163,7 +144,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
      */
     public function set_f_servicios_id_servicio($value = "")
     {
-        $this->_f_servicios_id_servicio = \helpers\Validator::valInt('f_f_servicios_id_servicio', $value, TRUE);
+        $this->_f_servicios_id_servicio = \helpers\Validator::valInt('f_f_servicios_id_servicio', $value, true);
     }
 
     /**
@@ -174,7 +155,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
      */
     public function set_cantidad($value = "")
     {
-        $this->_cantidad = \helpers\Validator::valDecimal('f_cantidad', $value, TRUE);
+        $this->_cantidad = \helpers\Validator::valDecimal('f_cantidad', $value, true);
     }
 
     /**
@@ -185,7 +166,37 @@ abstract class FacturaServicioTable extends \kerana\Ada
      */
     public function set_precio($value = "")
     {
-        $this->_precio = \helpers\Validator::valDecimal('f_precio', $value, TRUE);
+        $this->_precio = \helpers\Validator::valDecimal('f_precio', $value, true);
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for iva
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the iva value 
+     */
+    public function set_iva($value = "")
+    {
+        $this->_iva = \helpers\Validator::valDecimal('f_iva', $value, false);
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for retencion
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the retencion value 
+     */
+    public function set_retencion($value = "")
+    {
+        $this->_retencion = \helpers\Validator::valDecimal('f_retencion', $value, false);
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for total
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the total value 
+     */
+    public function set_total($value = "")
+    {
+        $this->_total = (($this->_precio * $this->_cantidad) + $this->_iva)- $this->_retencion;
     }
 
     /*
@@ -225,7 +236,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
      */
     public function get_cantidad()
     {
-        return (isset($this->_cantidad)) ? $this->_cantidad : null;
+        return (isset($this->_cantidad)) ? $this->_cantidad : 0;
     }
 
     /**
@@ -236,7 +247,37 @@ abstract class FacturaServicioTable extends \kerana\Ada
      */
     public function get_precio()
     {
-        return (isset($this->_precio)) ? $this->_precio : null;
+        return (isset($this->_precio)) ? $this->_precio : 0.0;
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for iva
+     * ------------------------------------------------------------------------- 
+     * @return decimal $value  
+     */
+    public function get_iva()
+    {
+        return (isset($this->_iva)) ? $this->_iva : 0.0;
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for retencion
+     * ------------------------------------------------------------------------- 
+     * @return decimal $value  
+     */
+    public function get_retencion()
+    {
+        return (isset($this->_retencion)) ? $this->_retencion : 0.0;
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for total
+     * ------------------------------------------------------------------------- 
+     * @return decimal $value  
+     */
+    public function get_total()
+    {
+        return (isset($this->_total)) ? $this->_total : 0.0;
     }
 
 }
