@@ -126,13 +126,13 @@
 
                                     <div class="info-box-content">
                                         <span class="info-box-text"><strong id="span_empresa"></strong></span>
-                                        <span class="info-box-number">41,410</span>
+                                        <span class="info-box-number"> </span>
 
                                         <div class="progress">
                                             <div class="progress-bar" style="width: 70%"></div>
                                         </div>
                                         <span class="progress-description" >
-                                            total factura
+                                            
                                         </span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -140,7 +140,7 @@
                             </div>
                             <!-- /total factura -->
                         </div>
-                        <div class="hidden box1" id="div_conceptos">
+                        <div class=" box1" id="div_conceptos">
                             <div class="box-header">
                                 <h3 class="box-title ">Conceptos a facturar</h3>
                             </div>
@@ -149,48 +149,47 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr class="bg-info">
-                                            <th style="width: 10px">#</th>
                                             <th>Servicio</th>
-                                            <th>Base imponible</th>
-                                            <th>Cantidad</th>
-                                            <th>IVA</th>
-                                            <th>Retenci&oacute;n</th>
-                                            <th style="">Total</th>
+                                            <th style="width: 180px">Base imponible</th>
+                                            <th style="width: 100px">Cantidad</th>
+                                            <th style="width: 180px">IVA</th>
+                                            <th style="width: 180px">Retenci&oacute;n</th>
+                                            <th style="width: 180px">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($rsServicios AS $servicio): ?>
+                                        <input type="hidden" name="f_concepto[<?php echo $servicio->id_servicio; ?>]"/>
                                             <tr class="">
-                                                <td style="width: 10px">
-                                                    <?php echo $servicio->id_servicio; ?>
+                                                <td>
+                                                    <div class='col-sm-12'> 
+                                                         <?php echo $servicio->servicio; ?>
+                                                    </div> 
+                                                    <div class='col-sm-12'> 
+                                                        <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-comment"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                       name="f_concepto_personalizacion[<?php echo $servicio->id_servicio; ?>]"
+                                                                       value=""/>
+                                                            </div>
+                                                    </div> 
                                                 </td>
                                                 <td>
                                                     <div class='col-sm-12'> 
                                                         <div class="input-group">
                                                             <div class="input-group-addon">
-                                                                <i class="fa fa-check"></i>
-                                                            </div>
-                                                            <input type="text" class="form-control pull-right"
-                                                                   name="f_concepto[<?php echo $servicio->id_servicio; ?>]"
-                                                                   value="<?php echo $servicio->servicio; ?>"/>
-                                                        </div>
-                                                    </div> 
-
-                                                </td>
-                                                <td>
-                                                    <div class='col-sm-6'> 
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
                                                                 <i class="fa fa-euro"></i>
                                                             </div>
-                                                            <input type="text" class="form-control pull-right"
+                                                            <input type="text" class="form-control form-control-sm"
                                                                    name="f_concepto_precio[<?php echo $servicio->id_servicio; ?>]"
                                                                    value="<?php echo $servicio->precio; ?>"/>
                                                         </div>
                                                     </div> 
                                                 </td>
                                                 <td>
-                                                    <div class='col-sm-4'> 
+                                                    <div class='col-sm-12'> 
                                                         <input type="number" class="form-control pull-right"
                                                                name="f_concepto_cantidad[<?php echo $servicio->id_servicio; ?>]"
                                                                value="1"/>
@@ -198,7 +197,7 @@
 
                                                 </td>
                                                 <td>
-                                                    <div class='col-sm-8'> 
+                                                    <div class='col-sm-12'> 
                                                         <input type="number" class="form-control pull-right"
                                                                name="f_concepto_iva[<?php echo $servicio->id_servicio; ?>]"
                                                                value="<?php echo $rsIva->porcentaje; ?>"/>
@@ -215,7 +214,7 @@
 
                                                 </td>
                                                 <td style="">
-                                                    <div class='col-sm-6'> 
+                                                    <div class='col-sm-12'> 
                                                         <div class="input-group">
                                                             <div class="input-group-addon">
                                                                 <i class="fa fa-euro"></i>
