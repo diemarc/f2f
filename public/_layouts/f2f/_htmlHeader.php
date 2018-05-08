@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="/_layouts/f2f/dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="/_layouts/f2f/dist/css/skins/skin-blue-light.min.css">
+        <link rel="stylesheet" href="/_layouts/f2f/dist/css/skins/skin-green-light.min.css">
         <!-- Morris chart -->
         <!-- jvectormap -->
         <link rel="stylesheet" href="/_layouts/f2f/bower_components/jvectormap/jquery-jvectormap.css">
@@ -40,7 +40,7 @@
         <!-- jQuery 3 -->
         <script src="/_layouts/f2f/bower_components/jquery/dist/jquery.min.js"></script>
     </head>
-    <body class="hold-transition  skin-blue-light sidebar-mini">
+    <body class="hold-transition  skin-green-light sidebar-mini">
         <div class="wrapper">
             <?php
             include __DOCUMENTROOT__ . '/_layouts/f2f/_top.php';
