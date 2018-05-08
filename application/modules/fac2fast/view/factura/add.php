@@ -121,7 +121,7 @@
                             </div>
                             <!-- total factura -->
                             <div class="col-md-4 col-xs-12">
-                                <div class="info-box bg-green-gradient">
+                                <div class="info-box bg-green-gradient hidden" id="div_info_fac">
                                     <span class="info-box-icon"><i class="fa fa-euro"></i></span>
 
                                     <div class="info-box-content">
@@ -140,7 +140,7 @@
                             </div>
                             <!-- /total factura -->
                         </div>
-                        <div class=" box1" id="div_conceptos">
+                        <div class="hidden box1" id="div_conceptos">
                             <div class="box-header">
                                 <h3 class="box-title ">Conceptos a facturar</h3>
                             </div>
