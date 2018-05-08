@@ -95,7 +95,9 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="date" class="form-control pull-right" name="f_fecha_factura" id="datepicker">
+                                            <input type="date" class="form-control pull-right" 
+                                                   name="f_fecha_factura" 
+                                                   id="datepicker">
                                         </div>
                                     </div> 
                                 </div> 
@@ -132,7 +134,7 @@
                                             <div class="progress-bar" style="width: 70%"></div>
                                         </div>
                                         <span class="progress-description" >
-                                            
+
                                         </span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -146,7 +148,7 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered table-striped table-condensed">
                                     <thead>
                                         <tr class="bg-info">
                                             <th>Servicio</th>
@@ -160,74 +162,77 @@
                                     <tbody>
                                         <?php foreach ($rsServicios AS $servicio): ?>
                                         <input type="hidden" name="f_concepto[<?php echo $servicio->id_servicio; ?>]"/>
-                                            <tr class="">
-                                                <td>
-                                                    <div class='col-sm-12 text-success'> 
-                                                        <i class="fa fa-plus-circle" title="Click para agregar detalles del servicio"
-                                                           onclick="$('#person_<?php echo $servicio->id_servicio;?>').removeClass('hidden');"></i>
-                                                         <?php echo $servicio->servicio; ?>
-                                                    </div> 
-                                                    <div class='col-sm-12 hidden' id="person_<?php echo $servicio->id_servicio;?>"> 
-                                                        <div class="input-group has-success">
-                                                                <div class="input-group-addon">
-                                                                    <i class="fa fa-comment"></i>
-                                                                </div>
-                                                                <textarea class="form-control form-control-sm" rows="1"
-                                                                          name="f_concepto_personalizacion[<?php echo $servicio->id_servicio; ?>]"></textarea>
-                                                            </div>
-                                                    </div> 
-                                                </td>
-                                                <td>
-                                                    <div class='col-sm-12'> 
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <i class="fa fa-euro"></i>
-                                                            </div>
-                                                            <input type="text" class="form-control form-control-sm"
-                                                                   name="f_concepto_precio[<?php echo $servicio->id_servicio; ?>]"
-                                                                   value="<?php echo $servicio->precio; ?>"/>
+                                        <tr class="">
+                                            <td>
+                                                <div class='col-sm-12 text-success'> 
+                                                    <i class="fa fa-comment-o" title="Click para agregar detalles del servicio"
+                                                       onclick="$('#person_<?php echo $servicio->id_servicio; ?>').removeClass('hidden');"></i>
+                                                       <?php echo $servicio->servicio; ?>
+                                                </div> 
+                                                <div class='col-sm-12 hidden' id="person_<?php echo $servicio->id_servicio; ?>"> 
+                                                    <div class="input-group has-success">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-close" onclick="
+                                                                                $('#person_<?php echo $servicio->id_servicio; ?>').addClass('hidden');
+                                                                                $('#f_concepto_personalizacion_<?php echo $servicio->id_servicio; ?>').val('');
+                                                               "></i>
                                                         </div>
-                                                    </div> 
-                                                </td>
-                                                <td>
-                                                    <div class='col-sm-12'> 
-                                                        <input type="number" class="form-control pull-right"
-                                                               name="f_concepto_cantidad[<?php echo $servicio->id_servicio; ?>]"
-                                                               value="1"/>
-                                                    </div> 
-
-                                                </td>
-                                                <td>
-                                                    <div class='col-sm-12'> 
-                                                        <input type="number" class="form-control pull-right"
-                                                               name="f_concepto_iva[<?php echo $servicio->id_servicio; ?>]"
-                                                               value="<?php echo $rsIva->porcentaje; ?>"/>
-                                                    </div> 
-
-                                                </td>
-                                                <td>
-                                                    <div class='col-sm-8'> 
-
-                                                        <input type="number" class="form-control pull-right"
-                                                               name="f_concepto_retencion[<?php echo $servicio->id_servicio; ?>]"
-                                                               value="<?php echo $rsRetencion->porcentaje; ?>"/>
-                                                    </div> 
-
-                                                </td>
-                                                <td style="">
-                                                    <div class='col-sm-12'> 
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <i class="fa fa-euro"></i>
-                                                            </div>
-                                                            <input type="text" class="form-control pull-right"
-                                                                   value="<?php echo ($servicio->precio); ?>"/>
+                                                        <textarea class="form-control form-control-sm" rows="1" id="f_concepto_personalizacion_<?php echo $servicio->id_servicio; ?>"
+                                                                  name="f_concepto_personalizacion[<?php echo $servicio->id_servicio; ?>]"></textarea>
+                                                    </div>
+                                                </div> 
+                                            </td>
+                                            <td>
+                                                <div class='col-sm-12'> 
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-euro"></i>
                                                         </div>
-                                                    </div> 
+                                                        <input type="text" class="form-control form-control-sm"
+                                                               name="f_concepto_precio[<?php echo $servicio->id_servicio; ?>]"
+                                                               value="<?php echo $servicio->precio; ?>"/>
+                                                    </div>
+                                                </div> 
+                                            </td>
+                                            <td>
+                                                <div class='col-sm-12'> 
+                                                    <input type="number" class="form-control pull-right"
+                                                           name="f_concepto_cantidad[<?php echo $servicio->id_servicio; ?>]"
+                                                           value="1"/>
+                                                </div> 
 
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
+                                            </td>
+                                            <td>
+                                                <div class='col-sm-12'> 
+                                                    <input type="number" class="form-control pull-right"
+                                                           name="f_concepto_iva[<?php echo $servicio->id_servicio; ?>]"
+                                                           value="<?php echo $rsIva->porcentaje; ?>"/>
+                                                </div> 
+
+                                            </td>
+                                            <td>
+                                                <div class='col-sm-8'> 
+
+                                                    <input type="number" class="form-control pull-right"
+                                                           name="f_concepto_retencion[<?php echo $servicio->id_servicio; ?>]"
+                                                           value="<?php echo $rsRetencion->porcentaje; ?>"/>
+                                                </div> 
+
+                                            </td>
+                                            <td style="">
+                                                <div class='col-sm-12'> 
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-euro"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control pull-right"
+                                                               value="<?php echo ($servicio->precio); ?>"/>
+                                                    </div>
+                                                </div> 
+
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                     </tbody>
 
                                 </table>
