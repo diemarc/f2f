@@ -197,21 +197,33 @@
             <!-- Small boxes (Stat box) -->
 
             <div class="row">
-                <div class="box box-danger box-solid">
+                <div class="box box-default box-solid">
                     <div class="box-header">
                         <h3 class="box-title">Seleciona una empresa</h3>
                     </div>
                     <div class="box-body">
-                        Selecciona una empresa
+                        <div class="row col-md-6">
+                            <div class="" align="center">
+                                <?php foreach ($_SESSION['f2f_contratantes_array'] AS $contra): ?>
+                                        <a href="<?php echo __URL__ . '/fac2fast/f2f/changeCompany/' . $contra['id_contratante']; ?>">
+
+                                            <div class="info-box">
+                                                <span class="info-box-icon bg-default"><i class="fa fa-check"></i></span>
+
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text"><?php echo $contra['nombre_contra']; ?></span>
+                                                    <span class="info-box-number"><?php echo $contra['contratante']; ?>-<?php echo $contra['cif']; ?></span>
+                                                </div>
+                                                <!-- /.info-box-content -->
+                                            </div>
+
+                                        </a>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
                     </div>
-                    <!-- /.box-body -->
-                    <!-- Loading (remove the following to stop the loading)-->
-                    <div class="overlay">
-                        <i class="fa fa-refresh fa-spin"></i>
-                    </div>
-                    <!-- end loading -->
+
                 </div>
-            </div>
         </section>
     <?php }; ?>
 </div>
