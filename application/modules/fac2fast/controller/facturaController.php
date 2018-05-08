@@ -49,9 +49,9 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
         
         $params = [
             'rsFormapagos' => $this->_factura->objFormaPagoModel->getAll(),
-            'rsServicios' => $obj_model_services->getAll(),
+            'rsServicios' => $obj_model_services->find('*',['id_contratante'=> $_SESSION['f2f_id_contratante']],'all'),
             'rsIva' => $obj_tasas->find('porcentaje',['tasa'=>'IVA']),
-            'rsIrpf' => $obj_tasas->find('porcentaje',['tasa'=>'IRPF'])
+            'rsRetencion' => $obj_tasas->find('porcentaje',['tasa'=>'IRPF'])
             
         ];
         \kerana\View::showForm($this->_current_module, 'factura/add', $params);
