@@ -123,8 +123,8 @@
                             </div>
                             <!-- total factura -->
                             <div class="col-md-4 col-xs-12">
-                                <div class="info-box bg-green-gradient hidden" id="div_info_fac">
-                                    <span class="info-box-icon"><i class="fa fa-euro"></i></span>
+                                <div class="info-box hidden" id="div_info_fac">
+                                    <span class="info-box-icon bg-green"><i class="fa fa-euro"></i></span>
 
                                     <div class="info-box-content">
                                         <span class="info-box-text"><strong id="span_empresa"></strong></span>
