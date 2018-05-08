@@ -142,12 +142,12 @@
                             </div>
                             <!-- /total factura -->
                         </div>
-                        <div class="hidden1 box" id="div_conceptos">
+                        <div class="hidden box" id="div_conceptos">
                             <div class="box-header">
                                 <h2 class="box-title">
-                                    <a href="" title="Nuevo servicio">
-                                        <i class="fa fa-plus-square-o"></i> 
-                                    </a>
+                                    <button type="button" class="btn btn-xs btn-success" data-toggle="modal" 
+                                   data-remote="<?php echo __URL__ . '/fac2fast/empresa/add/'; ?>" data-target="#myModel"><i class="fa fa-plus"></i> </button>
+                                   
                                     Servicios</h2>
                             </div>
                             <!-- /.box-header -->
