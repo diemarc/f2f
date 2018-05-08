@@ -86,6 +86,8 @@ class FacturaModel extends tables\FacturaTable
         $conceptos = filter_input(INPUT_POST, 'f_concepto', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
         $cantidad = filter_input(INPUT_POST, 'f_concepto_cantidad', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
         $precio = filter_input(INPUT_POST, 'f_concepto_precio', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+        $iva = filter_input(INPUT_POST, 'f_concepto_iva', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+        $retencion = filter_input(INPUT_POST, 'f_concepto_retencion', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
 
         foreach ($conceptos as $k => $v):
             // create new object to save services 
@@ -95,6 +97,10 @@ class FacturaModel extends tables\FacturaTable
             $objServiciosFactura->set_f_servicios_id_servicio($k);
             $objServiciosFactura->set_cantidad($cantidad[$k]);
             $objServiciosFactura->set_precio($precio[$k]);
+            $objServiciosFactura->set_iva($iva[$k]);
+            $objServiciosFactura->set_retencion($retencion[$k]);
+            $objServiciosFactura->set_total();
+            $objServiciosFactura->set_personalizacion();
             $objServiciosFactura->saveFacturaServicio();
 
         endforeach;
