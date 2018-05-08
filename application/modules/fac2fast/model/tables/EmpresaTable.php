@@ -131,7 +131,7 @@ abstract class EmpresaTable extends \kerana\Ada
             'created_by' => $this->_created_by,
             'aux_estados_id_estado' => $this->_aux_estados_id_estado,
         ];
-        return parent::save($data_insert);
+        return parent::save($data_insert,false);
     }
 
     /*
