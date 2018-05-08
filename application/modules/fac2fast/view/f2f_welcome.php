@@ -197,7 +197,7 @@
             <!-- Small boxes (Stat box) -->
 
             <div class="row">
-                <div class="box box-default box-solid">
+                <div class="box box-warning box-solid">
                     <div class="box-header">
                         <h3 class="box-title">Seleciona una empresa</h3>
                     </div>
