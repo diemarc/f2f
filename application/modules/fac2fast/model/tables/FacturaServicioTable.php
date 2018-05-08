@@ -193,6 +193,8 @@ abstract class FacturaServicioTable extends \kerana\Ada
      * Setter for total
      * ------------------------------------------------------------------------- 
      * @param decimal $value the total value 
+     * ((precio * cantidad) + iva)- retencion ; en la retencion pongo mas
+     * porque en la tabla esta como valor negativo - * - = +
      */
     public function set_total($value = "")
     {
