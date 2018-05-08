@@ -14,10 +14,10 @@
 </script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <section class="content-header">
-        <h1 class="text-blue">
-            Nueva factura
-        </h1>
+    <section class="content-header bg-success">
+            <h1 class="text-blue">
+                Nueva factura
+            </h1>
     </section> 
     <!-- Main content -->
     <!-- Default box -->
@@ -146,8 +146,8 @@
                             <div class="box-header">
                                 <h2 class="box-title">
                                     <button type="button" class="btn btn-xs btn-success" data-toggle="modal" 
-                                   data-remote="<?php echo __URL__ . '/fac2fast/empresa/add/'; ?>" data-target="#myModel"><i class="fa fa-plus"></i> </button>
-                                   
+                                            data-remote="<?php echo __URL__ . '/fac2fast/servicio/add/'; ?>" data-target="#myModel"><i class="fa fa-plus"></i> </button>
+
                                     Servicios</h2>
                             </div>
                             <!-- /.box-header -->
