@@ -209,8 +209,8 @@
                                                     <div class='col-sm-8'> 
 
                                                         <input type="number" class="form-control pull-right"
-                                                               name="f_concepto_irpf[<?php echo $servicio->id_servicio; ?>]"
-                                                               value="<?php echo $rsIrpf->porcentaje; ?>"/>
+                                                               name="f_concepto_retencion[<?php echo $servicio->id_servicio; ?>]"
+                                                               value="<?php echo $rsRetencion->porcentaje; ?>"/>
                                                     </div> 
 
                                                 </td>
@@ -221,7 +221,7 @@
                                                                 <i class="fa fa-euro"></i>
                                                             </div>
                                                             <input type="text" class="form-control pull-right"
-                                                                   value="<?php echo $servicio->precio; ?>"/>
+                                                                   value="<?php echo ($servicio->precio); ?>"/>
                                                         </div>
                                                     </div> 
 
