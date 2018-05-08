@@ -40,7 +40,7 @@
         <!-- jQuery 3 -->
         <script src="/_layouts/f2f/bower_components/jquery/dist/jquery.min.js"></script>
     </head>
-    <body class="hold-transition  skin-black sidebar-mini">
+    <body class="hold-transition  sidebar-collapse skin-black sidebar-mini">
         <div class="wrapper">
             <?php
             include __DOCUMENTROOT__ . '/_layouts/f2f/_top.php';
