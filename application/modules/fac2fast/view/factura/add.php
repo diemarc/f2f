@@ -121,7 +121,7 @@
                             </div>
                             <!-- total factura -->
                             <div class="col-md-4 col-xs-12">
-                                <div class="info-box bg-default">
+                                <div class="info-box bg-green-gradient">
                                     <span class="info-box-icon"><i class="fa fa-euro"></i></span>
 
                                     <div class="info-box-content">
@@ -162,17 +162,18 @@
                                         <input type="hidden" name="f_concepto[<?php echo $servicio->id_servicio; ?>]"/>
                                             <tr class="">
                                                 <td>
-                                                    <div class='col-sm-12'> 
+                                                    <div class='col-sm-12 text-success'> 
+                                                        <i class="fa fa-plus-circle" title="Click para agregar detalles del servicio"
+                                                           onclick="$('#person_<?php echo $servicio->id_servicio;?>').removeClass('hidden');"></i>
                                                          <?php echo $servicio->servicio; ?>
                                                     </div> 
-                                                    <div class='col-sm-12'> 
-                                                        <div class="input-group">
+                                                    <div class='col-sm-12 hidden' id="person_<?php echo $servicio->id_servicio;?>"> 
+                                                        <div class="input-group has-success">
                                                                 <div class="input-group-addon">
                                                                     <i class="fa fa-comment"></i>
                                                                 </div>
-                                                                <input type="text" class="form-control form-control-sm"
-                                                                       name="f_concepto_personalizacion[<?php echo $servicio->id_servicio; ?>]"
-                                                                       value=""/>
+                                                                <textarea class="form-control form-control-sm" rows="1"
+                                                                          name="f_concepto_personalizacion[<?php echo $servicio->id_servicio; ?>]"></textarea>
                                                             </div>
                                                     </div> 
                                                 </td>
