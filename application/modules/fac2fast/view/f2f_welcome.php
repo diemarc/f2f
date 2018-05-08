@@ -11,184 +11,207 @@
             <li class="active">Dashboard</li>
         </ol>
     </section>
+    <?php if (isset($_SESSION['f2f_id_contratante'])) { ?>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Small boxes (Stat box) -->
 
-    <!-- Main content -->
-    <section class="content">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-            <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-default">
-                    <div class="inner">
-                        <h3>150</h3>
+            <div class="row">
+                <div class="col-lg-4 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-default">
+                        <div class="inner">
+                            <h3>150</h3>
 
-                        <p>Facturas cobradas</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-cash"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-default">
-                    <div class="inner">
-                        <h3>10</h3>
-
-                        <p>Facturas de marzo</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green-gradient">
-                    <div class="inner">
-                        <h3>4</h3>
-
-                        <p>Clientes nuevos</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-happy-outline"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-        </div>
-        <!-- /.row -->
-        <!-- Main row -->
-        <div class="row">
-            <!-- Left col -->
-            <section class="col-lg-7 connectedSortable">
-
-
-                <!-- quick email widget -->
-                <div class="box box-info">
-                    <div class="box-header">
-                        <i class="fa fa-money"></i>
-
-                        <h3 class="box-title">Fast2Fac</h3>
-                        <!-- tools box -->
-                        <div class="pull-right box-tools">
-                            <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
-                                    title="Remove">
-                                <i class="fa fa-times"></i></button>
+                            <p>Facturas cobradas</p>
                         </div>
-                        <!-- /. tools -->
-                    </div>
-                    <div class="box-body">
-                        <form action="#" method="post">
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="emailto" placeholder="Cliente:">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="subject" placeholder="Subject">
-                            </div>
-                            <div>
-                                <textarea class="textarea" placeholder="Message"
-                                          style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="box-footer clearfix">
-                        <button type="button" class="pull-right btn btn-default" id="sendEmail">Send
-                            <i class="fa fa-arrow-circle-right"></i></button>
+                        <div class="icon">
+                            <i class="ion ion-cash"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                <!-- ./col -->
+                <div class="col-lg-4 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-default">
+                        <div class="inner">
+                            <h3>10</h3>
 
-            </section>
-            <!-- /.Left col -->
-            <!-- right col (We are only adding the ID to make the widgets sortable)-->
-            <section class="col-lg-5 connectedSortable">
+                            <p>Facturas de marzo</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-4 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-green-gradient">
+                        <div class="inner">
+                            <h3>4</h3>
 
-                <!-- TO DO List -->
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <i class="ion ion-cash"></i>
+                            <p>Clientes nuevos</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-happy-outline"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-7 connectedSortable">
 
-                        <h3 class="box-title text-blue">Ultimas facturas</h3>
 
-                        <div class="box-tools pull-right">
-                            <ul class="pagination pagination-sm inline">
-                                <li><a href="#">&laquo;</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">&raquo;</a></li>
+                    <!-- quick email widget -->
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <i class="fa fa-money"></i>
+
+                            <h3 class="box-title">Fast2Fac</h3>
+                            <!-- tools box -->
+                            <div class="pull-right box-tools">
+                                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                                        title="Remove">
+                                    <i class="fa fa-times"></i></button>
+                            </div>
+                            <!-- /. tools -->
+                        </div>
+                        <div class="box-body">
+                            <form action="#" method="post">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="emailto" placeholder="Cliente:">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="subject" placeholder="Subject">
+                                </div>
+                                <div>
+                                    <textarea class="textarea" placeholder="Message"
+                                              style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="box-footer clearfix">
+                            <button type="button" class="pull-right btn btn-default" id="sendEmail">Send
+                                <i class="fa fa-arrow-circle-right"></i></button>
+                        </div>
+                    </div>
+
+                </section>
+                <!-- /.Left col -->
+                <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                <section class="col-lg-5 connectedSortable">
+
+                    <!-- TO DO List -->
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <i class="ion ion-cash"></i>
+
+                            <h3 class="box-title text-blue">Ultimas facturas</h3>
+
+                            <div class="box-tools pull-right">
+                                <ul class="pagination pagination-sm inline">
+                                    <li><a href="#">&laquo;</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">&raquo;</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+                            <ul class="todo-list">
+                                <li>
+                                    <!-- todo text -->
+                                    <span class="text">F-984554, Carpinteria metalica jose 587€</span>
+                                    <!-- Emphasis label -->
+                                    <small class="label label-danger"><i class="fa fa-clock-o"></i> SinCobrar</small>
+                                    <!-- General tools such as edit or delete-->
+                                    <div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="text">F-984534, Pescaderia diarte 57€</span>
+                                    <small class="label label-info"><i class="fa fa-clock-o"></i> Enviada</small>
+                                    <div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="text">F-911554, Micromouse 1587€</span>
+                                    <small class="label label-warning"><i class="fa fa-clock-o"></i> Abono</small>
+                                    <div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="text">F-984551, Ipr 350€</span>
+                                    <small class="label label-success"><i class="fa fa-clock-o"></i> Cobrada</small>
+                                    <div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="text">F-623559, Serigrafia Lopez, 71€</span>
+                                    <small class="label label-primary"><i class="fa fa-clock-o"></i>Cobrada</small>
+                                    <div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer clearfix no-border">
+                            <a href="<?php echo __URL__ . '/fac2fast/factura/add'; ?>" 
+                               class="btn btn-primary pull-right"
+                               title="Nueva factura">
+                                <i class="fa fa-plus"></i> Nueva Factura
+                            </a>
+                        </div>
                     </div>
-                    <!-- /.box-header -->
+                    <!-- /.box -->
+
+                </section>
+                <!-- right col -->
+            </div>
+            <!-- /.row (main row) -->
+
+        </section>
+        <!-- /.content -->
+    <?php } else { ?>
+        <section class="content">
+            <!-- Small boxes (Stat box) -->
+
+            <div class="row">
+                <div class="box box-danger box-solid">
+                    <div class="box-header">
+                        <h3 class="box-title">Seleciona una empresa</h3>
+                    </div>
                     <div class="box-body">
-                        <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-                        <ul class="todo-list">
-                            <li>
-                                <!-- todo text -->
-                                <span class="text">F-984554, Carpinteria metalica jose 587€</span>
-                                <!-- Emphasis label -->
-                                <small class="label label-danger"><i class="fa fa-clock-o"></i> SinCobrar</small>
-                                <!-- General tools such as edit or delete-->
-                                <div class="tools">
-                                    <i class="fa fa-edit"></i>
-                                    <i class="fa fa-trash-o"></i>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="text">F-984534, Pescaderia diarte 57€</span>
-                                <small class="label label-info"><i class="fa fa-clock-o"></i> Enviada</small>
-                                <div class="tools">
-                                    <i class="fa fa-edit"></i>
-                                    <i class="fa fa-trash-o"></i>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="text">F-911554, Micromouse 1587€</span>
-                                <small class="label label-warning"><i class="fa fa-clock-o"></i> Abono</small>
-                                <div class="tools">
-                                    <i class="fa fa-edit"></i>
-                                    <i class="fa fa-trash-o"></i>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="text">F-984551, Ipr 350€</span>
-                                <small class="label label-success"><i class="fa fa-clock-o"></i> Cobrada</small>
-                                <div class="tools">
-                                    <i class="fa fa-edit"></i>
-                                    <i class="fa fa-trash-o"></i>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="text">F-623559, Serigrafia Lopez, 71€</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i>Cobrada</small>
-                                <div class="tools">
-                                    <i class="fa fa-edit"></i>
-                                    <i class="fa fa-trash-o"></i>
-                                </div>
-                            </li>
-                        </ul>
+                        Selecciona una empresa
                     </div>
                     <!-- /.box-body -->
-                    <div class="box-footer clearfix no-border">
-                        <a href="<?php echo __URL__.'/fac2fast/factura/add';?>" 
-                           class="btn btn-primary pull-right"
-                           title="Nueva factura">
-                            <i class="fa fa-plus"></i> Nueva Factura
-                        </a>
+                    <!-- Loading (remove the following to stop the loading)-->
+                    <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
                     </div>
+                    <!-- end loading -->
                 </div>
-                <!-- /.box -->
-
-            </section>
-            <!-- right col -->
-        </div>
-        <!-- /.row (main row) -->
-
-    </section>
-    <!-- /.content -->
+            </div>
+        </section>
+    <?php }; ?>
 </div>
