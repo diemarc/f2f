@@ -198,6 +198,16 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         $this->_total = (($this->_precio * $this->_cantidad) + $this->_iva)- $this->_retencion;
     }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for personalizacion
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the personalizacion value 
+     */
+    public function set_personalizacion($value = "")
+    {
+        $this->_personalizacion = \helpers\Validator::valVarchar('f_personalizacion', $value, false);
+    }
 
     /*
       |-------------------------------------------------------------------------
@@ -278,6 +288,16 @@ abstract class FacturaServicioTable extends \kerana\Ada
     public function get_total()
     {
         return (isset($this->_total)) ? $this->_total : 0.0;
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for personalizacion
+     * ------------------------------------------------------------------------- 
+     * @return decimal $value  
+     */
+    public function get_personalizacion()
+    {
+        return (isset($this->_personalizacion)) ? $this->_personalizacion : 0.0;
     }
 
 }
