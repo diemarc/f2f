@@ -28,7 +28,7 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
  * ------------------------------------------------------------------------------
  * @author diemarc
  */
-class F2fReportModel extends FacturaModel
+class F2fReportModel extends FacturaServicioModel
 {
 
     protected
