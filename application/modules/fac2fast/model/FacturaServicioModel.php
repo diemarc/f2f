@@ -59,6 +59,10 @@ class FacturaServicioModel extends tables\FacturaServicioTable
         $this->set_f_servicios_id_servicio();
         $this->set_cantidad();
         $this->set_precio();
+        $this->set_iva();
+        $this->set_retencion();
+        $this->set_total();
+        $this->set_personalizacion();
 
         return parent::saveFacturaServicio();
     }
