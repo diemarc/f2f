@@ -142,15 +142,19 @@
                             </div>
                             <!-- /total factura -->
                         </div>
-                        <div class="hidden box1" id="div_conceptos">
+                        <div class="hidden1 box" id="div_conceptos">
                             <div class="box-header">
-                                <h3 class="box-title ">Conceptos a facturar</h3>
+                                <h2 class="box-title">
+                                    <a href="" title="Nuevo servicio">
+                                        <i class="fa fa-plus-square-o"></i> 
+                                    </a>
+                                    Servicios</h2>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <table class="table table-bordered table-striped table-condensed">
                                     <thead>
-                                        <tr class="bg-info">
+                                        <tr class="bg-success">
                                             <th>Servicio</th>
                                             <th style="width: 180px">Base imponible</th>
                                             <th style="width: 100px">Cantidad</th>
@@ -173,8 +177,8 @@
                                                     <div class="input-group has-success">
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-close" onclick="
-                                                                                $('#person_<?php echo $servicio->id_servicio; ?>').addClass('hidden');
-                                                                                $('#f_concepto_personalizacion_<?php echo $servicio->id_servicio; ?>').val('');
+                                                                        $('#person_<?php echo $servicio->id_servicio; ?>').addClass('hidden');
+                                                                        $('#f_concepto_personalizacion_<?php echo $servicio->id_servicio; ?>').val('');
                                                                "></i>
                                                         </div>
                                                         <textarea class="form-control form-control-sm" rows="1" id="f_concepto_personalizacion_<?php echo $servicio->id_servicio; ?>"
