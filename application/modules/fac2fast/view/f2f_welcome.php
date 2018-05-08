@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-aqua">
+                <div class="small-box bg-default">
                     <div class="inner">
                         <h3>150</h3>
 
@@ -33,7 +33,7 @@
             <!-- ./col -->
             <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-primary">
+                <div class="small-box bg-default">
                     <div class="inner">
                         <h3>10</h3>
 
