@@ -49,7 +49,8 @@
 
                 <form action="/welcome/login/go" method="post">
                     <div class="form-group has-feedback">
-                        <input type="text" name="f_username" id="f_username" class="form-control" placeholder="Usuario">
+                        <input type="text" name="f_username" id="f_username" 
+                               class="form-control" placeholder="Usuario" autofocus>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
