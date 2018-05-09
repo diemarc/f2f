@@ -134,6 +134,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
     public function set_facturas_id_facturas($value = "")
     {
         $this->_facturas_id_facturas = \helpers\Validator::valInt('f_facturas_id_facturas', $value, true);
+        $this->_id_value = $this->_facturas_id_facturas;
     }
 
     /**
