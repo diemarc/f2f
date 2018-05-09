@@ -111,4 +111,32 @@ class FacturaModel extends tables\FacturaTable
         return true;
     }
 
+    /**
+     * -------------------------------------------------------------------------
+     * Get the factura details
+     * -------------------------------------------------------------------------
+     * @return array
+     */
+    public function getFacturaDetails(){
+        
+        // load model service
+        $objFacturaServicio = new \application\modules\fac2fast\model\FacturaServicioModel();
+        $objFacturaServicio->set_facturas_id_facturas($this->get_id_facturas());
+
+        // get facturas servicios
+        $rsServiciosFacturados = $objFacturaServicio->getRecord(false, 'all');
+
+        // get total serivios facturados
+        $totales = array_map(function($e) {
+            return $e->total;
+        }, $rsServiciosFacturados);
+
+        return [
+            'rsFactura' => $this->getRecord(),
+            'rsFacturasServicios' => $rsServiciosFacturados,
+            'total' => array_sum($totales)
+        ];
+    }
+    
+    
 }
