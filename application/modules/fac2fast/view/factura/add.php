@@ -251,7 +251,7 @@
                         <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" 
                            class="btn btn-default">Cancelar</a>
                         <button type="submit" id="btnGrabarFactura"
-                                class="hidden btn btn-success">Crear factura</button>
+                                class="hidden btn btn-info">Crear factura</button>
                     </div>
                     <!-- /.box-footer -->
                 </form>
