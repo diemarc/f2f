@@ -344,7 +344,7 @@ abstract class Ada
      * un kerana::exception
      * @return type
      */
-    public function getRecord($check = true)
+    public function getRecord($check = true,$mode = 'one')
     {
         if (isset($this->_id_value) AND ( !empty($this->_id_value))) {
 
@@ -358,7 +358,7 @@ abstract class Ada
             }
 
             $this->_binds[':id_key'] = $this->_id_value;
-            $result = $this->getQuery('one');
+            $result = $this->getQuery($mode);
             if ($check) {
                 return ($result) ? $result : Exceptions::showError('NoRecordFound', 'There is nothing here');
             } else {
