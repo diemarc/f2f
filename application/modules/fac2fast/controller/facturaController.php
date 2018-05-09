@@ -84,8 +84,18 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
         $objFacturaServicio = new \application\modules\fac2fast\model\FacturaServicioModel();
         $objFacturaServicio->set_facturas_id_facturas($id);
 
+        // get facturas servicios
+        $rsServiciosFacturados = $objFacturaServicio->getRecord(false, 'all');
+
+        // get total serivios facturados
+        $totales = array_map(function($e) {
+            return $e->total;
+        }, $rsServiciosFacturados);
+
         $params = [
-            'rsFactura' => $this->_factura->getRecord()
+            'rsFactura' => $this->_factura->getRecord(),
+            'rsFacturasServicios' => $rsServiciosFacturados,
+            'total' => array_sum($totales)
         ];
         \kerana\View::showView($this->_current_module, 'factura/detail', $params);
     }
