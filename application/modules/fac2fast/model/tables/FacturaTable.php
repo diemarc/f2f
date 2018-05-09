@@ -162,7 +162,7 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function set_id_facturas($value = "")
     {
-        $this->_id_facturas = \helpers\Validator::valInt('f_id_facturas', $value, true);
+        $this->_id_facturas = \helpers\Validator::valInt('id_factura', $value, true);
         $this->_id_value = $this->_id_facturas;
     }
 
