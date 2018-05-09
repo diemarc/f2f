@@ -82,7 +82,9 @@ class FacturaModel extends tables\FacturaTable
     {
         // first save factura
         $this->savePost();
-
+        
+        // set the id_factura
+        $this->set_id_facturas($this->_id_value);
         $conceptos = filter_input(INPUT_POST, 'f_concepto', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
         $cantidad = filter_input(INPUT_POST, 'f_concepto_cantidad', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
         $precio = filter_input(INPUT_POST, 'f_concepto_precio', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
@@ -93,7 +95,7 @@ class FacturaModel extends tables\FacturaTable
         foreach ($conceptos as $k => $v):
             // create new object to save services 
             $objServiciosFactura = new \application\modules\fac2fast\model\FacturaServicioModel();
-            $objServiciosFactura->set_facturas_id_facturas($this->_id_value);
+            $objServiciosFactura->set_facturas_id_facturas($this->get_id_facturas());
 
             $objServiciosFactura->set_f_servicios_id_servicio($k);
             $objServiciosFactura->set_cantidad($cantidad[$k]);
@@ -105,6 +107,8 @@ class FacturaModel extends tables\FacturaTable
             $objServiciosFactura->saveFacturaServicio();
 
         endforeach;
+
+        return true;
     }
 
 }
