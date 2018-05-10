@@ -93,8 +93,6 @@ class FacturaModel extends tables\FacturaTable
         $retencion = filter_input(INPUT_POST, 'f_concepto_retencion', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
         $personalizacion = filter_input(INPUT_POST, 'f_concepto_personalizacion', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
 
-        echo "id_factura " . $this->get_id_facturas() . '<br>';
-
         if (is_array($conceptos)) {
             foreach ($conceptos as $k => $v):
                 // create new object to save services 
@@ -116,7 +114,7 @@ class FacturaModel extends tables\FacturaTable
             \kerana\Exceptions::showError('Error al crear factura', 'Servicios a facturar no recibido');
         }
 
-        //return true;
+        return true;
     }
 
     /**
