@@ -84,8 +84,6 @@ abstract class FacturaTable extends \kerana\Ada
                 . ' B2.email AS email_contratante,B2.contacto AS contacto_contratante,'
                 . ' B2.cta_bancaria AS cta_bancaria_contratante,'
                 . ' B2.path_logo,B2.observacion AS observacion_contratante,'
-                . ' B2.created_at AS created_at_contratante,B2.created_by AS create_by_contratante,'
-                . ' B2.aux_estados_id_estado AS id_estado_contratante,'
                 . ' B24.poblacion AS poblacion_contratante,'
                 . ' B24.provincia AS provincia_contratante,B24.ccaa AS ccaa_contrante,B24.pais as pais_contratante,'
                 . ' B24.cod_poblacion AS cod_poblacion_contratante ,B24.cod_provincia AS cod_provincia_contratante,'
@@ -105,7 +103,8 @@ abstract class FacturaTable extends \kerana\Ada
                 . ' INNER JOIN aux_poblaciones B35 ON (B35.id_poblacion = B3.id_poblacion) '
                 . ' INNER JOIN f_formas_pago C ON (C.id_pago = A.id_pago) '
                 . ' INNER JOIN f_tipo D ON (D.id_tipo = A.id_tipo) '
-                . ' WHERE A.id_facturas IS NOT NULL ';
+                . ' WHERE A.id_facturas IS NOT NULL '
+                . ' AND A.id_contratante = '.$this->get_id_contratante();
     }
 
     /*
@@ -313,7 +312,7 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function get_id_contratante()
     {
-        return (isset($this->_id_contratante)) ? $this->_id_contratante : null;
+        return (isset($this->_id_contratante)) ? $this->_id_contratante : $_SESSION['f2f_id_contratante'];
     }
 
     /**
