@@ -61,13 +61,13 @@ abstract class InformeContratanteTable extends \kerana\Ada
             'id_contratante' => $this->_id_contratante,
         ];
 
-        $this->_query = ' SELECT A.id_aux_informe,A.id_contratante,A.id_estado,'
+        $this->_query = ' SELECT A.id_aux_informe,A.id_contratante,'
+                . ' A.id_estado AS estado_informe_contratante ,'
                 . ' A.template_contratante_informe,'
                 . ' C.nombre_informe,C.default_template,C.modulo_informe,'
-                . ' C.controller_informe,C.action_informe,'
+                . ' C.controller_informe,C.action_informe,C.id_estado AS estado_informe,'
                 . ' D.contratante,D.cif'
                 . ' FROM aux_informes_contratantes A '
-                . ' INNER JOIN aux_estados B ON (B.id_estado = A.id_estado) '
                 . ' INNER JOIN aux_informes C ON (C.id_aux_informe = A.id_aux_informe) '
                 . ' INNER JOIN a_contratantes D ON (D.id_contratante = A.id_contratante) '
                 . ' WHERE A.id_aux_informe IS NOT NULL ';
@@ -122,7 +122,7 @@ abstract class InformeContratanteTable extends \kerana\Ada
      */
     public function set_id_aux_informe($value = "")
     {
-        $this->_id_aux_informe = \helpers\Validator::valInt('f_id_aux_informe', $value, TRUE);
+        $this->_id_aux_informe = \helpers\Validator::valInt('f_id_aux_informe', $value, true);
     }
 
     /**
@@ -133,7 +133,7 @@ abstract class InformeContratanteTable extends \kerana\Ada
      */
     public function set_id_contratante($value = "")
     {
-        $this->_id_contratante = \helpers\Validator::valInt('f_id_contratante', $value, TRUE);
+        $this->_id_contratante = \helpers\Validator::valInt('f_id_contratante', $value, $_SESSION['f2f_id_contratante']);
     }
 
     /**
@@ -144,7 +144,7 @@ abstract class InformeContratanteTable extends \kerana\Ada
      */
     public function set_id_estado($value = "")
     {
-        $this->_id_estado = \helpers\Validator::valInt('f_id_estado', $value, TRUE);
+        $this->_id_estado = \helpers\Validator::valInt('f_id_estado', $value, true);
     }
 
     /**
@@ -155,7 +155,7 @@ abstract class InformeContratanteTable extends \kerana\Ada
      */
     public function set_template_contratante_informe($value = "")
     {
-        $this->_template_contratante_informe = \helpers\Validator::valVarchar('f_template_contratante_informe', $value, FALSE);
+        $this->_template_contratante_informe = \helpers\Validator::valVarchar('f_template_contratante_informe', $value, false);
     }
 
     /*
@@ -173,7 +173,7 @@ abstract class InformeContratanteTable extends \kerana\Ada
      */
     public function get_id_aux_informe()
     {
-        return (isset($this->_id_aux_informe)) ? $this->_id_aux_informe : null;
+        return (isset($this->_id_aux_informe)) ? $this->_id_aux_informe : 1; // factura por defecto
     }
 
     /**
@@ -184,7 +184,7 @@ abstract class InformeContratanteTable extends \kerana\Ada
      */
     public function get_id_contratante()
     {
-        return (isset($this->_id_contratante)) ? $this->_id_contratante : null;
+        return (isset($this->_id_contratante)) ? $this->_id_contratante : $_SESSION['f2f_id_contratante'];
     }
 
     /**
