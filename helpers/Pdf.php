@@ -63,10 +63,19 @@ class Pdf
             /** @var string, paper size */
             $_paper_size = 'A4',
             /** @var string, mode to display 'Portrait' */
-            $_display = 'P';
+            $_display = 'P',
+            
+            /** @object, object determine the paths of templates */
+            $_objOrigin;
 
-    public function __construct()
+    public function __construct(\kerana\Ada  $origin)
     {
+        $this->_objOrigin = $origin;
+        
+        // set the template based on origin 
+        $template = $this->_objOrigin->getTemplateInformeContratante();
+        $this->setTemplate($template);
+        
         
     }
 
