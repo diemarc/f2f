@@ -165,7 +165,7 @@
                                     </thead>
                                     <tbody>
                                         <?php foreach ($rsServicios AS $servicio): ?>
-                                        <input type="hidden" name="f_concepto[<?php echo $servicio->id_servicio; ?>]"/>
+                                        <input type="text" name="f_concepto[<?php echo $servicio->id_servicio; ?>]" value="<?php echo $servicio->id_servicio; ?>"/>
                                         <tr class="">
                                             <td>
                                                 <div class='col-sm-12 text-success'> 
