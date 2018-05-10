@@ -80,8 +80,10 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
      */
     public function detail($id)
     {
-        $this->_factura->set_id_facturas($id);
-        \kerana\View::showView($this->_current_module, 'factura/detail', $this->_factura->getFacturaDetails());
+        // instance of facturaservicio object
+        $objFacturaServicio = new \application\modules\fac2fast\model\FacturaServicioModel();
+        $objFacturaServicio->setIdFactura($id);
+        \kerana\View::showView($this->_current_module, 'factura/detail', $objFacturaServicio->getFacturaDetails());
     }
 
     /**
