@@ -52,7 +52,9 @@ class InformeContratanteModel extends tables\InformeContratanteTable
     }
 
     /**
-     * 
+     * -------------------------------------------------------------------------
+     * Get the template to use in reports based in contratante
+     * -------------------------------------------------------------------------
      * @return type
      */
     public function getTemplateInformeContratante()
