@@ -115,7 +115,9 @@ abstract class FacturaServicioTable extends \kerana\Ada
             'personalizacion_servicio' => $this->_personalizacion,
             'total' => $this->_total
         ];
-        parent::save($data_insert,false);
+        
+        
+        parent::insert($data_insert);
     }
 
     /*
