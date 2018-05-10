@@ -50,6 +50,42 @@ class FacturaServicioModel extends tables\FacturaServicioTable
 
     /**
      * -------------------------------------------------------------------------
+     * Set facturas
+     * -------------------------------------------------------------------------
+     * @param type $id
+     */
+    public function setIdFactura($id = ''){
+        $this->set_facturas_id_facturas($id);
+        $this->objFacturaModel->set_id_facturas($id);
+    }
+    
+    /**
+     * -------------------------------------------------------------------------
+     * Get the factura details
+     * -------------------------------------------------------------------------
+     * @return array
+     */
+    public function getFacturaDetails()
+    {
+
+        // get facturas servicios
+        $rsServiciosFacturados = $this->getRecord(false, 'all');
+        
+        // extract total column from a object, is a fancy way to use in array_sum
+        // similar to array_sum(key_column()) but in a object :)
+        $totales = array_map(function($e) {
+            return $e->total;
+        }, $rsServiciosFacturados);
+
+        return [
+            'rsFactura' => $this->objFacturaModel->getRecord(),
+            'rsFacturasServicios' => $rsServiciosFacturados,
+            'total' => array_sum($totales) // now sum the total column
+        ];
+    }
+
+    /**
+     * -------------------------------------------------------------------------
      * Save post data
      * -------------------------------------------------------------------------
      */
