@@ -55,15 +55,22 @@
     <page_header>
         <table class="table1" width="" align="left">
             <tr>
-                <td width="20%"></td>
+                <td style="width: 20%; color: #444444;">
+                    <img style="width: 100%;" src="<?php echo __URL__ . '/data/logos/seva/ipr_small.jpg'; ?>"
+                         alt="Logo"><br>
+                    <!--path_logp-->
+                </td>
 
                 <td width="90%"><p>
-                        <strong><?php echo $titulo;?></strong>.<br />
-                        NIF:<?php "nifcontrante" ?> <br />
-                        <?php echo "domicilio_cont"; ?> <br />
-                        Tel: <?php echo "telefono_cont"; ?> Fax: <?php echo "fax_cont"; ?> <br />
-                        Email: <?php echo "email_cont"; ?><br/>
-                        <?php echo "web_cont"; ?></p>				 
+                        <strong><?php echo $rsFactura->razon_social_contratante ?>o</strong>.<br />
+                        NIF:<?php echo $rsFactura->cif ?> <br />
+                        <?php echo $rsFactura->direccion_contratante; ?> <br />
+                        <?php echo $rsFactura->poblacion_contratante; ?> <br />
+                        <?php echo $rsFactura->provincia_contratante; ?> <br />
+                        Tel: <?php echo $rsFactura->telefono_contratante; ?><br />
+                        Email: <?php echo $rsFactura->email_contratante; ?><br/>
+                    </p>
+
                 </td>
             </tr>
         </table>
@@ -77,19 +84,19 @@
         </tr>
         <tr>
             <td class="title">Cif</td>
-            <td class="value"><?php echo "cif"; ?></td>
+            <td class="value"><?php echo $rsFactura->cif; ?></td>
         </tr>
         <tr>
             <td class="title">Domicilio</td>
-            <td class="value"><?php echo "direccion"; ?></td>
+            <td class="value"><?php echo $rsFactura->direccion; ?></td>
         </tr>
         <tr>
             <td class="title">Localidad</td>
-            <td class="value"><?php echo "localidad"; ?></td>
+            <td class="value"><?php echo $rsFactura->poblacion; ?></td>
         </tr>
         <tr>
             <td class="title">Provincia</td>
-            <td class="value"><?php echo "provincia"; ?></td>
+            <td class="value"><?php echo $rsFactura->provincia; ?></td>
         </tr>
         <tr>
             <td class="title">C.Postal</td>
@@ -97,18 +104,18 @@
         </tr>
         <tr>
             <td class="title">Tel&eacute;fono</td>
-            <td class="value"><?php echo "tel_e"; ?></td>
+            <td class="value"><?php echo $rsFactura->telefono; ?></td>
         </tr>
     </table>
     <br/><br/>
     <table cellspacing="0" cellpadding="0" border="0" width="80%">
         <tr>
             <td>Fecha de factura:</td>
-            <td><strong>fecha _factuyra</strong></td>
+            <td><strong><?php echo $rsFactura->fecha_factura; ?></strong></td>
         </tr>
         <tr>
             <td>Factura</td>
-            <td><strong><?php echo "id_factura"; ?></strong></td>
+            <td><strong><?php echo $rsFactura->num_factura; ?></strong></td>
         </tr>
     </table>
     <h5>Descripci&oacute;n del servicio</h5><hr/>
