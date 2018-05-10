@@ -41,7 +41,7 @@ class F2fReportModel extends FacturaServicioModel
              * @var string, the tamplate path
              * all reports templates must be stored in application/templates/reports
              */
-            $_factura_template = 'factura/tpl_invoice_2';
+            $_factura_template = 'factura/tpl_factura_f2f';
 
     public function __construct()
     {
@@ -59,17 +59,16 @@ class F2fReportModel extends FacturaServicioModel
      */
     public function parseFactura($id)
     {
-        // set the id_factura to generate
-        $this->set_id_facturas($id);
+        $this->setIdFactura($id);
 
+        // get the factura details 
+        $params_to_pdf = $this->getFacturaDetails();
+        
+        // example to pass another param to PDF helper
+        $params_to_pdf['titulo'] = "otro contenido";
+        
         // set te params to render in template pdf.
-        $this->_pdf->setParams(
-                [
-                    'titulo' => 'palantir',
-                    'id_factura' => $id,
-                    'rsFactura' => $this->getRecord()
-                ]
-        );
+        $this->_pdf->setParams($params_to_pdf);
 
         // parse to pdf
         $this->_pdf->parsePdf();
