@@ -61,6 +61,6 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-    <button type="button" class="btn btn-success"
+    <button type="button" class="btn btn-primary"
             onclick="save()">Crear</button>
 </div>
