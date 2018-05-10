@@ -24,17 +24,17 @@
                             <div class="box">
                                 <div class="box-header with-border">
                                     <div class="box-title">
-                                        <a href="<?php echo __URL__ . '/base/contratante/edit/' . $rsFactura->id_factura; ?>" 
-                                           class="btn btn-sm btn-app" title="Editar factura">
+                                        <a href="<?php echo __URL__ . '/base/contratante/edit/' . $rsFactura->id_facturas; ?>" 
+                                           class="btn btn-sm btn-app" title="Editar factura" disabled >
                                             <i class="fa fa-edit text-primary"></i>
                                             <span class="text-primary">Editar</span>
                                         </a>
-                                        <a href="<?php echo __URL__ . '/base/contratante/edit/' . $rsFactura->id_factura; ?>" 
+                                        <a href="<?php echo __URL__ . '/fac2fast/f2fInformes/generar/' . $rsFactura->id_facturas; ?>" 
                                            class="btn btn-sm btn-app" title="Descargar factura">
                                             <i class="fa fa-file-pdf-o text-danger"></i>
                                             <span class="text-danger">Descargar</span>
                                         </a>
-                                        <a href="<?php echo __URL__ . '/base/contratante/edit/' . $rsFactura->id_factura; ?>" 
+                                        <a href="<?php echo __URL__ . '/base/contratante/edit/' . $rsFactura->id_facturas; ?>" 
                                            class="btn btn-sm btn-app" title="Enviar factura por email">
 
                                             <i class="fa fa-envelope text-success"></i>
