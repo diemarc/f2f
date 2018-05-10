@@ -144,7 +144,7 @@ abstract class FacturaTable extends \kerana\Ada
             'created_at' => $this->_created_at,
             'created_by' => $this->_created_by,
         ];
-        return parent::save($data_insert);
+        return parent::save($data_insert,false);
     }
 
     /*
