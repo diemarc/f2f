@@ -2,7 +2,11 @@
 <style type="text/css">
     .table1 {
         padding-top:5px;
+        color: #007700;
 
+    }
+    page {
+        color: red;
     }
 
     .table1 th {
@@ -58,7 +62,7 @@
                 <td width="20%"></td>
 
                 <td width="90%"><p>
-                        <strong>Jos&eacute; Gonz&aacute;lez Polonio</strong>.<br />
+                        <strong><?php echo $titulo;?></strong>.<br />
                         NIF:<?php "nifcontrante" ?> <br />
                         <?php echo "domicilio_cont"; ?> <br />
                         Tel: <?php echo "telefono_cont"; ?> Fax: <?php echo "fax_cont"; ?> <br />
@@ -73,7 +77,7 @@
     <table cellspacing="0" cellpadding="0" class="bordered" style="width: 95%">
         <tr>
             <td class="title" style="width:20%">Empresa</td>
-            <td class="value" style="width:75%"><?php echo "razon_social"; ?></td>
+            <td class="value" style="width:75%"><?php echo $rsFactura->razon_social; ?></td>
         </tr>
         <tr>
             <td class="title">Cif</td>
