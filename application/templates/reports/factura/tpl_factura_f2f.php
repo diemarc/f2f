@@ -63,7 +63,7 @@
 
                 <td width="90%"><p>
                         <strong><?php echo $rsFactura->razon_social_contratante ?>o</strong>.<br />
-                        NIF:<?php echo $rsFactura->cif ?> <br />
+                        NIF:<?php echo $rsFactura->cif_contratante ?> <br />
                         <?php echo $rsFactura->direccion_contratante; ?> <br />
                         <?php echo $rsFactura->poblacion_contratante; ?> <br />
                         <?php echo $rsFactura->provincia_contratante; ?> <br />
@@ -132,16 +132,18 @@
         </thead>
         <tbody>
             <?php
+            
             $nb = rand(5, 11);
-            $produits = array();
+            $servicios = array();
             $total = 0;
             for ($k = 0; $k < $nb; $k++) {
                 $num = rand(100000, 999999);
-                $nom = "le produit n°" . rand(1, 100);
+                $nom = "el servicio:" . rand(1, 100);
+                //$nom = "el servicio:" . $rsFacturasServicios->_concepto;
                 $qua = rand(1, 20);
                 $prix = rand(100, 9999) / 100.;
                 $total+= $prix * $qua;
-                $produits[] = array($num, $nom, $qua, $prix, rand(0, $qua));
+                $servicios[] = array($num, $nom, $qua, $prix, rand(0, $qua));
                 ?>
 
                 <tr style="background-color: #fff">
@@ -180,11 +182,11 @@
         </tr>
         <tr>
             <td class="title">Cuota</td>
-            <td class="value"><?php echo "cuopta"; ?></td>
+            <td class="value"><?php echo "cuota"; ?></td>
         </tr>
         <tr>
             <td  class="title" >TOTAL</td>
-            <td  class="value"><strong><?php echo "total"; ?></strong></td>
+            <td  class="value"><strong><?php echo 'total'; ?></strong></td>
         </tr>
     </table>
     <p><strong>Forma de pago por: </strong><?php echo "medio_pago"; ?><br/>
