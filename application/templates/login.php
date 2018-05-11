@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="/_layouts/f2f/dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="/_layouts/f2f/dist/css/skins/_all-skins.min.css">
+        <link rel="stylesheet" href="/_layouts/f2f/dist/css/skins/skin-green-light.min.css">
         <!-- Morris chart -->
         <link rel="stylesheet" href="/_layouts/f2f/bower_components/morris.js/morris.css">
         <!-- jvectormap -->
@@ -38,10 +38,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     </head>
 
-    <body class="hold-transition login-page">
+    <body class="hold-transition skin-green-light login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="<?php echo __URL__; ?>"><b>fac</b>2Fast</a>
+                <a  href="<?php echo __URL__; ?>"><b class="text-mutted">fac</b><span class="text-success">2Fast</a></a>
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">
@@ -49,7 +49,8 @@
 
                 <form action="/welcome/login/go" method="post">
                     <div class="form-group has-feedback">
-                        <input type="text" name="f_username" id="f_username" class="form-control" placeholder="Usuario">
+                        <input type="text" name="f_username" id="f_username" 
+                               class="form-control" placeholder="Usuario" autofocus>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
@@ -59,7 +60,7 @@
                     <div class="row">
                         <!-- /.col -->
                         <div class="col-xs-6 col-lg-offset-3">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Conectarme</button>
+                            <button type="submit" class="btn btn-success btn-block btn-flat">Conectarme</button>
                         </div>
                         <!-- /.col -->
                     </div>

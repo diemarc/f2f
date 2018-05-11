@@ -28,26 +28,32 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
  * ------------------------------------------------------------------------------
  * @author diemarc
  */
-class F2fReportModel extends FacturaModel
+class F2fReportModel extends FacturaServicioModel
 {
 
+    
     protected
 
     /** @object, pdf helper instance */
             $_pdf,
             /** @var string , name of doc to generate */
             $_factura_name = 'factura_f2f',
-            /**
-             * @var string, the tamplate path
-             * all reports templates must be stored in application/templates/reports
-             */
-            $_factura_template = 'factura/tpl_invoice_2';
+            
+            /** @object informe contratante */
+            $_objInformeContratante;
 
     public function __construct()
     {
         parent::__construct();
-        $this->_pdf = new \helpers\Pdf();
-        $this->_pdf->setTemplate($this->_factura_template);
+        
+        // mediante este objecto se setea la plantilla a utilizar mediante dependency injection
+        // asi el helper pdf sabe que template cargar segun el informe y el contratante,
+        // de momento solo saca template para factura id_aux_informe = 1
+        // si hay mas informes entonces hay que enviarlo como parametro, simple!!
+        $this->_objInformeContratante = new \application\modules\configuracion\model\InformeContratanteModel();
+      
+        $this->_pdf = new \helpers\Pdf($this->_objInformeContratante);
+        
         $this->_pdf->setName($this->_factura_name);
     }
 
@@ -59,17 +65,16 @@ class F2fReportModel extends FacturaModel
      */
     public function parseFactura($id)
     {
-        // set the id_factura to generate
-        $this->set_id_facturas($id);
+        $this->setIdFactura($id);
 
+        // get the factura details 
+        $params_to_pdf = $this->getFacturaDetails();
+        
+        // example to pass another param to PDF helper
+        $params_to_pdf['titulo'] = "otro contenido";
+        
         // set te params to render in template pdf.
-        $this->_pdf->setParams(
-                [
-                    'titulo' => 'palantir',
-                    'id_factura' => $id,
-                    'rsFactura' => $this->getRecord()
-                ]
-        );
+        $this->_pdf->setParams($params_to_pdf);
 
         // parse to pdf
         $this->_pdf->parsePdf();

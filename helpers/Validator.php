@@ -153,10 +153,6 @@ class Validator
     }
 
     
-    public static function valEmail($param_name,$param_value){
-        
-    }
-    
     
     
     /**
@@ -173,6 +169,28 @@ class Validator
         return self::valVarchar($param_name, $param_value, $required);
     }
 
+    /**
+     * -------------------------------------------------------------------------
+     * Validate a array
+     * -------------------------------------------------------------------------
+     * @param type $param_name
+     * @param type $param_value
+     * @param type $required
+     * @return type
+     */
+    public static function valArray($param_name,$param_value='',$required = false){
+        
+         self::initValidator($param_name, $param_value, $required);
+        
+        if(is_array($param_value)){
+            return $param_value;
+        }else{
+             \kerana\Exceptions::showError('stringVALIDATOR::Array', ' param_name=<strong>' .
+                        self::$param_name . '</strong><br> param_value=<strong>'
+                        . '' . self::$param_to_validate . '</strong> <br> WTF??... is not a valid array');
+        }
+    }
+    
     /**
      * -------------------------------------------------------------------------
      * Validate timestamp
@@ -192,7 +210,7 @@ class Validator
     public static function valDateTime($param_name, $param_value = '', $required = false)
     {
         self::initValidator($param_name, $param_value, $required);
-        return (empty(self::$param_to_validate)) ? date('Y-m-d h:i:s') : trim($param_value);
+        return (empty(self::$param_to_validate)) ? date('Y-m-d h:i:s') : trim(self::$param_to_validate);
     }
     
     public static function valTinyint($param_name, $param_value = '', $required = false){

@@ -115,7 +115,7 @@ $config->set('_aeskey_', 'vnaT497*_N');
 $config->set('_session_name_', '_keRsess_');
 
 /** @var boolean, if overt https set to true */
-$config->set('_session_https_', false);
+$config->set('_session_https_', true);
 
 /** @var boolean, only url no js mode, */
 $config->set('_session_http_only_', true);

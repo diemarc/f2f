@@ -50,6 +50,7 @@ class FacturaModel extends tables\FacturaTable
         $this->objEmpresaContratanteModel = new \application\modules\fac2fast\model\EmpresaContratanteModel();
         $this->objFormaPagoModel = new \application\modules\base\model\FormaPagoModel();
         $this->objTipoModel = new \application\modules\base\model\TipoModel();
+        
     }
 
     /**
@@ -59,17 +60,63 @@ class FacturaModel extends tables\FacturaTable
      */
     public function savePost()
     {
+
         $this->set_id_empresa();
         $this->set_id_contratante();
+        $this->set_id_tipo();
         $this->set_id_pago();
         $this->set_fecha_factura();
         $this->set_num_factura();
         $this->set_abono();
-        $this->set_id_tipo();
         $this->set_created_at();
         $this->set_created_by();
 
-        return parent::saveFactura();
+        return parent::saveFacturaTable();
     }
+
+    /**
+     * -------------------------------------------------------------------------
+     * Process the factura creation with services
+     * -------------------------------------------------------------------------
+     */
+    public function saveFactura()
+    {
+        // first save factura
+        $this->savePost();
+
+        // set the id_factura
+        $this->set_id_facturas($this->_id_value);
+        $conceptos = filter_input(INPUT_POST, 'f_concepto', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+        $cantidad = filter_input(INPUT_POST, 'f_concepto_cantidad', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+        $precio = filter_input(INPUT_POST, 'f_concepto_precio', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+        $iva = filter_input(INPUT_POST, 'f_concepto_iva', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+        $retencion = filter_input(INPUT_POST, 'f_concepto_retencion', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+        $personalizacion = filter_input(INPUT_POST, 'f_concepto_personalizacion', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+
+        if (is_array($conceptos)) {
+            foreach ($conceptos as $k => $v):
+                // create new object to save services 
+                $objServiciosFactura = new \application\modules\fac2fast\model\FacturaServicioModel();
+                $objServiciosFactura->set_facturas_id_facturas($this->get_id_facturas());
+
+                $objServiciosFactura->set_f_servicios_id_servicio($k);
+                $objServiciosFactura->set_cantidad($cantidad[$k]);
+                $objServiciosFactura->set_precio($precio[$k]);
+                $objServiciosFactura->set_iva($iva[$k]);
+                $objServiciosFactura->set_retencion($retencion[$k]);
+                $objServiciosFactura->set_total();
+                $objServiciosFactura->set_personalizacion($personalizacion[$k]);
+                
+                $objServiciosFactura->saveFacturaServicio();
+
+            endforeach;
+        }else{
+            \kerana\Exceptions::showError('Error al crear factura', 'Servicios a facturar no recibido');
+        }
+
+        return true;
+    }
+
+   
 
 }

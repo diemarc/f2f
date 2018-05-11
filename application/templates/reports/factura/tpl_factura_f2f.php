@@ -56,21 +56,21 @@
         <table class="table1" width="" align="left">
             <tr>
                 <td style="width: 20%; color: #444444;">
-                <img style="width: 100%;" src="<?php echo __URL__ . '/data/logos/seva/ipr_small.jpg'; ?>"
-                     alt="Logo"><br>
-                <!--path_logp-->
+                    <img style="width: 100%;" src="<?php echo __URL__ . '/data/logos/seva/ipr_small.jpg'; ?>"
+                         alt="Logo"><br>
+                    <!--path_logp-->
                 </td>
 
                 <td width="90%"><p>
-                        <strong><?php echo $rsFactura->razon_social_contratante?>o</strong>.<br />
+                        <strong><?php echo $rsFactura->razon_social_contratante ?>o</strong>.<br />
                         NIF:<?php echo $rsFactura->cif ?> <br />
-                        <?php echo $rsFactura->direccion_contratante;?> <br />
-                        <?php echo  $rsFactura->poblacion_contratante; ?> <br />
-                        <?php echo  $rsFactura->provincia_contratante; ?> <br />
+                        <?php echo $rsFactura->direccion_contratante; ?> <br />
+                        <?php echo $rsFactura->poblacion_contratante; ?> <br />
+                        <?php echo $rsFactura->provincia_contratante; ?> <br />
                         Tel: <?php echo $rsFactura->telefono_contratante; ?><br />
                         Email: <?php echo $rsFactura->email_contratante; ?><br/>
                     </p>
-                        			 
+
                 </td>
             </tr>
         </table>

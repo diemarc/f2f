@@ -27,7 +27,7 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">NAVEGACI&Oacute;N PRINCIPAL</li>
             <li><a href="<?php echo __URL__.'/fac2fast/f2f/index';?>"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
-            <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+            <li><a href="<?php echo __URL__.'/fac2fast/factura/add';?>"><i class="fa fa-plus-square"></i> <span>Nueva factura</span></a></li>
             <li class="header">SOPORTE</li>
         </ul>
     </section>

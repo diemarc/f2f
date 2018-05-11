@@ -84,8 +84,6 @@ abstract class FacturaTable extends \kerana\Ada
                 . ' B2.email AS email_contratante,B2.contacto AS contacto_contratante,'
                 . ' B2.cta_bancaria AS cta_bancaria_contratante,'
                 . ' B2.path_logo,B2.observacion AS observacion_contratante,'
-                . ' B2.created_at AS created_at_contratante,B2.created_by AS create_by_contratante,'
-                . ' B2.aux_estados_id_estado AS id_estado_contratante,'
                 . ' B24.poblacion AS poblacion_contratante,'
                 . ' B24.provincia AS provincia_contratante,B24.ccaa AS ccaa_contrante,B24.pais as pais_contratante,'
                 . ' B24.cod_poblacion AS cod_poblacion_contratante ,B24.cod_provincia AS cod_provincia_contratante,'
@@ -105,7 +103,8 @@ abstract class FacturaTable extends \kerana\Ada
                 . ' INNER JOIN aux_poblaciones B35 ON (B35.id_poblacion = B3.id_poblacion) '
                 . ' INNER JOIN f_formas_pago C ON (C.id_pago = A.id_pago) '
                 . ' INNER JOIN f_tipo D ON (D.id_tipo = A.id_tipo) '
-                . ' WHERE A.id_facturas IS NOT NULL ';
+                . ' WHERE A.id_facturas IS NOT NULL '
+                . ' AND A.id_contratante = '.$this->get_id_contratante();
     }
 
     /*
@@ -130,7 +129,7 @@ abstract class FacturaTable extends \kerana\Ada
      * -------------------------------------------------------------------------
      * @return boolean
      */
-    public function saveFactura()
+    public function saveFacturaTable()
     {
 
         $data_insert = [
@@ -144,7 +143,7 @@ abstract class FacturaTable extends \kerana\Ada
             'created_at' => $this->_created_at,
             'created_by' => $this->_created_by,
         ];
-        return parent::save($data_insert);
+        return parent::save($data_insert,false);
     }
 
     /*
@@ -162,7 +161,7 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function set_id_facturas($value = "")
     {
-        $this->_id_facturas = \helpers\Validator::valInt('f_id_facturas', $value, TRUE);
+        $this->_id_facturas = \helpers\Validator::valInt('id_factura', $value, true);
         $this->_id_value = $this->_id_facturas;
     }
 
@@ -174,7 +173,7 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function set_id_empresa($value = "")
     {
-        $this->_id_empresa = \helpers\Validator::valInt('f_id_empresa', $value, TRUE);
+        $this->_id_empresa = \helpers\Validator::valInt('f_id_empresa', $value, true);
     }
 
     /**
@@ -185,7 +184,7 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function set_id_contratante($value = "")
     {
-        $this->_id_contratante = \helpers\Validator::valInt('f_id_contratante', $value, TRUE);
+        $this->_id_contratante = \helpers\Validator::valInt('f_id_contratante', $value, true);
     }
 
     /**
@@ -196,7 +195,7 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function set_id_pago($value = "")
     {
-        $this->_id_pago = \helpers\Validator::valInt('f_id_pago', $value, TRUE);
+        $this->_id_pago = \helpers\Validator::valInt('f_id_pago', $value, true);
     }
 
     /**
@@ -207,7 +206,7 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function set_fecha_factura($value = "")
     {
-        $this->_fecha_factura = \helpers\Validator::valDatetime('f_fecha_factura', $value, FALSE);
+        $this->_fecha_factura = \helpers\Validator::valDatetime('f_fecha_factura', $value, false);
     }
 
     /**
@@ -218,7 +217,18 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function set_num_factura($value = "")
     {
-        $this->_num_factura = \helpers\Validator::valVarchar('f_num_factura', $value, TRUE);
+        // first get the year of the fecha_factura date
+        $parts = explode('-',$this->_fecha_factura);
+        
+        $this->_query = ' SELECT getCodeFactura(:id_c,:tipo,:ano) AS code_factura ';
+        $this->_binds = [
+            ':id_c' => $this->_id_contratante,
+            ':tipo' => $this->_id_tipo,
+            ':ano' => $parts[0]
+        ];
+        
+        $rs = $this->getQuery('one');
+        $this->_num_factura = $rs->code_factura;
     }
 
     /**
@@ -229,7 +239,7 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function set_abono($value = "")
     {
-        $this->_abono = \helpers\Validator::valTinyint('f_abono', $value, FALSE);
+        $this->_abono = \helpers\Validator::valTinyint('f_abono', $value, false);
     }
 
     /**
@@ -240,7 +250,7 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function set_id_tipo($value = "")
     {
-        $this->_id_tipo = \helpers\Validator::valInt('f_id_tipo', $value, TRUE);
+        $this->_id_tipo = \helpers\Validator::valInt('f_id_tipo', $value, true);
     }
 
     /**
@@ -251,7 +261,7 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function set_created_at($value = "")
     {
-        $this->_created_at = \helpers\Validator::valTime('f_created_at', $value, FALSE);
+        $this->_created_at = \helpers\Validator::valTime('f_created_at', $value, false);
     }
 
     /**
@@ -262,7 +272,7 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function set_created_by($value = "")
     {
-        $this->_created_by = \helpers\Validator::valVarchar('f_created_by', $value, FALSE);
+        $this->_created_by = \helpers\Validator::valVarchar('f_created_by', $value, false);
     }
 
     /*
@@ -302,7 +312,7 @@ abstract class FacturaTable extends \kerana\Ada
      */
     public function get_id_contratante()
     {
-        return (isset($this->_id_contratante)) ? $this->_id_contratante : null;
+        return (isset($this->_id_contratante)) ? $this->_id_contratante : $_SESSION['f2f_id_contratante'];
     }
 
     /**

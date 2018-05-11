@@ -40,16 +40,18 @@ class F2fInformesController extends \kerana\Kerana
     {
         parent::__construct();
         $this->f2fReport_model = new \application\modules\fac2fast\model\F2fReportModel();
+        
+        
     }
     
     /**
      * -------------------------------------------------------------------------
-     * Genera una factura
+     * Parse params to generate a invoice pdf output
      * -------------------------------------------------------------------------
-     * @param int $id , id factura que deseas generar
+     * @param int $id , 
      * @return avoid
      */
-    public function generarFactura($id){
+    public function generar($id){
         
         $this->f2fReport_model->parseFactura($id);
         

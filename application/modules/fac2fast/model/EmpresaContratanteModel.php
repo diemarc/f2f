@@ -82,15 +82,16 @@ class EmpresaContratanteModel extends tables\EmpresaContratanteTable
     }
 
     /**
-     * 
+     * -------------------------------------------------------------------------
+     * Create a new customer associte to a contratante and return json response
+     * -------------------------------------------------------------------------
      * @return type
      */
     public function createEmpresaContratante()
     {
 
+        // set the error display to 0, prevent errors in json response js
         ini_set('display_errors', 0);
-
-
 
         $data_array = [];
 

@@ -344,21 +344,23 @@ abstract class Ada
      * un kerana::exception
      * @return type
      */
-    public function getRecord($check = true)
+    public function getRecord($check = true,$mode = 'one')
     {
         if (isset($this->_id_value) AND ( !empty($this->_id_value))) {
 
             // if not _query is not setted, then use the base table
             if (!isset($this->_query) AND empty($this->_query)) {
                 $this->_query = ' SELECT * FROM  ' . $this->table_name
-                        . ' WHERE ' . $this->table_id . ' = :id_key LIMIT 1';
+                        . ' WHERE ' . $this->table_id . ' = :id_key';
             } else {
                 $this->_query = ' SELECT A.* FROM (' . $this->_query . ') A '
-                        . ' WHERE A.' . $this->table_id . ' = :id_key LIMIT 1 ';
+                        . ' WHERE A.' . $this->table_id . ' = :id_key';
             }
+            
+            ($mode == 'one') ? $this->_query.' LIMIT 1' : ''; 
 
             $this->_binds[':id_key'] = $this->_id_value;
-            $result = $this->getQuery('one');
+            $result = $this->getQuery($mode);
             if ($check) {
                 return ($result) ? $result : Exceptions::showError('NoRecordFound', 'There is nothing here');
             } else {

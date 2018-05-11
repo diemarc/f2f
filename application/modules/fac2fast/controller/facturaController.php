@@ -14,11 +14,13 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
   |
  */
 
-class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterface {
+class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterface
+{
 
     protected $_factura;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->_factura = New \application\modules\fac2fast\model\FacturaModel();
     }
@@ -28,7 +30,8 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
      * Show all 
      * -------------------------------------------------------------------------
      */
-    public function index() {
+    public function index()
+    {
 
         // only necesary for a view creator, remove it  after index files is
         // created
@@ -38,17 +41,23 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
 
     /**
      * -------------------------------------------------------------------------
-     * Add new
+     * Add new factura
      * -------------------------------------------------------------------------
      */
-    public function add() {
-        \kerana\View::$model = $this->_factura;
+    public function add()
+    {
+
+        // get all default services 
+        $obj_model_services = new \application\modules\fac2fast\model\ServicioContratanteModel();
+        $obj_tasas = new \application\modules\base\model\TaxaModel();
+
         $params = [
-            "rsEmpresacontratantes" => $this->_factura->objEmpresaContratanteModel->getAll(),
-            "rsFormapagos" => $this->_factura->objFormaPagoModel->getAll(),
-            "rsTipos" => $this->_factura->objTipoModel->getAll(),
+            'rsFormapagos' => $this->_factura->objFormaPagoModel->getAll(),
+            'rsServicios' => $obj_model_services->find('*', ['id_contratante' => $_SESSION['f2f_id_contratante']], 'all'),
+            'rsIva' => $obj_tasas->find('porcentaje', ['tasa' => 'IVA']),
+            'rsRetencion' => $obj_tasas->find('porcentaje', ['tasa' => 'IRPF'])
         ];
-        \kerana\View::showForm($this->_current_module, 'factura/add', $params, $this->_factura);
+        \kerana\View::showForm($this->_current_module, 'factura/add', $params);
     }
 
     /**
@@ -56,8 +65,11 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
      * Save new record
      * -------------------------------------------------------------------------
      */
-    public function save() {
-        ($this->_factura->savePost()) ? \helpers\Redirect::to('/fac2fast/factura/index') : '';
+    public function save()
+    {
+        
+        ($this->_factura->saveFactura()) ?
+                        \helpers\Redirect::to('/fac2fast/factura/detail/' . $this->_factura->get_id_facturas()) : '';
     }
 
     /**
@@ -66,11 +78,12 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
      * -------------------------------------------------------------------------
      * @param int $id
      */
-    public function detail($id) {
-
-        $this->_factura->_setIdTableValue($id);
-        $params['rsFactura'] = $this->_factura->getRecord();
-        \kerana\View::showView($this->_current_module, 'factura/detail', $params);
+    public function detail($id)
+    {
+        // instance of facturaservicio object
+        $objFacturaServicio = new \application\modules\fac2fast\model\FacturaServicioModel();
+        $objFacturaServicio->setIdFactura($id);
+        \kerana\View::showView($this->_current_module, 'factura/detail', $objFacturaServicio->getFacturaDetails());
     }
 
     /**
@@ -79,7 +92,8 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
      * -------------------------------------------------------------------------
      * @param int $id
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         $this->_factura->_setIdTableValue($id);
         \kerana\View::$model = $this->_factura;
         $params['rs'] = $this->_factura->getRecord();
@@ -92,7 +106,8 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
      * -------------------------------------------------------------------------
      * @param int $id
      */
-    public function update($id) {
+    public function update($id)
+    {
         $this->_factura->_setIdTableValue($id);
         ($this->_factura->savePost()) ? \helpers\Redirect::to('/fac2fast/factura/index') : '';
     }
@@ -103,7 +118,8 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
      * -------------------------------------------------------------------------
      * @param int $id
      */
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->_factura->_setIdTableValue($id);
         ($this->_factura->delete()) ? \helpers\Redirect::to('/fac2fast/factura/index') : '';
     }

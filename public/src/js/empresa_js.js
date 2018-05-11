@@ -43,8 +43,13 @@ function findEmpresa(empresa) {
  */
 function asignarEmpresa(empresa, id_empresa) {
     $('#live_search_empresa').addClass('hidden');
+    $('#div_conceptos').removeClass('hidden');
+    $('#div_info_fac').removeClass('hidden');
+    $('#btnGrabarFactura').removeClass('hidden');
+    $('#div_cliente').addClass('has-success');
     $('#f_id_empresa').val(id_empresa);
     $('#k_cliente').val(empresa);
+    $('#span_empresa').html(empresa);
 
 }
 

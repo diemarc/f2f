@@ -57,11 +57,7 @@ abstract class EmpresaContratanteTable extends \kerana\Ada {
             'id_contratante' => $this->_id_contratante,
         ];
 
-        $this->_query = ' SELECT A.id_empresa,A.id_contratante,A.fechas,B.contratante,'
-                . ' B.cif,B.razon_social,B.id_poblacion,B.direccion,B.telefono,B.email,B.contacto,'
-                . ' B.cta_bancaria,B.path_logo,B.observacion,B.created_at,B.created_by,'
-                . ' B.aux_estados_id_estado,B3.poblacion,B3.provincia,B3.ccaa,'
-                . ' B3.pais,B3.cod_poblacion,B3.cod_provincia,B3.cod_ccaa,B3.cod_pais,'
+        $this->_query = ' SELECT A.id_empresa,A.id_contratante,A.fechas,'
                 . ' C.cif AS cif_empresa,C.empresa,C.razon_social AS razon_social_empresa,'
                 . ' C.id_poblacion AS id_poblacion_empresa,'
                 . ' C.direccion AS direccion_empresa,C.telefono AS telefono_empresa,'
@@ -75,12 +71,10 @@ abstract class EmpresaContratanteTable extends \kerana\Ada {
                 . ' C4.cod_provincia AS cod_provincia_empresa,'
                 . ' C4.cod_ccaa AS cod_ccaa_empresa,C4.cod_pais AS cod_pais_empresa'
                 . ' FROM a_empresa_contratante A '
-                . ' INNER JOIN a_contratantes B ON (B.id_contratante = A.id_contratante) '
-                . ' INNER JOIN aux_poblaciones B3 ON (B3.id_poblacion = B.id_poblacion) '
                 . ' INNER JOIN a_empresas C ON (C.id_empresa = A.id_empresa) '
-                . ' INNER JOIN aux_poblaciones C4 ON (C4.id_poblacion = C.id_poblacion) '
+                . ' LEFT JOIN aux_poblaciones C4 ON (C4.id_poblacion = C.id_poblacion) '
                 . ' WHERE A.id_empresa IS NOT NULL'
-                . ' AND A.id_contratante = '.$_SESSION['f2f_id_contratante'];
+                . ' AND A.id_contratante = '.$_SESSION['f2f_id_contratante'].'';
     }
 
     /*

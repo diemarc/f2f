@@ -8,6 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'kerana\\' => array($baseDir . '/kerana'),
     'helpers\\' => array($baseDir . '/helpers'),
-    'creator\\' => array($baseDir . '/creator'),
     'application\\' => array($baseDir . '/application'),
+    'Spipu\\Html2Pdf\\' => array($vendorDir . '/spipu/html2pdf/src'),
 );

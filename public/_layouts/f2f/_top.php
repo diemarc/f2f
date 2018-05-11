@@ -2,7 +2,7 @@
     <!-- Logo -->
     <a href="<?php echo __URL__.'/base/contratante/detail/'.$_SESSION['f2f_id_contratante'];?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>f</b>2F</span>
+        <span class="logo-mini text-aqua"><b>f</b>2F</span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg"><b><?php echo $_SESSION['f2f_contratante']; ?></b>
             <span class="text-aqua small" > by f2F</span>
