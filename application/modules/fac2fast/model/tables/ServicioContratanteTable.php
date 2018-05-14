@@ -57,14 +57,17 @@ abstract class ServicioContratanteTable extends \kerana\Ada
             'id_contratante' => $this->_id_contratante,
         ];
 
-        $this->_query = ' SELECT A.id_servicio,A.id_contratante,'
+     
+        $this->_query = ' SELECT A.id_servicio,A.id_contratante,A.is_default,'
+                . ' C.iva_servicio,C.retencion_servicio,'
                 . ' C.id_subclase,C.servicio,C.descripcion,C.precio,C.created_at,'
                 . ' C.created_by,C3.subclase,C34.clase'
                 . ' FROM f_servicios_contratantes A '
                 . ' INNER JOIN f_servicios C ON (C.id_servicio = A.id_servicio) '
                 . ' INNER JOIN aux_subclases C3 ON (C3.id_subclase = C.id_subclase) '
                 . ' INNER JOIN aux_clases C34 ON (C34.id_clases = C3.id_clases) '
-                . ' WHERE A.id_servicio IS NOT NULL ';
+                . ' WHERE A.id_servicio IS NOT NULL '
+                . ' AND A.id_contratante = '.$_SESSION['f2f_id_contratante'];
     }
 
     /*
