@@ -245,7 +245,7 @@ abstract class Ada
      * Prepara una consulta y devuelve el resultado
      * -------------------------------------------------------------------------
      * @param type $get_mode
-     * @return boolean 
+     * @return boolean return
      */
     public function getQuery($get_mode = 'all')
     {
