@@ -120,44 +120,43 @@
     </table>
     <h5>Descripci&oacute;n del servicio</h5><hr/>
 
-    <table cellspacing="0" style="width: 100%; border: solid 1px black; background: #E7E7E7; text-align: center; font-size: 10pt;">
+    <table class="box-body box-profile">
         <thead>
-            <tr>
-                <th style="width: 12%">Produit</th>
-                <th style="width: 52%">Désignation</th>
-                <th style="width: 13%">Prix Unitaire</th>
-                <th style="width: 10%">Calid&aacute;d</th>
-                <th style="width: 13%">Prix Net</th>
+            <tr class="">
+                <th style="">Servicio</th>
+                <th style="">Precio</th>
+                <th style="">Cantidad</th><!--
+                <th style="">IVA</th>
+                <th style="">Retenci&oacute;n</th>-->
+                <th style="">Total</th>
             </tr>
         </thead>
         <tbody>
-            <?php
-            
-            $nb = rand(5, 11);
-            $servicios = array();
-            $total = 0;
-            for ($k = 0; $k < $nb; $k++) {
-                $num = rand(100000, 999999);
-                $nom = "el servicio:" . rand(1, 100);
-                //$nom = "el servicio:" . $rsFacturasServicios->_concepto;
-                $qua = rand(1, 20);
-                $prix = rand(100, 9999) / 100.;
-                $total+= $prix * $qua;
-                $servicios[] = array($num, $nom, $qua, $prix, rand(0, $qua));
-                ?>
-
-                <tr style="background-color: #fff">
-                    <td style="width: 12%; text-align: left ;border: solid 1px"><?php echo $num; ?></td>
-                    <td style="width: 52%; text-align: left;border: solid 1px"><?php echo $nom; ?></td>
-                    <td style="width: 13%; text-align: right;border: solid 1px"><?php echo number_format($prix, 2, ',', ' '); ?> &euro;</td>
-                    <td style="width: 10%;border: solid 1px"><?php echo $qua; ?></td>
-                    <td style="width: 13%; text-align: right;border: solid 1px"><?php echo number_format($prix * $qua, 2, ',', ' '); ?> &euro;</td>
+            <?php foreach ($rsFacturasServicios AS $servicio): ?>
+                <tr class="">
+                    <td style="">
+                        <?php echo $servicio->servicio; ?>
+                    </td>
+                    <td style="">
+                        <?php echo number_format(($servicio->precio), 2, ',', ' '); ?>&euro;
+                    </td>
+                    <td style="">
+                        <?php echo number_format(($servicio->cantidad), 2, ',', ' '); ?>
+                    </td><!--
+                    <td style="">
+                        <?php echo $servicio->iva; ?>
+                    </td>
+                    <td style="">
+                        <?php echo $servicio->retencion; ?>
+                    </td>-->
+                    <td style="">
+                        <?php echo number_format((($servicio->precio)*($servicio->cantidad)), 2, ',', ' '); ?>&euro;
+                    </td>
                 </tr>
-                <?php
-            }
-            ?>
+            <?php endforeach; ?>
+        </tbody>  
 
-        </tbody>
+
     </table>
 
 
@@ -165,7 +164,7 @@
     <table cellspacing="0" cellpadding="0" border="0" width="80%">
         <tr>
             <td><strong>IMPORTE: </strong></td>
-            <td><?php echo "total"; ?> &euro;
+            <td><?php echo number_format(($total), 2, ',', ' '); ?>&euro;
             </td>
         </tr>
     </table>
@@ -173,11 +172,11 @@
         <tr>
             <td class="title" style="width:20%">Base imponible</td>
             <td class="value" style="width:75%">
-                <strong><?php echo "base"; ?></strong>
+                <strong><?php echo number_format($base, 2, ',', ' '); ?>&euro;</strong>
             </td>
         </tr>
         <tr>
-            <td class="title">%IVA</td>
+            <td class="title">% IVA</td>
             <td class="value"><strong><?php echo "iva"; ?></strong></td>
         </tr>
         <tr>
@@ -186,7 +185,7 @@
         </tr>
         <tr>
             <td  class="title" >TOTAL</td>
-            <td  class="value"><strong><?php echo 'total'; ?></strong></td>
+            <td  class="value"><strong><?php echo 'total'; ?>&euro</strong></td>
         </tr>
     </table>
     <p><strong>Forma de pago por: </strong><?php echo "medio_pago"; ?><br/>
