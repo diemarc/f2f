@@ -201,7 +201,8 @@ abstract class FacturaServicioTable extends \kerana\Ada
      */
     public function set_total($value = "")
     {
-        $this->_total = (($this->_precio * $this->_cantidad) + $this->_iva) + $this->_retencion;
+        $base_imponible = $this->_precio * $this->_cantidad;
+        $this->_total = ($base_imponible) + ($base_imponible * $this->_iva) + ($this->_retencion * $base_imponible);
     }
     /**
      * ------------------------------------------------------------------------- 
