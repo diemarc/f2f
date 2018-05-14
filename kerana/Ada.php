@@ -383,15 +383,21 @@ abstract class Ada
         $order = (empty($order_by)) ? $this->table_id . ' DESC ' : $order_by;
         if (!isset($this->_query) AND empty($this->_query)) {
             $this->_query = ' SELECT * FROM ' . $this->table_name
-                    . ' WHERE ' . $this->table_id . ' IS NOT NULL '
-                    . ' ORDER BY :order DESC ';
+                    . ' WHERE ' . $this->table_id . ' IS NOT NULL ';
+                   // . ' ORDER BY :order DESC ';
         }else{
              $this->_query = ' SELECT A.* FROM (' . $this->_query . ') A '
-                        . ' WHERE A.' . $this->table_id . ' IS NOT NULL'
-                     . ' ORDER BY :order DESC ';
+                        . ' WHERE A.' . $this->table_id . ' IS NOT NULL';
+                     //. ' ORDER BY :order DESC ';
         }
 
-        $this->_binds[':order'] = $order;
+        if(!empty($order_by)){
+            
+            $this->_query .= ' ORDER BY :order DESC ';
+            $this->_binds[':order'] = $order;
+        }
+        
+        
         return $this->getQuery();
     }
 
