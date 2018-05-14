@@ -191,6 +191,24 @@
 <!-- /.control-sidebar -->
 <!--  end of div class wrapper iniciated in _htmlHeader.php -->
 </div>
+
+<!-- modal large -->
+<div class="modal fade" id="myModelLarge" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="overlay" id="overlay_modal" align="center">
+                <div class="text-mutted">
+                    <i class="fa fa-refresh fa-spin fa-4x"></i>
+                    <p>
+                        Loading...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="myModel" tabindex="-1"
      role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -206,6 +224,8 @@
         </div>
     </div>
 </div>
+
+<!-- /modal large>
 <!-- jQuery UI 1.11.4 -->
 <script src="/_layouts/f2f/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
