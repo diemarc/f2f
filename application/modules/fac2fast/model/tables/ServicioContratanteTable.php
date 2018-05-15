@@ -40,6 +40,8 @@ abstract class ServicioContratanteTable extends \kerana\Ada
             $_id_servicio,
             /** @var int(11), $id_contratante  */
             $_id_contratante,
+            /** @var int(11), $is_default, determines is favorite service  */
+            $_is_default,
             /** Master query for serviciocontratante */
             $_query_serviciocontratante;
     public
@@ -57,7 +59,7 @@ abstract class ServicioContratanteTable extends \kerana\Ada
             'id_contratante' => $this->_id_contratante,
         ];
 
-     
+
         $this->_query = ' SELECT A.id_servicio,A.id_contratante,A.is_default,'
                 . ' C.iva_servicio,C.retencion_servicio,'
                 . ' C.id_subclase,C.servicio,C.descripcion,C.precio,C.created_at,'
@@ -67,7 +69,7 @@ abstract class ServicioContratanteTable extends \kerana\Ada
                 . ' INNER JOIN aux_subclases C3 ON (C3.id_subclase = C.id_subclase) '
                 . ' INNER JOIN aux_clases C34 ON (C34.id_clases = C3.id_clases) '
                 . ' WHERE A.id_servicio IS NOT NULL '
-                . ' AND A.id_contratante = '.$_SESSION['f2f_id_contratante'];
+                . ' AND A.id_contratante = ' . $_SESSION['f2f_id_contratante'];
     }
 
     /*
@@ -98,8 +100,9 @@ abstract class ServicioContratanteTable extends \kerana\Ada
         $data_insert = [
             'id_servicio' => $this->_id_servicio,
             'id_contratante' => $this->_id_contratante,
+            'is_default' => $this->_is_default
         ];
-        return parent::save($data_insert);
+        return parent::save($data_insert, false);
     }
 
     /*
@@ -117,7 +120,7 @@ abstract class ServicioContratanteTable extends \kerana\Ada
      */
     public function set_id_servicio($value = "")
     {
-        $this->_id_servicio = \helpers\Validator::valInt('f_id_servicio', $value, TRUE);
+        $this->_id_servicio = \helpers\Validator::valInt('f_id_servicio', $value, true);
     }
 
     /**
@@ -128,7 +131,17 @@ abstract class ServicioContratanteTable extends \kerana\Ada
      */
     public function set_id_contratante($value = "")
     {
-        $this->_id_contratante = \helpers\Validator::valInt('f_id_contratante', $value, TRUE);
+        $this->_id_contratante = \helpers\Validator::valInt('f_id_contratante', $value, true);
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for is_default
+     * ------------------------------------------------------------------------- 
+     * @param int $value the is_contratante value 
+     */
+    public function set_is_default($value = "")
+    {
+        $this->_is_default = \helpers\Validator::valInt('f_is_default', $value, false);
     }
 
     /*
@@ -158,6 +171,17 @@ abstract class ServicioContratanteTable extends \kerana\Ada
     public function get_id_contratante()
     {
         return (isset($this->_id_contratante)) ? $this->_id_contratante : null;
+    }
+    
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for is_default
+     * ------------------------------------------------------------------------- 
+     * @return int $value  
+     */
+    public function get_is_default()
+    {
+        return (isset($this->_is_default)) ? $this->_is_default : null;
     }
 
 }
