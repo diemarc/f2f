@@ -132,6 +132,7 @@ abstract class ServicioTable extends \kerana\Ada
     public function set_id_servicio($value = "")
     {
         $this->_id_servicio = \helpers\Validator::valInt('f_id_servicio', $value, true);
+        $this->_id_value = $this->_id_servicio;
     }
 
     /**
