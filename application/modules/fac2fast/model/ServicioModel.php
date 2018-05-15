@@ -56,6 +56,8 @@ class ServicioModel extends tables\ServicioTable
         $this->set_servicio();
         $this->set_descripcion();
         $this->set_precio();
+        $this->set_iva_servicio();
+        $this->set_retencion_servicio();
         $this->set_created_at();
         $this->set_created_by();
 
