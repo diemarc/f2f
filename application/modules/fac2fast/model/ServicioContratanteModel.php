@@ -64,4 +64,19 @@ class ServicioContratanteModel extends tables\ServicioContratanteTable
         return parent::saveServicioContratante();
     }
 
+    /**
+     * -------------------------------------------------------------------------
+     * Process the new service for a contratante
+     * -------------------------------------------------------------------------
+     */
+    public function processNewServiceContratante(){
+        
+        // first create new service
+        $this->objServicioModel->savePost();
+        
+        
+    }
+    
+    
+    
 }
