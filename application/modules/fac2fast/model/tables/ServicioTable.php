@@ -46,6 +46,10 @@ abstract class ServicioTable extends \kerana\Ada
             $_descripcion,
             /** @var decimal(10,2), $precio  */
             $_precio,
+            /** @var decimal(10,2), $precio  */
+            $_iva_servicio,
+            /** @var decimal(10,2), $precio  */
+            $_retencion_servicio,
             /** @var time(tamp), $created_at  */
             $_created_at,
             /** @var varchar(45), $created_by  */
@@ -104,6 +108,8 @@ abstract class ServicioTable extends \kerana\Ada
             'servicio' => $this->_servicio,
             'descripcion' => $this->_descripcion,
             'precio' => $this->_precio,
+            'iva_servicio' => $this->_iva_servicio,
+            'retencion_servicio' => $this->_retencion_servicio,
             'created_at' => $this->_created_at,
             'created_by' => $this->_created_by,
         ];
@@ -170,6 +176,28 @@ abstract class ServicioTable extends \kerana\Ada
     public function set_precio($value = "")
     {
         $this->_precio = \helpers\Validator::valDecimal('f_precio', $value, TRUE);
+    }
+    
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for iva servicio
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the iva value 
+     */
+    public function set_iva_servicio($value = "")
+    {
+        $this->_iva_servicio = \helpers\Validator::valDecimal('f_iva_servicio', $value, TRUE);
+    }
+    
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for retencion servicio
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the iva value 
+     */
+    public function set_retencion_servicio($value = "")
+    {
+        $this->_retencion_servicio = \helpers\Validator::valDecimal('f_retencion_servicio', $value, TRUE);
     }
 
     /**
@@ -254,6 +282,27 @@ abstract class ServicioTable extends \kerana\Ada
     public function get_precio()
     {
         return (isset($this->_precio)) ? $this->_precio : null;
+    }
+    
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for iva_servicio
+     * ------------------------------------------------------------------------- 
+     * @return decimal $value  
+     */
+    public function get_iva_servicio()
+    {
+        return (isset($this->_iva_servicio)) ? $this->_iva_servicio : null;
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for retencion_servicio
+     * ------------------------------------------------------------------------- 
+     * @return decimal $value  
+     */
+    public function get_retencion_servicio()
+    {
+        return (isset($this->_retencion_servicio)) ? $this->_retencion_servicio : null;
     }
 
     /**
