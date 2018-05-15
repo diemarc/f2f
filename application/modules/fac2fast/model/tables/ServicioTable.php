@@ -104,7 +104,7 @@ abstract class ServicioTable extends \kerana\Ada
     {
 
         $data_insert = [
-            'id_subclase' => $this->_id_subclase,
+            'id_subclase' => 1,
             'servicio' => $this->_servicio,
             'descripcion' => $this->_descripcion,
             'precio' => $this->_precio,
@@ -131,7 +131,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_id_servicio($value = "")
     {
-        $this->_id_servicio = \helpers\Validator::valInt('f_id_servicio', $value, TRUE);
+        $this->_id_servicio = \helpers\Validator::valInt('f_id_servicio', $value, true);
     }
 
     /**
@@ -142,7 +142,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_id_subclase($value = "")
     {
-        $this->_id_subclase = \helpers\Validator::valInt('f_id_subclase', $value, TRUE);
+        $this->_id_subclase = \helpers\Validator::valInt('f_id_subclase', $value, false);
     }
 
     /**
@@ -153,7 +153,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_servicio($value = "")
     {
-        $this->_servicio = \helpers\Validator::valVarchar('f_servicio', $value, FALSE);
+        $this->_servicio = \helpers\Validator::valVarchar('f_servicio', $value, false);
     }
 
     /**
@@ -164,7 +164,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_descripcion($value = "")
     {
-        $this->_descripcion = \helpers\Validator::valText('f_descripcion', $value, FALSE);
+        $this->_descripcion = \helpers\Validator::valText('f_descripcion', $value, false);
     }
 
     /**
@@ -175,7 +175,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_precio($value = "")
     {
-        $this->_precio = \helpers\Validator::valDecimal('f_precio', $value, TRUE);
+        $this->_precio = \helpers\Validator::valDecimal('f_precio', $value, true);
     }
     
     /**
@@ -186,7 +186,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_iva_servicio($value = "")
     {
-        $this->_iva_servicio = \helpers\Validator::valDecimal('f_iva_servicio', $value, TRUE);
+        $this->_iva_servicio = \helpers\Validator::valDecimal('f_iva_servicio', $value, false);
     }
     
     /**
@@ -197,7 +197,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_retencion_servicio($value = "")
     {
-        $this->_retencion_servicio = \helpers\Validator::valDecimal('f_retencion_servicio', $value, TRUE);
+        $this->_retencion_servicio = \helpers\Validator::valDecimal('f_retencion_servicio', $value, false);
     }
 
     /**
@@ -208,7 +208,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_created_at($value = "")
     {
-        $this->_created_at = \helpers\Validator::valTime('f_created_at', $value, FALSE);
+        $this->_created_at = \helpers\Validator::valTime('f_created_at', $value, false);
     }
 
     /**
@@ -219,7 +219,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_created_by($value = "")
     {
-        $this->_created_by = \helpers\Validator::valVarchar('f_created_by', $value, FALSE);
+        $this->_created_by = \helpers\Validator::valVarchar('f_created_by', $value, false);
     }
 
     /*
