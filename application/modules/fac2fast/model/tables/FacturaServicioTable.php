@@ -44,6 +44,8 @@ abstract class FacturaServicioTable extends \kerana\Ada
             $_cantidad,
             /** @var decimal(9,2), $precio  */
             $_precio,
+            /**@var cantidad*precio $bases */
+            $_bases,
             /** @var decimal(9,2), $iva  */
             $_iva,
             /** @var decimal(9,2), $retencion  */
@@ -193,13 +195,48 @@ abstract class FacturaServicioTable extends \kerana\Ada
     }
     /**
      * ------------------------------------------------------------------------- 
+     * Setter for bases
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the base value 
+     * ((precio * cantidad)
+     */
+    public function set_bases($value = "")
+    {
+        $this->_bases = $this->_precio * $this->_cantidad;
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for improte iva
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the base value 
+     * ((precio * cantidad)*tipo de iva
+     */
+    public function set_importe_iva($value = "")
+    {
+        $this->_importe_iva = $this->_bases * $this->_iva;
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for improte retencion
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the base value 
+     * ((precio * cantidad)*tipo de retencion
+     */
+    public function set_importe_retencion($value = "")
+    {
+        $this->_importe_iva = $this->_bases * $this->_retencion;
+    }
+        
+    /**
+     * ------------------------------------------------------------------------- 
      * Setter for total
      * ------------------------------------------------------------------------- 
      * @param decimal $value the total value 
      * ((precio * cantidad) + iva)- retencion ; en la retencion pongo mas
      *  porque en la tabla esta como valor negativo - * - = +
      */
-    public function set_total($value = "")
+   
+        public function set_total ($value = "")
     {
         $base_imponible = $this->_precio * $this->_cantidad;
         $this->_total = ($base_imponible) + ($base_imponible * $this->_iva) + ($this->_retencion * $base_imponible);
