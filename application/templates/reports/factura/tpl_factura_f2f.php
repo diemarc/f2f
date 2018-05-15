@@ -176,12 +176,15 @@
             </td>
         </tr>
         <tr>
+<!--            /**esta sumando los ivas
+             es decir 0.21-0.21  *//-->
             <td class="title">% IVA</td>
-            <td class="value"><strong><?php echo "iva"; ?></strong></td>
+            <td class="value"><strong><?php echo "$iva";?></strong></td>
+            
         </tr>
         <tr>
             <td class="title">Cuota</td>
-            <td class="value"><?php echo "cuota"; ?></td>
+            <td class="value"><?php echo "$iva*$base"; ?></td>
         </tr>
         <tr>
             <td  class="title" >TOTAL</td>
