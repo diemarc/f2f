@@ -230,8 +230,8 @@ class Validator
     {
         self::initValidator($param_name, $param_value, $required);
 
-        // if is not a float and is not numerico, try to formated 
-        if (!filter_var(self::$param_to_validate, FILTER_VALIDATE_FLOAT) AND ( is_numeric(self::$param_to_validate + 1))) {
+        // if is not a float and is not numeric, try to formated 
+        if (!filter_var(self::$param_to_validate, FILTER_VALIDATE_FLOAT) AND ( is_numeric(self::$param_to_validate + 1)) AND self::$param_to_validate != 0.0) {
 
             $fmt = new \NumberFormatter('de_DE', \NumberFormatter::DECIMAL);
             $num_formatted = $fmt->parse(self::$param_to_validate);
@@ -240,10 +240,10 @@ class Validator
             return ($num_formatted) ? $num_formatted :
                     \kerana\Exceptions::showError('floatVALIDATOR::' . $param_name, ' (' . self::$param_to_validate . ') '
                             . 'IS NOT A NUMBER');
-            // sif not a number
+            // if not a number
         } else if (!is_numeric(self::$param_to_validate)) {
             \kerana\Exceptions::showError('floatVALIDATOR::' . $param_name, ' (' . self::$param_to_validate . ') '
-                    . 'IS NOT A NUMBER');
+                    . 'IS NOT A NUMBER type');
         } else {
 
             // if the value format is like to 9.8 return this value 
