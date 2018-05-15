@@ -49,6 +49,14 @@
         font-size: 8px;
     }
 
+    /*    .footer-top{
+            background-color:transparent;
+    }
+     
+    .footer-container #footer h4{
+            color:red!important;
+    }*/
+
 </style>
 <page backtop="35mm" backbottom="2mm" backleft="20mm" backright="10mm" style="font-size: 13px"
       footer="date;time;page">
@@ -144,13 +152,13 @@
                         <?php echo number_format(($servicio->cantidad), 2, ',', ' '); ?>
                     </td><!--
                     <td style="">
-                        <?php echo $servicio->iva; ?>
+                    <?php echo $servicio->iva; ?>
                     </td>
                     <td style="">
-                        <?php echo $servicio->retencion; ?>
+                    <?php echo $servicio->retencion; ?>
                     </td>-->
                     <td style="">
-                        <?php echo number_format((($servicio->precio)*($servicio->cantidad)), 2, ',', ' '); ?>&euro;
+                        <?php echo number_format((($servicio->precio) * ($servicio->cantidad)), 2, ',', ' '); ?>&euro;
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -176,11 +184,11 @@
             </td>
         </tr>
         <tr>
-<!--            /**esta sumando los ivas
-             es decir 0.21-0.21  *//-->
+            <!--            /**esta sumando los ivas
+                         es decir 0.21-0.21  *//-->
             <td class="title">% IVA</td>
-            <td class="value"><strong><?php echo "$iva";?></strong></td>
-            
+            <td class="value"><strong><?php echo "$iva"; ?></strong></td>
+
         </tr>
         <tr>
             <td class="title">Cuota</td>
@@ -198,6 +206,6 @@
         sello
 
     </div>
-
+   
 
 </page>
