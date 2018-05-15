@@ -86,13 +86,18 @@ class FacturaServicioModel extends tables\FacturaServicioTable
         $retenciones = array_map(function($e) {
             return $e->retencion;
         }, $rsServiciosFacturados);
+        // retenciones
+        $iva = array_map(function($e) {
+            return $e->iva;
+        }, $rsServiciosFacturados);
 
         return [
             'rsFactura' => $this->objFacturaModel->getRecord(),
             'rsFacturasServicios' => $rsServiciosFacturados,
             'total' => array_sum($totales), // now sum the total column
             'base' => array_sum($bases), // now sum the total column
-            'retencion' => array_sum($retenciones) // now sum the total column
+            'retencion' => array_sum($retenciones), // now sum the total column
+            'iva' => array_sum($iva) // now sum the total column
         ];
     }
 
