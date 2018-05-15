@@ -45,21 +45,6 @@ class ServicioController extends \kerana\Kerana implements \kerana\KeranaInterfa
         \kerana\View::showView($this->_current_module, 'servicio/index', ['rsServicios' => $this->_servicio->getAll()]);
     }
 
-    /**
-     * -------------------------------------------------------------------------
-     * List services 
-     * -------------------------------------------------------------------------
-     */
-    public function listServicios()
-    {
-        
-        $this->_servicio_contratante = new \application\modules\fac2fast\model\ServicioContratanteModel();
-        
-        $params = [
-            'rsServicios'=>$this->_servicio_contratante->getAll()
-        ]; 
-        \kerana\View::showView($this->_current_module, 'servicio/list', $params);
-    }
 
     /**
      * -------------------------------------------------------------------------
@@ -82,7 +67,9 @@ class ServicioController extends \kerana\Kerana implements \kerana\KeranaInterfa
      */
     public function save()
     {
-        ($this->_servicio->savePost()) ? \helpers\Redirect::to('/fac2fast/servicio/index') : '';
+        if($this->_servicio->savePost()){
+            return true;
+        }
     }
 
     /**
