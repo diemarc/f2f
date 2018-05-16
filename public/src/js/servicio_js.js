@@ -26,7 +26,10 @@ function loadListServices() {
                 services_list += '<td>'+service.precio+'</td>';
                 services_list += '<td>'+service.iva_servicio+'</td>';
                 services_list += '<td>'+service.retencion_servicio+'</td>';
-                services_list += '<td></td>';
+                services_list += '<td><button class="btn btn-xs btn-success"\n\
+                onclick="addService('+service.id_servicio+')" title="Agregar servicio">\n\
+                <i class="fa fa-check-square-o"></i></button>\n\
+            </td>';
                 services_list += '</tr>';
                 
             });
@@ -42,6 +45,12 @@ function loadListServices() {
 
 
 }
+
+
+function addService(id_service){
+    alert(' Se va agregar este servicio '+id_service);
+}
+
 
 
 /**
