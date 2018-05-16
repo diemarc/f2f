@@ -27,14 +27,22 @@ class ServiciocontratanteController extends \kerana\Kerana implements \kerana\Ke
 
     /**
      * -------------------------------------------------------------------------
-     * List services 
+     * Get services in json notation
      * -------------------------------------------------------------------------
      */
-    public function getContranteServices()
+    public function getContratanteServicesJson()
     {
-        
-       return $this->_serviciocontratante->getContratanteServicesJson();
-        
+        return $this->_serviciocontratante->getQueryInJson();
+    }
+
+    /**
+     * -------------------------------------------------------------------------
+     * Load panel to select services
+     * -------------------------------------------------------------------------
+     */
+    public function loadContratanteServices()
+    {
+        \kerana\View::showView($this->_current_module, 'servicio/contratante_services');
     }
 
     /**
