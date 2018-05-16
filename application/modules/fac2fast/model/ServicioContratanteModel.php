@@ -51,16 +51,16 @@ class ServicioContratanteModel extends tables\ServicioContratanteTable
         
     }
 
-    /**
-     * -------------------------------------------------------------------------
-     * Get contratante services in json format
-     * -------------------------------------------------------------------------
-     */
-    public function getContratanteServicesJson(){
-        
-        return $this->getQueryInJson();
-        
-    }
+//    /**
+//     * -------------------------------------------------------------------------
+//     * Get contratante services in json format
+//     * -------------------------------------------------------------------------
+//     */
+//    public function getContratanteServicesJson(){
+//        
+//        return $this->getQueryInJson();
+//        
+//    }
     
     
     /**
