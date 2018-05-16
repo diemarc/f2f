@@ -2,6 +2,7 @@
 <script src="/src/js/poblacion_js.js"></script>
 <script src="/src/js/form_js.js"></script>
 <script src="/src/js/factura_js.js"></script>
+<script src="/src/js/servicio_js.js"></script>
 <script>
 
     $(function () {
@@ -147,7 +148,7 @@
                                 <h2 class="box-title">
                                     <button type="button" class="btn btn-xs btn-success" 
                                             data-toggle="modal" 
-                                            data-remote="<?php echo __URL__ . '/fac2fast/servicio/listServicios'; ?>" 
+                                            data-remote="<?php echo __URL__ . '/fac2fast/serviciocontratante/loadContratanteServices'; ?>" 
                                             data-target="#myModelLarge"><i class="fa fa-plus"></i> </button>
 
                                     Servicios</h2>
