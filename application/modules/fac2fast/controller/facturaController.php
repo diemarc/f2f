@@ -47,18 +47,8 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
     public function add()
     {
 
-        // get all default services 
-        $obj_model_services = new \application\modules\fac2fast\model\ServicioContratanteModel();
-        $obj_tasas = new \application\modules\base\model\TaxaModel();
-
         $params = [
             'rsFormapagos' => $this->_factura->objFormaPagoModel->getAll(),
-            'rsServicios' => $obj_model_services->find('*', 
-                        ['id_contratante' => $_SESSION['f2f_id_contratante'],
-                        'is_default' => 1    
-                    ], 'all'),
-            'rsIva' => $obj_tasas->find('porcentaje', ['tasa' => 'IVA']),
-            'rsRetencion' => $obj_tasas->find('porcentaje', ['tasa' => 'IRPF'])
         ];
         \kerana\View::showForm($this->_current_module, 'factura/add', $params);
     }
@@ -70,7 +60,7 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
      */
     public function save()
     {
-        
+
         ($this->_factura->saveFactura()) ?
                         \helpers\Redirect::to('/fac2fast/factura/detail/' . $this->_factura->get_id_facturas()) : '';
     }
