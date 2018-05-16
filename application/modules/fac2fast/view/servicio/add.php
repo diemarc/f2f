@@ -3,14 +3,13 @@
             aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
-    <h3 class="modal-title text-success" id="myModalLabel">Nuevo servicio</h3>
+    <h3 class="modal-title text-primary" id="myModalLabel">Nuevo servicio</h3>
 </div>
 <div class="modal-body">
-    <form action="<?php echo __URL__; ?>/fac2fast/empresacontratante/save" 
-          id="formNewEmpresa" name="formNewEmpresa" method="POST" class="form-horizontal"
+    <form action="<?php echo __URL__; ?>/fac2fast/serviciocontratante/save" 
+          id="formNewService" name="formNewService" method="POST" class="form-horizontal"
           accept-charset="utf-8">
-        <input type="hidden"name="f_id_poblacion" id="f_id_poblacion" value="" />
-        <?php echo $kerana_token; ?>
+              <?php echo $kerana_token; ?>
 
         <header class="breadcrumb">
             Datos principales
@@ -34,33 +33,48 @@
         </div> 
         <div class='form-group form-group-sm'> 
             <label for='f_precio' class='col-sm-2 control-label'>Precio</label> 
-            <div class='col-sm-6'> 
+            <div class='col-sm-4'> 
                 <div class='input-group col-sm-8'> 
                     <input type="number" step="0.01" id="f_precio" name="f_precio" class="form-control"  maxlength="10,2" required  />
                 </div> 
             </div> 
         </div> 
         <div class='form-group form-group-sm'> 
-            <label for='f_iva' class='col-sm-2 control-label'>IVA</label> 
-            <div class='col-sm-6'> 
+            <label for='f_iva_servicio' class='col-sm-2 control-label'>IVA</label> 
+            <div class='col-sm-4'> 
                 <div class='input-group col-sm-8'> 
-                    <input type="number" step="0.01" id="f_iva" name="f_iva" class="form-control"  maxlength="10,2" required  />
+                    <input type="number" step="0.01" id="f_iva_servicio" name="f_iva_servicio" 
+                           class="form-control"  maxlength="10,2" required value="0.0"  />
                 </div> 
             </div> 
         </div> 
         <div class='form-group form-group-sm'> 
-            <label for='f_iva' class='col-sm-2 control-label'>Retenci&oacute;n</label> 
+            <label for='f_retencion_servicio' class='col-sm-2 control-label'>Retenci&oacute;n</label> 
+            <div class='col-sm-4'> 
+                <div class='input-group col-sm-8'> 
+                    <input type="number" step="0.01" id="f_retencion_servicio" name="f_retencion_servicio"
+                           class="form-control"  maxlength="10,2" required value="0.0"  />
+                </div> 
+            </div> 
+        </div>
+
+        <div class='form-group form-group-sm'> 
+            <label for='f_is_default' class='col-sm-2 control-label'>Favorito?</label> 
             <div class='col-sm-6'> 
                 <div class='input-group col-sm-8'> 
-                    <input type="number" step="0.01" id="f_retencion" name="f_retencion" class="form-control"  maxlength="10,2" required  />
+                    <input type="radio" id="f_is_default" name="f_is_default" 
+                           class="radio_inline" value="1">Si 
+                    <input type="radio" id="f_is_default" name="f_is_default" 
+                           class="radio_inline" value="0" checked>No
                 </div> 
             </div> 
         </div> 
-
     </form>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-    <button type="button" class="btn btn-primary"
-            onclick="save()">Crear</button>
+         <button type=button" class="btn btn-primary" onclick="saveNewServiceContratante()"
+                >Crear</button>
+
+
 </div>
