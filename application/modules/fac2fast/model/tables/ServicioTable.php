@@ -70,8 +70,9 @@ abstract class ServicioTable extends \kerana\Ada
             'id_servicio' => $this->_id_servicio,
         ];
 
-        $this->_query = ' SELECT A.id_servicio,A.id_subclase,A.servicio,'
-                . ' A.descripcion,A.precio,A.created_at,A.created_by,B.subclase,B2.clase'
+        $this->_query = ' SELECT A.id_servicio,A.id_subclase,A.servicio,A.iva_servicio,'
+                . ' A.descripcion,A.precio,A.created_at,A.created_by,A.retencion_servicio,'
+                . ' B.subclase,B2.clase'
                 . ' FROM f_servicios A '
                 . ' INNER JOIN aux_subclases B ON (B.id_subclase = A.id_subclase) '
                 . ' INNER JOIN aux_clases B2 ON (B2.id_clases = B.id_clases) '
