@@ -126,9 +126,9 @@ function addService(id_service) {
             data_service += '<div class="input-group-addon">';
             data_service += '<i class="fa fa-euro"></i>';
             data_service += '</div>';
-            data_service += '<input type="text" class="form-control form-control-sm"';
+            data_service += '<input type="number" step="0.01" class="form-control form-control-sm"';
             data_service += 'name=""';
-            data_service += 'value="' + data.record.precio + '"/> </div>';
+            data_service += 'value="' + data.record.total_serv + '"/> </div>';
             data_service += '</div></td> ';
 
             // end tr
