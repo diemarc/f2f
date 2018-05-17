@@ -4,6 +4,7 @@
 
         loadListServices();
 
+// search html data
         $("#filter_buscar_agrupacion").keyup(function () {
             var filter = $(this).val();
 
