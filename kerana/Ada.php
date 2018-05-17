@@ -250,7 +250,7 @@ abstract class Ada
         if($rsRecord){
             
             $json_response['exists'] = true;
-            $json_response['data'] = $rsRecord;
+            $json_response['record'] = $rsRecord;
         }
         else{
             $json_response['exists'] = false;
