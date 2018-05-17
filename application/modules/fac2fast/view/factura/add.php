@@ -13,6 +13,11 @@
         });
     });
 </script>
+<style>
+    .table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td {
+padding: 2px;
+}
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <section class="content-header bg-success">
@@ -146,100 +151,29 @@
                         <div class="hidden1 box" id="div_conceptos">
                             <div class="box-header">
                                 <h2 class="box-title">
-                                    <button type="button" class="btn btn-xs btn-success" 
+                                    Servicios</h2>
+                                 <button type="button" class="btn btn-sm btn-info" 
                                             data-toggle="modal" 
                                             data-remote="<?php echo __URL__ . '/fac2fast/serviciocontratante/loadContratanteServices'; ?>" 
-                                            data-target="#myModelLarge"><i class="fa fa-plus"></i> </button>
-
-                                    Servicios</h2>
+                                            data-target="#myModelLarge"><i class="fa fa-plus"></i> Agregar servicios a facturar </button>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <table class="table table-bordered table-striped table-condensed">
+                                <table class="table table-bordered table-condensed">
                                     <thead>
                                         <tr class="bg-success">
+                                            <th style="width: 30px">#</th>
                                             <th>Servicio</th>
-                                            <th style="width: 180px">Base imponible</th>
+                                            <th style="width: 180px">Precio</th>
                                             <th style="width: 100px">Cantidad</th>
                                             <th style="width: 180px">IVA</th>
                                             <th style="width: 180px">Retenci&oacute;n</th>
                                             <th style="width: 180px">Total</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php foreach ($rsServicios AS $servicio): ?>
-                                        <input type="text" name="f_concepto[<?php echo $servicio->id_servicio; ?>]" value="<?php echo $servicio->id_servicio; ?>"/>
-                                        <tr class="">
-                                            <td>
-                                                <div class='col-sm-12 text-success'> 
-                                                    <i class="fa fa-comment-o" title="Click para agregar detalles del servicio"
-                                                       onclick="$('#person_<?php echo $servicio->id_servicio; ?>').removeClass('hidden');"></i>
-                                                       <?php echo $servicio->servicio; ?>
-                                                </div> 
-                                                <div class='col-sm-12 hidden' id="person_<?php echo $servicio->id_servicio; ?>"> 
-                                                    <div class="input-group has-success">
-                                                        <div class="input-group-addon">
-                                                            <i class="fa fa-close" onclick="
-                                                                        $('#person_<?php echo $servicio->id_servicio; ?>').addClass('hidden');
-                                                                        $('#f_concepto_personalizacion_<?php echo $servicio->id_servicio; ?>').val('');
-                                                               "></i>
-                                                        </div>
-                                                        <textarea class="form-control form-control-sm" rows="1" id="f_concepto_personalizacion_<?php echo $servicio->id_servicio; ?>"
-                                                                  name="f_concepto_personalizacion[<?php echo $servicio->id_servicio; ?>]"></textarea>
-                                                    </div>
-                                                </div> 
-                                            </td>
-                                            <td>
-                                                <div class='col-sm-12'> 
-                                                    <div class="input-group">
-                                                        <div class="input-group-addon">
-                                                            <i class="fa fa-euro"></i>
-                                                        </div>
-                                                        <input type="text" class="form-control form-control-sm"
-                                                               name="f_concepto_precio[<?php echo $servicio->id_servicio; ?>]"
-                                                               value="<?php echo $servicio->precio; ?>"/>
-                                                    </div>
-                                                </div> 
-                                            </td>
-                                            <td>
-                                                <div class='col-sm-12'> 
-                                                    <input type="number" class="form-control pull-right"
-                                                           name="f_concepto_cantidad[<?php echo $servicio->id_servicio; ?>]"
-                                                           value="1"/>
-                                                </div> 
-
-                                            </td>
-                                            <td>
-                                                <div class='col-sm-12'> 
-                                                    <input type="number" class="form-control pull-right"
-                                                           name="f_concepto_iva[<?php echo $servicio->id_servicio; ?>]"
-                                                           value="<?php echo $rsIva->porcentaje; ?>"/>
-                                                </div> 
-
-                                            </td>
-                                            <td>
-                                                <div class='col-sm-8'> 
-
-                                                    <input type="number" class="form-control pull-right"
-                                                           name="f_concepto_retencion[<?php echo $servicio->id_servicio; ?>]"
-                                                           value="<?php echo $rsRetencion->porcentaje; ?>"/>
-                                                </div> 
-
-                                            </td>
-                                            <td style="">
-                                                <div class='col-sm-12'> 
-                                                    <div class="input-group">
-                                                        <div class="input-group-addon">
-                                                            <i class="fa fa-euro"></i>
-                                                        </div>
-                                                        <input type="text" class="form-control pull-right"
-                                                               value="<?php echo ($servicio->precio); ?>"/>
-                                                    </div>
-                                                </div> 
-
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
+                                    <tbody id="div_servicios_factura">
+                                        <!-- json content -->
+                                        
                                     </tbody>
 
                                 </table>
