@@ -32,7 +32,7 @@ class ServiciocontratanteController extends \kerana\Kerana implements \kerana\Ke
      */
     public function getContratanteServicesJson()
     {
-        return $this->_serviciocontratante->getQueryInJson();
+        return $this->_serviciocontratante->getAllInJson();
     }
 
     /**
