@@ -46,6 +46,8 @@ class ServicioController extends \kerana\Kerana implements \kerana\KeranaInterfa
     }
 
 
+    
+    
     /**
      * -------------------------------------------------------------------------
      * Add new
@@ -70,6 +72,19 @@ class ServicioController extends \kerana\Kerana implements \kerana\KeranaInterfa
         if($this->_servicio->savePost()){
             return true;
         }
+    }
+    
+    /**
+     * -------------------------------------------------------------------------
+     * Get Service record in json
+     * --------------------------------------------------------------------------
+     * @param type $id
+     * @return type
+     */
+    public function getServicioJson($id){
+        
+        $this->_servicio->_setIdTableValue($id);
+        return $this->_servicio->getRecordInJson();
     }
 
     /**
