@@ -218,7 +218,7 @@ abstract class Ada
      * Getquery result in json format
      * -------------------------------------------------------------------------
      */
-    public function getQueryInJson()
+    public function getAllInJson()
     {
         $json_response = [];
 
@@ -237,6 +237,29 @@ abstract class Ada
         echo json_encode($json_response);
     }
 
+    /**
+     * -------------------------------------------------------------------------
+     * Get one record in json notation
+     * -------------------------------------------------------------------------
+     */
+    public function getRecordInJson(){
+        
+        $json_response = [];
+        
+        $rsRecord = $this->getRecord(false);
+        if($rsRecord){
+            
+            $json_response['exists'] = true;
+            $json_response['data'] = $rsRecord;
+        }
+        else{
+            $json_response['exists'] = false;
+        }
+        
+        echo json_encode($json_response);
+        
+    }
+    
     /*
       |=========================================================================
       | SELECTS
