@@ -80,7 +80,7 @@ function addService(id_service) {
             // servicio personalizacion
             data_service += '<div class="col-sm-12 hidden" id="person_' + data.record.id_servicio + '"> ';
             data_service += '<div class="input-group has-success">';
-            data_service += '<div class="input-group-addon"><i class="fa fa-close" onclick="cleanObsServicio('+data.record.id_servicio+')"></i></div>';
+            data_service += '<div class="input-group-addon"><i class="fa fa-close" onclick="cleanObsServicio(' + data.record.id_servicio + ')"></i></div>';
             data_service += '<textarea class="form-control form-control-sm" rows="1" ';
             data_service += 'id="f_concepto_personalizacion_' + data.record.id_servicio + '"';
             data_service += 'name="f_concepto_personalizacion[' + data.record.id_servicio + ']"></textarea>';
@@ -101,23 +101,23 @@ function addService(id_service) {
             data_service += '</div></td> ';
             // cantidade
             data_service += '<td> <div class="col-sm-12"> ';
-            data_service += '<input type="number" class="form-control pull-right"';
+            data_service += '<input type="number" class="form-control pull-right" onchange="changeCantidad('+data.record.id_servicio+')"';
             data_service += 'name="f_concepto_cantidad[' + data.record.id_servicio + ']"';
-            data_service += 'value="1"/> ';
+            data_service += 'value="1" id="f_cantidad_' + data.record.id_servicio + '"/> ';
             data_service += '</div></td> ';
 
             // iva
             data_service += '<td> <div class="col-sm-8"> ';
             data_service += '<input type="number" step="0.01" class="form-control pull-right"';
             data_service += 'name="f_concepto_iva[' + data.record.id_servicio + ']"';
-            data_service += 'value="' + data.record.iva_servicio + '"/> ';
+            data_service += 'value="' + data.record.iva_servicio + 'id="f_iva_' + data.record.id_servicio + '"/> ';
             data_service += '</div></td> ';
 
             // retencion
             data_service += '<td> <div class="col-sm-8"> ';
             data_service += '<input type="number" step="0.01" class="form-control pull-right"';
             data_service += 'name="f_concepto_retencion[' + data.record.id_servicio + ']"';
-            data_service += 'value="' + data.record.retencion_servicio + '"/> ';
+            data_service += 'value="' + data.record.retencion_servicio + '" id="f_retencion_' + data.record.id_servicio + '"/> ';
             data_service += '</div></td> ';
 
             // total
@@ -127,7 +127,7 @@ function addService(id_service) {
             data_service += '<i class="fa fa-euro"></i>';
             data_service += '</div>';
             data_service += '<input type="number" step="0.01" class="form-control form-control-sm"';
-            data_service += 'name=""';
+            data_service += 'name="" id="total_' + data.record.id_servicio + '"';
             data_service += 'value="' + data.record.total_serv + '"/> </div>';
             data_service += '</div></td> ';
 
@@ -148,6 +148,24 @@ function addService(id_service) {
 
 /**
  * -----------------------------------------------------------------------------
+ * change total cantidad
+ * -----------------------------------------------------------------------------
+ * @param {type} id_service
+ * @returns {undefined}
+ */
+function changeCantidad(id_service) {
+
+    var total_actual = $('#f_cantidad_' + id_service).val() * $('#total_' + id_service).val();
+    $('#total_' + id_service).val(total_actual);
+}
+
+function changeIva(id_service){
+    var total_actual = $('#f_cantidad_' + id_service).val() * $('#total_' + id_service).val();
+    $('#total_' + id_service).val(total_actual);
+}
+
+/**
+ * -----------------------------------------------------------------------------
  * Show textarea for servicio
  * -----------------------------------------------------------------------------
  * @param {type} id_service
@@ -156,6 +174,14 @@ function addService(id_service) {
 function showObsServicio(id_service) {
     $('#person_' + id_service).removeClass('hidden');
 }
+
+/**
+ * -----------------------------------------------------------------------------
+ * Remove data from service personalization and hidde the div
+ * -----------------------------------------------------------------------------
+ * @param {type} id_service
+ * @returns {undefined}
+ */
 
 function cleanObsServicio(id_service) {
     $('#person_' + id_service).addClass('hidden');
