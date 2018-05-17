@@ -19,6 +19,9 @@
  */
 
 namespace helpers;
+
+defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
+
 use helpers\Validator AS Validator;
 
 /**
