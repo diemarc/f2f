@@ -207,10 +207,10 @@
         </section>
     </div>
     <div class="col-sm-4">
-        <section class="content">
+        <section class="content hidden" id="section_cliente">
             <div class="box box-default box-solid">
                 <div class="box-header with-border">
-                    <h3 class="box-title">cliente a facturar</h3>
+                    <h3 class="box-title" id="j_empresa"></h3>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -222,11 +222,8 @@
                 <div class="box-body">
                     <!-- datos clientes -->
                     <div class="box-body box-profile">
-                        <header class="breadcrumb text-blue">
-                            Datos de cliente facturado
-                        </header>
                         <ul class="list-group list-group-unbordered">
-                            <li class="list-group-item">
+                            <li class="list-group-item" id="j_empresa1">
                                 <b>Raz&oacute;n social</b> <a class="pull-right"></a>
                             </li>
                             <li class="list-group-item">
