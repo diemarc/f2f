@@ -15,15 +15,15 @@
 </script>
 <style>
     .table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td {
-padding: 2px;
-}
+        padding: 2px;
+    }
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <section class="content-header bg-success">
-            <h1 class="text-blue">
-                Nueva factura
-            </h1>
+        <h1 class="text-blue">
+            Nueva factura
+        </h1>
     </section> 
     <!-- Main content -->
     <!-- Default box -->
@@ -152,31 +152,33 @@ padding: 2px;
                             <div class="box-header">
                                 <h2 class="box-title">
                                     Servicios</h2>
-                                 <button type="button" class="btn btn-sm btn-info" 
-                                            data-toggle="modal" 
-                                            data-remote="<?php echo __URL__ . '/fac2fast/serviciocontratante/loadContratanteServices'; ?>" 
-                                            data-target="#myModelLarge"><i class="fa fa-plus"></i> Agregar servicios a facturar </button>
+                                <button type="button" class="btn btn-sm btn-default" 
+                                        data-toggle="modal" 
+                                        data-remote="<?php echo __URL__ . '/fac2fast/serviciocontratante/loadContratanteServices'; ?>" 
+                                        data-target="#myModelLarge"><i class="fa fa-plus"></i> Agregar servicios a facturar </button>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <table class="table table-bordered table-condensed">
-                                    <thead>
-                                        <tr class="bg-success">
-                                            <th style="width: 30px">#</th>
-                                            <th>Servicio</th>
-                                            <th style="width: 180px">Precio</th>
-                                            <th style="width: 100px">Cantidad</th>
-                                            <th style="width: 180px">IVA</th>
-                                            <th style="width: 180px">Retenci&oacute;n</th>
-                                            <th style="width: 180px">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="div_servicios_factura">
-                                        <!-- json content -->
-                                        
-                                    </tbody>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-condensed">
+                                        <thead>
+                                            <tr class="bg-aqua">
+                                                <th>#</th>
+                                                <th >Servicio</th>
+                                                <th style="">Cantidad</th>
+                                                <th style="">Precio</th>
+                                                <th style="">IVA</th>
+                                                <th style="">Retenci&oacute;n</th>
+                                                <th style="">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="div_servicios_factura">
+                                            <!-- json content -->
 
-                                </table>
+                                        </tbody>
+
+                                    </table>
+                                </div>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer clearfix">
