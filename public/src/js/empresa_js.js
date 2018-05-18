@@ -42,6 +42,7 @@ function findEmpresa(empresa) {
  * @returns {undefined}
  */
 function asignarEmpresa(empresa, id_empresa) {
+    $('#section_cliente').removeClass('hidden');
     $('#live_search_empresa').addClass('hidden');
     $('#div_conceptos').removeClass('hidden');
     $('#div_info_fac').removeClass('hidden');
@@ -50,6 +51,7 @@ function asignarEmpresa(empresa, id_empresa) {
     $('#f_id_empresa').val(id_empresa);
     $('#k_cliente').val(empresa);
     $('#span_empresa').html(empresa);
+    $('#j_empresa').append(empresa);
 
 }
 
