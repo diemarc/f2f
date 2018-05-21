@@ -32,8 +32,7 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
   |
  */
 
-class FacturaServicioModel extends tables\FacturaServicioTable
-{
+class FacturaServicioModel extends tables\FacturaServicioTable {
 
     public
     /** @object FacturaModel  */
@@ -41,8 +40,7 @@ class FacturaServicioModel extends tables\FacturaServicioTable
             /** @object ServicioModel  */
             $objServicioModel;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->objFacturaModel = new \application\modules\fac2fast\model\FacturaModel();
         $this->objServicioModel = new \application\modules\fac2fast\model\ServicioModel();
@@ -54,34 +52,41 @@ class FacturaServicioModel extends tables\FacturaServicioTable
      * -------------------------------------------------------------------------
      * @param type $id
      */
-    public function setIdFactura($id = ''){
+    public function setIdFactura($id = '') {
         $this->set_facturas_id_facturas($id);
         $this->objFacturaModel->set_id_facturas($id);
     }
-    
+
     /**
      * -------------------------------------------------------------------------
      * Get the factura details
      * -------------------------------------------------------------------------
      * @return array
      */
-    public function getFacturaDetails()
-    {
+    public function getFacturaDetails() {
 
         // get facturas servicios
         $rsServiciosFacturados = $this->getRecord(false, 'all');
-        
+
         // extract total column from a object, is a fancy way to use in array_sum
         // similar to array_sum(key_column()) but in a object :)
         $totales = array_map(function($e) {
             return $e->total;
         }, $rsServiciosFacturados);
-        
-        // totales
-        $bases = array_map(function($e) {
+
+        // precio
+        $precio = array_map(function($e) {
             return $e->precio;
         }, $rsServiciosFacturados);
-        
+        // cantidad
+        $cantidad = array_map(function($e) {
+            return $e->cantidad;
+        }, $rsServiciosFacturados);
+        // bases
+        $bases = array_map(function($e) {
+            return $e->precio * $e->cantidad;
+        }, $rsServiciosFacturados);
+
         // retenciones
         $retenciones = array_map(function($e) {
             return $e->retencion;
@@ -91,13 +96,19 @@ class FacturaServicioModel extends tables\FacturaServicioTable
             return $e->iva;
         }, $rsServiciosFacturados);
 
+
+
+
+
+
+
         return [
             'rsFactura' => $this->objFacturaModel->getRecord(),
             'rsFacturasServicios' => $rsServiciosFacturados,
             'total' => array_sum($totales), // now sum the total column
             'base' => array_sum($bases), // now sum the total column
             'retencion' => array_sum($retenciones), // now sum the total column
-            'iva' => array_sum($iva) // now sum the total column
+            'iva' => array_unique($iva) // now distinc values of array
         ];
     }
 
@@ -106,8 +117,7 @@ class FacturaServicioModel extends tables\FacturaServicioTable
      * Save post data
      * -------------------------------------------------------------------------
      */
-    public function savePost()
-    {
+    public function savePost() {
         $this->set_facturas_id_facturas();
         $this->set_f_servicios_id_servicio();
         $this->set_cantidad();
@@ -118,6 +128,13 @@ class FacturaServicioModel extends tables\FacturaServicioTable
         $this->set_personalizacion();
 
         return parent::saveFacturaServicio();
+    }
+
+    public function getImpuestosFactura() {
+        
+        $this->queryImpuestosFactura();
+        return $this->getAll();
+        
     }
 
 }
