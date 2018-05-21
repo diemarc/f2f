@@ -118,8 +118,10 @@
     <br/><br/>
     <table cellspacing="0" cellpadding="0" border="0" width="80%">
         <tr>
+
             <td>Fecha de factura:</td>
             <td><strong><?php echo $rsFactura->fecha_factura; ?></strong></td>
+            <!--<td><strong><?php echo date_format($rsFactura->fecha_factura, 'd/m/Y H:i:s'); ?></strong></td>-->
         </tr>
         <tr>
             <td>Factura</td>
@@ -133,32 +135,32 @@
             <tr class="">
                 <th style="">Servicio</th>
                 <th style="">Precio</th>
-                <th style="">Cantidad</th><!--
+                <th style="">Cantidad</th>
                 <th style="">IVA</th>
-                <th style="">Retenci&oacute;n</th>-->
+                <th style="">Retenci&oacute;n</th>
                 <th style="">Total</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($rsFacturasServicios AS $servicio): ?>
                 <tr class="">
-                    <td style="">
+                    <td style="text-align: left">
                         <?php echo $servicio->servicio; ?>
                     </td>
-                    <td style="">
+                    <td style="text-align: right">
                         <?php echo number_format(($servicio->precio), 2, ',', ' '); ?>&euro;
                     </td>
-                    <td style="">
+                    <td style="text-align: right">
                         <?php echo number_format(($servicio->cantidad), 2, ',', ' '); ?>
-                    </td><!--
-                    <td style="">
-                    <?php echo $servicio->iva; ?>
                     </td>
-                    <td style="">
-                    <?php echo $servicio->retencion; ?>
-                    </td>-->
-                    <td style="">
-                        <?php echo number_format((($servicio->precio) * ($servicio->cantidad)), 2, ',', ' '); ?>&euro;
+                    <td style="text-align: right">
+                        <?php echo $servicio->iva; ?>
+                    </td>
+                    <td style="text-align: right">
+                        <?php echo $servicio->retencion; ?>
+                    </td>
+                    <td style="text-align: right">
+                        <?php echo number_format((($servicio->total)), 2, ',', ' '); ?>&euro;
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -176,7 +178,7 @@
             </td>
         </tr>
     </table>
-    <table class="bordered" style="width:95%">
+<!--    <table class="bordered" style="width:95%">
         <tr>
             <td class="title" style="width:20%">Base imponible</td>
             <td class="value" style="width:75%">
@@ -184,21 +186,58 @@
             </td>
         </tr>
         <tr>
-            <!--            /**esta sumando los ivas
-                         es decir 0.21-0.21  *//-->
+                        /**esta sumando los ivas
+                         es decir 0.21-0.21  *//
             <td class="title">% IVA</td>
             <td class="value"><strong><?php echo "$iva"; ?></strong></td>
 
         </tr>
         <tr>
             <td class="title">Cuota</td>
-            <td class="value"><?php echo "$iva*$base"; ?></td>
+            <td class="value"><?php echo $_importe_iva; ?></td>
+        </tr>
+        <tr>
+            <td class="title">Retención</td>
+            <td class="value"><?php echo $retencion ?></td>
         </tr>
         <tr>
             <td  class="title" >TOTAL</td>
-            <td  class="value"><strong><?php echo 'total'; ?>&euro</strong></td>
+            <td  class="value"><strong><?php echo number_format(($total), 2, ',', ' '); ?>&euro;</strong></td>
+        </tr>
+    </table>-->
+    <table class="bordered" style="width:100%">
+        <thead>
+            <tr>
+                <td class="title" style="width:25%">Bases</td>
+                <td class="title" style="width:10%">IVA</td>
+                <td class="title" style="width:25%">Cuota</td>
+                <td class="title" style="width:10%">Retención</td>
+                <td class="title" style="width:25%">Cuota</td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($rsImpuestos AS $impuesto): ?>
+                <tr>
+                    <td><?php echo number_format(($impuesto->bases), 2, ',', '.'); ?>&euro;</td>
+                    <td><?php echo number_format(($impuesto->iva_por), 0) . ' %'; ?></td> 
+                    <td><?php echo number_format(($impuesto->cuota), 2, ',', '.'); ?>&euro;</td> 
+                    <td><?php echo number_format(($impuesto->retencion_por), 0) . ' %'; ?></td> 
+                    <td><?php echo number_format(($impuesto->retencion), 2, ',', '.'); ?>&euro;</td> 
+                </tr>
+
+
+            <?php endforeach; ?>
+
+        </tbody>
+
+    </table>
+    <table>
+        <tr>
+            <td  class="title" >TOTAL</td>
+            <td  class="value"><strong><?php echo number_format(($impuesto->sum_total), 2, ',', ' '); ?>&euro;</strong></td>
         </tr>
     </table>
+
     <p><strong>Forma de pago por: </strong><?php echo "medio_pago"; ?><br/>
         <strong>N&ordm; de cuenta: <?php echo "banco_cuenta"; ?></strong></p>
     <div align="center" style="margin-top:5px">
@@ -206,6 +245,6 @@
         sello
 
     </div>
-   
+
 
 </page>
