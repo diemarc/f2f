@@ -2,6 +2,7 @@
 <script src="/src/js/poblacion_js.js"></script>
 <script src="/src/js/form_js.js"></script>
 <script src="/src/js/factura_js.js"></script>
+<script src="/src/js/servicio_js.js"></script>
 <script>
 
     $(function () {
@@ -12,254 +13,238 @@
         });
     });
 </script>
+<style>
+    .table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td {
+        padding: 2px;
+    }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0; 
+    }
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <section class="content-header bg-success">
-            <h1 class="text-blue">
-                Nueva factura
-            </h1>
-    </section> 
-    <!-- Main content -->
-    <!-- Default box -->
-    <div class="box box-solid">
-        <div class="box-body">
-            <div class="row">
-                <!-- /.box-header -->
-                <!-- form start -->
-                <form action="<?php echo __URL__ . '/fac2fast/factura/save/'; ?>" 
-                      id="formKerana" name="formKerana" method="POST" class="form-horizontal"
-                      accept-charset="utf-8">
-                          <?php echo $kerana_token; ?>
-                    <input type="hidden"name="f_id_empresa" id="f_id_empresa" value="" />
-                    <input type="hidden"name="f_id_tipo" id="f_id_tipo" value="1" />
-                    <input type="hidden"name="f_id_contratante" id="f_id_contratante" 
-                           value="<?php echo $_SESSION['f2f_id_contratante']; ?>" />
 
-                    <div class="box-body">
+    <div class="col-sm-8">
+        <section class="content">
+            <!-- Default box -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title text-blue">
+                        <i class="fa fa-shopping-cart"></i>
+                        <strong>Nueva factura</strong>
+                    </h3>
+                </div>
+                <div class="box-body">
+                    <form action="<?php echo __URL__ . '/fac2fast/factura/save/'; ?>" 
+                          id="formKerana" name="formKerana" method="POST" class="form-horizontal"
+                          accept-charset="utf-8">
+                              <?php echo $kerana_token; ?>
+                        <input type="hidden"name="f_id_empresa" id="f_id_empresa" value="" />
+                        <input type="hidden"name="f_id_tipo" id="f_id_tipo" value="1" />
+                        <input type="hidden"name="f_id_contratante" id="f_id_contratante" 
+                               value="<?php echo $_SESSION['f2f_id_contratante']; ?>" />
 
                         <div class="row">
-                            <div class="col-md-8 col-xs-12">
-                                <div class='form-group form-group-sm' id="div_cliente"> 
-                                    <label for='k_cliente' class='col-sm-2 control-label'>Cliente</label> 
-                                    <div class='col-sm-6'> 
-                                        <div class="input-group date col-sm-8" id="div_cliente">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-building"></i></span>
-                                            <input class="form-control" name="k_cliente" id="k_cliente" 
-                                                   placeholder="busca un cliente" autocomplete="off"
-                                                   type="text">
+                            <div class="col-lg-12">
+                                <div class="box">
+                                    <div class="box-header with-border">
+                                        <div class="box-title">
+                                            <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" 
+                                               class="btn btn-default">Cancelar</a>
+                                            <button type="submit" id="btnGrabarFactura"
+                                                    class="hidden1 btn btn-success">Crear factura</button>
+
                                         </div>
-                                        <!-- cliente livesearch -->
-                                        <div id="live_search_empresa" class="hidden">
-                                            <div class="col-sm-10">
-                                                <div class="box box-success direct-chat direct-chat-success" id="">
-                                                    <div class="box-header with-border">
-                                                        <h3 class="box-title">Cliente encontrado</h3>
+
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <!-- datos clientes -->
+                                    <div class="box-body box-profile">
+                                        <header class="breadcrumb">
+                                            <span class="label label-default">1</span>
+                                            Selecciona un cliente
+                                        </header>
+                                        <div class="row">
+                                            <div class='form-group form-group-sm' id="div_cliente"> 
+                                                <label for='k_cliente' class='col-sm-2 control-label'>Cliente</label> 
+                                                <div class='col-sm-6'> 
+                                                    <div class="input-group date col-sm-8" id="div_cliente">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-building"></i></span>
+                                                        <input class="form-control" name="k_cliente" id="k_cliente" 
+                                                               placeholder="busca un cliente" autocomplete="off"
+                                                               type="text">
                                                     </div>
-                                                    <div class="box-body">
+                                                    <!-- cliente livesearch -->
+                                                    <div id="live_search_empresa" class="hidden">
+                                                        <div class="col-sm-10">
+                                                            <div class="box box-success direct-chat direct-chat-success" id="">
+                                                                <div class="box-header with-border">
+                                                                    <h3 class="box-title">Cliente encontrado</h3>
+                                                                </div>
+                                                                <div class="box-body">
 
-                                                        <div class="direct-chat-text">
-                                                            <table class="table table-bordered">
-                                                                <tbody class="small" id="json_empresas">
+                                                                    <div class="direct-chat-text">
+                                                                        <table class="table table-bordered">
+                                                                            <tbody class="small" id="json_empresas">
 
-                                                                </tbody>
-                                                            </table>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end of div live search -->
-                                        <!-- client not found -->
-                                        <div class="box box-solid direct-chat direct-chat-warning hidden" id="div_cliente_notfound">
-                                            <div class="box-body">
+                                                    <!-- end of div live search -->
+                                                    <!-- client not found -->
+                                                    <div class="box box-solid direct-chat direct-chat-warning hidden" id="div_cliente_notfound">
+                                                        <div class="box-body">
 
-                                                <div class="direct-chat-msg right">
-                                                    <div class="direct-chat-text">
-                                                        Cliente no encontrado,deseas crearlo? 
-                                                        <button type="button" class="btn btn-sm btn-circle btn-primary" data-toggle="modal" 
-                                                                data-remote="<?php echo __URL__ . '/fac2fast/empresa/add/'; ?>" data-target="#myModel">Si</button>
+                                                            <div class="direct-chat-msg right">
+                                                                <div class="direct-chat-text">
+                                                                    Cliente no encontrado,deseas crearlo? 
+                                                                    <button type="button" class="btn btn-sm btn-circle btn-primary" data-toggle="modal" 
+                                                                            data-remote="<?php echo __URL__ . '/fac2fast/empresa/add/'; ?>" data-target="#myModel">Si</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                    <!-- /.client not found -->
+                                                </div> 
+                                            </div> 
                                         </div>
-                                        <!-- /.client not found -->
-                                    </div> 
-                                </div> 
-                                <!-- /cliente -->
-                                <!-- fecha factura -->
-                                <div class='form-group form-group-sm'> 
-                                    <label for='f_fecha_factura' class='col-sm-2 control-label'>Fecha factura</label> 
-                                    <div class='col-sm-6'> 
-                                        <div class="input-group date col-sm-4">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="date" class="form-control pull-right" 
-                                                   name="f_fecha_factura" 
-                                                   id="datepicker">
+                                        <header class="breadcrumb">
+                                            <span class="label label-info">2</span>
+                                            Fecha de la factura
+                                        </header>
+                                        <div class="row">
+                                            <!-- /cliente -->
+                                            <!-- fecha factura -->
+                                            <div class='form-group form-group-sm'> 
+                                                <label for='f_fecha_factura' class='col-sm-2 control-label'>Fecha factura</label> 
+                                                <div class='col-sm-6'> 
+                                                    <div class="input-group date col-sm-4">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="date" class="form-control pull-right" 
+                                                               name="f_fecha_factura" 
+                                                               id="datepicker">
+                                                    </div>
+                                                </div> 
+                                            </div> 
+                                            <!-- forma de pago -->
+                                            <div class='form-group form-group-sm'> 
+                                                <label for='f_id_pago' class='col-sm-2 control-label'>Forma pago</label> 
+                                                <div class='col-sm-4'> 
+                                                    <div class='input-group col-sm-6'> 
+                                                        <select class="form-control" name="f_id_pago" id="f_id_pago" required> 
+                                                            <?php foreach ($rsFormapagos AS $formapago): ?>  
+                                                                <option value="<?php echo $formapago->id_pago; ?>"
+                                                                <?php echo ($formapago->id_pago == 4) ? 'selected' : ''; ?>
+                                                                        > 
+                                                                            <?php echo $formapago->formapago; ?>
+                                                                </option> 
+                                                            <?php endforeach; ?>  
+                                                        </select> 
+
+                                                    </div> 
+                                                </div> 
+                                            </div> 
+                                            <!-- /forma de pago -->
                                         </div>
-                                    </div> 
-                                </div> 
-                                <!-- forma de pago -->
-                                <div class='form-group form-group-sm'> 
-                                    <label for='f_id_pago' class='col-sm-2 control-label'>Forma pago</label> 
-                                    <div class='col-sm-4'> 
-                                        <div class='input-group col-sm-6'> 
-                                            <select class="form-control" name="f_id_pago" id="f_id_pago" required> 
-                                                <?php foreach ($rsFormapagos AS $formapago): ?>  
-                                                    <option value="<?php echo $formapago->id_pago; ?>"
-                                                    <?php echo ($formapago->id_pago == 4) ? 'selected' : ''; ?>
-                                                            > 
-                                                                <?php echo $formapago->formapago; ?>
-                                                    </option> 
-                                                <?php endforeach; ?>  
-                                            </select> 
-
-                                        </div> 
-                                    </div> 
-                                </div> 
-                                <!-- /forma de pago -->
-                            </div>
-                            <!-- total factura -->
-                            <div class="col-md-4 col-xs-12">
-                                <div class="info-box hidden" id="div_info_fac">
-                                    <span class="info-box-icon bg-green"><i class="fa fa-euro"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text"><strong id="span_empresa"></strong></span>
-                                        <span class="info-box-number"> </span>
-
-                                        <div class="progress">
-                                            <div class="progress-bar" style="width: 70%"></div>
-                                        </div>
-                                        <span class="progress-description" >
-
-                                        </span>
                                     </div>
-                                    <!-- /.info-box-content -->
+                                    <!-- /.datos clientes -->
+                                    <!-- servicios facturados -->
+                                    <div class="box-body box-profile">
+                                        <header class="breadcrumb">
+                                            <span class="label label-primary">3</span>
+                                            Agrega servicios a facturar
+
+                                        </header>
+                                        <div class="table-responsive">
+                                            <button type="button" class="btn btn-sm btn-default" 
+                                                    data-toggle="modal" 
+                                                    data-remote="<?php echo __URL__ . '/fac2fast/serviciocontratante/loadContratanteServices'; ?>" 
+                                                    data-target="#myModelLarge"><i class="fa fa-plus"></i> 
+                                                Agregar servicios
+                                            </button>
+                                            <table class="table table-bordered 
+                                                   table-condensed table-hover">
+                                                <thead>
+                                                    <tr class="bg-primary">
+                                                        <th class="col-sm-1">#</th>
+                                                        <th class="col-sm-4">Servicio</th>
+                                                        <th class="col-sm-1">Cantidad</th>
+                                                        <th class="col-sm-2">Precio</th>
+                                                        <th class="col-sm-1">IVA</th>
+                                                        <th class="col-sm-1">Retenci&oacute;n</th>
+                                                        <th class="col-sm-2">Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="div_servicios_factura">
+                                                    <!-- json content -->
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                    <!-- /.servicios facturados -->
                                 </div>
                             </div>
-                            <!-- /total factura -->
                         </div>
-                        <div class="hidden box" id="div_conceptos">
-                            <div class="box-header">
-                                <h2 class="box-title">
-                                    <button type="button" class="btn btn-xs btn-success" data-toggle="modal" 
-                                            data-remote="<?php echo __URL__ . '/fac2fast/servicio/add/'; ?>" data-target="#myModel"><i class="fa fa-plus"></i> </button>
+                        <!-- /.box-body -->
+                    </form>
+                </div>
+                <!-- /.box -->
 
-                                    Servicios</h2>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <table class="table table-bordered table-striped table-condensed">
-                                    <thead>
-                                        <tr class="bg-success">
-                                            <th>Servicio</th>
-                                            <th style="width: 180px">Base imponible</th>
-                                            <th style="width: 100px">Cantidad</th>
-                                            <th style="width: 180px">IVA</th>
-                                            <th style="width: 180px">Retenci&oacute;n</th>
-                                            <th style="width: 180px">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($rsServicios AS $servicio): ?>
-                                        <input type="text" name="f_concepto[<?php echo $servicio->id_servicio; ?>]" value="<?php echo $servicio->id_servicio; ?>"/>
-                                        <tr class="">
-                                            <td>
-                                                <div class='col-sm-12 text-success'> 
-                                                    <i class="fa fa-comment-o" title="Click para agregar detalles del servicio"
-                                                       onclick="$('#person_<?php echo $servicio->id_servicio; ?>').removeClass('hidden');"></i>
-                                                       <?php echo $servicio->servicio; ?>
-                                                </div> 
-                                                <div class='col-sm-12 hidden' id="person_<?php echo $servicio->id_servicio; ?>"> 
-                                                    <div class="input-group has-success">
-                                                        <div class="input-group-addon">
-                                                            <i class="fa fa-close" onclick="
-                                                                        $('#person_<?php echo $servicio->id_servicio; ?>').addClass('hidden');
-                                                                        $('#f_concepto_personalizacion_<?php echo $servicio->id_servicio; ?>').val('');
-                                                               "></i>
-                                                        </div>
-                                                        <textarea class="form-control form-control-sm" rows="1" id="f_concepto_personalizacion_<?php echo $servicio->id_servicio; ?>"
-                                                                  name="f_concepto_personalizacion[<?php echo $servicio->id_servicio; ?>]"></textarea>
-                                                    </div>
-                                                </div> 
-                                            </td>
-                                            <td>
-                                                <div class='col-sm-12'> 
-                                                    <div class="input-group">
-                                                        <div class="input-group-addon">
-                                                            <i class="fa fa-euro"></i>
-                                                        </div>
-                                                        <input type="text" class="form-control form-control-sm"
-                                                               name="f_concepto_precio[<?php echo $servicio->id_servicio; ?>]"
-                                                               value="<?php echo $servicio->precio; ?>"/>
-                                                    </div>
-                                                </div> 
-                                            </td>
-                                            <td>
-                                                <div class='col-sm-12'> 
-                                                    <input type="number" class="form-control pull-right"
-                                                           name="f_concepto_cantidad[<?php echo $servicio->id_servicio; ?>]"
-                                                           value="1"/>
-                                                </div> 
-
-                                            </td>
-                                            <td>
-                                                <div class='col-sm-12'> 
-                                                    <input type="number" class="form-control pull-right"
-                                                           name="f_concepto_iva[<?php echo $servicio->id_servicio; ?>]"
-                                                           value="<?php echo $rsIva->porcentaje; ?>"/>
-                                                </div> 
-
-                                            </td>
-                                            <td>
-                                                <div class='col-sm-8'> 
-
-                                                    <input type="number" class="form-control pull-right"
-                                                           name="f_concepto_retencion[<?php echo $servicio->id_servicio; ?>]"
-                                                           value="<?php echo $rsRetencion->porcentaje; ?>"/>
-                                                </div> 
-
-                                            </td>
-                                            <td style="">
-                                                <div class='col-sm-12'> 
-                                                    <div class="input-group">
-                                                        <div class="input-group-addon">
-                                                            <i class="fa fa-euro"></i>
-                                                        </div>
-                                                        <input type="text" class="form-control pull-right"
-                                                               value="<?php echo ($servicio->precio); ?>"/>
-                                                    </div>
-                                                </div> 
-
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                    </tbody>
-
-                                </table>
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer clearfix">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer">
-                        <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" 
-                           class="btn btn-default">Cancelar</a>
-                        <button type="submit" id="btnGrabarFactura"
-                                class="hidden btn btn-info">Crear factura</button>
-                    </div>
-                    <!-- /.box-footer -->
-                </form>
-            </div>
-        </div>
-        <!-- /.box-body -->
+        </section>
     </div>
-    <!-- /.box -->
+    <div class="col-sm-4">
+        <section class="content hidden" id="section_cliente">
+            <div class="box box-default box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title" id="j_empresa"></h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <!-- datos clientes -->
+                    <div class="box-body box-profile">
+                        <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item" id="j_empresa1">
+                                <b>Raz&oacute;n social</b> <a class="pull-right"></a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>CIF</b> <a class="pull-right"></a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Direcci&oacute;n</b> <a class="pull-right"></a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Localidad</b> <a class="pull-right"></a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Tel&eacute;fono</b> <a class="pull-right"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </section>
+    </div>
 
 </div>
 

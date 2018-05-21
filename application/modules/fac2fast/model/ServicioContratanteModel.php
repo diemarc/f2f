@@ -47,9 +47,22 @@ class ServicioContratanteModel extends tables\ServicioContratanteTable
         $this->objContratanteModel = new \application\modules\base\model\ContratanteModel();
         $this->objServicioModel = new \application\modules\fac2fast\model\ServicioModel();
         $this->set_id_contratante($_SESSION['f2f_id_contratante']);
+           
         
     }
 
+//    /**
+//     * -------------------------------------------------------------------------
+//     * Get contratante services in json format
+//     * -------------------------------------------------------------------------
+//     */
+//    public function getContratanteServicesJson(){
+//        
+//        return $this->getQueryInJson();
+//        
+//    }
+    
+    
     /**
      * -------------------------------------------------------------------------
      * Save post data
@@ -63,4 +76,23 @@ class ServicioContratanteModel extends tables\ServicioContratanteTable
         return parent::saveServicioContratante();
     }
 
+    /**
+     * -------------------------------------------------------------------------
+     * Process the new service for a contratante
+     * -------------------------------------------------------------------------
+     */
+    public function processNewServiceContratante(){
+        
+        // first create new service
+        $this->objServicioModel->savePost();
+        
+        $this->set_id_servicio($this->objServicioModel->_id_value);
+        $this->set_id_contratante($_SESSION['f2f_id_contratante']);
+        $this->set_is_default();
+        return parent::saveServicioContratante();
+        
+    }
+    
+    
+    
 }

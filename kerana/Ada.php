@@ -202,17 +202,64 @@ abstract class Ada
      * -------------------------------------------------------------------------
      * @param array $conditions 
      */
-    public function _setConditions($conditions,$operator = '=')
+    public function _setConditions($conditions, $operator = '=')
     {
         if (is_array($conditions)):
             foreach ($conditions AS $field => $search) :
-                $operator_to_use = ($operator == '=')? ' = :'.$field : ' LIKE CONCAT(:'.$field.',"%")';
+                $operator_to_use = ($operator == '=') ? ' = :' . $field : ' LIKE CONCAT(:' . $field . ',"%")';
                 $this->_query .= ' AND ' . $field . $operator_to_use;
                 $this->_binds[':' . $field] = $search;
             endforeach;
         endif;
     }
 
+    /**
+     * -------------------------------------------------------------------------
+     * Getquery result in json format
+     * -------------------------------------------------------------------------
+     */
+    public function getAllInJson()
+    {
+        $json_response = [];
+
+        $rsResults = $this->getAll();
+        
+        if ($rsResults) {
+
+            $json_response['exists'] = true;
+            foreach ($rsResults AS $result):
+                $json_response['response'][] = $result;
+            endforeach;
+        }
+        else {
+            $json_response['exists'] = false;
+        }
+        echo json_encode($json_response);
+    }
+
+    /**
+     * -------------------------------------------------------------------------
+     * Get one record in json notation
+     * -------------------------------------------------------------------------
+     */
+    public function getRecordInJson(){
+        
+        $json_response = [];
+        
+        $rsRecord = $this->getRecord(false);
+        if($rsRecord){
+            
+            $json_response['exists'] = true;
+            $json_response['record'] = $rsRecord;
+        }
+        else{
+            $json_response['exists'] = false;
+        }
+        
+        echo json_encode($json_response);
+        
+    }
+    
     /*
       |=========================================================================
       | SELECTS
@@ -245,7 +292,7 @@ abstract class Ada
      * Prepara una consulta y devuelve el resultado
      * -------------------------------------------------------------------------
      * @param type $get_mode
-     * @return boolean 
+     * @return boolean return
      */
     public function getQuery($get_mode = 'all')
     {
@@ -262,10 +309,10 @@ abstract class Ada
                 case 'one':
                     $result = $rs->fetch(\PDO::FETCH_OBJ);
                     return $result;
-                    
+
                 case 'json':
                     $result = $rs->fetchAll();
-                    return json_encode($result);
+                    return $this->parseQueryToJson($result);
 
                 case 'onecheck':
                     $result = $rs->fetch(\PDO::FETCH_OBJ);
@@ -307,6 +354,7 @@ abstract class Ada
         $this->_setConditions($conditions);
         return $this->getQuery($mode);
     }
+
     /**
      * -------------------------------------------------------------------------
      * Find a rows from a $_query, or from  base table likes querys
@@ -331,10 +379,9 @@ abstract class Ada
                     . ' WHERE 1=1 ';
         }
         //  parse each conditions
-        $this->_setConditions($conditions,'like');
+        $this->_setConditions($conditions, 'like');
         return $this->getQuery($mode);
     }
-    
 
     /**
      * -------------------------------------------------------------------------
@@ -344,7 +391,7 @@ abstract class Ada
      * un kerana::exception
      * @return type
      */
-    public function getRecord($check = true,$mode = 'one')
+    public function getRecord($check = true, $mode = 'one')
     {
         if (isset($this->_id_value) AND ( !empty($this->_id_value))) {
 
@@ -356,8 +403,8 @@ abstract class Ada
                 $this->_query = ' SELECT A.* FROM (' . $this->_query . ') A '
                         . ' WHERE A.' . $this->table_id . ' = :id_key';
             }
-            
-            ($mode == 'one') ? $this->_query.' LIMIT 1' : ''; 
+
+            ($mode == 'one') ? $this->_query . ' LIMIT 1' : '';
 
             $this->_binds[':id_key'] = $this->_id_value;
             $result = $this->getQuery($mode);
@@ -383,15 +430,21 @@ abstract class Ada
         $order = (empty($order_by)) ? $this->table_id . ' DESC ' : $order_by;
         if (!isset($this->_query) AND empty($this->_query)) {
             $this->_query = ' SELECT * FROM ' . $this->table_name
-                    . ' WHERE ' . $this->table_id . ' IS NOT NULL '
-                    . ' ORDER BY :order DESC ';
-        }else{
-             $this->_query = ' SELECT A.* FROM (' . $this->_query . ') A '
-                        . ' WHERE A.' . $this->table_id . ' IS NOT NULL'
-                     . ' ORDER BY :order DESC ';
+                    . ' WHERE ' . $this->table_id . ' IS NOT NULL ';
+            // . ' ORDER BY :order DESC ';
+        } else {
+            $this->_query = ' SELECT A.* FROM (' . $this->_query . ') A '
+                    . ' WHERE A.' . $this->table_id . ' IS NOT NULL';
+            //. ' ORDER BY :order DESC ';
         }
 
-        $this->_binds[':order'] = $order;
+        if (!empty($order_by)) {
+
+            $this->_query .= ' ORDER BY :order DESC ';
+            $this->_binds[':order'] = $order;
+        }
+
+
         return $this->getQuery();
     }
 

@@ -46,11 +46,15 @@ abstract class ServicioTable extends \kerana\Ada
             $_descripcion,
             /** @var decimal(10,2), $precio  */
             $_precio,
+            /** @var decimal(10,2), $precio  */
+            $_iva_servicio,
+            /** @var decimal(10,2), $precio  */
+            $_retencion_servicio,
             /** @var time(tamp), $created_at  */
             $_created_at,
             /** @var varchar(45), $created_by  */
             $_created_by,
-            /** Master query for servicio */
+            /** Master query for servicio */ 
             $_query_servicio;
     public
     /** @array data matching attributes with table field */
@@ -66,8 +70,10 @@ abstract class ServicioTable extends \kerana\Ada
             'id_servicio' => $this->_id_servicio,
         ];
 
-        $this->_query = ' SELECT A.id_servicio,A.id_subclase,A.servicio,'
-                . ' A.descripcion,A.precio,A.created_at,A.created_by,B.subclase,B2.clase'
+        $this->_query = ' SELECT A.id_servicio,A.id_subclase,A.servicio,A.iva_servicio,'
+                . ' A.descripcion,A.precio,A.created_at,A.created_by,A.retencion_servicio,'
+                . ' B.subclase,B2.clase,'
+                . ' (A.precio + (A.precio * A.iva_servicio) - (A.precio * A.retencion_servicio)) AS total_serv '
                 . ' FROM f_servicios A '
                 . ' INNER JOIN aux_subclases B ON (B.id_subclase = A.id_subclase) '
                 . ' INNER JOIN aux_clases B2 ON (B2.id_clases = B.id_clases) '
@@ -100,10 +106,12 @@ abstract class ServicioTable extends \kerana\Ada
     {
 
         $data_insert = [
-            'id_subclase' => $this->_id_subclase,
+            'id_subclase' => 1,
             'servicio' => $this->_servicio,
             'descripcion' => $this->_descripcion,
             'precio' => $this->_precio,
+            'iva_servicio' => $this->_iva_servicio,
+            'retencion_servicio' => $this->_retencion_servicio,
             'created_at' => $this->_created_at,
             'created_by' => $this->_created_by,
         ];
@@ -125,7 +133,8 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_id_servicio($value = "")
     {
-        $this->_id_servicio = \helpers\Validator::valInt('f_id_servicio', $value, TRUE);
+        $this->_id_servicio = \helpers\Validator::valInt('f_id_servicio', $value, true);
+        $this->_id_value = $this->_id_servicio;
     }
 
     /**
@@ -136,7 +145,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_id_subclase($value = "")
     {
-        $this->_id_subclase = \helpers\Validator::valInt('f_id_subclase', $value, TRUE);
+        $this->_id_subclase = \helpers\Validator::valInt('f_id_subclase', $value, false);
     }
 
     /**
@@ -147,7 +156,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_servicio($value = "")
     {
-        $this->_servicio = \helpers\Validator::valVarchar('f_servicio', $value, FALSE);
+        $this->_servicio = \helpers\Validator::valVarchar('f_servicio', $value, false);
     }
 
     /**
@@ -158,7 +167,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_descripcion($value = "")
     {
-        $this->_descripcion = \helpers\Validator::valText('f_descripcion', $value, FALSE);
+        $this->_descripcion = \helpers\Validator::valText('f_descripcion', $value, false);
     }
 
     /**
@@ -169,7 +178,29 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_precio($value = "")
     {
-        $this->_precio = \helpers\Validator::valDecimal('f_precio', $value, TRUE);
+        $this->_precio = \helpers\Validator::valDecimal('f_precio', $value, true);
+    }
+    
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for iva servicio
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the iva value 
+     */
+    public function set_iva_servicio($value = "")
+    {
+        $this->_iva_servicio = \helpers\Validator::valDecimal('f_iva_servicio', $value, false);
+    }
+    
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for retencion servicio
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the iva value 
+     */
+    public function set_retencion_servicio($value = "")
+    {
+        $this->_retencion_servicio = \helpers\Validator::valDecimal('f_retencion_servicio', $value, false);
     }
 
     /**
@@ -180,7 +211,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_created_at($value = "")
     {
-        $this->_created_at = \helpers\Validator::valTime('f_created_at', $value, FALSE);
+        $this->_created_at = \helpers\Validator::valTime('f_created_at', $value, false);
     }
 
     /**
@@ -191,7 +222,7 @@ abstract class ServicioTable extends \kerana\Ada
      */
     public function set_created_by($value = "")
     {
-        $this->_created_by = \helpers\Validator::valVarchar('f_created_by', $value, FALSE);
+        $this->_created_by = \helpers\Validator::valVarchar('f_created_by', $value, false);
     }
 
     /*
@@ -254,6 +285,27 @@ abstract class ServicioTable extends \kerana\Ada
     public function get_precio()
     {
         return (isset($this->_precio)) ? $this->_precio : null;
+    }
+    
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for iva_servicio
+     * ------------------------------------------------------------------------- 
+     * @return decimal $value  
+     */
+    public function get_iva_servicio()
+    {
+        return (isset($this->_iva_servicio)) ? $this->_iva_servicio : null;
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for retencion_servicio
+     * ------------------------------------------------------------------------- 
+     * @return decimal $value  
+     */
+    public function get_retencion_servicio()
+    {
+        return (isset($this->_retencion_servicio)) ? $this->_retencion_servicio : null;
     }
 
     /**
