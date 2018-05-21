@@ -130,35 +130,32 @@
     </table>
     <h5>Descripci&oacute;n del servicio</h5><hr/>
 
-    <table class="box-body box-profile">
+    <table style="width:95%">
         <thead>
-            <tr class="">
-                <th style="">Servicio</th>
-                <th style="">Precio</th>
-                <th style="">Cantidad</th>
-                <th style="">IVA</th>
-                <th style="">Retenci&oacute;n</th>
-                <th style="">Total</th>
+            <tr>
+                <th style="width:20%">Servicio</th>
+                <th style="width:30%">Especificaciones</th>
+                <th style="width:15%">Precio</th>
+                <th style="width:15%">Cantidad</th>
+                <th style="width:15%">Total</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($rsFacturasServicios AS $servicio): ?>
                 <tr class="">
-                    <td style="text-align: left">
+                    <td style="text-align: left;width:20%">
                         <?php echo $servicio->servicio; ?>
                     </td>
-                    <td style="text-align: right">
+                    <td  class="value" style="text-align: left;width:20%">
+                        <?php echo $servicio->personalizacion_servicio; ?>
+                    </td>
+                    <td style="text-align: right;width:20%">
                         <?php echo number_format(($servicio->precio), 2, ',', ' '); ?>&euro;
                     </td>
-                    <td style="text-align: right">
+                    <td style="text-align: right;width:20%">
                         <?php echo number_format(($servicio->cantidad), 2, ',', ' '); ?>
                     </td>
-                    <td style="text-align: right">
-                        <?php echo $servicio->iva; ?>
-                    </td>
-                    <td style="text-align: right">
-                        <?php echo $servicio->retencion; ?>
-                    </td>
+
                     <td style="text-align: right">
                         <?php echo number_format((($servicio->total)), 2, ',', ' '); ?>&euro;
                     </td>
@@ -173,7 +170,7 @@
     <br/><br/>
     <table cellspacing="0" cellpadding="0" border="0" width="80%">
         <tr>
-            <td><strong>IMPORTE: </strong></td>
+            <td><strong>Total Factura: </strong></td>
             <td><?php echo number_format(($total), 2, ',', ' '); ?>&euro;
             </td>
         </tr>
@@ -205,24 +202,24 @@
             <td  class="value"><strong><?php echo number_format(($total), 2, ',', ' '); ?>&euro;</strong></td>
         </tr>
     </table>-->
-    <table class="bordered" style="width:100%">
+    <table class="bordered" style="width:95%">
         <thead>
             <tr>
-                <td class="title" style="width:25%">Bases</td>
-                <td class="title" style="width:10%">IVA</td>
-                <td class="title" style="width:25%">Cuota</td>
-                <td class="title" style="width:10%">Retención</td>
-                <td class="title" style="width:25%">Cuota</td>
+                <td class="title" style="width:25%; text-align: center">Bases</td>
+                <td class="title" style="width:10%; text-align: center">IVA</td>
+                <td class="title" style="width:25%; text-align: center">Cuota</td>
+                <td class="title" style="width:10%; text-align: center">Retención</td>
+                <td class="title" style="width:25%; text-align: center">Cuota</td>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($rsImpuestos AS $impuesto): ?>
                 <tr>
-                    <td><?php echo number_format(($impuesto->bases), 2, ',', '.'); ?>&euro;</td>
-                    <td><?php echo number_format(($impuesto->iva_por), 0) . ' %'; ?></td> 
-                    <td><?php echo number_format(($impuesto->cuota), 2, ',', '.'); ?>&euro;</td> 
-                    <td><?php echo number_format(($impuesto->retencion_por), 0) . ' %'; ?></td> 
-                    <td><?php echo number_format(($impuesto->retencion), 2, ',', '.'); ?>&euro;</td> 
+                    <td style="text-align: right"><?php echo number_format(($impuesto->bases), 2, ',', '.'); ?>&euro;</td>
+                    <td style="text-align: right"><?php echo number_format(($impuesto->iva_por), 0) . ' %'; ?></td> 
+                    <td style="text-align: right"><?php echo number_format(($impuesto->cuota), 2, ',', '.'); ?>&euro;</td> 
+                    <td style="text-align: right"><?php echo number_format(($impuesto->retencion_por), 0) . ' %'; ?></td> 
+                    <td style="text-align: right"><?php echo number_format(($impuesto->retencion), 2, ',', '.'); ?>&euro;</td> 
                 </tr>
 
 
@@ -231,12 +228,12 @@
         </tbody>
 
     </table>
-    <table>
+<!--    <table>
         <tr>
             <td  class="title" >TOTAL</td>
             <td  class="value"><strong><?php echo number_format(($impuesto->sum_total), 2, ',', ' '); ?>&euro;</strong></td>
         </tr>
-    </table>
+    </table>-->
 
     <p><strong>Forma de pago por: </strong><?php echo "medio_pago"; ?><br/>
         <strong>N&ordm; de cuenta: <?php echo "banco_cuenta"; ?></strong></p>
