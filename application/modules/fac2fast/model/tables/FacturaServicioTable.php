@@ -72,6 +72,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
         ];
 
         $this->_query = ' SELECT A.facturas_id_facturas,A.f_servicios_id_servicio,A.cantidad,A.precio,'
+                . ' (A.cantidad*A.precio) AS base, '
                 . ' A.iva, A.retencion,A.total,A.personalizacion_servicio,'
                 . ' B.id_pago,B.fecha_factura,B.num_factura,B.abono,B.id_tipo,B.created_at AS created_at_B,'
                 . ' B.created_by As created_by_B,'
@@ -88,6 +89,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
       |-------------------------------------------------------------------------
       |
      */
+    
 
 
 
@@ -342,5 +344,28 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         return (isset($this->_personalizacion)) ? $this->_personalizacion : 0.0;
     }
-
+    
+    /**
+     * -------------------------------------------------------------------------
+     * para sacar los impuesto de una factura
+     * -------------------------------------------------------------------------
+     * @param type $facturas_id_factura
+     * 
+     */
+    
+    public function queryImpuestosFactura()
+    {
+        $this->_query = 'SELECT SUM(precio * cantidad) AS bases, '
+                . ' SUM(precio * cantidad* iva) AS cuota, '
+                . ' SUM(precio * cantidad * retencion) AS retencion,'
+                . ' facturas_id_facturas,(iva * 100) AS iva_por ,'
+                . ' (retencion * 100) AS retencion_por, '
+                . ' SUM(((precio*cantidad)*(1+iva))-((precio*cantidad*retencion))) AS sum_total'
+                . ' FROM factufacil.f_facturas_servicios '
+                . ' WHERE facturas_id_facturas = :id_facturas'
+                . ' GROUP BY iva ';
+        $this->_binds = [
+            'id_facturas'=>$this->_id_value
+        ];
+    }
 }
