@@ -134,10 +134,10 @@
         <thead>
             <tr>
                 <th style="width:20%">Servicio</th>
-                <th style="width:30%">Especificaciones</th>
-                <th style="width:15%">Precio</th>
-                <th style="width:15%">Cantidad</th>
-                <th style="width:15%">Total</th>
+                <th style="width:35%">Especificaciones</th>
+                <th style="text-align: right;width:15%">Precio</th>
+                <th style="text-align: right;width:10%">Cantidad</th>
+                <th style="text-align: right;width:15%">Total</th>
             </tr>
         </thead>
         <tbody>
@@ -146,17 +146,17 @@
                     <td style="text-align: left;width:20%">
                         <?php echo $servicio->servicio; ?>
                     </td>
-                    <td  class="value" style="text-align: left;width:20%">
+                    <td  class="value" style="text-align: left;width:30%">
                         <?php echo $servicio->personalizacion_servicio; ?>
                     </td>
-                    <td style="text-align: right;width:20%">
+                    <td style="text-align: right;width:15%">
                         <?php echo number_format(($servicio->precio), 2, ',', ' '); ?>&euro;
                     </td>
-                    <td style="text-align: right;width:20%">
+                    <td style="text-align: right;width:10%">
                         <?php echo number_format(($servicio->cantidad), 2, ',', ' '); ?>
                     </td>
 
-                    <td style="text-align: right">
+                    <td style="text-align: right; width: 15%">
                         <?php echo number_format((($servicio->total)), 2, ',', ' '); ?>&euro;
                     </td>
                 </tr>
@@ -235,8 +235,18 @@
         </tr>
     </table>-->
 
-    <p><strong>Forma de pago por: </strong><?php echo "medio_pago"; ?><br/>
-        <strong>N&ordm; de cuenta: <?php echo "banco_cuenta"; ?></strong></p>
+    <p><strong>Forma de pago por: </strong><?php echo $rsFactura->formapago; ?><br/>
+        <strong>N&ordm; de cuenta: <?php
+            if ($rsFactura->formapago == 'Transferecia') {
+                
+                echo $rsFactura->cta_bancaria_contratante;
+                
+            } elseif ($rsFactura->formapago == 'Domiciliación') {
+
+                echo $rsFactura->cta_bancaria;
+            }
+            ?>
+        </strong></p>
     <div align="center" style="margin-top:5px">
 
         sello
