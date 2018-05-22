@@ -63,11 +63,7 @@
     <page_header>
         <table class="table1" width="" align="left">
             <tr>
-                <td style="width: 20%; color: #444444;">
-                    <img style="width: 100%;" src="<?php echo __URL__ . '/data/logos/seva/ipr_small.jpg'; ?>"
-                         alt="Logo"><br>
-                    <!--path_logp-->
-                </td>
+               
 
                 <td width="90%"><p>
                         <strong><?php echo $rsFactura->razon_social_contratante ?>o</strong>.<br />
@@ -79,6 +75,11 @@
                         Email: <?php echo $rsFactura->email_contratante; ?><br/>
                     </p>
 
+                </td>
+                 <td style="width: 20%; color: #444444;">
+                    <img style="width: 100%;" src="<?php echo __URL__ . '/data/logos/'.$rsFactura->path_logo; ?>"
+                         alt="Logo"><br>
+                    <!--path_logp-->
                 </td>
             </tr>
         </table>
@@ -175,33 +176,7 @@
             </td>
         </tr>
     </table>
-<!--    <table class="bordered" style="width:95%">
-        <tr>
-            <td class="title" style="width:20%">Base imponible</td>
-            <td class="value" style="width:75%">
-                <strong><?php echo number_format($base, 2, ',', ' '); ?>&euro;</strong>
-            </td>
-        </tr>
-        <tr>
-                        /**esta sumando los ivas
-                         es decir 0.21-0.21  *//
-            <td class="title">% IVA</td>
-            <td class="value"><strong><?php echo "$iva"; ?></strong></td>
 
-        </tr>
-        <tr>
-            <td class="title">Cuota</td>
-            <td class="value"><?php echo $_importe_iva; ?></td>
-        </tr>
-        <tr>
-            <td class="title">Retención</td>
-            <td class="value"><?php echo $retencion ?></td>
-        </tr>
-        <tr>
-            <td  class="title" >TOTAL</td>
-            <td  class="value"><strong><?php echo number_format(($total), 2, ',', ' '); ?>&euro;</strong></td>
-        </tr>
-    </table>-->
     <table class="bordered" style="width:95%">
         <thead>
             <tr>
@@ -228,22 +203,17 @@
         </tbody>
 
     </table>
-<!--    <table>
-        <tr>
-            <td  class="title" >TOTAL</td>
-            <td  class="value"><strong><?php echo number_format(($impuesto->sum_total), 2, ',', ' '); ?>&euro;</strong></td>
-        </tr>
-    </table>-->
+
 
     <p><strong>Forma de pago por: </strong><?php echo $rsFactura->formapago; ?><br/>
-        <strong>N&ordm; de cuenta: <?php
-            if ($rsFactura->formapago == 'Transferecia') {
+        <strong> <?php
+            if ($rsFactura->id_pago == '2') {
                 
-                echo $rsFactura->cta_bancaria_contratante;
+                echo "N&ordm; de cuenta:".$rsFactura->cta_bancaria_contratante;
                 
-            } elseif ($rsFactura->formapago == 'Domiciliación') {
+            } elseif ($rsFactura->id_pago == '3') {
 
-                echo $rsFactura->cta_bancaria;
+                echo "N&ordm; de cuenta:".$rsFactura->cta_bancaria;
             }
             ?>
         </strong></p>
