@@ -149,7 +149,8 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_id_empresa($value = "")
     {
-        $this->_id_empresa = \helpers\Validator::valInt('f_id_empresa', $value, TRUE);
+        $this->_id_empresa = \helpers\Validator::valInt('f_id_empresa', $value, true);
+        $this->_id_value = $this->_id_empresa;
     }
 
     /**
@@ -160,7 +161,7 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_cif($value = "")
     {
-        $this->_cif = \helpers\Validator::valVarchar('f_cif', $value, TRUE);
+        $this->_cif = \helpers\Validator::valVarchar('f_cif', $value, true);
     }
 
     /**
@@ -194,7 +195,7 @@ abstract class EmpresaTable extends \kerana\Ada
      */
     public function set_id_poblacion($value = "")
     {
-        $this->_id_poblacion = \helpers\Validator::valInt('f_id_poblacion', $value, TRUE);
+        $this->_id_poblacion = \helpers\Validator::valInt('f_id_poblacion', $value, true);
     }
 
     /**
