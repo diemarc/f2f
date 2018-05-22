@@ -72,6 +72,8 @@ function assignClient(id_empresa) {
             // show cliente rightside
             $('#section_cliente').removeClass('hidden');
             $('#div_cliente').addClass('has-success');
+            $('#i_client').removeClass('fa fa-search');
+            $('#i_client').addClass('fa fa-check');
             // hide seach result cliente
             $('#live_search_empresa').addClass('hidden');
             
