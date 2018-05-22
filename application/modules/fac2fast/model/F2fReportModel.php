@@ -69,9 +69,9 @@ class F2fReportModel extends FacturaServicioModel
 
         // get the factura details 
         $params_to_pdf = $this->getFacturaDetails();
-        
+      
         // example to pass another param to PDF helper
-        $params_to_pdf['titulo'] = "otro contenido";
+        $params_to_pdf['rsImpuestos'] = $this->getImpuestosFactura();
         
         // set te params to render in template pdf.
         $this->_pdf->setParams($params_to_pdf);

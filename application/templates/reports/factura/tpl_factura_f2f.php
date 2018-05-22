@@ -49,21 +49,25 @@
         font-size: 8px;
     }
 
+    /*    .footer-top{
+            background-color:transparent;
+    }
+     
+    .footer-container #footer h4{
+            color:red!important;
+    }*/
+
 </style>
 <page backtop="35mm" backbottom="2mm" backleft="20mm" backright="10mm" style="font-size: 13px"
       footer="date;time;page">
     <page_header>
         <table class="table1" width="" align="left">
             <tr>
-                <td style="width: 20%; color: #444444;">
-                    <img style="width: 100%;" src="<?php echo __URL__ . '/data/logos/seva/ipr_small.jpg'; ?>"
-                         alt="Logo"><br>
-                    <!--path_logp-->
-                </td>
+               
 
                 <td width="90%"><p>
                         <strong><?php echo $rsFactura->razon_social_contratante ?>o</strong>.<br />
-                        NIF:<?php echo $rsFactura->cif ?> <br />
+                        NIF:<?php echo $rsFactura->cif_contratante ?> <br />
                         <?php echo $rsFactura->direccion_contratante; ?> <br />
                         <?php echo $rsFactura->poblacion_contratante; ?> <br />
                         <?php echo $rsFactura->provincia_contratante; ?> <br />
@@ -71,6 +75,11 @@
                         Email: <?php echo $rsFactura->email_contratante; ?><br/>
                     </p>
 
+                </td>
+                 <td style="width: 20%; color: #444444;">
+                    <img style="width: 100%;" src="<?php echo __URL__ . '/data/logos/'.$rsFactura->path_logo; ?>"
+                         alt="Logo"><br>
+                    <!--path_logp-->
                 </td>
             </tr>
         </table>
@@ -110,8 +119,10 @@
     <br/><br/>
     <table cellspacing="0" cellpadding="0" border="0" width="80%">
         <tr>
+
             <td>Fecha de factura:</td>
             <td><strong><?php echo $rsFactura->fecha_factura; ?></strong></td>
+            <!--<td><strong><?php echo date_format($rsFactura->fecha_factura, 'd/m/Y H:i:s'); ?></strong></td>-->
         </tr>
         <tr>
             <td>Factura</td>
@@ -120,75 +131,92 @@
     </table>
     <h5>Descripci&oacute;n del servicio</h5><hr/>
 
-    <table cellspacing="0" style="width: 100%; border: solid 1px black; background: #E7E7E7; text-align: center; font-size: 10pt;">
+    <table style="width:95%">
         <thead>
             <tr>
-                <th style="width: 12%">Produit</th>
-                <th style="width: 52%">Désignation</th>
-                <th style="width: 13%">Prix Unitaire</th>
-                <th style="width: 10%">Calid&aacute;d</th>
-                <th style="width: 13%">Prix Net</th>
+                <th style="width:20%">Servicio</th>
+                <th style="width:35%">Especificaciones</th>
+                <th style="text-align: right;width:15%">Precio</th>
+                <th style="text-align: right;width:10%">Cantidad</th>
+                <th style="text-align: right;width:15%">Total</th>
             </tr>
         </thead>
         <tbody>
-            <?php
-            $nb = rand(5, 11);
-            $produits = array();
-            $total = 0;
-            for ($k = 0; $k < $nb; $k++) {
-                $num = rand(100000, 999999);
-                $nom = "le produit n°" . rand(1, 100);
-                $qua = rand(1, 20);
-                $prix = rand(100, 9999) / 100.;
-                $total+= $prix * $qua;
-                $produits[] = array($num, $nom, $qua, $prix, rand(0, $qua));
-                ?>
+            <?php foreach ($rsFacturasServicios AS $servicio): ?>
+                <tr class="">
+                    <td style="text-align: left;width:20%">
+                        <?php echo $servicio->servicio; ?>
+                    </td>
+                    <td  class="value" style="text-align: left;width:30%">
+                        <?php echo $servicio->personalizacion_servicio; ?>
+                    </td>
+                    <td style="text-align: right;width:15%">
+                        <?php echo number_format(($servicio->precio), 2, ',', ' '); ?>&euro;
+                    </td>
+                    <td style="text-align: right;width:10%">
+                        <?php echo number_format(($servicio->cantidad), 2, ',', ' '); ?>
+                    </td>
 
-                <tr style="background-color: #fff">
-                    <td style="width: 12%; text-align: left ;border: solid 1px"><?php echo $num; ?></td>
-                    <td style="width: 52%; text-align: left;border: solid 1px"><?php echo $nom; ?></td>
-                    <td style="width: 13%; text-align: right;border: solid 1px"><?php echo number_format($prix, 2, ',', ' '); ?> &euro;</td>
-                    <td style="width: 10%;border: solid 1px"><?php echo $qua; ?></td>
-                    <td style="width: 13%; text-align: right;border: solid 1px"><?php echo number_format($prix * $qua, 2, ',', ' '); ?> &euro;</td>
+                    <td style="text-align: right; width: 15%">
+                        <?php echo number_format((($servicio->total)), 2, ',', ' '); ?>&euro;
+                    </td>
                 </tr>
-                <?php
-            }
-            ?>
+            <?php endforeach; ?>
+        </tbody>  
 
-        </tbody>
+
     </table>
 
 
     <br/><br/>
     <table cellspacing="0" cellpadding="0" border="0" width="80%">
         <tr>
-            <td><strong>IMPORTE: </strong></td>
-            <td><?php echo "total"; ?> &euro;
+            <td><strong>Total Factura: </strong></td>
+            <td><?php echo number_format(($total), 2, ',', ' '); ?>&euro;
             </td>
         </tr>
     </table>
+
     <table class="bordered" style="width:95%">
-        <tr>
-            <td class="title" style="width:20%">Base imponible</td>
-            <td class="value" style="width:75%">
-                <strong><?php echo "base"; ?></strong>
-            </td>
-        </tr>
-        <tr>
-            <td class="title">%IVA</td>
-            <td class="value"><strong><?php echo "iva"; ?></strong></td>
-        </tr>
-        <tr>
-            <td class="title">Cuota</td>
-            <td class="value"><?php echo "cuopta"; ?></td>
-        </tr>
-        <tr>
-            <td  class="title" >TOTAL</td>
-            <td  class="value"><strong><?php echo "total"; ?></strong></td>
-        </tr>
+        <thead>
+            <tr>
+                <td class="title" style="width:25%; text-align: center">Bases</td>
+                <td class="title" style="width:10%; text-align: center">IVA</td>
+                <td class="title" style="width:25%; text-align: center">Cuota</td>
+                <td class="title" style="width:10%; text-align: center">Retención</td>
+                <td class="title" style="width:25%; text-align: center">Cuota</td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($rsImpuestos AS $impuesto): ?>
+                <tr>
+                    <td style="text-align: right"><?php echo number_format(($impuesto->bases), 2, ',', '.'); ?>&euro;</td>
+                    <td style="text-align: right"><?php echo number_format(($impuesto->iva_por), 0) . ' %'; ?></td> 
+                    <td style="text-align: right"><?php echo number_format(($impuesto->cuota), 2, ',', '.'); ?>&euro;</td> 
+                    <td style="text-align: right"><?php echo number_format(($impuesto->retencion_por), 0) . ' %'; ?></td> 
+                    <td style="text-align: right"><?php echo number_format(($impuesto->retencion), 2, ',', '.'); ?>&euro;</td> 
+                </tr>
+
+
+            <?php endforeach; ?>
+
+        </tbody>
+
     </table>
-    <p><strong>Forma de pago por: </strong><?php echo "medio_pago"; ?><br/>
-        <strong>N&ordm; de cuenta: <?php echo "banco_cuenta"; ?></strong></p>
+
+
+    <p><strong>Forma de pago por: </strong><?php echo $rsFactura->formapago; ?><br/>
+        <strong> <?php
+            if ($rsFactura->id_pago == '2') {
+                
+                echo "N&ordm; de cuenta:".$rsFactura->cta_bancaria_contratante;
+                
+            } elseif ($rsFactura->id_pago == '3') {
+
+                echo "N&ordm; de cuenta:".$rsFactura->cta_bancaria;
+            }
+            ?>
+        </strong></p>
     <div align="center" style="margin-top:5px">
 
         sello

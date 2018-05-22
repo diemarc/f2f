@@ -92,10 +92,10 @@
                                         <thead>
                                             <tr class="bg-success">
                                                 <th>Servicio</th>
-                                                <th style="">Base imponible</th>
+                                                <th style="">precio</th>
                                                 <th style="">Cantidad</th>
-                                                <th style="">IVA</th>
-                                                <th style="">Retenci&oacute;n</th>
+                                                <th style=""> % IVA</th>
+                                                <th style=""> % Retenci&oacute;n</th>
                                                 <th style="">Total</th>
                                             </tr>
                                         </thead>
