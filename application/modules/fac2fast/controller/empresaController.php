@@ -39,6 +39,20 @@ class EmpresaController extends \kerana\Kerana implements \kerana\KeranaInterfac
         \kerana\View::showView($this->_current_module, 'empresa/index', ['rsEmpresas' => $this->_empresa->getAll()]);
     }
 
+    
+    /**
+     * -------------------------------------------------------------------------
+     * Get empresa data in json
+     * -------------------------------------------------------------------------
+     * @param type $id
+     * @return type
+     */
+    public function getEmpresaJson($id){
+        $this->_empresa->set_id_empresa($id);
+        return $this->_empresa->getRecordInJson();
+    }
+    
+    
     /**
      * -------------------------------------------------------------------------
      * Add new
