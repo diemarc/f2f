@@ -67,8 +67,8 @@ function addService(id_service) {
             var total_actual_taxes = $('#sw_total_impuesto').val();
             
             // plus to total_actual to totalservice coast
-            var total = Number(total_actual) + Number(data.record.total_serv);
-            var total_taxes = Number(total_actual_taxes) + Number(data.record.total_impuesto);
+            var total = (Number(total_actual) + Number(data.record.total_serv)).toFixed(2);
+            var total_taxes = (Number(total_actual_taxes) + Number(data.record.total_impuesto)).toFixed(2);
             
             $('#sw_total_factura').val(total);
             $('#sw_total_impuesto').val(total_taxes);
