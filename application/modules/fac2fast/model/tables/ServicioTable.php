@@ -73,7 +73,7 @@ abstract class ServicioTable extends \kerana\Ada
         $this->_query = ' SELECT A.id_servicio,A.id_subclase,A.servicio,A.iva_servicio,'
                 . ' A.descripcion,A.precio,A.created_at,A.created_by,A.retencion_servicio,'
                 . ' B.subclase,B2.clase,'
-                . ' (A.precio + (A.precio * A.iva_servicio) - (A.precio * A.retencion_servicio)) AS total_serv '
+                . ' (A.precio + (A.precio * (A.iva_servicio/100)) - (A.precio * (A.retencion_servicio/100))) AS total_serv '
                 . ' FROM f_servicios A '
                 . ' INNER JOIN aux_subclases B ON (B.id_subclase = A.id_subclase) '
                 . ' INNER JOIN aux_clases B2 ON (B2.id_clases = B.id_clases) '
