@@ -39,6 +39,7 @@
                             <input type="hidden"name="f_id_empresa" id="f_id_empresa" value="" />
                             <input type="hidden"name="f_id_tipo" id="f_id_tipo" value="1" />
                             <input type="hidden" step="0.01" id="sw_total_factura" value="" />
+                            <input type="hidden" step="0.01" id="sw_total_impuesto" value="" />
                             <input type="hidden"name="f_id_contratante" id="f_id_contratante" 
                                    value="<?php echo $_SESSION['f2f_id_contratante']; ?>" />
 
@@ -51,19 +52,19 @@
                                                     <a href="<?php echo __URL__ . '/fac2fast/f2f/index/'; ?>" 
                                                        class="btn btn-default">Cancelar</a>
                                                     <button type="submit" id="btnGrabarFactura"
-                                                            class="hidden btn btn-success">Crear factura</button>
+                                                            class="hidden btn btn-info">Crear factura</button>
 
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <section class="content1" id="section_total" style="margin: 0">
-                                                    <div class="info-box bg-default">
+                                                    <div class="info-box bg-gray-light">
                                                         <span class="info-box-icon"><i class="fa fa-euro"></i></span>
                                                         <div class="info-box-content">
                                                             <span class="info-box-text">Total</span>
                                                             <span class="info-box-number text-blue" id="total_factura"></span>
-                                                            <span class="progress-description">
-                                                                70% Impuestos
+                                                            <span class="progress-description text-warning">
+                                                                <span id="total_factura_impuestos"></span> Impuestos
                                                             </span>
                                                         </div>
                                                         <!-- /.info-box-content -->
@@ -176,22 +177,23 @@
                                         <!-- /.datos clientes -->
                                         <!-- servicios facturados -->
                                         <div class="box-body box-profile">
-                                            <header class="breadcrumb">
+                                            <header class="breadcrumb text-green">
                                                 <span class="label label-primary">3</span>
-                                                Agrega servicios a facturar
+                                                <button type="button" class="btn btn-sm btn-success" 
+                                                        data-toggle="modal" 
+                                                        data-remote="<?php echo __URL__ . '/fac2fast/serviciocontratante/loadContratanteServices'; ?>" 
+                                                        data-target="#myModelLarge">
+                                                    <i class="fa fa-plus-square-o "></i>&nbsp;
+                                                     Agregar servicios para facturar
+                                                </button>
 
                                             </header>
                                             <div class="table-responsive">
-                                                <button type="button" class="btn btn-sm btn-dark" 
-                                                        data-toggle="modal" 
-                                                        data-remote="<?php echo __URL__ . '/fac2fast/serviciocontratante/loadContratanteServices'; ?>" 
-                                                        data-target="#myModelLarge"><i class="fa fa-plus"></i> 
-                                                    Agregar servicios
-                                                </button>
+
                                                 <table class="table table-bordered 
                                                        table-condensed table-hover">
                                                     <thead>
-                                                        <tr class="bg-primary">
+                                                        <tr class="bg-success">
                                                             <th class="col-sm-1">#</th>
                                                             <th class="col-sm-4">Servicio</th>
                                                             <th class="col-sm-1">Cantidad</th>
