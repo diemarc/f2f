@@ -196,8 +196,8 @@
                                                             <th class="col-sm-4">Servicio</th>
                                                             <th class="col-sm-1">Cantidad</th>
                                                             <th class="col-sm-2">Precio</th>
-                                                            <th class="col-sm-1">IVA</th>
-                                                            <th class="col-sm-1">Retenci&oacute;n</th>
+                                                            <th class="col-sm-1">% IVA</th>
+                                                            <th class="col-sm-1">% Ret.</th>
                                                             <th class="col-sm-2">Total</th>
                                                         </tr>
                                                     </thead>
