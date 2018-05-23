@@ -23,6 +23,9 @@ function loadListServices() {
                 services_list += '<td>' + icon_service + '</td>';
                 services_list += '<td>' + service.servicio + '</td>';
                 services_list += '<td>' + service.descripcion + '</td>';
+                services_list += '<td>' + service.precio + '</td>';
+                services_list += '<td>' + service.iva_servicio + '</td>';
+                services_list += '<td>' + service.retencion_servicio + '</td>';
                 services_list += '<td><button class="btn btn-xs btn-success"\n\
                 onclick="addService(' + service.id_servicio + ')" \n\
                 id="btn_add_service_' + service.id_servicio + '" title="Agregar servicio">\n\
@@ -57,15 +60,24 @@ function addService(id_service) {
 
         if (data.exists) {
 
+            // hidden input to store the total value with taxes
             var total_actual = $('#sw_total_factura').val();
+            
+            // hidden input to store total_taxes
+            var total_actual_taxes = $('#sw_total_impuesto').val();
+            
+            // plus to total_actual to totalservice coast
             var total = Number(total_actual) + Number(data.record.total_serv);
+            var total_taxes = Number(total_actual_taxes) + Number(data.record.total_impuesto);
+            
             $('#sw_total_factura').val(total);
+            $('#sw_total_impuesto').val(total_taxes);
             $('#total_factura').html(total);
+            $('#total_factura_impuestos').html(total_taxes);
             $('#btnGrabarFactura').removeClass('hidden');
 
             //alert(data.record.servicio);
             data_service = '';
-
             data_service += '<tr id="service_' + data.record.id_servicio + '">';
 
             // checkbox
@@ -133,8 +145,13 @@ function addService(id_service) {
                 data_service += '<option value="'+iva.porcentaje+'" '+selected+'>'+iva.porcentaje+'</option>';
             });
             data_service += '</select>';
+            // hidden input to store total_tax service
+            data_service += '<input type="hidden"\n\
+                    id="total_tax_service_'+data.record.id_servicio+'" class="total_tax_service" step="0.01" value="'+data.record.total_impuesto+'" />';
+
             data_service += '</td> ';
 
+            
             // retencion
             data_service += '<td> ';
             data_service += '<select class="form-control \n\
@@ -157,7 +174,7 @@ function addService(id_service) {
             data_service += '<div class="input-group-addon">';
             data_service += '<span class="text-primary"><i class="fa fa-euro"></i></span>';
             data_service += '</div>';
-            data_service += '<input type="text"  step="0.01" \n\
+            data_service += '<input type="disabled"  step="0.01" \n\
                 class="input_total form-control input-sm form-control-sm"';
             data_service += 'name="" id="total_' + data.record.id_servicio + '"';
             data_service += 'value="' + data.record.total_serv + '"/> </div>';
@@ -190,16 +207,34 @@ function changeCantidad(id_service) {
     var base_imponible = $('#f_cantidad_' + id_service).val() * $('#f_concepto_precio_' + id_service).val();
     var iva_servicio = ($('#f_iva_' + id_service).val())/100;
     var retencion_servicio = $('#f_retencion_' + id_service).val();
-    var total_actual = base_imponible + (base_imponible * iva_servicio) - retencion_servicio;
+    var total_actual = (base_imponible + (base_imponible * iva_servicio) - retencion_servicio).toFixed(2);
+    var total_impuesto_servicio = (base_imponible * iva_servicio).toFixed(2);
+    
+    // actualizamos el valor del total importe
     $('#total_' + id_service).val(total_actual);
+    
+    // actualizamos el valor del total impuestos
+    $('#total_tax_service_' + id_service).val(total_impuesto_servicio);
+    
+    
 
-    var sum = 0;
+    // total de importe de la factura impuestos incluidos
+    var total_importe = 0;
     $('.input_total').each(function () {
-        sum += Number($(this).val());
+        total_importe += Number($(this).val());
     });
-
-    $('#sw_total_factura').val(sum);
-    $('#total_factura').html(sum);
+    // total de importe de la factura impuestos incluidos
+    var total_impuesto_services = 0;
+    $('.total_tax_service').each(function () {
+        total_impuesto_services += Number($(this).val());
+    });
+    // actualiza el hidden input de total precios y total impuestos
+    $('#sw_total_factura').val(total_importe);
+    $('#sw_total_impuesto').val(total_impuesto_services);
+    
+    // actualiza la vista html visual que aparece con el icono de euro
+    $('#total_factura').html(total_importe);
+    $('#total_factura_impuestos').html((total_impuesto_services).toFixed(2));
 
 
 
