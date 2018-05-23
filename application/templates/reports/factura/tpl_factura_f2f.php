@@ -63,7 +63,7 @@
     <page_header>
         <table class="table1" width="" align="left">
             <tr>
-               
+
 
                 <td width="90%"><p>
                         <strong><?php echo $rsFactura->razon_social_contratante ?>o</strong>.<br />
@@ -76,8 +76,8 @@
                     </p>
 
                 </td>
-                 <td style="width: 20%; color: #444444;">
-                    <img style="width: 100%;" src="<?php echo __URL__ . '/data/logos/'.$rsFactura->path_logo; ?>"
+                <td style="width: 20%; color: #444444;">
+                    <img style="width: 100%;" src="<?php echo __URL__ . '/data/logos/' . $rsFactura->path_logo; ?>"
                          alt="Logo"><br>
                     <!--path_logp-->
                 </td>
@@ -178,6 +178,7 @@
     </table>
 
     <table class="bordered" style="width:95%">
+
         <thead>
             <tr>
                 <td class="title" style="width:25%; text-align: center">Bases</td>
@@ -187,6 +188,7 @@
                 <td class="title" style="width:25%; text-align: center">Cuota</td>
             </tr>
         </thead>
+
         <tbody>
             <?php foreach ($rsImpuestos AS $impuesto): ?>
                 <tr>
@@ -197,26 +199,41 @@
                     <td style="text-align: right"><?php echo number_format(($impuesto->retencion), 2, ',', '.'); ?>&euro;</td> 
                 </tr>
 
-
             <?php endforeach; ?>
 
         </tbody>
 
     </table>
 
+    <table>
+        <?php foreach ($rsFacturasServicios AS $servicio): ?>
+            <tr>
+                <td style="width:95%; text-align: center"><?php
+                    if ($servicio->iva == '0') {
+
+                        echo "La partida ".$servicio->servicio." está exenta de IVA (artículo 20) - Ley 37/1992.";
+                    }?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+
+
+
+
 
     <p><strong>Forma de pago por: </strong><?php echo $rsFactura->formapago; ?><br/>
         <strong> <?php
             if ($rsFactura->id_pago == '2') {
-                
-                echo "N&ordm; de cuenta:".$rsFactura->cta_bancaria_contratante;
-                
+
+                echo "N&ordm; de cuenta:" . $rsFactura->cta_bancaria_contratante;
             } elseif ($rsFactura->id_pago == '3') {
 
-                echo "N&ordm; de cuenta:".$rsFactura->cta_bancaria;
+                echo "N&ordm; de cuenta:" . $rsFactura->cta_bancaria;
             }
             ?>
         </strong></p>
+
     <div align="center" style="margin-top:5px">
 
         sello
