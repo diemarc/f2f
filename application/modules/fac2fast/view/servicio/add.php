@@ -43,8 +43,11 @@
             <label for='f_iva_servicio' class='col-sm-2 control-label'>IVA</label> 
             <div class='col-sm-4'> 
                 <div class='input-group col-sm-8'> 
-                    <input type="number" step="0.01" id="f_iva_servicio" name="f_iva_servicio" 
-                           class="form-control"  maxlength="10,2" required value="0.0"  />
+                    <select class="form-control" name="f_iva_servicio" id="f_iva_servicio">
+                        <?php foreach ($rsIvas AS $iva): ?>
+                            <option value="<?php echo $iva->porcentaje; ?>"><?php echo $iva->porcentaje; ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div> 
             </div> 
         </div> 
@@ -52,8 +55,13 @@
             <label for='f_retencion_servicio' class='col-sm-2 control-label'>Retenci&oacute;n</label> 
             <div class='col-sm-4'> 
                 <div class='input-group col-sm-8'> 
-                    <input type="number" step="0.01" id="f_retencion_servicio" name="f_retencion_servicio"
-                           class="form-control"  maxlength="10,2" required value="0.0"  />
+
+                    <select class="form-control" name="f_retencion_servicio" id="f_retencion_servicio">
+                        <?php foreach ($rsRetenciones AS $ret): ?>
+                            <option value="<?php echo $ret->porcentaje; ?>"><?php echo $ret->porcentaje; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+
                 </div> 
             </div> 
         </div>
@@ -73,8 +81,8 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-         <button type=button" class="btn btn-primary" onclick="saveNewServiceContratante()"
-                >Crear</button>
+    <button type=button" class="btn btn-primary" onclick="saveNewServiceContratante()"
+            >Crear</button>
 
 
 </div>
