@@ -78,6 +78,9 @@
                                     <th style="width: 10px">#</th>
                                     <th>Servicio</th>
                                     <th>Desc</th>
+                                    <th>Precio</th>
+                                    <th>IVA%</th>
+                                    <th>RET%</th>
                                     <th style="width: 40px"></th>
                                 </tr>
                             </thead>
