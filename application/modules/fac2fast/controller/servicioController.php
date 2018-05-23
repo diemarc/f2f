@@ -58,6 +58,8 @@ class ServicioController extends \kerana\Kerana implements \kerana\KeranaInterfa
         \kerana\View::$model = $this->_servicio;
         $params = [
             "rsSubclases" => $this->_servicio->objSubclaseModel->getAll(),
+            "rsIvas" => $this->_servicio->objTaxs->find('*',['id_clases'=>2],'all'),
+            "rsRetenciones" => $this->_servicio->objTaxs->find('*',['id_clases'=>3],'all'),
         ];
         \kerana\View::showForm($this->_current_module, 'servicio/add', $params, $this->_servicio);
     }
