@@ -37,7 +37,9 @@ class ServicioModel extends tables\ServicioTable
 
     public
     /** @object SubclaseModel  */
-            $objSubclaseModel;
+            $objSubclaseModel,
+            /** @object taxs */
+            $objTaxs;
 
     public function __construct()
     {
@@ -62,6 +64,47 @@ class ServicioModel extends tables\ServicioTable
         $this->set_created_by();
 
         return parent::saveServicio();
+    }
+
+    /**
+     * -------------------------------------------------------------------------
+     * Get service and taxs related in json 
+     * -------------------------------------------------------------------------
+     */
+    public function getServicioDetailJson()
+    {
+        $this->objTaxs = new \application\modules\base\model\TaxaModel();
+        $json_response = [];
+
+        $rsService = $this->getRecord(false);
+        if ($rsService) {
+
+            // get all iva
+            $rsIvas = $this->objTaxs->find('*', ['id_clases' => 2], 'all');
+            
+            // get all retentions
+            $rsRetenciones = $this->objTaxs->find('*', ['id_clases' => 3], 'all');
+
+            $json_response['exists'] = true;
+            $json_response['record'] = $rsService;
+            
+            // collect the iva data
+            foreach ($rsIvas AS $ivas):
+                $json_response['ivas'][] = $ivas;
+            endforeach;
+           
+            // collect the retention data
+            foreach ($rsRetenciones AS $retencion):
+                $json_response['retenciones'][] = $retencion;
+            endforeach;
+            
+            
+            
+        } else {
+            $json_response['exists'] = false;
+        }
+
+        echo json_encode($json_response);
     }
 
 }
