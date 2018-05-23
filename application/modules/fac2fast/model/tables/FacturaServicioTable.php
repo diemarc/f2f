@@ -44,7 +44,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
             $_cantidad,
             /** @var decimal(9,2), $precio  */
             $_precio,
-            /**@var cantidad*precio $bases */
+            /*             * @var cantidad*precio $bases */
             $_bases,
             /** @var decimal(9,2), $iva  */
             $_iva,
@@ -89,7 +89,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
       |-------------------------------------------------------------------------
       |
      */
-    
+
 
 
 
@@ -119,8 +119,8 @@ abstract class FacturaServicioTable extends \kerana\Ada
             'personalizacion_servicio' => $this->_personalizacion,
             'total' => $this->_total
         ];
-        
-        
+
+
         parent::insert($data_insert);
     }
 
@@ -175,6 +175,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         $this->_precio = \helpers\Validator::valDecimal('f_precio', $value, true);
     }
+
     /**
      * ------------------------------------------------------------------------- 
      * Setter for iva
@@ -185,6 +186,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         $this->_iva = \helpers\Validator::valDecimal('f_iva', $value, false);
     }
+
     /**
      * ------------------------------------------------------------------------- 
      * Setter for retencion
@@ -195,6 +197,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         $this->_retencion = \helpers\Validator::valDecimal('f_retencion', $value, false);
     }
+
     /**
      * ------------------------------------------------------------------------- 
      * Setter for bases
@@ -206,6 +209,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         $this->_bases = $this->_precio * $this->_cantidad;
     }
+
     /**
      * ------------------------------------------------------------------------- 
      * Setter for improte iva
@@ -217,6 +221,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         $this->_importe_iva = $this->_bases * $this->_iva;
     }
+
     /**
      * ------------------------------------------------------------------------- 
      * Setter for improte retencion
@@ -228,7 +233,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         $this->_importe_iva = $this->_bases * $this->_retencion;
     }
-        
+
     /**
      * ------------------------------------------------------------------------- 
      * Setter for total
@@ -237,12 +242,12 @@ abstract class FacturaServicioTable extends \kerana\Ada
      * ((precio * cantidad) + iva)- retencion ; en la retencion pongo mas
      *  porque en la tabla esta como valor negativo - * - = +
      */
-   
-        public function set_total ($value = "")
+    public function set_total($value = "")
     {
         $base_imponible = $this->_precio * $this->_cantidad;
-        $this->_total = ($base_imponible) + ($base_imponible * $this->_iva) + ($this->_retencion * $base_imponible);
+        $this->_total = ($base_imponible) + ($base_imponible * ($this->_iva/100)) - (($this->_retencion/100) * $base_imponible);
     }
+
     /**
      * ------------------------------------------------------------------------- 
      * Setter for personalizacion
@@ -304,6 +309,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         return (isset($this->_precio)) ? $this->_precio : 0.0;
     }
+
     /**
      * ------------------------------------------------------------------------- 
      * Getter for iva
@@ -314,6 +320,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         return (isset($this->_iva)) ? $this->_iva : 0.0;
     }
+
     /**
      * ------------------------------------------------------------------------- 
      * Getter for retencion
@@ -324,6 +331,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         return (isset($this->_retencion)) ? $this->_retencion : 0.0;
     }
+
     /**
      * ------------------------------------------------------------------------- 
      * Getter for total
@@ -334,6 +342,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         return (isset($this->_total)) ? $this->_total : 0.0;
     }
+
     /**
      * ------------------------------------------------------------------------- 
      * Getter for personalizacion
@@ -344,7 +353,7 @@ abstract class FacturaServicioTable extends \kerana\Ada
     {
         return (isset($this->_personalizacion)) ? $this->_personalizacion : 0.0;
     }
-    
+
     /**
      * -------------------------------------------------------------------------
      * para sacar los impuesto de una factura
@@ -352,7 +361,6 @@ abstract class FacturaServicioTable extends \kerana\Ada
      * @param type $facturas_id_factura
      * 
      */
-    
     public function queryImpuestosFactura()
     {
         $this->_query = 'SELECT SUM(precio * cantidad) AS bases, '
@@ -365,7 +373,8 @@ abstract class FacturaServicioTable extends \kerana\Ada
                 . ' WHERE facturas_id_facturas = :id_facturas'
                 . ' GROUP BY iva ';
         $this->_binds = [
-            'id_facturas'=>$this->_id_value
+            'id_facturas' => $this->_id_value
         ];
     }
+
 }
