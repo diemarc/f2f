@@ -23,9 +23,6 @@ function loadListServices() {
                 services_list += '<td>' + icon_service + '</td>';
                 services_list += '<td>' + service.servicio + '</td>';
                 services_list += '<td>' + service.descripcion + '</td>';
-                services_list += '<td>' + service.precio + '</td>';
-                services_list += '<td>' + service.iva_servicio + '</td>';
-                services_list += '<td>' + service.retencion_servicio + '</td>';
                 services_list += '<td><button class="btn btn-xs btn-success"\n\
                 onclick="addService(' + service.id_servicio + ')" \n\
                 id="btn_add_service_' + service.id_servicio + '" title="Agregar servicio">\n\
@@ -151,8 +148,8 @@ function addService(id_service) {
             data_service += '<div class="input-group-addon">';
             data_service += '<span class="text-primary"><i class="fa fa-euro"></i></span>';
             data_service += '</div>';
-            data_service += '<input type="text" disabled step="0.01" \n\
-                class="form-control input-sm form-control-sm"';
+            data_service += '<input type="text" step="0.01" \n\
+                class="input_total form-control input-sm form-control-sm"';
             data_service += 'name="" id="total_' + data.record.id_servicio + '"';
             data_service += 'value="' + data.record.total_serv + '"/> </div>';
             data_service += '</td> ';
@@ -187,8 +184,15 @@ function changeCantidad(id_service) {
     var total_actual = base_imponible + (base_imponible * iva_servicio) - retencion_servicio;
     $('#total_' + id_service).val(total_actual);
 
-    var total_actual_fac = $('#sw_total_factura').val();
-    var total = Number(total_actual_fac) + total_actual;
+    var sum = 0;
+    $('.input_total').each(function () {
+        sum += Number($(this).val());
+    });
+
+    $('#sw_total_factura').val(sum);
+    $('#total_factura').html(sum);
+
+
     $('#sw_total_factura').val(total);
     $('#total_factura').html(total);
 
