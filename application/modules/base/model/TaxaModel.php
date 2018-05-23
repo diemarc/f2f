@@ -19,27 +19,25 @@
  */
 
 namespace application\modules\base\model;
+
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
   | Class TaxaModel
   |-----------------------------------------------------------------------------
-  | Buisiness logic (rules) for TaxaTable 
-  | 
+  | Buisiness logic (rules) for TaxaTable
+  |
   | @author kerana,
   | @date 16-03-2018 06:12:46,
   |
  */
 
-class TaxaModel extends tables\TaxaTable {
+class TaxaModel extends tables\TaxaTable
+{
 
-    
-    
-     public function __construct()
+    public function __construct()
     {
         parent::__construct();
-        
-        
     }
 
     /**
@@ -47,13 +45,12 @@ class TaxaModel extends tables\TaxaTable {
      * Save post data
      * -------------------------------------------------------------------------
      */
-    public function savePost(){
+    public function savePost()
+    {
         $this->set_tasa();
-$this->set_porcentaje();
+        $this->set_porcentaje();
 
         return parent::saveTaxa();
     }
-    
-    
 
 }
