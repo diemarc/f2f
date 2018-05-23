@@ -117,29 +117,38 @@ function addService(id_service) {
             data_service += 'name="f_concepto_precio[' + data.record.id_servicio + ']"';
             data_service += 'value="' + data.record.precio + '" \n\
                 onkeyup="changeCantidad(' + data.record.id_servicio + ')"\n\
-                onkeyup="changeCantidad(' + data.record.id_servicio + ')" /> </div>';
+                onchange="changeCantidad(' + data.record.id_servicio + ')" /> </div>';
             data_service += '</td> ';
 
             // iva
             data_service += '<td> ';
-            data_service += '<input type="number" step="0.01" class="form-control \n\
+            data_service += '<select class="form-control \n\
                 input-sm pull-right"';
             data_service += 'name="f_concepto_iva[' + data.record.id_servicio + ']" \n\
-                onkeyup="changeCantidad(' + data.record.id_servicio + ')" \n\
-                onkeyup="changeCantidad(' + data.record.id_servicio + ')"';
-            data_service += 'value="' + data.record.iva_servicio + '" \n\
-                id="f_iva_' + data.record.id_servicio + '"/> ';
+                onchange="changeCantidad(' + data.record.id_servicio + ')"';
+            data_service += 'id="f_iva_' + data.record.id_servicio + '"> ';
+            $.each(data.ivas,function(i,iva){
+                
+                var selected = (data.record.iva_servicio === iva.porcentaje) ? 'selected' : '';
+                data_service += '<option value="'+iva.porcentaje+'" '+selected+'>'+iva.porcentaje+'</option>';
+            });
+            data_service += '</select>';
             data_service += '</td> ';
 
             // retencion
             data_service += '<td> ';
-            data_service += '<input type="number" step="0.01" class="form-control \n\
+            data_service += '<select class="form-control \n\
                 input-sm pull-right"';
             data_service += 'name="f_concepto_retencion[' + data.record.id_servicio + ']" \n\
-                onkeyup="changeCantidad(' + data.record.id_servicio + ')"\n\
-                onkeyup="changeCantidad(' + data.record.id_servicio + ')"';
-            data_service += 'value="' + data.record.retencion_servicio + '" \n\
-                id="f_retencion_' + data.record.id_servicio + '"/> ';
+                onchange="changeCantidad(' + data.record.id_servicio + ')"';
+            data_service += 'id="f_retencion_' + data.record.id_servicio + '"> ';
+            $.each(data.retenciones,function(o,retencion){
+                
+                var selected_ret = (data.record.retencion_servicio === retencion.porcentaje) ? 'selected' : '';
+                data_service += '<option value="'+retencion.porcentaje+'" '+selected_ret+'>'+retencion.porcentaje+'</option>';
+            });
+            
+            data_service += '</select> ';
             data_service += '</td> ';
 
             // total
@@ -148,7 +157,7 @@ function addService(id_service) {
             data_service += '<div class="input-group-addon">';
             data_service += '<span class="text-primary"><i class="fa fa-euro"></i></span>';
             data_service += '</div>';
-            data_service += '<input type="text" step="0.01" \n\
+            data_service += '<input type="text"  step="0.01" \n\
                 class="input_total form-control input-sm form-control-sm"';
             data_service += 'name="" id="total_' + data.record.id_servicio + '"';
             data_service += 'value="' + data.record.total_serv + '"/> </div>';
@@ -179,7 +188,7 @@ function addService(id_service) {
 function changeCantidad(id_service) {
 
     var base_imponible = $('#f_cantidad_' + id_service).val() * $('#f_concepto_precio_' + id_service).val();
-    var iva_servicio = $('#f_iva_' + id_service).val();
+    var iva_servicio = ($('#f_iva_' + id_service).val())/100;
     var retencion_servicio = $('#f_retencion_' + id_service).val();
     var total_actual = base_imponible + (base_imponible * iva_servicio) - retencion_servicio;
     $('#total_' + id_service).val(total_actual);
@@ -193,8 +202,6 @@ function changeCantidad(id_service) {
     $('#total_factura').html(sum);
 
 
-    $('#sw_total_factura').val(total);
-    $('#total_factura').html(total);
 
 }
 
