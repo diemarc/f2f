@@ -84,7 +84,7 @@ class ServicioController extends \kerana\Kerana implements \kerana\KeranaInterfa
     public function getServicioJson($id){
         
         $this->_servicio->_setIdTableValue($id);
-        return $this->_servicio->getRecordInJson();
+        return $this->_servicio->getServicioDetailJson();
     }
 
     /**
