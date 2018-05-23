@@ -19,6 +19,7 @@
  */
 
 namespace application\modules\base\model\tables;
+
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
@@ -31,42 +32,39 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
   |
  */
 
-abstract class TaxaTable extends \kerana\Ada {
+abstract class TaxaTable extends \kerana\Ada
+{
 
     protected
-    /** @var int(11), $id_tasa  */ 
-$_id_tasa, 
-/** @var varchar(45), $tasa  */ 
-$_tasa, 
-/** @var decimal(10,2), $porcentaje  */ 
-$_porcentaje,
-            
+    /** @var int(11), $id_tasa  */
+            $_id_tasa,
+            /** @var int(11), $id_clases  */
+            $_id_clases,
+            /** @var varchar(45), $tasa  */
+            $_tasa,
+            /** @var decimal(10,2), $porcentaje  */
+            $_porcentaje,
             /** Master query for taxa */
             $_query_taxa;
-    
-    
-
-    public 
-            /** @array data matching attributes with table field */
+    public
+    /** @array data matching attributes with table field */
             $data_taxa;
-    
-     public function __construct()
+
+    public function __construct()
     {
         parent::__construct();
         $this->table_name = 'aux_tasas';
         $this->table_id = 'id_tasa';
-        
+
         $this->pks = [
-          'id_tasa'=> $this->_id_tasa,
-  
+            'id_tasa' => $this->_id_tasa,
         ];
-        
-        $this->_query = ' SELECT A.id_tasa,A.tasa,A.porcentaje' 
-.' FROM aux_tasas A '
- .' WHERE A.id_tasa IS NOT NULL ';  
+
+        $this->_query = ' SELECT A.id_tasa,A.tasa,A.porcentaje,A.id_clases'
+                . ' FROM aux_tasas A '
+                . ' WHERE A.id_tasa IS NOT NULL ';
     }
 
-    
     /*
       |-------------------------------------------------------------------------
       | SELECT-METHODS
@@ -74,15 +72,14 @@ $_porcentaje,
       |
      */
 
-    
-    
-    /*
-     |-------------------------------------------------------------------------
-     | INSERT-UPDATE-METHODS
-     |-------------------------------------------------------------------------
-     |
-    */
 
+
+    /*
+      |-------------------------------------------------------------------------
+      | INSERT-UPDATE-METHODS
+      |-------------------------------------------------------------------------
+      |
+     */
 
     /**
      * -------------------------------------------------------------------------
@@ -90,90 +87,116 @@ $_porcentaje,
      * -------------------------------------------------------------------------
      * @return boolean
      */
-    public function saveTaxa(){
-        
-        $data_insert =  [
-            'tasa' =>$this->_tasa,
-'porcentaje' =>$this->_porcentaje,
-  
+    public function saveTaxa()
+    {
+
+        $data_insert = [
+            'tasa' => $this->_tasa,
+            'id_clases' => $this->_id_clases,
+            'porcentaje' => $this->_porcentaje,
         ];
-          return parent::save($data_insert);
-        
+        return parent::save($data_insert);
+    }
+
+    /*
+      |-------------------------------------------------------------------------
+      | SETTERS
+      |-------------------------------------------------------------------------
+      |
+     */
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for id_tasa
+     * ------------------------------------------------------------------------- 
+     * @param int $value the id_tasa value 
+     */
+    public function set_id_tasa($value = "")
+    {
+        $this->_id_tasa = \helpers\Validator::valInt('f_id_tasa', $value, TRUE);
+    }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for id_clases
+     * ------------------------------------------------------------------------- 
+     * @param int $value the id_clases value 
+     */
+    public function set_id_clases($value = "")
+    {
+        $this->_id_clases = \helpers\Validator::valInt('f_id_clase', $value, TRUE);
+    }
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for tasa
+     * ------------------------------------------------------------------------- 
+     * @param varchar $value the tasa value 
+     */
+    public function set_tasa($value = "")
+    {
+        $this->_tasa = \helpers\Validator::valVarchar('f_tasa', $value, FALSE);
+    }
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for porcentaje
+     * ------------------------------------------------------------------------- 
+     * @param decimal $value the porcentaje value 
+     */
+    public function set_porcentaje($value = "")
+    {
+        $this->_porcentaje = \helpers\Validator::valDecimal('f_porcentaje', $value, TRUE);
+    }
+
+    /*
+      |-------------------------------------------------------------------------
+      | GETTERS
+      |-------------------------------------------------------------------------
+      |
+     */
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for id_tasa
+     * ------------------------------------------------------------------------- 
+     * @return int $value  
+     */
+    public function get_id_tasa()
+    {
+        return (isset($this->_id_tasa)) ? $this->_id_tasa : null;
     }
     
-    
-    
-    
- /*
-  |-------------------------------------------------------------------------
-  | SETTERS
-  |-------------------------------------------------------------------------
-  | 
- */
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for id_clases
+     * ------------------------------------------------------------------------- 
+     * @return int $value  
+     */
+    public function get_id_clase()
+    {
+        return (isset($this->_id_clases)) ? $this->_id_clases : null;
+    }
 
- /** 
-* ------------------------------------------------------------------------- 
-* Setter for id_tasa
-* ------------------------------------------------------------------------- 
-* @param int $value the id_tasa value 
-*/ 
- public function set_id_tasa($value = ""){ 
- $this->_id_tasa= \helpers\Validator::valInt('f_id_tasa',$value,TRUE);
-}
-/** 
-* ------------------------------------------------------------------------- 
-* Setter for tasa
-* ------------------------------------------------------------------------- 
-* @param varchar $value the tasa value 
-*/ 
- public function set_tasa($value = ""){ 
- $this->_tasa= \helpers\Validator::valVarchar('f_tasa',$value,FALSE);
-}
-/** 
-* ------------------------------------------------------------------------- 
-* Setter for porcentaje
-* ------------------------------------------------------------------------- 
-* @param decimal $value the porcentaje value 
-*/ 
- public function set_porcentaje($value = ""){ 
- $this->_porcentaje= \helpers\Validator::valDecimal('f_porcentaje',$value,TRUE);
-}
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for tasa
+     * ------------------------------------------------------------------------- 
+     * @return varchar $value  
+     */
+    public function get_tasa()
+    {
+        return (isset($this->_tasa)) ? $this->_tasa : null;
+    }
 
-    
-    
- 
- /*
-  |-------------------------------------------------------------------------
-  | GETTERS
-  |-------------------------------------------------------------------------
-  | 
- */
- /** 
-* ------------------------------------------------------------------------- 
-* Getter for id_tasa
-* ------------------------------------------------------------------------- 
-* @return int $value  
-*/ 
- public function get_id_tasa(){ 
- return (isset($this->_id_tasa)) ? $this->_id_tasa: null;
-}
-/** 
-* ------------------------------------------------------------------------- 
-* Getter for tasa
-* ------------------------------------------------------------------------- 
-* @return varchar $value  
-*/ 
- public function get_tasa(){ 
- return (isset($this->_tasa)) ? $this->_tasa: null;
-}
-/** 
-* ------------------------------------------------------------------------- 
-* Getter for porcentaje
-* ------------------------------------------------------------------------- 
-* @return decimal $value  
-*/ 
- public function get_porcentaje(){ 
- return (isset($this->_porcentaje)) ? $this->_porcentaje: null;
-}
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for porcentaje
+     * ------------------------------------------------------------------------- 
+     * @return decimal $value  
+     */
+    public function get_porcentaje()
+    {
+        return (isset($this->_porcentaje)) ? $this->_porcentaje : null;
+    }
 
 }
