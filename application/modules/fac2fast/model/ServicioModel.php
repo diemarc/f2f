@@ -45,6 +45,7 @@ class ServicioModel extends tables\ServicioTable
     {
         parent::__construct();
         $this->objSubclaseModel = new \application\modules\base\model\SubclaseModel();
+        $this->objTaxs = new \application\modules\base\model\TaxaModel();
     }
 
     /**
@@ -73,7 +74,6 @@ class ServicioModel extends tables\ServicioTable
      */
     public function getServicioDetailJson()
     {
-        $this->objTaxs = new \application\modules\base\model\TaxaModel();
         $json_response = [];
 
         $rsService = $this->getRecord(false);
@@ -97,7 +97,6 @@ class ServicioModel extends tables\ServicioTable
             foreach ($rsRetenciones AS $retencion):
                 $json_response['retenciones'][] = $retencion;
             endforeach;
-            
             
             
         } else {
