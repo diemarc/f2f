@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="<?php echo __URL__.'/base/contratante/index';?>" class="logo">
+    <a href="<?php echo __URL__.'/fac2fast/f2f/index';?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini text-aqua"><b>f</b>2F</span>
         <!-- logo for regular state and mobile devices -->
