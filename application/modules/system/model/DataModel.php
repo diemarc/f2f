@@ -398,7 +398,7 @@ class DataModel extends \kerana\Ada
      */
     private function _parseSetterFieldTable($field, $type, $null)
     {
-        $required = ($null == 'NO') ? ",TRUE" : ",FALSE";
+        $required = ($null == 'NO') ? ",true" : ",false";
         $this->_setters .= "/** \n"
                 . "* ------------------------------------------------------------------------- \n"
                 . "* Setter for " . $field . "\n"
