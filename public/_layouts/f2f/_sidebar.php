@@ -26,9 +26,10 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">NAVEGACI&Oacute;N PRINCIPAL</li>
-            <li><a href="<?php echo __URL__.'/fac2fast/f2f/index';?>"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
+            <li><a href="<?php echo __URL__.'/fac2fast/f2f/index';?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
             <li><a href="<?php echo __URL__.'/fac2fast/factura/add';?>"><i class="fa fa-plus-square"></i> <span>Nueva factura</span></a></li>
-            <li class="header">SOPORTE</li>
+            <li class="header">Configuraciones</li>
+            <li><a href="<?php echo __URL__.'/base/contratante/index';?>"><i class="fa fa-wrench"></i> <span>Configurar</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->
