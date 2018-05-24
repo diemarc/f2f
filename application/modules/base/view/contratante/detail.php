@@ -2,9 +2,14 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
+            <i class="fa fa-wrench fa-2x"></i> 
+            <a href="<?php echo __URL__.'/base/contratante/index';?>">Configuraci&oacute;n f2F</a>
+
+        </h1>
+        <h3 class="text-primary">
             <?php echo $rsContratante->contratante; ?>
             <small>aqu&iacute; puedes editar todo lo referente a tu empresa</small>
-        </h1>
+        </h3>
 
     </section> 
     <!-- Main content -->
@@ -21,7 +26,7 @@
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h3 class="box-title">
-                                    <a href="<?php echo __URL__.'/base/contratante/edit/'.$rsContratante->id_contratante;?>" class="btn btn-sm btn-info">
+                                    <a href="<?php echo __URL__ . '/base/contratante/edit/' . $rsContratante->id_contratante; ?>" class="btn btn-sm btn-info">
                                         <i class="fa fa-edit"></i>Editar
                                     </a>
                                 </h3>
@@ -64,7 +69,7 @@
                     <div class="col-lg-4">
                         <div class="box box-primary">
                             <div class="box-body box-profile">
-                                <img class="profile-user-img img-responsive img-circle" src="<?php echo __URL__.'/data/logos/seva/ipr_small.jpg';?>" alt="logo de mi empresa">
+                                <img class="profile-user-img img-responsive img-circle" src="<?php echo __URL__ . '/data/logos/seva/ipr_small.jpg'; ?>" alt="logo de mi empresa">
 
                                 <h3 class="profile-username text-center"><?php echo $rsContratante->razon_social; ?></h3>
                                 <p class="text-muted text-center"><?php echo $rsContratante->contratante; ?></p>
