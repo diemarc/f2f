@@ -32,11 +32,9 @@ class ContratanteController extends \kerana\Kerana implements \kerana\KeranaInte
      */
     public function index()
     {
-
-        // only necesary for a view creator, remove it  after index files is
-        // created
-        \kerana\View::$model = $this->_contratante;
-        \kerana\View::showView($this->_current_module, 'contratante/index', ['rsContratantes' => $this->_contratante->getAll()]);
+        $this->_contratante->_setIdTableValue($_SESSION['f2f_id_contratante']);
+        $params['rsContratante'] = $this->_contratante->getRecord();
+        \kerana\View::showView($this->_current_module, 'contratante/index', $params);
     }
 
     /**
@@ -69,8 +67,8 @@ class ContratanteController extends \kerana\Kerana implements \kerana\KeranaInte
      * Show one record detail
      * -------------------------------------------------------------------------
      * @param int $id
-     */ 
-   public function detail($id)
+     */
+    public function detail($id)
     {
 
         $this->_contratante->_setIdTableValue($id);
@@ -88,12 +86,12 @@ class ContratanteController extends \kerana\Kerana implements \kerana\KeranaInte
     {
         $this->_contratante->_setIdTableValue($id);
         \kerana\View::$model = $this->_contratante;
-        
+
         $params = [
-          'rsContratante'=> $this->_contratante->getRecord(),
-          'rsProvincias' => $this->_contratante->objPoblacionModel->getProvincias()
+            'rsContratante' => $this->_contratante->getRecord(),
+            'rsProvincias' => $this->_contratante->objPoblacionModel->getProvincias()
         ];
-        
+
         \kerana\View::showForm($this->_current_module, 'contratante/edit', $params);
     }
 
@@ -106,7 +104,7 @@ class ContratanteController extends \kerana\Kerana implements \kerana\KeranaInte
     public function update($id)
     {
         $this->_contratante->_setIdTableValue($id);
-        ($this->_contratante->savePost()) ? \helpers\Redirect::to('/base/contratante/detail/'.$id) : '';
+        ($this->_contratante->savePost()) ? \helpers\Redirect::to('/base/contratante/detail/' . $id) : '';
     }
 
     /**
