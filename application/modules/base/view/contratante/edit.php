@@ -1,5 +1,4 @@
 <script src="/src/js/poblacion_js.js"></script>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <section class="content-header">
@@ -12,7 +11,7 @@
     <section class="content">
 
         <!-- Default box -->
-        <div class="box box-info">
+        <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title text-blue"><?php echo $rsContratante->razon_social; ?></h3>
 
@@ -30,7 +29,7 @@
                         <div class="box-body">
                             <div class="breadcrumb">
                                 <a href="<?php echo __URL__ . '/base/contratante/detail/' . $rsContratante->id_contratante; ?>" class="btn btn-warning">Cancelar</a>
-                                <button type="submit" class="btn btn-info">Actualizar datos</button>
+                                <button type="submit" class="btn btn-success">Actualizar datos</button>
                             </div>
                             <div class='form-group form-group-sm'> 
                                 <label for='f_contratante' class='col-sm-2 control-label'>Nombre  corto</label> 
@@ -62,13 +61,14 @@
                             <div class='form-group form-group-sm'> 
                                 <label for='aux_provincia' class='col-sm-2 control-label'>Provincia</label> 
                                 <div class='col-sm-6'> 
-                                    <div class='input-group col-sm-10'> 
+                                    <div class='input-group col-sm-4'> 
                                         <select name="aux_provincia" class="form-control" id="aux_provincia">
-                                            <?php foreach($rsProvincias AS $provincia): ?>
-                                            <option value="<?php echo $provincia->cod_provincia;?>">
-                                            <?php echo $provincia->provincia;?>
-                                            </option>
-                                            <?php endforeach;?>
+                                            <?php foreach ($rsProvincias AS $provincia): ?>
+                                                <option value="<?php echo $provincia->cod_provincia; ?>"
+                                                        <?php echo ($provincia->cod_provincia == $rsContratante->cod_provincia) ? 'selected' : '';?>>
+                                                    <?php echo $provincia->provincia; ?>
+                                                </option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div> 
                                 </div> 
@@ -82,7 +82,7 @@
                                                value="<?php echo $rsContratante->poblacion; ?>"  />
                                         <div id="live_search_poblacion" class="hidden">
                                             <br/>
-                                            <div class="box box-info">
+                                            <div class="box box-success">
                                                 <div class="box-header with-border">
                                                     <h3 class="box-title text-blue">Selecciona una localidad</h3>
                                                 </div>
@@ -100,7 +100,7 @@
                                 </div> 
                             </div> 
                             <div class='form-group form-group-sm'> 
-                                <label for='f_direccion' class='col-sm-2 control-label'>Direccion</label> 
+                                <label for='f_direccion' class='col-sm-2 control-label'>Direcci&oacute;n</label> 
                                 <div class='col-sm-6'> 
                                     <div class='input-group col-sm-12'> 
                                         <input type="text" id="f_direccion" name="f_direccion" class="form-control"  
@@ -146,7 +146,7 @@
                                 </div> 
                             </div> 
                             <div class='form-group form-group-sm'> 
-                                <label for='f_observacion' class='col-sm-2 control-label'>Observacion</label> 
+                                <label for='f_observacion' class='col-sm-2 control-label'>Observaciones</label> 
                                 <div class='col-sm-6'> 
                                     <div class='input-group col-sm-8'> 
                                         <textarea name="f_observacion" id="f_observacion" class="form-control"><?php echo $rsContratante->observacion; ?></textarea>
@@ -158,7 +158,7 @@
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <a href="<?php echo __URL__ . ''; ?>" class="btn btn-warning">Cancelar</a>
-                            <button type="submit" class="btn btn-info">Actualizar datos</button>
+                            <button type="submit" class="btn btn-success">Actualizar datos</button>
                         </div>
                         <!-- /.box-footer -->
                     </form>
