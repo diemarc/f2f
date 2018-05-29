@@ -54,9 +54,12 @@ class MailUserContratanteModel extends tables\MailUserContratanteTable
      */
     public function savePost()
     {
-        $this->set_id_mail_account();
-        $this->set_id_user();
-        $this->set_id_contratante();
+        
+        // first save the new account
+        $this->objMailAccountModel->saveNewAccount();
+        $this->set_id_mail_account($this->objMailAccountModel->get_id_mail_account());
+        $this->set_id_user($_SESSION['id_user']);
+        $this->set_id_contratante($_SESSION['f2f_id_contratante']);
 
         return parent::saveMailUserContratante();
     }
