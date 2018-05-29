@@ -84,6 +84,7 @@ abstract class FacturaTable extends \kerana\Ada
                 . ' B2.email AS email_contratante,B2.contacto AS contacto_contratante,'
                 . ' B2.cta_bancaria AS cta_bancaria_contratante,'
                 . ' B2.path_logo,B2.observacion AS observacion_contratante,'
+                . ' B2.mercantil, '
                 . ' B24.poblacion AS poblacion_contratante,'
                 . ' B24.provincia AS provincia_contratante,B24.ccaa AS ccaa_contrante,B24.pais as pais_contratante,'
                 . ' B24.cod_poblacion AS cod_poblacion_contratante ,B24.cod_provincia AS cod_provincia_contratante,'
