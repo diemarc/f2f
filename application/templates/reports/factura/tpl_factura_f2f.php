@@ -49,13 +49,10 @@
         font-size: 8px;
     }
 
-    /*    .footer-top{
-            background-color:transparent;
+    .texto-vertical-2 {
+        writing-mode: vertical-lr;
+        transform: rotate(180deg);
     }
-     
-    .footer-container #footer h4{
-            color:red!important;
-    }*/
 
 </style>
 <page backtop="35mm" backbottom="2mm" backleft="20mm" backright="10mm" style="font-size: 13px"
@@ -158,7 +155,7 @@
                     </td>
 
                     <td style="text-align: right; width: 15%">
-                        <?php echo number_format((($servicio->total)), 2, ',', ' '); ?>&euro;
+                        <?php echo number_format((($servicio->precio)*($servicio->cantidad)), 2, ',', ' '); ?>&euro;
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -171,9 +168,8 @@
     <br/><br/>
     <table cellspacing="0" cellpadding="0" border="0" width="80%">
         <tr>
-            <td><strong>Total Factura: </strong></td>
-            <td><?php echo number_format(($total), 2, ',', ' '); ?>&euro;
-            </td>
+            <td style="text-align: right"><strong>Total Factura: </strong></td>
+            <td style="text-align: right"><?php echo number_format(($total), 2, ',', ' '); ?>&euro;</td>
         </tr>
     </table>
 
@@ -204,11 +200,11 @@
         </tbody>
 
     </table>
-
+    
     <table>
         <?php foreach ($rsFacturasServicios AS $servicio): ?>
             <tr>
-                <td style="width:95%; text-align: center"><?php
+                <td style="width:95%; text-align: left"><?php
                     if ($servicio->iva == '0') {
 
                         echo "La partida ".$servicio->servicio." está exenta de IVA (artículo 20) - Ley 37/1992.";
@@ -222,8 +218,11 @@
 
 
 
-    <p><strong>Forma de pago por: </strong><?php echo $rsFactura->formapago; ?><br/>
-        <strong> <?php
+    <p>
+        <strong>Forma de pago por: </strong><?php echo $rsFactura->formapago; ?>
+        <br/>
+        <strong> 
+            <?php
             if ($rsFactura->id_pago == '2') {
 
                 echo "N&ordm; de cuenta:" . $rsFactura->cta_bancaria_contratante;
@@ -232,7 +231,8 @@
                 echo "N&ordm; de cuenta:" . $rsFactura->cta_bancaria;
             }
             ?>
-        </strong></p>
+        </strong>
+    </p>
 
     <div align="center" style="margin-top:5px">
 
@@ -240,5 +240,9 @@
 
     </div>
 
-
+    <div>
+        <p class="texto-vertical-2">
+            <?php echo $rsFactura->mercantil;?>
+        </p>
+    </div>
 </page>
