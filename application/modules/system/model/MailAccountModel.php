@@ -45,7 +45,7 @@ class MailAccountModel extends tables\MailAccountTable
      * Save post data
      * -------------------------------------------------------------------------
      */
-    public function savePost()
+    public function saveNewAccount()
     {
         $this->set_account();
         $this->set_mail_address();
