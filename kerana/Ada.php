@@ -43,7 +43,9 @@ abstract class Ada
             /** @array , query conditions */
             $_conditions,
             /** @array, binds for prepare statetment */
-            $_binds;
+            $_binds,
+            /** @object, config object*/
+            $_config;
     public
     /** @var mixed, el nombre de la tabla */
             $table_name,
@@ -55,8 +57,7 @@ abstract class Ada
             $_query,
             /** @mixed, table pks */
             $pks;
-    private
-            $_config;
+            
 
     public function __construct()
     {
