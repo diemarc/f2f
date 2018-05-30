@@ -62,11 +62,10 @@ abstract class MailUserContratanteTable extends \kerana\Ada
 
         $this->_query = ' SELECT A.id_mail_account,A.id_user,A.id_contratante,B.account,'
                 . ' B.mail_address,B.mail_username,B.mail_password,B.mail_smtp_server,'
-                . ' B.mail_smtp_auth,B.mail_smtp_port,C3.contratante'
+                . ' B.mail_smtp_auth,B.mail_smtp_port'
                 . ' FROM user_contratante_mail A '
                 . ' INNER JOIN sys_mail_account B ON (B.id_mail_account = A.id_mail_account) '
-                . ' INNER JOIN user_contratante C ON (C.id_user = A.id_user) '
-                . ' INNER JOIN a_contratantes C3 ON (C3.id_contratante = C.id_contratante) '
+                . ' INNER JOIN user_contratante C ON (C.id_user = A.id_user AND A.id_contratante = C.id_contratante) '
                 . ' WHERE A.id_mail_account IS NOT NULL ';
     }
 

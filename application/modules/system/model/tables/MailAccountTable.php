@@ -68,7 +68,9 @@ abstract class MailAccountTable extends \kerana\Ada
             'id_mail_account' => $this->_id_mail_account,
         ];
 
-        $this->_query = ' SELECT A.id_mail_account,A.account,A.mail_address,A.mail_username,A.mail_password,A.mail_smtp_server,A.mail_smtp_auth,A.mail_smtp_port'
+        $this->_query = ' SELECT A.id_mail_account,A.account,A.mail_address,'
+                . ' A.mail_username,A.mail_password,A.mail_smtp_server,A.mail_smtp_auth,'
+                . ' A.mail_smtp_port'
                 . ' FROM sys_mail_account A '
                 . ' WHERE A.id_mail_account IS NOT NULL ';
     }
@@ -97,17 +99,33 @@ abstract class MailAccountTable extends \kerana\Ada
      */
     public function saveMailAccount()
     {
-
-        $data_insert = [
-            'account' => $this->_account,
-            'mail_address' => $this->_mail_address,
-            'mail_username' => $this->_mail_username,
-            'mail_password' => $this->_mail_password,
-            'mail_smtp_server' => $this->_mail_smtp_server,
-            'mail_smtp_auth' => $this->_mail_smtp_auth,
-            'mail_smtp_port' => $this->_mail_smtp_port,
+        
+        $this->_query = 'INSERT INTO '.$this->table_name.' '
+                . '('
+                . ' account,mail_address,mail_username, mail_password,mail_smtp_server,'
+                . ' mail_smtp_auth,mail_smtp_port'
+                . ')'
+                . ' VALUES '
+                 . '('
+                . ' :account,:mail_address,:mail_username, AES_ENCRYPT(:password,:aes_key),'
+                . ' :mail_smtp_server,'
+                . ' :mail_smtp_auth,:mail_smtp_port'
+                . ')';
+        
+        $this->_binds = [
+            ':account' => $this->_account,
+            ':mail_address' => $this->_mail_address,
+            ':mail_username' => $this->_mail_username,
+            ':mail_smtp_server' => $this->_mail_smtp_server,
+            ':mail_smtp_auth' => 1,
+            ':mail_smtp_port' => $this->_mail_smtp_port,
+            ':password' => $this->_mail_password,
+            ':aes_key' => $this->_config->get('_aeskey_')
         ];
-        return parent::save($data_insert);
+        
+        if(parent::runQuery()){
+            $this->set_id_mail_account($this->_db->lastInsertId());
+        }
     }
 
     /*
@@ -125,7 +143,8 @@ abstract class MailAccountTable extends \kerana\Ada
      */
     public function set_id_mail_account($value = "")
     {
-        $this->_id_mail_account = \helpers\Validator::valInt('f_id_mail_account', $value, TRUE);
+        $this->_id_mail_account = \helpers\Validator::valInt('f_id_mail_account', $value, true);
+        $this->_id_value = $this->_id_mail_account;
     }
 
     /**
@@ -136,7 +155,7 @@ abstract class MailAccountTable extends \kerana\Ada
      */
     public function set_account($value = "")
     {
-        $this->_account = \helpers\Validator::valVarchar('f_account', $value, TRUE);
+        $this->_account = \helpers\Validator::valVarchar('f_account', $value, true);
     }
 
     /**
@@ -147,7 +166,7 @@ abstract class MailAccountTable extends \kerana\Ada
      */
     public function set_mail_address($value = "")
     {
-        $this->_mail_address = \helpers\Validator::valVarchar('f_mail_address', $value, TRUE);
+        $this->_mail_address = \helpers\Validator::valVarchar('f_mail_address', $value, true);
     }
 
     /**
@@ -158,7 +177,7 @@ abstract class MailAccountTable extends \kerana\Ada
      */
     public function set_mail_username($value = "")
     {
-        $this->_mail_username = \helpers\Validator::valVarchar('f_mail_username', $value, TRUE);
+        $this->_mail_username = \helpers\Validator::valVarchar('f_mail_username', $value, true);
     }
 
     /**
@@ -169,7 +188,7 @@ abstract class MailAccountTable extends \kerana\Ada
      */
     public function set_mail_password($value = "")
     {
-        $this->_mail_password = \helpers\Validator::valBlob('f_mail_password', $value, TRUE);
+        $this->_mail_password = \helpers\Validator::valVarchar('f_mail_password', $value, true);
     }
 
     /**
@@ -180,7 +199,7 @@ abstract class MailAccountTable extends \kerana\Ada
      */
     public function set_mail_smtp_server($value = "")
     {
-        $this->_mail_smtp_server = \helpers\Validator::valVarchar('f_mail_smtp_server', $value, TRUE);
+        $this->_mail_smtp_server = \helpers\Validator::valVarchar('f_mail_smtp_server', $value, true);
     }
 
     /**
@@ -191,7 +210,7 @@ abstract class MailAccountTable extends \kerana\Ada
      */
     public function set_mail_smtp_auth($value = "")
     {
-        $this->_mail_smtp_auth = \helpers\Validator::valTinyint('f_mail_smtp_auth', $value, TRUE);
+        $this->_mail_smtp_auth = \helpers\Validator::valTinyint('f_mail_smtp_auth', $value, false);
     }
 
     /**
@@ -202,7 +221,7 @@ abstract class MailAccountTable extends \kerana\Ada
      */
     public function set_mail_smtp_port($value = "")
     {
-        $this->_mail_smtp_port = \helpers\Validator::valInt('f_mail_smtp_port', $value, TRUE);
+        $this->_mail_smtp_port = \helpers\Validator::valInt('f_mail_smtp_port', $value, true);
     }
 
     /*
