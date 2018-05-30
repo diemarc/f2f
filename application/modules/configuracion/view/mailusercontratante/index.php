@@ -37,12 +37,9 @@
                                 <td><?php echo $mailconfig->mail_address;?></td>
                                 <td> 
                                     <a href='/configuracion/mailusercontratante/edit/<?php echo $mailconfig->id_mail_account; ?>' 
-                                       class='btn btn-default btn-xs' title='Edit'>
-                                        <i class='fa fa-edit'></i>
+                                       class='btn btn-default btn-xs' title='Mail detail'>
+                                        <i class='fa fa-tasks'></i>
                                     </a> 
-                                    <a href='/configuracion/mailusercontratante/delete/<?php echo $mailconfig->id_mail_account; ?>' 
-                                       class='btn btn-danger btn-xs' title='Delete'>
-                                        <i class='fa fa-trash'></i></a> 
                                 </td> 
                             </tr> 
                         <?php endforeach; ?>
