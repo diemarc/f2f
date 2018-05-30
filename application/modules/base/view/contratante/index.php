@@ -2,7 +2,6 @@
     <section class="content-header">
         <h1>
             <i class="fa fa-wrench fa-2x"></i> Configuraci&oacute;n f2F
-
         </h1>
 
     </section> 
@@ -64,7 +63,7 @@
                             <div class="icon">
                                 <i class="fa fa-envelope"></i>
                             </div>
-                            <a href="<?php echo __URL__ . '/base/contratante/detail/' . $rsContratante->id_contratante; ?>" class="small-box-footer">
+                            <a href="<?php echo __URL__ . '/configuracion/mailconfig/index'; ?>" class="small-box-footer">
                                 ver <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
