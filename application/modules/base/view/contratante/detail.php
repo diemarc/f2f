@@ -3,7 +3,8 @@
     <section class="content-header">
         <h1>
             <i class="fa fa-wrench fa-2x"></i> 
-            <a href="<?php echo __URL__.'/base/contratante/index';?>">Configuraci&oacute;n f2F</a>
+            <a href="<?php echo __URL__.'/base/contratante/index';?>">
+                Configuraci&oacute;n f2F</a>->Detalle empresa
 
         </h1>
         <h3 class="text-primary">
