@@ -1,5 +1,6 @@
 
 <style type="text/css">
+    <!--
     .table1 {
         padding-top:5px;
 
@@ -53,7 +54,7 @@
         writing-mode: vertical-lr;
         transform: rotate(180deg);
     }
-
+-->
 </style>
 <page backtop="35mm" backbottom="2mm" backleft="20mm" backright="10mm" style="font-size: 13px"
       footer="date;time;page">
@@ -239,9 +240,9 @@
         sello
 
     </div>
-    <page_footer>
+    <page_footer >
         <div>
-            <p class="texto-vertical-2">
+            <p >
                 <?php echo $rsFactura->mercantil; ?>
             </p>
         </div>
