@@ -239,10 +239,14 @@
         sello
 
     </div>
+    <page_footer>
+        <div>
+            <p class="texto-vertical-2">
+                <?php echo $rsFactura->mercantil; ?>
+            </p>
+        </div>
+    </page_footer>
 
-    <div>
-        <p class="texto-vertical-2">
-            <?php echo $rsFactura->mercantil;?>
-        </p>
-    </div>
+   
+    
 </page>
