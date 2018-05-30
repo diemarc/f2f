@@ -33,7 +33,7 @@ class MailconfigController extends \kerana\Kerana implements \kerana\KeranaInter
     public function index()
     {
 
-        \kerana\View::showView($this->_current_module, 'mailusercontratante/index', ['rsMailusercontratantes' => $this->_mailusercontratante->getMailsContratante()]);
+        \kerana\View::showView($this->_current_module, 'mailusercontratante/index', ['rsMailusercontratantes' => $this->_mailusercontratante->getAll()]);
     }
 
     /**
@@ -64,9 +64,8 @@ class MailconfigController extends \kerana\Kerana implements \kerana\KeranaInter
      */
     public function detail($id)
     {
-
         $this->_mailusercontratante->_setIdTableValue($id);
-        $params['rsMailusercontratante'] = $this->_mailusercontratante->getRecord();
+        $params['rsMailConfig'] = $this->_mailusercontratante->getRecord();
         \kerana\View::showView($this->_current_module, 'mailusercontratante/detail', $params);
     }
 
@@ -79,8 +78,7 @@ class MailconfigController extends \kerana\Kerana implements \kerana\KeranaInter
     public function edit($id)
     {
         $this->_mailusercontratante->_setIdTableValue($id);
-        \kerana\View::$model = $this->_mailusercontratante;
-        $params['rs'] = $this->_mailusercontratante->getRecord();
+        $params['rsMailConfig'] = $this->_mailusercontratante->getRecord();
         \kerana\View::showForm($this->_current_module, 'mailusercontratante/edit', $params);
     }
 
