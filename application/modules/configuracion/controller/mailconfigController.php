@@ -33,7 +33,7 @@ class MailconfigController extends \kerana\Kerana implements \kerana\KeranaInter
     public function index()
     {
 
-        \kerana\View::showView($this->_current_module, 'mailusercontratante/index', ['rsMailusercontratantes' => $this->_mailusercontratante->getAll()]);
+        \kerana\View::showView($this->_current_module, 'mailusercontratante/index', ['rsMailusercontratantes' => $this->_mailusercontratante->getMailsContratante()]);
     }
 
     /**
