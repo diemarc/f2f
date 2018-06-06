@@ -32,8 +32,7 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
   |
  */
 
-class InformeContratanteModel extends tables\InformeContratanteTable
-{
+class InformeContratanteModel extends tables\InformeContratanteTable {
 
     public
     /** @object InformeModel  */
@@ -43,12 +42,12 @@ class InformeContratanteModel extends tables\InformeContratanteTable
             /** @object EstadoModel  */
             $objEstadoModel;
 
-    public function __construct()
-    {
+    public function __construct($tipo) {
         parent::__construct();
         $this->objInformeModel = new \application\modules\configuracion\model\InformeModel();
         $this->objContratanteModel = new \application\modules\base\model\ContratanteModel();
         $this->objEstadoModel = new \application\modules\base\model\EstadoModel();
+        $this->set_id_aux_informe($tipo);
     }
 
     /**
@@ -57,19 +56,18 @@ class InformeContratanteModel extends tables\InformeContratanteTable
      * -------------------------------------------------------------------------
      * @return type
      */
-    public function getTemplateInformeContratante()
-    {
+    public function getTemplateInformeContratante() {
+//setea el id_informe, para saber cual template usar
+        //$this->set_id_aux_informe();
 
-        $rsInforme = $this->find('A.default_template,A.template_contratante_informe', 
-                [
-                    'id_contratante' => $this->get_id_contratante(),
-                    'id_aux_informe' => $this->get_id_aux_informe(), 
-                    'estado_informe_contratante' => 1
+        $rsInforme = $this->find('A.default_template,A.template_contratante_informe', [
+            'id_contratante' => $this->get_id_contratante(),
+            'id_aux_informe' => $this->get_id_aux_informe(),
+            'estado_informe_contratante' => 1
                 ]
         );
-        
-       return (empty($rsInforme->template_contratante_informe)) ? $rsInforme->default_template : $rsInforme->template_contratante_informe;
-       
+
+        return (empty($rsInforme->template_contratante_informe)) ? $rsInforme->default_template : $rsInforme->template_contratante_informe;
     }
 
     /**
@@ -77,8 +75,7 @@ class InformeContratanteModel extends tables\InformeContratanteTable
      * Save post data
      * -------------------------------------------------------------------------
      */
-    public function savePost()
-    {
+    public function savePost() {
         $this->set_id_aux_informe();
         $this->set_id_contratante();
         $this->set_id_estado();
