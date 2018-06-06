@@ -18,7 +18,7 @@
                     <!-- datos de empresa -->
                     <div class="col-lg-3 col-xs-6">
                         <!-- small box -->
-                        <div class="small-box bg-primary">
+                        <div class="small-box bg-default">
                             <div class="inner">
                                 <h3> <?php echo $rsContratante->contratante; ?></h3>
 
@@ -54,7 +54,7 @@
                     <!-- mails -->
                     <div class="col-lg-3 col-xs-6">
                         <!-- small box -->
-                        <div class="small-box bg-primary">
+                        <div class="small-box bg-aqua-gradient">
                             <div class="inner">
                                 <h3>Email</h3>
 
