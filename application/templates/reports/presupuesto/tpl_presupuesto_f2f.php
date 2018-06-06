@@ -169,7 +169,7 @@
     <br/><br/>
     <table cellspacing="0" cellpadding="0" border="0" width="80%">
         <tr>
-            <td style="text-align: right"><strong>Total Factura: </strong></td>
+            <td style="text-align: right"><strong>Total Presupuesto: </strong></td>
             <td style="text-align: right"><?php echo number_format(($total), 2, ',', ' '); ?>&euro;</td>
         </tr>
     </table>
