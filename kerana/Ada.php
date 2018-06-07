@@ -394,6 +394,7 @@ abstract class Ada
      */
     public function getRecord($check = true, $mode = 'one')
     {
+        
         if (isset($this->_id_value) AND ( !empty($this->_id_value))) {
 
             // if not _query is not setted, then use the base table
@@ -490,10 +491,10 @@ abstract class Ada
 
         (!empty($array)) ? $this->_setFieldsToInsertByArray($array) : $this->_setFieldsToInsertByRequest();
 
-        $this->_query = 'INSERT INTO ' . $this->table_name . $this->_fields;
+        $query_insert = 'INSERT INTO ' . $this->table_name . $this->_fields;
 
         try {
-            $rs = $this->_db->prepare($this->_query);
+            $rs = $this->_db->prepare($query_insert);
             $rs->execute($this->_binds);
             $this->_id_value = $this->_db->lastInsertId();
             return true;
