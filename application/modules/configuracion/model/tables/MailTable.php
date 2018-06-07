@@ -68,10 +68,14 @@ abstract class MailTable extends \kerana\Ada
             'id_email' => $this->_id_email,
         ];
 
+        $this->set_id_contratante($_SESSION['f2f_id_contratante']);
+        $this->set_id_user($_SESSION['id_user']);
+
         $this->_query = ' SELECT A.id_email,A.id_mail_account,A.id_contratante,'
                 . ' A.id_user,A.subject,A.body,A.created_at,A.created_by,B2.account,'
                 . ' B2.mail_address,B2.mail_username,B2.mail_password,B2.mail_smtp_server,'
-                . ' B2.mail_smtp_auth,B2.mail_smtp_port'
+                . ' B2.mail_smtp_auth,B2.mail_smtp_port,'
+                . ' CAST(AES_DECRYPT(B2.mail_password,:secret)AS CHAR) AS pass_decrypt'
                 . ' FROM sys_email A '
                 . ' INNER JOIN user_contratante_mail B ON (B.id_mail_account = A.id_mail_account) '
                 . ' INNER JOIN sys_mail_account B2 ON (B2.id_mail_account = B.id_mail_account) '
@@ -87,7 +91,24 @@ abstract class MailTable extends \kerana\Ada
       |
      */
 
-
+    public function getMail()
+    {
+        unset($this->_binds);
+        
+        $this->_query = $this->_query . ' AND A.id_contratante = :id_contratante ';
+        $this->_binds[':id_contratante'] = $this->_id_contratante;
+        $this->_binds[':secret'] = $this->_config->get('_aeskey_');
+   
+//        $rs = $this->getRecord(false);
+//        
+//        
+//        echo $this->_query;
+//        echo "<pre>";
+//        print_r($this->_binds);
+//        die();
+        
+        return $this->getRecord();
+    }
 
     /*
       |-------------------------------------------------------------------------
@@ -114,7 +135,7 @@ abstract class MailTable extends \kerana\Ada
             'created_at' => $this->_created_at,
             'created_by' => $this->_created_by,
         ];
-        return parent::save($data_insert);
+        return parent::save($data_insert, false);
     }
 
     /*
