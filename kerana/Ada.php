@@ -394,7 +394,8 @@ abstract class Ada
      */
     public function getRecord($check = true, $mode = 'one')
     {
-        
+        // vaciamos los binds instanciados previamente
+        //unset($this->_binds);
         if (isset($this->_id_value) AND ( !empty($this->_id_value))) {
 
             // if not _query is not setted, then use the base table
@@ -497,6 +498,7 @@ abstract class Ada
             $rs = $this->_db->prepare($query_insert);
             $rs->execute($this->_binds);
             $this->_id_value = $this->_db->lastInsertId();
+            // unset($this->_binds);
             return true;
         } catch (\PDOException $e) {
             $error = 'Error in' . __CLASS__ . '->' . __FUNCTION__;
