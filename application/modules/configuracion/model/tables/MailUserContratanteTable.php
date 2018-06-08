@@ -65,8 +65,7 @@ abstract class MailUserContratanteTable extends \kerana\Ada
         
         $this->_query = ' SELECT A.id_mail_account,A.id_user,A.id_contratante,B.account,'
                 . ' B.mail_address,B.mail_username,B.mail_password,B.mail_smtp_server,'
-                . ' B.mail_smtp_auth,B.mail_smtp_port,'
-                . ' CAST(AES_DECRYPT(B.mail_password,:secret)AS CHAR) AS pass_decrypt,'
+                . ' B.mail_smtp_auth,B.mail_smtp_port,B.mail_from_name,'
                 . ' D.username, D.name,D.lastname '
                 . ' FROM user_contratante_mail A '
                 . ' INNER JOIN sys_mail_account B ON (B.id_mail_account = A.id_mail_account) '
@@ -76,7 +75,6 @@ abstract class MailUserContratanteTable extends \kerana\Ada
                 . ' AND A.id_contratante = :id_contratante ';
         
          $this->_binds[':id_contratante'] = $this->_id_contratante;
-         $this->_binds[':secret'] = $this->_config->get('_aeskey_');
 
 
         

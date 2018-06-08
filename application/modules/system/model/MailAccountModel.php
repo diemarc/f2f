@@ -54,6 +54,7 @@ class MailAccountModel extends tables\MailAccountTable
         $this->set_mail_smtp_server();
         $this->set_mail_smtp_auth();
         $this->set_mail_smtp_port();
+        $this->set_mail_from_name();
 
         return parent::saveMailAccount();
     }

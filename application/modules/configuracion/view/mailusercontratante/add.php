@@ -69,6 +69,15 @@
                         </div> 
                     </div> 
                     <div class='form-group form-group-sm'> 
+                        <label for='f_mail_from_name' class='col-sm-2 control-label'>Nombre que aparece en los mails</label> 
+                        <div class='col-sm-4'> 
+                            <div class='input-group col-sm-8'> 
+                                <input type="text" id="f_mail_from_name" name="f_mail_from_name" 
+                                       class="form-control"  maxlength="45" required   />
+                            </div> 
+                        </div> 
+                    </div> 
+                    <div class='form-group form-group-sm'> 
                         <label for='f_mail_smtp_server' class='col-sm-2 control-label'>Servidor de salida</label> 
                         <div class='col-sm-4'> 
                             <div class='input-group col-sm-8'> 

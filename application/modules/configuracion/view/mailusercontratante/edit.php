@@ -43,6 +43,16 @@
                                 </div> 
                             </div> 
                         </div> 
+                        <div class='form-group form-group-sm'> 
+                            <label for='f_mail_from_name' class='col-sm-2 control-label'>Etiqueta de mail</label> 
+                            <div class='col-sm-4'> 
+                                <div class='input-group col-sm-8'> 
+                                    <input type="text" id="f_mail_from_name" name="f_mail_from_name" 
+                                           class="form-control"
+                                           required maxlength="250" value="<?php echo $rsMailConfig->mail_from_name; ?>"   />
+                                </div> 
+                            </div> 
+                        </div> 
                         <div class='form-group form-group-sm bg-grey'> 
                             <label for='f_mail_address' class='col-sm-2 control-label'>Direcci&oacute;n de email</label> 
                             <div class='col-sm-6'> 

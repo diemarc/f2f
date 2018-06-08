@@ -30,6 +30,9 @@
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
+                                    <b>Etiqueta de mail</b> <a class="pull-right"><?php echo $rsMailConfig->mail_from_name;?></a>
+                                </li>
+                                <li class="list-group-item">
                                     <b>Servidor saliente</b> <a class="pull-right"><?php echo $rsMailConfig->mail_smtp_server;?></a>
                                 </li>
                                 <li class="list-group-item">
