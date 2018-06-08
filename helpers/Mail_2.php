@@ -28,7 +28,7 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
  * ------------------------------------------------------------------------------
  * @author diemarc
  */
-class Mail
+class EmailOld
 {
 
     private
@@ -41,7 +41,7 @@ class Mail
             $_log_mail;
     public
 
-    /** @var int, id de la cuenta que va aneivar */
+    /** @var int, id de la cuenta que va enviar */
             $mailman_id_cuenta,
             /** @var mixed, direccion desde donde se envia el mail */
             $mailman_cuenta,

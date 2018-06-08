@@ -81,7 +81,7 @@ class Email
         $this->_phpmailer->Port = $this->_email_data->mail_smtp_port;
         $this->_phpmailer->isHTML(true);
         $this->_phpmailer->From = $this->_email_data->mail_address;
-        $this->_phpmailer->FromName = 'f2f Team';
+        $this->_phpmailer->FromName = $this->_email_data->mail_from_name;
         $this->_phpmailer->Body = $this->_email_data->body;
         $this->_phpmailer->Subject = $this->_email_data->subject;
     }
