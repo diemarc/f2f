@@ -94,20 +94,20 @@ class BadLoginModel extends \Kerana\Ada
     public function registerBadLogin($string, $id_user = 0)
     {
         
-        $this->_query = ' INSERT INTO ' . $this->table_name
+        $query = ' INSERT INTO ' . $this->table_name
                 . '(id_user,remote_address,time,string_attempt)'
                 . ' VALUES '
                 . ' (:id_user,INET_ATON(:ip),:time,:string_attemp)';
 
         // seteamos los bins
-        $this->_binds = [
+        $binds = [
             ':id_user' => filter_var($id_user, FILTER_SANITIZE_NUMBER_INT),
             ':ip' => filter_input(INPUT_SERVER, 'REMOTE_ADDR', FILTER_VALIDATE_IP),
             ':time' => time(),
             ':string_attemp' => filter_var($string, FILTER_SANITIZE_SPECIAL_CHARS)
         ];
 
-        return $this->runQuery();
+        return $this->executeQuery($query,$binds);
     }
 
 }
