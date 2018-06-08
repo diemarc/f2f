@@ -33,27 +33,6 @@ function findEmpresa(empresa) {
     });
 }
 
-/**
- * -----------------------------------------------------------------------------
- * Assign a empresa
- * -----------------------------------------------------------------------------
- * @param {string} empresa
- * @param {int} id_empresa
- * @returns {undefined}
- */
-//function asignarEmpresa(empresa, id_empresa) {
-//    $('#section_cliente').removeClass('hidden');
-//    $('#live_search_empresa').addClass('hidden');
-//    $('#div_conceptos').removeClass('hidden');
-//    $('#div_info_fac').removeClass('hidden');
-//    $('#btnGrabarFactura').removeClass('hidden');
-//    $('#div_cliente').addClass('has-success');
-//    $('#f_id_empresa').val(id_empresa);
-//    $('#k_cliente').val(empresa);
-//    $('#span_empresa').html(empresa);
-//    $('#j_empresa').append(empresa);
-//
-//}
 
 /**
  * -----------------------------------------------------------------------------
