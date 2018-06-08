@@ -64,6 +64,9 @@ function findEmpresa(empresa) {
  */
 function assignClient(id_empresa) {
 
+
+    alert("es esta empresa "+id_empresa);
+
     var url = '/fac2fast/empresa/getEmpresaJson/' + id_empresa;
 
     $.getJSON(url, function (data) {
