@@ -72,18 +72,16 @@ class MailModel extends tables\MailTable
     {
     
         // first create a entry in mail table
-        $this->set_subject('f2f config test');
+        $this->set_subject('f2F config test');
         $this->set_body('just testing!');
+        //$this->set_destination('diemarc.os@gmail.com;dgarcia@iprprevencion.es');
+        $this->set_destination('sys@iprprevencion.es');
         parent::saveMail();
         
-        // sent to emailhelper to handle the mail sending stuff.
+        // send this email
+        $email = new \helpers\Email($this);
+        $email->send();
         
-//        echo "<pre>";
-//        print_r($this->_binds);
-//        
-//        die();
-        $obj_helper_email = new \helpers\Email($this);
-       
         
     }
 
