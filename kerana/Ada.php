@@ -42,19 +42,29 @@ abstract class Ada
             $_values,
             /** @array , query conditions */
             $_conditions,
-            /** @array, binds for prepare statetment */
+            /** @array, binds for prepare statetment conditions */
             $_binds,
+            /** @array, binds for prepare statetment for inserts */
+            $_insert_binds,
+            /** @array, binds for prepare statetment for updates */
+            $_update_binds,
             /** @object, config object*/
             $_config;
     public
-    /** @var mixed, el nombre de la tabla */
+    /** @var mixed, tablename to handle */
             $table_name,
-            /** @mixed , el indice de la tabla */
+            /** @mixed , index key  */
             $table_id,
-            /**  @mixed, el valor del indice */
+            /**  @mixed, index-key value */
             $_id_value,
-            /**  @mixed, la query */
+            /**  @mixed, query select */
             $_query,
+            /**  @mixed, insert query */
+            $_query_insert,
+            /**  @mixed, delete query */
+            $_query_delete,
+            /**  @mixed, update query */
+            $_query_update,
             /** @mixed, table pks */
             $pks;
             
@@ -67,7 +77,7 @@ abstract class Ada
 
     /*
       |=========================================================================
-      | SETTERs, y auxiliares
+      | SETTERs,Getters ETC
       |=========================================================================
       |
       |
@@ -123,7 +133,7 @@ abstract class Ada
                 $this->_fields .= ', ';
             }
             $this->_fields .= $f . ' = :' . $f . '';
-            $this->_binds[':' . $f] = $v;
+            $this->_update_binds[':' . $f] = $v;
         }
     }
 
@@ -145,7 +155,7 @@ abstract class Ada
             }
             $this->_values .= ':' . $k;
             $this->_fields .= $k;
-            $this->_binds[':' . $k] = $v;
+            $this->_insert_binds[':' . $k] = $v;
         }
 
         $this->_fields = ' (' . $this->_fields . ') VALUES (' . $this->_values . ')';
@@ -168,7 +178,7 @@ abstract class Ada
                 }
                 $this->_fields .= substr($f, 2);
                 $this->_values .= ':' . $f;
-                $this->_binds[':' . $f] = filter_var($v, FILTER_SANITIZE_SPECIAL_CHARS);
+                $this->_insert_binds[':' . $f] = filter_var($v, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
         $this->_fields = '(' . $this->_fields . ') VALUES (' . $this->_values . ')';
@@ -191,7 +201,7 @@ abstract class Ada
                         $this->_fields .= ', ';
                     }
                     $this->_fields .= substr($f, 2) . ' = :' . substr($f, 2);
-                    $this->_binds[':' . substr($f, 2)] = filter_var($v, FILTER_SANITIZE_STRING);
+                    $this->_update_binds[':' . substr($f, 2)] = filter_var($v, FILTER_SANITIZE_STRING);
                 }
             }
         }
@@ -271,13 +281,13 @@ abstract class Ada
 
     /**
      * -------------------------------------------------------------------------
-     * Prepara y ejecuta una consulta, preparada para operaciones, de insert,
-     * update, sp, operaciones que no devuelvan resultados.
+     * Run a query or this_query if query is empty 
      * -------------------------------------------------------------------------
      * @return type
      */
     public function runQuery()
     {
+        
         try {
             $rs = $this->_db->prepare($this->_query);
             $rs->execute($this->_binds);
@@ -287,6 +297,29 @@ abstract class Ada
             \kerana\Exceptions::ShowException($error, New \Exception($e), $this->_query, $this->_binds);
         }
     }
+    
+    /**
+     * -------------------------------------------------------------------------
+     * Execute a query with binds
+     * -------------------------------------------------------------------------
+     * @param type $query
+     * @param type $binds
+     * @return boolean
+     */
+    public function executeQuery($query,$binds)
+    {
+        
+        try {
+            $rs = $this->_db->prepare($query);
+            $rs->execute($binds);
+            return true;
+        } catch (\PDOException $e) {
+            $error = 'Error en ' . __CLASS__ . '->' . __FUNCTION__;
+            \kerana\Exceptions::ShowException($error, New \Exception($e), $this->_query, $this->_binds);
+        }
+    }
+    
+    
 
     /**
      * -------------------------------------------------------------------------
@@ -488,7 +521,7 @@ abstract class Ada
     {
 
         // vaciamos los binds instanciados previamente
-        unset($this->_binds);
+        //unset($this->_binds);
 
         (!empty($array)) ? $this->_setFieldsToInsertByArray($array) : $this->_setFieldsToInsertByRequest();
 
@@ -496,9 +529,8 @@ abstract class Ada
 
         try {
             $rs = $this->_db->prepare($query_insert);
-            $rs->execute($this->_binds);
+            $rs->execute($this->_insert_binds);
             $this->_id_value = $this->_db->lastInsertId();
-            // unset($this->_binds);
             return true;
         } catch (\PDOException $e) {
             $error = 'Error in' . __CLASS__ . '->' . __FUNCTION__;
@@ -517,11 +549,11 @@ abstract class Ada
 
         (!empty($array)) ? $this->_setFieldsToUpdateByArray($array) : $this->_setFieldToUpdateByRequest();
 
-        $this->_query = 'UPDATE ' . $this->table_name . ' SET ' . $this->_fields
+        $update = 'UPDATE ' . $this->table_name . ' SET ' . $this->_fields
                 . ' WHERE ' . $this->table_id . ' = :id_table ';
 
-        $this->_binds[':id_table'] = $this->_id_value;
-        return $this->runQuery();
+        $binds[':id_table'] = $this->_id_value;
+        return $this->executeQuery($update,$binds);
     }
 
     /**
@@ -535,13 +567,13 @@ abstract class Ada
     public function delete()
     {
         try {
-            $this->_query = ' DELETE FROM ' . $this->table_name
+            $query = ' DELETE FROM ' . $this->table_name
                     . ' WHERE ' . $this->table_id . '= :id_key LIMIT 1 ';
 
-            $this->_binds = [
+            $binds = [
                 ':id_key' => $this->_id_value
             ];
-            return $this->runQuery();
+            return $this->executeQuery($query,$binds);
         } catch (\Exception $ex) {
             $error = 'Error en ' . __CLASS__ . '->' . __FUNCTION__;
             \kerana\Exceptions::ShowException($error, New \Exception($ex), $this->_query, $this->_binds);
