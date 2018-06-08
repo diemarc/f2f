@@ -17,7 +17,7 @@ function saveEmpresaFactura() {
             var json = $.parseJSON(data);
             // if is success
             if (json.success) {
-                assignClient(json.cliente, json.id_empresa);
+                assignClient(json.id_empresa);
                 $('#div_cliente_notfound').addClass('hidden');
                 $('#myModel').modal('hide');
                 // remove remote content from modal window
