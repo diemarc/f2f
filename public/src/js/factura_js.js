@@ -14,18 +14,18 @@ function saveEmpresaFactura() {
         data: $("#formNewEmpresa").serialize(), // Adjuntar los campos del formulario enviado.
         success: function (data)
         {
-           var json = $.parseJSON(data);
-           // if is success
-           if(json.success){
-               asignarEmpresa(json.cliente,json.id_empresa);
-               $('#div_cliente_notfound').addClass('hidden');
-               $('#myModel').modal('hide');
-               // remove remote content from modal window
-               $('#myModel').removeData('bs.modal');
-           }else{
-               alert('un error ocurrio');
-           }
-            
+            var json = $.parseJSON(data);
+            // if is success
+            if (json.success) {
+                assignClient(json.cliente, json.id_empresa);
+                $('#div_cliente_notfound').addClass('hidden');
+                $('#myModel').modal('hide');
+                // remove remote content from modal window
+                $('#myModel').removeData('bs.modal');
+            } else {
+                alert('un error ocurrio');
+            }
+
         },
         error: function (data) {
             alert('An Error occured, see the console.log');
