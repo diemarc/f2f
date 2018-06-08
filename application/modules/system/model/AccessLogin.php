@@ -48,18 +48,18 @@ class AccessLogin extends \Kerana\Ada
     public function registerAccessUser($id_user)
     {
 
-        $this->_query = ' INSERT INTO ' . $this->table_name . ' '
+        $query = ' INSERT INTO ' . $this->table_name . ' '
                 . ' (id_user,remote_address_access,time_access)'
                 . ' VALUES'
                 . ' (:id_user,INET_ATON(:ip),:time) ';
 
-        $this->_binds = [
+        $binds = [
             ':id_user' => filter_var($id_user, FILTER_SANITIZE_NUMBER_INT),
             ':ip' => filter_input(INPUT_SERVER, 'REMOTE_ADDR', FILTER_VALIDATE_IP),
             ':time' => time()
         ];
 
-        return $this->runQuery();
+        return $this->executeQuery($query,$binds);
     }
 
 }
