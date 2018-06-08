@@ -328,12 +328,15 @@ abstract class Ada
      * @param type $get_mode
      * @return boolean return
      */
-    public function getQuery($get_mode = 'all')
+    public function getQuery($get_mode = 'all',$query = '',$binds = '')
     {
 
+        $query_to_run = (empty($query)) ? $this->_query : $query;
+        $binds_to_apply = (empty($binds)) ? $this->_binds : $binds;
+        
         try {
-            $rs = $this->_db->prepare($this->_query);
-            $rs->execute($this->_binds);
+            $rs = $this->_db->prepare($query_to_run);
+            $rs->execute($binds_to_apply);
 
 
             switch ($get_mode) {
@@ -356,8 +359,8 @@ abstract class Ada
                     return $rs->rowCount();
             }
         } catch (\PDOException $e) {
-            $error = 'Error en ' . __CLASS__ . '->' . __FUNCTION__;
-            \kerana\Exceptions::ShowException($error, New \Exception($e), $this->_query, $this->_binds);
+            $error = 'oops ' . __CLASS__ . '->' . __FUNCTION__;
+            \kerana\Exceptions::ShowException($error, New \Exception($e), $query_to_run, $binds_to_apply);
         }
     }
 
