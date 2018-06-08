@@ -49,11 +49,27 @@ class Email
     {
         $this->_phpmailer = new \PHPMailer\PHPMailer\PHPMailer();
         $this->_object_mail_resource = $mail;
-        $this->_email_data = $this->_object_mail_resource->getMail();
-        $this->setupMailSeding();
+        $this->_email_data = $this->_object_mail_resource->getMailWithSettings();
+        $this->_setupMail();
+        $this->_setAddress();
     }
 
-    public function setupMailSeding()
+    /**
+     * -------------------------------------------------------------------------
+     * Send a email
+     * -------------------------------------------------------------------------
+     */
+    public function send()
+    {
+        $this->_phpmailer->send();
+    }
+
+    /**
+     * -------------------------------------------------------------------------
+     * Setup email settings to send emails
+     * -------------------------------------------------------------------------
+     */
+    private function _setupMail()
     {
 
         $this->_phpmailer->SMTPDebug = 3;
@@ -68,9 +84,30 @@ class Email
         $this->_phpmailer->FromName = 'f2f Team';
         $this->_phpmailer->Body = $this->_email_data->body;
         $this->_phpmailer->Subject = $this->_email_data->subject;
-        $this->_phpmailer->addAddress('diemarc.os@gmail.com');
-        $this->_phpmailer->send();
     }
 
+    /**
+     * -------------------------------------------------------------------------
+     * Set destinations
+     * -------------------------------------------------------------------------
+     */
+    private function _setAddress()
+    {
+
+        $address = explode(';', $this->_email_data->destination);
+        $bccs = explode(';', $this->_email_data->bcc);
+
+        // add address
+        foreach ($address AS $to):
+            $this->_phpmailer->addAddress($to);
+        endforeach;
+
+        // add bccs
+        if (!empty($bccs)) {
+            foreach ($bccs AS $bcc):
+                $this->_phpmailer->addBCC($bcc);
+            endforeach;
+        }
+    }
 
 }
