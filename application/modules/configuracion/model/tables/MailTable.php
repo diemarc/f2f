@@ -114,7 +114,7 @@ abstract class MailTable extends \kerana\Ada
         $query = 'SELECT A.id_email,A.id_mail_account,A.id_contratante,A.destination,A.bcc,'
                 . ' A.id_user,A.subject,A.body,A.created_at,A.created_by,B2.account,'
                 . ' B2.mail_address,B2.mail_username,B2.mail_password,B2.mail_smtp_server,'
-                . ' B2.mail_smtp_auth,B2.mail_smtp_port,B2.mail_from_name,'
+                . ' B2.mail_smtp_auth,B2.mail_smtp_port,B2.mail_from_name,B2.mail_smtp_secure,'
                 . ' CAST(AES_DECRYPT(B2.mail_password,:secret)AS CHAR) AS pass_decrypt'
                 . ' FROM sys_email A '
                 . ' INNER JOIN user_contratante_mail B ON (B.id_mail_account = A.id_mail_account) '
