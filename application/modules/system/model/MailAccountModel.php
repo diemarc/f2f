@@ -50,7 +50,7 @@ class MailAccountModel extends tables\MailAccountTable
         $this->set_account();
         $this->set_mail_address();
         $this->set_mail_username();
-        $this->set_mail_password();
+        //$this->set_mail_password();
         $this->set_mail_smtp_server();
         $this->set_mail_smtp_auth();
         $this->set_mail_smtp_port();
@@ -58,5 +58,25 @@ class MailAccountModel extends tables\MailAccountTable
 
         return parent::saveMailAccount();
     }
+    /**
+     * -------------------------------------------------------------------------
+     * Save post data
+     * -------------------------------------------------------------------------
+     */
+    public function updateAccount()
+    {
+        $this->set_account();
+        $this->set_mail_address();
+        $this->set_mail_username();
+        //$this->set_mail_password();
+        $this->set_mail_smtp_server();
+        $this->set_mail_smtp_auth();
+        $this->set_mail_smtp_port();
+        $this->set_mail_from_name();
 
+        return parent::updateMailAccount();
+    }
+
+    
+    
 }
