@@ -91,8 +91,9 @@ class MailconfigController extends \kerana\Kerana implements \kerana\KeranaInter
      */
     public function update($id)
     {
-        $this->_mailusercontratante->_setIdTableValue($id);
-        ($this->_mailusercontratante->savePost()) ? \helpers\Redirect::to('/configuracion/mailusercontratante/index') : '';
+        
+        $this->_mailusercontratante->objMailAccountModel->_setIdTableValue($id);
+        ($this->_mailusercontratante->objMailAccountModel->updateAccount()) ? \helpers\Redirect::to('/configuracion/mailconfig/detail/'.$id) : '';
     }
 
     /**
