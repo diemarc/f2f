@@ -41,17 +41,27 @@ class Email
             $_phpmailer,
             /** @var mixed, resultset for a datamail */
             $_email_data,
-            /** @var */
+            /** @array mail attachments */
+            $_attachments = [],
             /** @object , log model */
-            $_mail_log;
+            $_sys_log,
+            $_log_message,
+            $_log_successful;
 
     public function __construct(\kerana\Ada $mail)
     {
+        // create a new phpmailer object
         $this->_phpmailer = new \PHPMailer\PHPMailer\PHPMailer();
+
+        // create a new object mail,and get data
         $this->_object_mail_resource = $mail;
         $this->_email_data = $this->_object_mail_resource->getMailWithSettings();
+
+        // object syslog
+        $this->_sys_log = new \application\modules\system\model\SyslogModel();
+
+        // set the mail stuff,settings,mails,addres,etc
         $this->_setupMail();
-        $this->_setAddress();
     }
 
     /**
@@ -61,7 +71,17 @@ class Email
      */
     public function send()
     {
-        $this->_phpmailer->send();
+
+        $this->_checkAndAddAttachments();
+        if ($this->_phpmailer->send()) {
+            $this->_log_successful = '1'; // successfully
+            $this->_log_message = 'Mail ' . $this->_email_data->id_email . ' sended ';
+            $this->_registerLogMail();
+        } else {
+            $this->_log_successful = '2'; //error 
+            $this->_log_message = 'Mail ' . $this->_email_data->id_email . ' failed to send with response "' . $this->_phpmailer->ErrorInfo . ' "';
+            $this->_registerLogMail();
+        }
     }
 
     /**
@@ -78,12 +98,14 @@ class Email
         $this->_phpmailer->SMTPAuth = $this->_email_data->mail_smtp_auth;
         $this->_phpmailer->Username = $this->_email_data->mail_username;
         $this->_phpmailer->Password = $this->_email_data->pass_decrypt;
+        $this->_phpmailer->SMTPSecure = $this->_email_data->mail_smtp_secure;
         $this->_phpmailer->Port = $this->_email_data->mail_smtp_port;
         $this->_phpmailer->isHTML(true);
         $this->_phpmailer->From = $this->_email_data->mail_address;
         $this->_phpmailer->FromName = $this->_email_data->mail_from_name;
         $this->_phpmailer->Body = $this->_email_data->body;
         $this->_phpmailer->Subject = $this->_email_data->subject;
+        $this->_setAddress();
     }
 
     /**
@@ -99,16 +121,66 @@ class Email
 
         // add address
         foreach ($address AS $to):
-            \helpers\Validator::valVarchar('email',$to);
-            $this->_phpmailer->addAddress($to);
+            if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
+                \kerana\Exceptions::showError('Mailing', $to . ' is not a valid email...');
+            } else {
+                $this->_phpmailer->addAddress($to);
+            }
+
         endforeach;
 
         // add bccs
         if (!empty($bccs)) {
             foreach ($bccs AS $bcc):
-                $this->_phpmailer->addBCC($bcc);
+                if (!filter_var($bcc, FILTER_VALIDATE_EMAIL)) {
+                    \kerana\Exceptions::showError('Mailing', $bcc . ' is not a valid email...');
+                } else {
+                    $this->_phpmailer->addBCC($bcc);
+                }
+
             endforeach;
         }
+    }
+
+    /**
+     * -------------------------------------------------------------------------
+     * Check And set the availables attachments
+     * -------------------------------------------------------------------------
+     */
+    private function _checkAndAddAttachments()
+    {
+        if (count($this->_attachments) > 0) {
+            foreach ($this->_attachments AS $attach):
+                $this->_phpmailer->addAttachment(__DOCUMENTROOT__ . '/../data/' . $attach);
+            endforeach;
+        }
+
+    }
+
+    /**
+     * -------------------------------------------------------------------------
+     * Add attachments
+     * -------------------------------------------------------------------------
+     */
+    public function setAttachment($file)
+    {
+        $attachment = realpath(__DOCUMENTROOT__ . '/../data/' . $file);
+        if (!empty($attachment)) {
+            array_push($this->_attachments, $file);
+        }
+    }
+
+    /**
+     * -------------------------------------------------------------------------
+     * Add entry to log system
+     * -------------------------------------------------------------------------
+     */
+    private function _registerLogMail()
+    {
+        $this->_sys_log->set_log_type('email');
+        $this->_sys_log->set_message_log($this->_log_message);
+        $this->_sys_log->set_sw_successful($this->_log_successful);
+        $this->_sys_log->saveSyslog();
     }
 
 }
