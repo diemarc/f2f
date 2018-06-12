@@ -54,6 +54,8 @@ abstract class MailAccountTable extends \kerana\Ada
             $_mail_smtp_port,
             /** @var varchar(45), $mail_from_name  */
             $_mail_from_name,
+            /** @var varchar(45), $mail_smtp_secure  */
+            $_mail_smtp_secure,
             /** Master query for mailaccount */
             $_query_mailaccount;
     public
@@ -72,7 +74,7 @@ abstract class MailAccountTable extends \kerana\Ada
 
         $this->_query = ' SELECT A.id_mail_account,A.account,A.mail_address,'
                 . ' A.mail_username,A.mail_password,A.mail_smtp_server,A.mail_smtp_auth,'
-                . ' A.mail_smtp_port,A.mail_from_name'
+                . ' A.mail_smtp_port,A.mail_from_name,A.mail_smtp_secure '
                 . ' FROM sys_mail_account A '
                 . ' WHERE A.id_mail_account IS NOT NULL ';
     }
@@ -101,19 +103,19 @@ abstract class MailAccountTable extends \kerana\Ada
      */
     public function saveMailAccount()
     {
-        
-        $this->_query = 'INSERT INTO '.$this->table_name.' '
+
+        $this->_query = 'INSERT INTO ' . $this->table_name . ' '
                 . '('
                 . ' account,mail_address,mail_username, mail_password,mail_smtp_server,'
-                . ' mail_smtp_auth,mail_smtp_port,mail_from_name'
+                . ' mail_smtp_auth,mail_smtp_port,mail_from_name,mail_smtp_secure'
                 . ')'
                 . ' VALUES '
-                 . '('
+                . '('
                 . ' :account,:mail_address,:mail_username, AES_ENCRYPT(:password,:aes_key),'
                 . ' :mail_smtp_server,'
-                . ' :mail_smtp_auth,:mail_smtp_port,:mail_from_name'
+                . ' :mail_smtp_auth,:mail_smtp_port,:mail_from_name,:mail_smtp_secure'
                 . ')';
-        
+
         $this->_binds = [
             ':account' => $this->_account,
             ':mail_address' => $this->_mail_address,
@@ -122,13 +124,35 @@ abstract class MailAccountTable extends \kerana\Ada
             ':mail_smtp_auth' => 1,
             ':mail_smtp_port' => $this->_mail_smtp_port,
             ':mail_from_name' => $this->_mail_from_name,
+            ':mail_smp_secure' => $this->_mail_smtp_secure,
             ':password' => $this->_mail_password,
             ':aes_key' => $this->_config->get('_aeskey_')
         ];
-        
-        if(parent::runQuery()){
+
+        if (parent::runQuery()) {
             $this->set_id_mail_account($this->_db->lastInsertId());
         }
+    }
+
+    /**
+     * -------------------------------------------------------------------------
+     * Insert/update new record into sys_mail_account
+     * -------------------------------------------------------------------------
+     * @return boolean
+     */
+    public function updateMailAccount()
+    {
+        $data = [
+            'account' => $this->_account,
+            'mail_address' => $this->_mail_address,
+            'mail_username' => $this->_mail_username,
+            'mail_smtp_server' =>  $this->_mail_smtp_server,
+            'mail_smtp_auth' =>  $this->_mail_smtp_auth,
+            'mail_smtp_port' =>  $this->_mail_smtp_port,
+            'mail_from_name' =>  $this->_mail_from_name,
+            'mail_smtp_secure' => $this->_mail_smtp_secure,
+        ];
+        return parent::save($data,false);
     }
 
     /*
@@ -204,6 +228,16 @@ abstract class MailAccountTable extends \kerana\Ada
     {
         $this->_mail_smtp_server = \helpers\Validator::valVarchar('f_mail_smtp_server', $value, true);
     }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for mail_smtp_secure
+     * ------------------------------------------------------------------------- 
+     * @param varchar $value the mail_smtp_server value 
+     */
+    public function set_mail_smtp_secure($value = "")
+    {
+        $this->_mail_smtp_secure = \helpers\Validator::valVarchar('f_mail_smtp_secure', $value, false);
+    }
 
     /**
      * ------------------------------------------------------------------------- 
@@ -226,8 +260,8 @@ abstract class MailAccountTable extends \kerana\Ada
     {
         $this->_mail_smtp_port = \helpers\Validator::valInt('f_mail_smtp_port', $value, true);
     }
-    
-     /**
+
+    /**
      * ------------------------------------------------------------------------- 
      * Setter for mail_from_name
      * ------------------------------------------------------------------------- 
@@ -310,6 +344,16 @@ abstract class MailAccountTable extends \kerana\Ada
     {
         return (isset($this->_mail_smtp_server)) ? $this->_mail_smtp_server : null;
     }
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for mail_smtp_secure
+     * ------------------------------------------------------------------------- 
+     * @return varchar $value  
+     */
+    public function get_mail_smtp_secure()
+    {
+        return (isset($this->_mail_smtp_secure)) ? $this->_mail_smtp_secure : null;
+    }
 
     /**
      * ------------------------------------------------------------------------- 
@@ -321,7 +365,7 @@ abstract class MailAccountTable extends \kerana\Ada
     {
         return (isset($this->_mail_smtp_auth)) ? $this->_mail_smtp_auth : null;
     }
-    
+
     /**
      * ------------------------------------------------------------------------- 
      * Getter for mail_from_name
