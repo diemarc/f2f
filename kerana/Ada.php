@@ -315,7 +315,7 @@ abstract class Ada
             return true;
         } catch (\PDOException $e) {
             $error = 'Error en ' . __CLASS__ . '->' . __FUNCTION__;
-            \kerana\Exceptions::ShowException($error, New \Exception($e), $this->_query, $this->_binds);
+            \kerana\Exceptions::ShowException($error, New \Exception($e), $query, $binds);
         }
     }
     
@@ -550,11 +550,13 @@ abstract class Ada
     public function update($array = '')
     {
 
+        
         (!empty($array)) ? $this->_setFieldsToUpdateByArray($array) : $this->_setFieldToUpdateByRequest();
 
         $update = 'UPDATE ' . $this->table_name . ' SET ' . $this->_fields
                 . ' WHERE ' . $this->table_id . ' = :id_table ';
 
+        $binds = $this->_update_binds;
         $binds[':id_table'] = $this->_id_value;
         return $this->executeQuery($update,$binds);
     }
