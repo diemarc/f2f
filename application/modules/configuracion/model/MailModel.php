@@ -75,12 +75,15 @@ class MailModel extends tables\MailTable
         $this->set_subject('f2F config test');
         $this->set_body('just testing!');
         //$this->set_destination('diemarc.os@gmail.com;dgarcia@iprprevencion.es');
-        $this->set_destination('sys@iprprevencion.es');
+        $this->set_destination('sys@iprpsdrevencion.es');
+       
         parent::saveMail();
         
         // send this email
         $email = new \helpers\Email($this);
-        $email->send();
+        $email->setAttachment('add.pdf');
+       // $email->setAttachments('add3.pdf');
+       // $email->send();
         
         
     }
