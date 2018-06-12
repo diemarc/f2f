@@ -19,6 +19,7 @@
  */
 
 namespace application\modules\configuracion\model\tables;
+
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
@@ -31,47 +32,40 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
   |
  */
 
-abstract class ServiciotasaTable extends \kerana\Ada {
+abstract class ServiciotasaTable extends \kerana\Ada
+{
 
     protected
-    /** @var int(11), $id_servicio  */ 
-$_id_servicio, 
-/** @var int(11), $id_tasa  */ 
-$_id_tasa,
-            
+    /** @var int(11), $id_servicio  */
+            $_id_servicio,
+            /** @var int(11), $id_tasa  */
+            $_id_tasa,
             /** Master query for serviciotasa */
             $_query_serviciotasa;
-    
-    
-
-    public 
-            /** @array data matching attributes with table field */
+    public
+    /** @array data matching attributes with table field */
             $data_serviciotasa;
-    
-     public function __construct()
+
+    public function __construct()
     {
         parent::__construct();
         $this->table_name = 'f_servicios_tasas';
         $this->table_id = 'id_servicio';
-        
+
         $this->pks = [
-          'id_servicio'=> $this->_id_servicio,
-'id_tasa'=> $this->_id_tasa,
-  
+            'id_servicio' => $this->_id_servicio,
+            'id_tasa' => $this->_id_tasa,
         ];
-        
-        $this->_query = ' SELECT A.id_servicio,A.id_tasa,B.tasa,B.porcentaje,C.id_subclase,C.servicio,C.descripcion,C.precio,C.created_at,C.created_by,C3.subclase,C34.clase' 
-.' FROM f_servicios_tasas A '
- .' INNER JOIN aux_tasas B ON (B.id_tasa = A.id_tasa) ' 
 
- .' INNER JOIN f_servicios C ON (C.id_servicio = A.id_servicio) ' 
-.' INNER JOIN aux_subclases C3 ON (C3.id_subclase = C.id_subclase) ' 
-.' INNER JOIN aux_clases C34 ON (C34.id_clases = C3.id_clases) ' 
-
- .' WHERE A.id_servicio IS NOT NULL ';  
+        $this->_query = ' SELECT A.id_servicio,A.id_tasa,B.tasa,B.porcentaje,C.id_subclase,C.servicio,C.descripcion,C.precio,C.created_at,C.created_by,C3.subclase,C34.clase'
+                . ' FROM f_servicios_tasas A '
+                . ' INNER JOIN aux_tasas B ON (B.id_tasa = A.id_tasa) '
+                . ' INNER JOIN f_servicios C ON (C.id_servicio = A.id_servicio) '
+                . ' INNER JOIN aux_subclases C3 ON (C3.id_subclase = C.id_subclase) '
+                . ' INNER JOIN aux_clases C34 ON (C34.id_clases = C3.id_clases) '
+                . ' WHERE A.id_servicio IS NOT NULL ';
     }
 
-    
     /*
       |-------------------------------------------------------------------------
       | SELECT-METHODS
@@ -79,15 +73,14 @@ $_id_tasa,
       |
      */
 
-    
-    
-    /*
-     |-------------------------------------------------------------------------
-     | INSERT-UPDATE-METHODS
-     |-------------------------------------------------------------------------
-     |
-    */
 
+
+    /*
+      |-------------------------------------------------------------------------
+      | INSERT-UPDATE-METHODS
+      |-------------------------------------------------------------------------
+      |
+     */
 
     /**
      * -------------------------------------------------------------------------
@@ -95,72 +88,72 @@ $_id_tasa,
      * -------------------------------------------------------------------------
      * @return boolean
      */
-    public function saveServiciotasa(){
-        
-        $data_insert =  [
-            'id_servicio' =>$this->_id_servicio,
-'id_tasa' =>$this->_id_tasa,
-  
+    public function saveServiciotasa()
+    {
+
+        $data_insert = [
+            'id_servicio' => $this->_id_servicio,
+            'id_tasa' => $this->_id_tasa,
         ];
-          return parent::save($data_insert);
-        
+        return parent::save($data_insert);
     }
-    
-    
-    
-    
- /*
-  |-------------------------------------------------------------------------
-  | SETTERS
-  |-------------------------------------------------------------------------
-  | 
- */
 
- /** 
-* ------------------------------------------------------------------------- 
-* Setter for id_servicio
-* ------------------------------------------------------------------------- 
-* @param int $value the id_servicio value 
-*/ 
- public function set_id_servicio($value = ""){ 
- $this->_id_servicio= \helpers\Validator::valInt('f_id_servicio',$value,TRUE);
-}
-/** 
-* ------------------------------------------------------------------------- 
-* Setter for id_tasa
-* ------------------------------------------------------------------------- 
-* @param int $value the id_tasa value 
-*/ 
- public function set_id_tasa($value = ""){ 
- $this->_id_tasa= \helpers\Validator::valInt('f_id_tasa',$value,TRUE);
-}
+    /*
+      |-------------------------------------------------------------------------
+      | SETTERS
+      |-------------------------------------------------------------------------
+      |
+     */
 
-    
-    
- 
- /*
-  |-------------------------------------------------------------------------
-  | GETTERS
-  |-------------------------------------------------------------------------
-  | 
- */
- /** 
-* ------------------------------------------------------------------------- 
-* Getter for id_servicio
-* ------------------------------------------------------------------------- 
-* @return int $value  
-*/ 
- public function get_id_servicio(){ 
- return (isset($this->_id_servicio)) ? $this->_id_servicio: null;
-}
-/** 
-* ------------------------------------------------------------------------- 
-* Getter for id_tasa
-* ------------------------------------------------------------------------- 
-* @return int $value  
-*/ 
- public function get_id_tasa(){ 
- return (isset($this->_id_tasa)) ? $this->_id_tasa: null;
-}
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for id_servicio
+     * ------------------------------------------------------------------------- 
+     * @param int $value the id_servicio value 
+     */
+    public function set_id_servicio($value = "")
+    {
+        $this->_id_servicio = \helpers\Validator::valInt('f_id_servicio', $value, TRUE);
+    }
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Setter for id_tasa
+     * ------------------------------------------------------------------------- 
+     * @param int $value the id_tasa value 
+     */
+    public function set_id_tasa($value = "")
+    {
+        $this->_id_tasa = \helpers\Validator::valInt('f_id_tasa', $value, TRUE);
+    }
+
+    /*
+      |-------------------------------------------------------------------------
+      | GETTERS
+      |-------------------------------------------------------------------------
+      |
+     */
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for id_servicio
+     * ------------------------------------------------------------------------- 
+     * @return int $value  
+     */
+    public function get_id_servicio()
+    {
+        return (isset($this->_id_servicio)) ? $this->_id_servicio : null;
+    }
+
+    /**
+     * ------------------------------------------------------------------------- 
+     * Getter for id_tasa
+     * ------------------------------------------------------------------------- 
+     * @return int $value  
+     */
+    public function get_id_tasa()
+    {
+        return (isset($this->_id_tasa)) ? $this->_id_tasa : null;
+    }
 
 }
