@@ -21,7 +21,7 @@
                     </h3>
                 </div>
                 <div class="box-body">
-                    <form action="<?php echo __URL__; ?>/configuracion/mailconfig/save" 
+                    <form action="<?php echo __URL__; ?>/configuracion/mailconfig/update/<?php echo $rsMailConfig->id_mail_account; ?>" 
                           id="formNewEmpresa" name="formNewEmpresa" method="POST" class="form-horizontal"
                           accept-charset="utf-8">
                               <?php echo $kerana_token; ?>
@@ -70,20 +70,10 @@
 
                         <div class='form-group form-group-sm'> 
                             <label for='f_mail_username' class='col-sm-2 control-label'>Usuario</label> 
-                            <div class='col-sm-2'> 
+                            <div class='col-sm-4'> 
                                 <div class='input-group col-sm-8'> 
                                     <input type="text" id="f_mail_username" name="f_mail_username" 
                                            class="form-control" required value="<?php echo $rsMailConfig->mail_username; ?>"  />
-                                </div> 
-                            </div> 
-                        </div> 
-                        <div class='form-group form-group-sm'> 
-                            <label for='f_mail_password' class='col-sm-2 control-label'>Password</label> 
-                            <div class='col-sm-2'> 
-                                <div class='input-group col-sm-8'> 
-                                    <input type="password" id="f_mail_password" name="f_mail_password" 
-                                           class="form-control"  maxlength="100" required  value="<?php echo $rsMailConfig->pass_decrypt;?>" />
-                                     <span class="input-group-addon"><i class="fa fa-eye" ></i></span>
                                 </div> 
                             </div> 
                         </div> 
@@ -103,6 +93,18 @@
                                     <input type="number" id="f_mail_smtp_port" 
                                            name="f_mail_smtp_port" class="form-control" 
                                            maxlength="20" value="587" required value="<?php echo $rsMailConfig->mail_smtp_port; ?>" />
+                                </div> 
+                            </div> 
+                        </div> 
+                        <div class='form-group form-group-sm'> 
+                            <label for='f_mail_smtp_secure' class='col-sm-2 control-label'>SmtpSecure</label> 
+                            <div class='col-sm-2'> 
+                                <div class='input-group col-sm-8'> 
+                                    <select name="f_mail_smtp_secure" id="f_mail_smtp_secure" class="form-control">
+                                        <option value="" <?php echo (empty($rsMailConfig->mail_smtp_secure)) ? 'selected' : '';?>></option>
+                                        <option value="tls" <?php echo ($rsMailConfig->mail_smtp_secure == 'tls') ? 'selected' : '';?>>TLS</option>
+                                        <option value="ssl" <?php echo ($rsMailConfig->mail_smtp_secure == 'ssl') ? 'selected' : '';?>>SSL</option>
+                                    </select>
                                 </div> 
                             </div> 
                         </div> 
