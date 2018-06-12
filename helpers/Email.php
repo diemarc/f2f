@@ -99,6 +99,7 @@ class Email
 
         // add address
         foreach ($address AS $to):
+            \helpers\Validator::valVarchar('email',$to);
             $this->_phpmailer->addAddress($to);
         endforeach;
 
