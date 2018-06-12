@@ -65,4 +65,5 @@ class MailUserContratanteModel extends tables\MailUserContratanteTable
         return parent::saveMailUserContratante();
     }
 
+    
 }
