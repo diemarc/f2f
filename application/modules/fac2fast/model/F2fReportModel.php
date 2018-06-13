@@ -35,8 +35,6 @@ class F2fReportModel extends FacturaServicioModel
 
     /** @object, pdf helper instance */
             $_pdf,
-            /** @var string , name of doc to generate */
-            $_factura_name = 'factura_f2f',
             /** @object informe contratante */
             $_objInformeContratante;
 
@@ -53,7 +51,7 @@ class F2fReportModel extends FacturaServicioModel
      * -------------------------------------------------------------------------
      * @param type $id
      */
-    public function parseFactura($id)
+    public function parseFactura($id,$mode = 'D')
     {
         $this->setIdFactura($id);
 
@@ -61,11 +59,9 @@ class F2fReportModel extends FacturaServicioModel
         $params_to_pdf = $this->getFacturaDetails();
         
         $this->_pdf->setTemplate($params_to_pdf['rsFactura']->template_to_use);
-        $this->_pdf->setName($this->_factura_name);
-        // set te params to render in template pdf.
+        $this->_pdf->setName($params_to_pdf['rsFactura']->num_factura);
+        $this->_pdf->setMode($mode);
         $this->_pdf->setParams($params_to_pdf);
-
-        // parse to pdf
         $this->_pdf->parsePdf();
     }
 
