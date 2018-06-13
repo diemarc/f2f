@@ -88,14 +88,15 @@ abstract class FacturaTable extends \kerana\Ada
                 . ' B24.poblacion AS poblacion_contratante,'
                 . ' B24.provincia AS provincia_contratante,B24.ccaa AS ccaa_contrante,B24.pais as pais_contratante,'
                 . ' B24.cod_poblacion AS cod_poblacion_contratante ,B24.cod_provincia AS cod_provincia_contratante,'
-                . ' B24.cod_ccaa AS cod_ccaa_contratante,B24.cod_pais AS Cod_pail_contratante,'
+                . ' B24.cod_ccaa AS cod_ccaa_contratante,B24.cod_pais AS sod_pais_contratante,'
                 . ' B3.cif,B3.empresa,B3.razon_social,'
                 . ' B3.id_poblacion,B3.direccion,'
                 . ' B3.telefono,B3.email,B3.contacto,B3.cta_bancaria,B3.observacion,'
                 . ' B3.created_at AS created_at_empresa, '
                 . ' B3.created_by AS create_by_empresa,'
                 . ' B35.poblacion,B35.provincia,B35.ccaa,B35.pais,'
-                . ' B35.cod_poblacion,B35.cod_provincia,B35.cod_ccaa,B35.cod_pais,C.formapago,D.tipo AS tipo_factura'
+                . ' B35.cod_poblacion,B35.cod_provincia,B35.cod_ccaa,B35.cod_pais,C.formapago,D.tipo AS tipo_factura,'
+                . ' IF(F.template_contratante_informe = "",E.default_template,F.template_contratante_informe) AS template_to_use'
                 . ' FROM f_facturas A '
                 . ' INNER JOIN a_empresa_contratante B ON (B.id_empresa = A.id_empresa) '
                 . ' INNER JOIN a_contratantes B2 ON (B2.id_contratante = B.id_contratante) '
@@ -104,8 +105,10 @@ abstract class FacturaTable extends \kerana\Ada
                 . ' INNER JOIN aux_poblaciones B35 ON (B35.id_poblacion = B3.id_poblacion) '
                 . ' INNER JOIN f_formas_pago C ON (C.id_pago = A.id_pago) '
                 . ' INNER JOIN f_tipo D ON (D.id_tipo = A.id_tipo) '
+                . ' LEFT JOIN aux_informes E ON (A.id_tipo = E.id_tipo) '
+                . ' LEFT JOIN aux_informes_contratantes F ON (A.id_contratante = F.id_contratante AND E.id_aux_informe = F.id_aux_informe) '
                 . ' WHERE A.id_facturas IS NOT NULL '
-                . ' AND A.id_contratante = '.$this->get_id_contratante();
+                . ' AND A.id_contratante = ' . $this->get_id_contratante();
     }
 
     /*
@@ -144,7 +147,7 @@ abstract class FacturaTable extends \kerana\Ada
             'created_at' => $this->_created_at,
             'created_by' => $this->_created_by,
         ];
-        return parent::save($data_insert,false);
+        return parent::save($data_insert, false);
     }
 
     /*
@@ -219,15 +222,15 @@ abstract class FacturaTable extends \kerana\Ada
     public function set_num_factura($value = "")
     {
         // first get the year of the fecha_factura date
-        $parts = explode('-',$this->_fecha_factura);
-        
+        $parts = explode('-', $this->_fecha_factura);
+
         $this->_query = ' SELECT getCodeFactura(:id_c,:tipo,:ano) AS code_factura ';
         $this->_binds = [
             ':id_c' => $this->_id_contratante,
             ':tipo' => $this->_id_tipo,
             ':ano' => $parts[0]
         ];
-        
+
         $rs = $this->getQuery('one');
         $this->_num_factura = $rs->code_factura;
     }
