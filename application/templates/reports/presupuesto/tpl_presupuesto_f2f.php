@@ -54,7 +54,7 @@
         writing-mode: vertical-lr;
         transform: rotate(180deg);
     }
--->
+    -->
 </style>
 <page backtop="35mm" backbottom="2mm" backleft="20mm" backright="10mm" style="font-size: 13px"
       footer="date;time;page">
@@ -83,6 +83,7 @@
         </table>
         <hr/>
     </page_header>
+    <h2>PRESUPUESTO</h2>
     <h4>Datos de cliente</h4>
     <table cellspacing="0" cellpadding="0" class="bordered" style="width: 95%">
         <tr>
@@ -118,7 +119,7 @@
     <table cellspacing="0" cellpadding="0" border="0" width="80%">
         <tr>
 
-            <td>Fecha de factura:</td>
+            <td>Fecha de presupuesto:</td>
             <td><strong><?php echo $rsFactura->fecha_factura; ?></strong></td>
             <!--<td><strong><?php echo date_format($rsFactura->fecha_factura, 'd/m/Y H:i:s'); ?></strong></td>-->
         </tr>
@@ -156,7 +157,7 @@
                     </td>
 
                     <td style="text-align: right; width: 15%">
-                        <?php echo number_format((($servicio->precio)*($servicio->cantidad)), 2, ',', ' '); ?>&euro;
+                        <?php echo number_format((($servicio->precio) * ($servicio->cantidad)), 2, ',', ' '); ?>&euro;
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -174,42 +175,16 @@
         </tr>
     </table>
 
-    <table class="bordered" style="width:95%">
 
-        <thead>
-            <tr>
-                <td class="title" style="width:25%; text-align: center">Bases</td>
-                <td class="title" style="width:10%; text-align: center">IVA</td>
-                <td class="title" style="width:25%; text-align: center">Cuota</td>
-                <td class="title" style="width:10%; text-align: center">Retención</td>
-                <td class="title" style="width:25%; text-align: center">Cuota</td>
-            </tr>
-        </thead>
-
-        <tbody>
-            <?php foreach ($rsImpuestos AS $impuesto): ?>
-                <tr>
-                    <td style="text-align: right"><?php echo number_format(($impuesto->bases), 2, ',', '.'); ?>&euro;</td>
-                    <td style="text-align: right"><?php echo number_format(($impuesto->iva_por), 0) . ' %'; ?></td> 
-                    <td style="text-align: right"><?php echo number_format(($impuesto->cuota), 2, ',', '.'); ?>&euro;</td> 
-                    <td style="text-align: right"><?php echo number_format(($impuesto->retencion_por), 0) . ' %'; ?></td> 
-                    <td style="text-align: right"><?php echo number_format(($impuesto->retencion), 2, ',', '.'); ?>&euro;</td> 
-                </tr>
-
-            <?php endforeach; ?>
-
-        </tbody>
-
-    </table>
-    
     <table>
         <?php foreach ($rsFacturasServicios AS $servicio): ?>
             <tr>
                 <td style="width:95%; text-align: left"><?php
                     if ($servicio->iva == '0') {
 
-                        echo "La partida ".$servicio->servicio." está exenta de IVA (artículo 20) - Ley 37/1992.";
-                    }?>
+                        echo "La partida " . $servicio->servicio . " está exenta de IVA (artículo 20) - Ley 37/1992.";
+                    }
+                    ?>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -251,6 +226,6 @@
         </div>
     </page_footer>
 
-   
-    
+
+
 </page>
