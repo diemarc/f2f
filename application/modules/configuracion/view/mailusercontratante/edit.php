@@ -88,7 +88,7 @@
                         </div> 
                         <div class='form-group form-group-sm'> 
                             <label for='f_mail_smtp_port' class='col-sm-2 control-label'>Puerto de salida</label> 
-                            <div class='col-sm-1'> 
+                            <div class='col-sm-2'> 
                                 <div class='input-group col-sm-8'> 
                                     <input type="number" id="f_mail_smtp_port" 
                                            name="f_mail_smtp_port" class="form-control" 
