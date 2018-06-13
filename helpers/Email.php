@@ -117,7 +117,7 @@ class Email
     {
 
         $address = explode(';', $this->_email_data->destination);
-        $bccs = explode(';', $this->_email_data->bcc);
+        $bccs = (!empty($this->_email_data->bcc)) ? explode(';', $this->_email_data->bcc) : '';
 
         // add address
         foreach ($address AS $to):
@@ -133,7 +133,7 @@ class Email
         if (!empty($bccs)) {
             foreach ($bccs AS $bcc):
                 if (!filter_var($bcc, FILTER_VALIDATE_EMAIL)) {
-                    \kerana\Exceptions::showError('Mailing', $bcc . ' is not a valid email...');
+                    \kerana\Exceptions::showError('Mailing', $bcc . ' is not a valid email... in BCC');
                 } else {
                     $this->_phpmailer->addBCC($bcc);
                 }
