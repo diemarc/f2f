@@ -30,7 +30,7 @@
                                                 <i class="fa fa-edit text-primary"></i>
                                                 <span class="text-primary">Editar</span>
                                             </a>
-                                            <a href="<?php echo __URL__ . '/fac2fast/f2fInformes/generar/' . $rsFactura->id_facturas.'/'.$rsFactura->id_tipo; ?>" 
+                                            <a href="<?php echo __URL__ . '/fac2fast/f2fInformes/generar/' . $rsFactura->id_facturas; ?>" 
                                                class="btn btn-sm btn-app" title="Descargar factura">
                                                 <i class="fa fa-file-pdf-o text-danger"></i>
                                                 <span class="text-danger">Descargar</span>
