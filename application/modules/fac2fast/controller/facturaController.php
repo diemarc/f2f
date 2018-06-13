@@ -73,6 +73,7 @@ class FacturaController extends \kerana\Kerana implements \kerana\KeranaInterfac
      */
     public function detail($id)
     {
+        
         // instance of facturaservicio object
         $objFacturaServicio = new \application\modules\fac2fast\model\FacturaServicioModel();
         $objFacturaServicio->setIdFactura($id);
