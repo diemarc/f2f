@@ -38,7 +38,6 @@
                                   <?php echo $kerana_token; ?>
                             <input type="hidden" required name="f_id_empresa" id="f_id_empresa" value="" />
                             <input type="hidden"name="f_id_tipo" id="f_id_tipo" value="1" />
-                            <input type="hidden"name="f_id_empresa" id="f_id_empresa" value="" />
                             <input type="hidden" step="0.01" id="sw_total_factura" value="" />
                             <input type="hidden" step="0.01" id="sw_total_impuesto" value="" />
                             <input type="hidden"name="f_id_contratante" id="f_id_contratante" 
