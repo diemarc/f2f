@@ -59,17 +59,14 @@ class InformeContratanteModel extends tables\InformeContratanteTable
      */
     public function getTemplateInformeContratante()
     {
-
-        $rsInforme = $this->find('A.default_template,A.template_contratante_informe', 
-                [
-                    'id_contratante' => $this->get_id_contratante(),
-                    'id_aux_informe' => $this->get_id_aux_informe(), 
-                    'estado_informe_contratante' => 1
+        $rsInforme = $this->find('A.default_template,A.template_contratante_informe', [
+            'id_contratante' => $this->get_id_contratante(),
+            'id_aux_informe' => $this->get_id_aux_informe(),
+            'estado_informe_contratante' => 1
                 ]
         );
-        
-       return (empty($rsInforme->template_contratante_informe)) ? $rsInforme->default_template : $rsInforme->template_contratante_informe;
-       
+
+        return (empty($rsInforme->template_contratante_informe)) ? $rsInforme->default_template : $rsInforme->template_contratante_informe;
     }
 
     /**

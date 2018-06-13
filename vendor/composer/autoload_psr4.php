@@ -10,4 +10,5 @@ return array(
     'helpers\\' => array($baseDir . '/helpers'),
     'application\\' => array($baseDir . '/application'),
     'Spipu\\Html2Pdf\\' => array($vendorDir . '/spipu/html2pdf/src'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
 );

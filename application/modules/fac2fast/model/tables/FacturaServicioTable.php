@@ -364,10 +364,10 @@ abstract class FacturaServicioTable extends \kerana\Ada
     public function queryImpuestosFactura()
     {
         $this->_query = 'SELECT SUM(precio * cantidad) AS bases, '
-                . ' SUM(precio * cantidad* iva) AS cuota, '
-                . ' SUM(precio * cantidad * retencion) AS retencion,'
-                . ' facturas_id_facturas,(iva * 100) AS iva_por ,'
-                . ' (retencion * 100) AS retencion_por, '
+                . ' SUM(precio * cantidad * (iva/100)) AS cuota, '
+                . ' SUM(precio * cantidad * (retencion/100)) AS retencion,'
+                . ' facturas_id_facturas,(iva ) AS iva_por ,'
+                . ' (retencion ) AS retencion_por, '
                 . ' SUM(((precio*cantidad)*(1+iva))-((precio*cantidad*retencion))) AS sum_total'
                 . ' FROM factufacil.f_facturas_servicios '
                 . ' WHERE facturas_id_facturas = :id_facturas'

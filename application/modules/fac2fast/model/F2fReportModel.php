@@ -42,7 +42,7 @@ class F2fReportModel extends FacturaServicioModel
             /** @object informe contratante */
             $_objInformeContratante;
 
-    public function __construct()
+    public function __construct($tipo)
     {
         parent::__construct();
         
@@ -50,7 +50,7 @@ class F2fReportModel extends FacturaServicioModel
         // asi el helper pdf sabe que template cargar segun el informe y el contratante,
         // de momento solo saca template para factura id_aux_informe = 1
         // si hay mas informes entonces hay que enviarlo como parametro, simple!!
-        $this->_objInformeContratante = new \application\modules\configuracion\model\InformeContratanteModel();
+        $this->_objInformeContratante = new \application\modules\configuracion\model\InformeContratanteModel($tipo);
       
         $this->_pdf = new \helpers\Pdf($this->_objInformeContratante);
         
@@ -63,7 +63,7 @@ class F2fReportModel extends FacturaServicioModel
      * -------------------------------------------------------------------------
      * @param type $id
      */
-    public function parseFactura($id)
+    public function parseFactura($id,$tipo)
     {
         $this->setIdFactura($id);
 

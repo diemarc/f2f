@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of keranaProject
  * Copyright (C) 2017-2018  diemarc  diemarc@protonmail.com
@@ -29,21 +30,17 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
  */
 class F2fInformesController extends \kerana\Kerana
 {
-    
+
     protected
-            
-            /** @object, f2f report model */
-            $f2fReport_model; 
-    
-    
+
+    /** @object, f2f report model */
+            $f2fReport_model;
+
     public function __construct()
     {
         parent::__construct();
-        $this->f2fReport_model = new \application\modules\fac2fast\model\F2fReportModel();
-        
-        
     }
-    
+
     /**
      * -------------------------------------------------------------------------
      * Parse params to generate a invoice pdf output
@@ -51,11 +48,12 @@ class F2fInformesController extends \kerana\Kerana
      * @param int $id , 
      * @return avoid
      */
-    public function generar($id){
-        
+    public function generar($id)
+    {
+        $this->f2fReport_model = new \application\modules\fac2fast\model\F2fReportModel();
         $this->f2fReport_model->parseFactura($id);
-        
     }
+
     
-    
+
 }

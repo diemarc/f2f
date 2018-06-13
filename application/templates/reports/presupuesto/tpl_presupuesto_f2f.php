@@ -123,7 +123,7 @@
             <!--<td><strong><?php echo date_format($rsFactura->fecha_factura, 'd/m/Y H:i:s'); ?></strong></td>-->
         </tr>
         <tr>
-            <td>Factura</td>
+            <td>Presupuesto</td>
             <td><strong><?php echo $rsFactura->num_factura; ?></strong></td>
         </tr>
     </table>
@@ -169,7 +169,7 @@
     <br/><br/>
     <table cellspacing="0" cellpadding="0" border="0" width="80%">
         <tr>
-            <td style="text-align: right"><strong>Total Factura: </strong></td>
+            <td style="text-align: right"><strong>Total Presupuesto: </strong></td>
             <td style="text-align: right"><?php echo number_format(($total), 2, ',', ' '); ?>&euro;</td>
         </tr>
     </table>
@@ -233,6 +233,9 @@
             }
             ?>
         </strong>
+    </p>
+    <p>
+        Este presupuesto tendrá una validez de 3 meses desde su fecha de emisión.
     </p>
 
     <div align="center" style="margin-top:5px">
