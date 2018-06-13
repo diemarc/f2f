@@ -50,7 +50,8 @@ class FacturaModel extends tables\FacturaTable
         $this->objEmpresaContratanteModel = new \application\modules\fac2fast\model\EmpresaContratanteModel();
         $this->objFormaPagoModel = new \application\modules\base\model\FormaPagoModel();
         $this->objTipoModel = new \application\modules\base\model\TipoModel();
-        
+       
+      
     }
 
     /**
