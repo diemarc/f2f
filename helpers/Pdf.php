@@ -68,16 +68,11 @@ class Pdf
             /** @object, object determine the paths of templates */
             $_objOrigin;
 
-    public function __construct(\kerana\Ada  $origin)
+    public function __construct()
     {
-        $this->_objOrigin = $origin;
-        
-        // set the template based on origin 
-        $template = $this->_objOrigin->getTemplateInformeContratante();
-        $this->setTemplate($template);
-        
         
     }
+  
 
     /**
      * -------------------------------------------------------------------------
@@ -87,7 +82,7 @@ class Pdf
      */
     public function setTemplate($template)
     {
-
+       
         $tmp_path = realpath(__APPFOLDER__ . 'templates/reports/' . $template . '.php');
 
         if (empty($tmp_path)) {
