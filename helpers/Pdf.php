@@ -22,7 +22,6 @@ namespace helpers;
 
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 
-
 /**
  * -----------------------------------------------------------------------------
  * Pdf Class helper
@@ -35,15 +34,14 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
  * Usage:
  * 
  * $pdf = new \helpers\Pdf();
-        $pdf->setTemplate('factura');
-        $pdf->setName('factura_test');
-        $pdf->setParams(
-                ['titulo' => 'mocos']
-        );
-        $pdf->parsePdf();
+  $pdf->setTemplate('factura');
+  $pdf->setName('factura_test');
+  $pdf->setParams(
+  ['titulo' => 'mocos']
+  );
+  $pdf->parsePdf();
  * 
  */
-
 class Pdf
 {
 
@@ -56,23 +54,17 @@ class Pdf
             $_mode = 'D',
             /** @var string, name of doc to save */
             $_doc_name,
-            /** @var string, path of doc to save */
-            $_doc_path,
             /** @var array, associative array to use en pdf template */
             $_vars,
             /** @var string, paper size */
             $_paper_size = 'A4',
             /** @var string, mode to display 'Portrait' */
-            $_display = 'P',
-            
-            /** @object, object determine the paths of templates */
-            $_objOrigin;
+            $_display = 'P';
 
     public function __construct()
     {
         
     }
-  
 
     /**
      * -------------------------------------------------------------------------
@@ -82,7 +74,7 @@ class Pdf
      */
     public function setTemplate($template)
     {
-       
+
         $tmp_path = realpath(__APPFOLDER__ . 'templates/reports/' . $template . '.php');
 
         if (empty($tmp_path)) {
@@ -103,12 +95,27 @@ class Pdf
     public function setName($name)
     {
         if (!empty($name)) {
-            $this->_doc_name = \helpers\Validator::valVarchar($name) . '.pdf';
+            $this->_doc_name = $name . '.pdf';
         } else {
             $this->_doc_name = $this->_template_pdf . '.pdf';
         }
     }
 
+    /**
+     * -------------------------------------------------------------------------
+     * Set the mode to pdf (D=download , F= save to file)
+     * -------------------------------------------------------------------------
+     * @param type $mode
+     */
+    public function setMode($mode)
+    {
+        $this->_mode = $mode;
+
+        // if is setted to store the file
+        if ($this->_mode == 'F') {
+            $this->_doc_name = realpath(__APPFOLDER__ . '/../data/') . '/' . $this->_doc_name;
+        }
+    }
 
     /**
      * -------------------------------------------------------------------------
@@ -142,7 +149,7 @@ class Pdf
 
             $this->_html2pdf = new \Spipu\Html2Pdf\Html2Pdf($this->_display, $this->_paper_size, 'es');
             $this->_html2pdf->writeHTML($content);
-            $this->_html2pdf->output($this->_doc_name);
+            $this->_html2pdf->output($this->_doc_name, $this->_mode);
         } catch (\Spipu\Html2Pdf\Exception\Html2PdfException $e) {
             $this->_html2pdf->clean();
             \kerana\Exceptions::ShowException('pedeEFE error', $e);
