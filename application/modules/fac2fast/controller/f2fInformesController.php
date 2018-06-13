@@ -39,6 +39,7 @@ class F2fInformesController extends \kerana\Kerana
     public function __construct()
     {
         parent::__construct();
+        $this->f2fReport_model = new \application\modules\fac2fast\model\F2fReportModel();
     }
 
     /**
@@ -50,7 +51,6 @@ class F2fInformesController extends \kerana\Kerana
      */
     public function generar($id)
     {
-        $this->f2fReport_model = new \application\modules\fac2fast\model\F2fReportModel();
         $this->f2fReport_model->parseFactura($id);
     }
 
