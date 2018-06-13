@@ -31,30 +31,20 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
 class F2fReportModel extends FacturaServicioModel
 {
 
-    
     protected
 
     /** @object, pdf helper instance */
             $_pdf,
             /** @var string , name of doc to generate */
             $_factura_name = 'factura_f2f',
-            
             /** @object informe contratante */
             $_objInformeContratante;
 
     public function __construct()
     {
         parent::__construct();
-        
-        // mediante este objecto se setea la plantilla a utilizar mediante dependency injection
-        // asi el helper pdf sabe que template cargar segun el informe y el contratante,
-        // de momento solo saca template para factura id_aux_informe = 1
-        // si hay mas informes entonces hay que enviarlo como parametro, simple!!
-        $this->_objInformeContratante = new \application\modules\configuracion\model\InformeContratanteModel();
-      
-        $this->_pdf = new \helpers\Pdf($this->_objInformeContratante);
-        
-        $this->_pdf->setName($this->_factura_name);
+        $this->_pdf = new \helpers\Pdf();
+
     }
 
     /**
@@ -69,10 +59,9 @@ class F2fReportModel extends FacturaServicioModel
 
         // get the factura details 
         $params_to_pdf = $this->getFacturaDetails();
-      
-        // example to pass another param to PDF helper
-        $params_to_pdf['rsImpuestos'] = $this->getImpuestosFactura();
         
+        $this->_pdf->setTemplate($params_to_pdf['rsFactura']->template_to_use);
+        $this->_pdf->setName($this->_factura_name);
         // set te params to render in template pdf.
         $this->_pdf->setParams($params_to_pdf);
 
