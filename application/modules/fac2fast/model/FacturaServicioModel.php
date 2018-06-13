@@ -96,20 +96,17 @@ class FacturaServicioModel extends tables\FacturaServicioTable {
             return $e->iva;
         }, $rsServiciosFacturados);
 
-
-
-
-
-
-
         return [
             'rsFactura' => $this->objFacturaModel->getRecord(),
             'rsFacturasServicios' => $rsServiciosFacturados,
             'total' => array_sum($totales), // now sum the total column
             'base' => array_sum($bases), // now sum the total column
             'retencion' => array_sum($retenciones), // now sum the total column
-            'iva' => array_unique($iva) // now distinc values of array
+            'iva' => array_unique($iva), // now distinc values of array
+            'rsImpuestos' => $this->getImpuestosFactura(),
         ];
+        
+        
     }
 
     /**
