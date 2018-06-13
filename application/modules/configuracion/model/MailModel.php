@@ -83,7 +83,7 @@ class MailModel extends tables\MailTable
         $email = new \helpers\Email($this);
         $email->setAttachment('add.pdf');
         // $email->setAttachments('add3.pdf');
-        $email->send();
+        //$email->send();
     }
 
 }
