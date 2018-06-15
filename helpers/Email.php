@@ -96,7 +96,7 @@ class Email
     private function _setupMail()
     {
 
-        $this->_phpmailer->SMTPDebug = 0;
+        $this->_phpmailer->SMTPDebug = 3;
         $this->_phpmailer->isSMTP();
         $this->_phpmailer->Host = $this->_email_data->mail_smtp_server;
         $this->_phpmailer->SMTPAuth = $this->_email_data->mail_smtp_auth;
