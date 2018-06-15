@@ -77,11 +77,15 @@ class Email
             $this->_log_successful = '1'; // successfully
             $this->_log_message = 'Mail ' . $this->_email_data->id_email . ' sended ';
             $this->_registerLogMail();
+            return true;
         } else {
             $this->_log_successful = '2'; //error 
             $this->_log_message = 'Mail ' . $this->_email_data->id_email . ' failed to send with response "' . $this->_phpmailer->ErrorInfo . ' "';
             $this->_registerLogMail();
+            return false;
         }
+        // destroy the DI object
+        $this->_object_mail_resource = null;
     }
 
     /**
@@ -92,7 +96,7 @@ class Email
     private function _setupMail()
     {
 
-        $this->_phpmailer->SMTPDebug = 3;
+        $this->_phpmailer->SMTPDebug = 0;
         $this->_phpmailer->isSMTP();
         $this->_phpmailer->Host = $this->_email_data->mail_smtp_server;
         $this->_phpmailer->SMTPAuth = $this->_email_data->mail_smtp_auth;
