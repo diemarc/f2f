@@ -141,9 +141,9 @@
         </div>
         <div class="col-sm-4">
             <section class="content">
-                <div class="box box-info box-solid">
+                <div class="box box-solid box-solid">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Otras facturas</h3>
+                        <h3 class="box-title">Historial</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -153,7 +153,38 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        The body of the box
+                        <div class="progress-group">
+                            <span class="progress-text">Iniciado</span>
+                            <span class="progress-number">13-06-2018</span>
+
+                            <div class="progress sm">
+                                <div class="progress-bar progress" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-group">
+                            <span class="progress-text">Enviado</span>
+                            <span class="progress-number">14-06-2018</span>
+
+                            <div class="progress sm">
+                                <div class="progress-bar progress-bar-aqua" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-group">
+                            <span class="progress-text">Cobrado</span>
+                            <span class="progress-number">15-06-2018</span>
+
+                            <div class="progress sm">
+                                <div class="progress-bar progress-bar-success" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-group">
+                            <span class="progress-text">Abonado</span>
+                            <span class="progress-number">15-06-2018</span>
+
+                            <div class="progress sm">
+                                <div class="progress-bar progress-bar-red" style="width: 40%"></div>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
