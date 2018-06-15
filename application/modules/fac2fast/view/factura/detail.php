@@ -35,7 +35,7 @@
                                                 <i class="fa fa-file-pdf-o text-danger"></i>
                                                 <span class="text-danger">Descargar</span>
                                             </a>
-                                            <a href="<?php echo __URL__ . '/base/contratante/edit/' . $rsFactura->id_facturas; ?>" 
+                                            <a href="<?php echo __URL__ . '/fac2fast/f2fEnvio/sendInvoice/' . $rsFactura->id_facturas; ?>" 
                                                class="btn btn-sm btn-app" title="Enviar factura por email">
 
                                                 <i class="fa fa-envelope text-success"></i>

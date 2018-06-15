@@ -34,12 +34,12 @@ class F2fInformesController extends \kerana\Kerana
     protected
 
     /** @object, f2f report model */
-            $f2fReport_model;
+            $_obj_report_model;
 
     public function __construct()
     {
         parent::__construct();
-        $this->f2fReport_model = new \application\modules\fac2fast\model\F2fReportModel();
+        $this->_obj_report_model = new \application\modules\fac2fast\model\F2fReportModel();
     }
 
     /**
@@ -51,7 +51,7 @@ class F2fInformesController extends \kerana\Kerana
      */
     public function generar($id)
     {
-        $this->f2fReport_model->parseFactura($id);
+        $this->_obj_report_model->parseFactura($id);
     }
 
     

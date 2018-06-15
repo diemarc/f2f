@@ -18,49 +18,44 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace application\modules\fac2fast\model;
+namespace application\modules\fac2fast\controller;
 
 defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya');
 /*
   |-----------------------------------------------------------------------------
-  | Class FacturaestadoModel
+  | Class F2fEnvioController
   |-----------------------------------------------------------------------------
-  | Buisiness logic (rules) for FacturaestadoTable
-  | dvd f2f fraStado
+  |
+  | envios de mails de f2f, facturas, presupuestos etc.
   | @author kerana,
-  | @date 20-03-2018 07:54:39,
+  | @date 13-06-2018 09:15:49,
   |
  */
 
-class FacturaestadoModel extends tables\FacturaestadoTable
+class F2fEnvioController extends \kerana\Kerana
 {
 
-    public
-    /** @object FacturaModel  */
-            $objFacturaModel,
-            /** @object EstadoModel  */
-            $objEstadoModel;
+    protected
+    /** @object mail model */
+            $_obj_envio_model;
 
     public function __construct()
     {
         parent::__construct();
-        $this->objFacturaModel = new \application\modules\fac2fast\model\FacturaModel();
-        $this->objEstadoModel = new \application\modules\base\model\EstadoModel();
+        $this->_obj_envio_model = new \application\modules\fac2fast\model\F2fEnvioModel();
     }
 
     /**
      * -------------------------------------------------------------------------
-     * Save post data
+     * Send the invoice email
      * -------------------------------------------------------------------------
+     * @param type $id
      */
-    public function savePost()
+    public function sendInvoice($id)
     {
-        $this->set_id_facturas();
-        $this->set_id_estado();
-        $this->set_created_at();
-        $this->set_created_by();
-
-        return parent::saveFacturaestado();
+       if($this->_obj_envio_model->sendInvoice($id)){
+           \helpers\Redirect::to('/fac2fast/factura/detail/'.$id);
+       }
     }
 
 }

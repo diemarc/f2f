@@ -31,6 +31,10 @@ defined('__APPFOLDER__') OR exit('Direct access to this file is forbidden, siya'
 class F2fReportModel extends FacturaServicioModel
 {
 
+    public
+            /** @rs data invoice to parse */
+            $data_invoice;
+    
     protected
 
     /** @object, pdf helper instance */
@@ -56,12 +60,12 @@ class F2fReportModel extends FacturaServicioModel
         $this->setIdFactura($id);
 
         // get the factura details 
-        $params_to_pdf = $this->getFacturaDetails();
+        $this->data_invoice = $this->getFacturaDetails();
         
-        $this->_pdf->setTemplate($params_to_pdf['rsFactura']->template_to_use);
-        $this->_pdf->setName($params_to_pdf['rsFactura']->num_factura);
+        $this->_pdf->setTemplate($this->data_invoice['rsFactura']->template_to_use);
+        $this->_pdf->setName($this->data_invoice['rsFactura']->num_factura);
         $this->_pdf->setMode($mode);
-        $this->_pdf->setParams($params_to_pdf);
+        $this->_pdf->setParams($this->data_invoice);
         $this->_pdf->parsePdf();
     }
 
